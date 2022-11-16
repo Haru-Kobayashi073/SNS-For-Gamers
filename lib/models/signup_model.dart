@@ -1,27 +1,28 @@
 //flutter
 import 'package:flutter/material.dart';
 //packages
-import 'package:uuid/uuid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 
-final mainProvider = ChangeNotifierProvider(
-  (ref) => MainModel(),
+final signupProvider = ChangeNotifierProvider(
+  (ref) => SignUpModel(),
 );
 
 //ChangeNotifier = 値の変更を知らせる
-class MainModel extends ChangeNotifier {
+class SignUpModel extends ChangeNotifier {
   int counter = 0;
   User? currentUser = null;
 
   //auth
   String email = '';
   String password = '';
+  bool isObscure = true;
 
-  Future<void> createFirestoreUser({required BuildContext context, required String uid}) async {
+  Future<void> createFirestoreUser(
+      {required BuildContext context, required String uid}) async {
     //引数でmain.dartからcontextを受け取る
     counter++;
     final Timestamp now = Timestamp.now();
@@ -52,4 +53,11 @@ class MainModel extends ChangeNotifier {
       print(e.toString());
     }
   }
+
+  void toggleIsObscure() {
+    isObscure = !isObscure;
+    //！でboolを反転
+    notifyListeners();
+  }
 }
+
