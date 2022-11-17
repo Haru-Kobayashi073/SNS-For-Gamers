@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //model
 import 'package:sns_vol2/models/login_model.dart';
+import 'package:sns_vol2/models/main_model.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
-
+  const LoginPage({Key? key, required MainModel this.mainModel}) : super(key: key);
+  final MainModel mainModel;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LoginModel loginModel = ref.watch(loginProvider);
@@ -40,15 +41,11 @@ class LoginPage extends ConsumerWidget {
               onTap: () => loginModel.toggleIsObscure(),
             )),
           ),
-          Center(
-            child: loginModel.currentUser == null
-                ? Text('Nullです。')
-                : Text('Nullじゃないです。'),
-          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async => await loginModel.login(),
+        onPressed: () async =>
+            await loginModel.login(context: context, mainModel: mainModel),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
