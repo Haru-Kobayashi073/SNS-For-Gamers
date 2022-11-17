@@ -7,6 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:sns_vol2/models/main_model.dart';
 //options
 import 'firebase_options.dart';
+//constants
+import 'package:sns_vol2/constants/routes.dart' as routes;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,12 +47,10 @@ class MyHomePage extends ConsumerWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          InkWell(
-            child: Icon(Icons.person),
-          ),
-          InkWell(
-            child: Icon(Icons.person),
-          ),
+          ElevatedButton(onPressed: () => routes.toSignUpPage(context: context),
+          child: const Text('サインアップページ')),
+          ElevatedButton(onPressed: () => routes.toLoginpPage(context: context),
+          child: const Text('ログインページ')),
           Center(
             child: mainmodel.currentUser == null
                 ? Text('Nullです。')

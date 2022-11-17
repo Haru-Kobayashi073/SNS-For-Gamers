@@ -6,8 +6,8 @@ import 'package:riverpod/riverpod.dart';
 //model
 import 'package:sns_vol2/models/signup_model.dart';
 
-class SignPage extends ConsumerWidget {
-  const SignPage({super.key});
+class SignUpPage extends ConsumerWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
