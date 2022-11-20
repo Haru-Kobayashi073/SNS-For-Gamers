@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sns_vol2/constants/strings.dart';
 //domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 
@@ -38,7 +39,7 @@ class SignUpModel extends ChangeNotifier {
     //usersコレクションの中にfirstUserを作る処理
 
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('ユーザーが作成できました。')));
+        .showSnackBar(SnackBar(content: Text(userCreatedMsg)));
     notifyListeners();
   }
 

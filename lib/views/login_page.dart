@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 //package
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
@@ -33,7 +34,7 @@ class LoginPage extends ConsumerWidget {
             controller: emailEditingCntoroller,
             color: Colors.white,
             borderColor: Colors.white,
-            hintText: 'Login用メールアドレス',
+            hintText: mailAddressText,
           ),
           RoundedPasswordField(
               onChanged: (text) => loginModel.password = text,
@@ -45,9 +46,9 @@ class LoginPage extends ConsumerWidget {
           RoundedButton(
               onPressed: () async => await loginModel.login(
                   context: context, mainModel: mainModel),
-              widthRate: 0.3,
+              widthRate: 0.35,
               color: Colors.blue,
-              text: 'ログイン',)
+              text: loginTitle,)
         ],
       ),
     );

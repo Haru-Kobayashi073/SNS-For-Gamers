@@ -9,6 +9,8 @@ import 'package:sns_vol2/details/rounded_password_field.dart';
 import 'package:sns_vol2/models/signup_model.dart';
 //components
 import 'package:sns_vol2/details/rounded_text_field.dart';
+//constants
+import 'package:sns_vol2/constants/strings.dart';
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
@@ -23,7 +25,7 @@ class SignUpPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signup'),
+        title: Text(signupTitle),
       ),
       body: Column(
         children: [
@@ -33,7 +35,7 @@ class SignUpPage extends ConsumerWidget {
             controller: emailEditingCntoroller,
             color: Colors.white,
             borderColor: Colors.white,
-            hintText: '新規登録用メールアドレス',
+            hintText: mailAddressText,
           ),
           RoundedPasswordField(
               onChanged: (text) => signUpModel.password = text,
@@ -45,9 +47,9 @@ class SignUpPage extends ConsumerWidget {
           RoundedButton(
             onPressed: () async =>
                 await signUpModel.createUser(context: context),
-            widthRate: 0.3,
+            widthRate: 0.35,
             color: Colors.blue,
-            text: '新規登録',
+            text: signupTitle,
           ),
         ],
       ),

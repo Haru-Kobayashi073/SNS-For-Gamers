@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+import 'package:sns_vol2/constants/strings.dart';
 //detail
 import 'package:sns_vol2/details/text_field_container.dart';
 
@@ -37,7 +38,7 @@ class RoundedPasswordField extends StatelessWidget {
                   : Icon(Icons.visibility),
               onTap: toggleObscureText,
             ),
-            hintText: 'パスワード',
+            hintText: passwordText,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(
