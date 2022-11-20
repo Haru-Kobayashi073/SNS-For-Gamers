@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
@@ -45,6 +46,7 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
+
 //ConsumerWidgetは中でmodelを呼び出す、MyAppで呼ばれたmodelをStatelessWidgetに受け渡している
 class MyHomePage extends StatelessWidget {
   const MyHomePage(
@@ -58,17 +60,22 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ElevatedButton(
-              onPressed: () => routes.toSignUpPage(context: context),
-              child: const Text('サインアップページ')),
-          ElevatedButton(
-              onPressed: () =>
-                  routes.toLoginpPage(context: context, mainModel: mainModel),
-              child: const Text('ログインページ')),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            RoundedButton(
+                onPressed: () => routes.toSignUpPage(context: context),
+                widthRate: 0.5,
+                color: Colors.blue,
+                text: 'サインアップページ'),
+            RoundedButton(
+                onPressed: () => routes.toSignUpPage(context: context),
+                widthRate: 0.5,
+                color: Colors.blue,
+                text: 'ログインページ'),
+          ],
+        ),
       ),
     );
   }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
 import 'package:riverpod/riverpod.dart';
+import 'package:sns_vol2/details/rounded_button.dart';
+import 'package:sns_vol2/details/rounded_password_field.dart';
 //model
 import 'package:sns_vol2/models/signup_model.dart';
 //components
@@ -27,35 +29,27 @@ class SignUpPage extends ConsumerWidget {
         children: [
           RoundedTextField(
             keybordType: TextInputType.emailAddress,
-            onChanged: (text) => signUpModel.email = text, 
+            onChanged: (text) => signUpModel.email = text,
             controller: emailEditingCntoroller,
             color: Colors.white,
             borderColor: Colors.white,
-            ),
-          TextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            onChanged: (text) => signUpModel.password = text,
-            controller: passwordEditingCntoroller,
-            obscureText: signUpModel.isObscure,
-            decoration: InputDecoration(
-                suffixIcon: InkWell(
-              child: signUpModel.isObscure
-                  ? Icon(Icons.visibility_off)
-                  : Icon(Icons.visibility),
-              onTap: () => signUpModel.toggleIsObscure(),
-            )),
+            hintText: '新規登録用メールアドレス',
           ),
-          Center(
-            child: signUpModel.currentUser == null
-                ? Text('Nullです。')
-                : Text('Nullじゃないです。'),
+          RoundedPasswordField(
+              onChanged: (text) => signUpModel.password = text,
+              obscureText: signUpModel.isObscure,
+              passwordEditingController: passwordEditingCntoroller,
+              toggleObscureText: () => signUpModel.toggleIsObscure(),
+              color: Colors.white,
+              borderColor: Colors.white),
+          RoundedButton(
+            onPressed: () async =>
+                await signUpModel.createUser(context: context),
+            widthRate: 0.3,
+            color: Colors.blue,
+            text: '新規登録',
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async => await signUpModel.createUser(context: context),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

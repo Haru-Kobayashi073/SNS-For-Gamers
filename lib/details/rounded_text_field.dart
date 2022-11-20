@@ -9,6 +9,7 @@ class RoundedTextField extends StatelessWidget {
       required this.controller,
       required this.color,
       required this.borderColor,
+      required this.hintText
       })
       : super(key: key);
   final TextInputType keybordType;
@@ -16,6 +17,7 @@ class RoundedTextField extends StatelessWidget {
   final TextEditingController controller;
   final Color color;
   final Color borderColor;
+  final String hintText;
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
@@ -24,6 +26,14 @@ class RoundedTextField extends StatelessWidget {
         child: TextFormField(
           keyboardType: keybordType,
           onChanged: onChanged,
+          decoration: InputDecoration(
+            hintText: hintText,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,)
+            ),
           controller: controller,
         ));
   }
