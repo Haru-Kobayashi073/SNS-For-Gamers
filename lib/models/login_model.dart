@@ -16,12 +16,15 @@ class LoginModel extends ChangeNotifier {
   bool isObscure = true;
 
   Future<void> login(
-      {required BuildContext context, required MainModel mainModel}) async {
+      {required BuildContext context}) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      //ログインする ->　mainModelのcurrentUserが更新される
       routes.toMyApppPage(context: context);
-      mainModel.setCurrentUser();
+      //モデルを跨いで処理をするのはあまり綺麗ではない
+      //ログインされた瞬間にmainModelのcurrentUserが更新されるのは難しい
+      //なのでMyHomePageが描画された時に、MainModelを起動し、ユーザー情報を更新すればいい
     } on FirebaseAuthException catch (e) {
       print(e.toString());
     }

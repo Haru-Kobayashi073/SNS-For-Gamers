@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
+import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
+import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
@@ -22,62 +24,67 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // MyAppが起動した最初の時にユーザーがログインしているかどうかの確認
     //この変数を一回きり
-    final MainModel mainmodel = ref.watch(mainProvider);
     final User? onceUser = FirebaseAuth.instance.currentUser;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
       theme: ThemeData(),
-      home: mainmodel.currentUser == null
-          ? LoginPage(
-              mainModel: mainmodel,
-            )
+      home: onceUser == null
+          ? LoginPage()
           : MyHomePage(
               title: appTitle,
-              mainModel: mainmodel,
             ),
     );
   }
 }
 
 //ConsumerWidgetは中でmodelを呼び出す、MyAppで呼ばれたmodelをStatelessWidgetに受け渡している
-class MyHomePage extends StatelessWidget {
-  const MyHomePage(
-      {super.key, required this.title, required MainModel this.mainModel});
+class MyHomePage extends ConsumerWidget {
+  const MyHomePage({super.key, required this.title});
   final String title;
-  final MainModel mainModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final MainModel mainModel = ref.watch(mainProvider);
+    final SNSBottomNavigationBarModel snsBottomNavigationBarModel =
+        ref.watch(snsBottomNavigationBarProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            RoundedButton(
-                onPressed: () => routes.toSignUpPage(context: context),
-                widthRate: 0.5,
-                color: Colors.blue,
-                text: signupText),
-            RoundedButton(
-                onPressed: () => routes.toLoginpPage(context: context, mainModel: mainModel),
-                widthRate: 0.5,
-                color: Colors.blue,
-                text: loginText),
-          ],
-        ),
-      ),
+      body: mainModel.isLoading
+          ? Center(
+              child: const Text(loadingText),
+            )
+          : PageView(
+              controller: snsBottomNavigationBarModel.pageController,
+              onPageChanged: (index) =>
+                  snsBottomNavigationBarModel.onPageChanged(index: index),
+              //childrenの数はElementsの数
+              children: [
+                //注意：ページジャないのでScaffold
+                Container(
+                  child: Text(homeText),
+                ),
+                Container(
+                  child: Text(searchText),
+                ),
+                Container(
+                  child: Text(profileText),
+                ),
+              ],
+            ),
+      bottomNavigationBar: SNSBottomNavigationBar(
+          snsBottomNavigationBarModel: snsBottomNavigationBarModel),
     );
   }
 }

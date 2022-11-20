@@ -11,9 +11,8 @@ import 'package:sns_vol2/models/login_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({Key? key, required MainModel this.mainModel})
+  const LoginPage({Key? key})
       : super(key: key);
-  final MainModel mainModel;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LoginModel loginModel = ref.watch(loginProvider);
@@ -45,7 +44,7 @@ class LoginPage extends ConsumerWidget {
               borderColor: Colors.white),
           RoundedButton(
               onPressed: () async => await loginModel.login(
-                  context: context, mainModel: mainModel),
+                  context: context),
               widthRate: 0.35,
               color: Colors.blue,
               text: loginTitle,)
