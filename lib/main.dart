@@ -11,6 +11,9 @@ import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/views/main/home_screen.dart';
+import 'package:sns_vol2/views/main/profile_screen.dart';
+import 'package:sns_vol2/views/main/search_screen.dart';
 //options
 import 'firebase_options.dart';
 //constants
@@ -72,15 +75,9 @@ class MyHomePage extends ConsumerWidget {
               //childrenの数はElementsの数
               children: [
                 //注意：ページジャないのでScaffold
-                Container(
-                  child: Text(homeText),
-                ),
-                Container(
-                  child: Text(searchText),
-                ),
-                Container(
-                  child: Text(profileText),
-                ),
+                HomeScreen(),
+                SearchScreen(),
+                ProfileScreen(mainModel: mainModel,),
               ],
             ),
       bottomNavigationBar: SNSBottomNavigationBar(

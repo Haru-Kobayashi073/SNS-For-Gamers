@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 //domain
 
 final mainProvider = ChangeNotifierProvider(
@@ -19,6 +20,7 @@ class MainModel extends ChangeNotifier {
   int counter = 0;
   User? currentUser = null;
   late DocumentSnapshot<Map<String, dynamic>> currentUserDoc;
+  late FirestoreUser firestoreUser;
   //Snapshotは簡単に言うとusersが持つドキュメント5行ぐらいのこと
   //jsonみたいなものでもある
 
@@ -37,6 +39,7 @@ class MainModel extends ChangeNotifier {
         .collection(usersFieldKey)
         .doc(currentUser!.uid)
         .get();
+    firestoreUser = FirestoreUser.fromJson(currentUserDoc.data()!);
     endLoading();
     //currentUserのuidの取得が可能になりました
   }
