@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 
@@ -14,4 +15,7 @@ void toSignUpPage({required BuildContext context}) => Navigator.push(
 
 void toLoginpPage({required BuildContext context}) => Navigator.push(
     context, MaterialPageRoute(builder: (context) => LoginPage()));
+
+void toAccountPage({required BuildContext context, required MainModel mainModel}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => AccountPage(mainModel: mainModel,)));
 

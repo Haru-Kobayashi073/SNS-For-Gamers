@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
+import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
@@ -64,6 +65,7 @@ class MyHomePage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(title),
       ),
+      drawer: SNSDrawer(mainModel: mainModel,),
       body: mainModel.isLoading
           ? Center(
               child: const Text(loadingText),
