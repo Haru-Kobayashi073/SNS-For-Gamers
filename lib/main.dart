@@ -5,10 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/themes.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
+import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
@@ -28,23 +30,25 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // MyAppが起動した最初の時にユーザーがログインしているかどうかの確認
     //この変数を一回きり
     final User? onceUser = FirebaseAuth.instance.currentUser;
+    final ThemeModel themeModel = ref.watch(themeProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      theme: ThemeData(),
+      theme: themeModel.isDarkTheme ? darkThemeData(context: context) : lightThemeData(context: context),
       home: onceUser == null
           ? LoginPage()
           : MyHomePage(
               title: appTitle,
+              themeModel: themeModel,
             ),
     );
   }
@@ -52,8 +56,9 @@ class MyApp extends StatelessWidget {
 
 //ConsumerWidgetは中でmodelを呼び出す、MyAppで呼ばれたmodelをStatelessWidgetに受け渡している
 class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.themeModel});
   final String title;
+  final ThemeModel themeModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +70,10 @@ class MyHomePage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      drawer: SNSDrawer(mainModel: mainModel,),
+      drawer: SNSDrawer(
+        mainModel: mainModel,
+        themeModel: themeModel,
+      ),
       body: mainModel.isLoading
           ? Center(
               child: const Text(loadingText),
@@ -79,7 +87,9 @@ class MyHomePage extends ConsumerWidget {
                 //注意：ページジャないのでScaffold
                 HomeScreen(),
                 SearchScreen(),
-                ProfileScreen(mainModel: mainModel,),
+                ProfileScreen(
+                  mainModel: mainModel,
+                ),
               ],
             ),
       bottomNavigationBar: SNSBottomNavigationBar(

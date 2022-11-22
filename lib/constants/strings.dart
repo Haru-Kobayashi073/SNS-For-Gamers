@@ -6,6 +6,7 @@ const String signupTitle = "新規登録";
 const String loginTitle = "ログイン";
 const String cropperTitle = 'クロッパー';
 const String accountTitle = 'アカウント';
+const String themeTitle = 'テーマ';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
