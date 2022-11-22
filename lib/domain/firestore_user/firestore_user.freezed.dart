@@ -26,6 +26,7 @@ mixin _$FirestoreUser {
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get userImageURL => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $FirestoreUserCopyWith<$Res> {
       dynamic updatedAt,
       String email,
       String userName,
+      String userImageURL,
       String uid});
 }
 
@@ -65,6 +67,7 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? updatedAt = null,
     Object? email = null,
     Object? userName = null,
+    Object? userImageURL = null,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +86,10 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userImageURL: null == userImageURL
+          ? _value.userImageURL
+          : userImageURL // ignore: cast_nullable_to_non_nullable
               as String,
       uid: null == uid
           ? _value.uid
@@ -105,6 +112,7 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       dynamic updatedAt,
       String email,
       String userName,
+      String userImageURL,
       String uid});
 }
 
@@ -123,6 +131,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? email = null,
     Object? userName = null,
+    Object? userImageURL = null,
     Object? uid = null,
   }) {
     return _then(_$_FirestoreUser(
@@ -142,6 +151,10 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      userImageURL: null == userImageURL
+          ? _value.userImageURL
+          : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -158,6 +171,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       required this.updatedAt,
       required this.email,
       required this.userName,
+      required this.userImageURL,
       required this.uid});
 
   factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
@@ -174,11 +188,13 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
   @override
   final String userName;
   @override
+  final String userImageURL;
+  @override
   final String uid;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, email: $email, userName: $userName, uid: $uid)';
+    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, email: $email, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
   }
 
   @override
@@ -190,6 +206,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('userImageURL', userImageURL))
       ..add(DiagnosticsProperty('uid', uid));
   }
 
@@ -203,6 +220,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.userImageURL, userImageURL) ||
+                other.userImageURL == userImageURL) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
@@ -214,6 +233,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       const DeepCollectionEquality().hash(updatedAt),
       email,
       userName,
+      userImageURL,
       uid);
 
   @JsonKey(ignore: true)
@@ -236,6 +256,7 @@ abstract class _FirestoreUser implements FirestoreUser {
       required final dynamic updatedAt,
       required final String email,
       required final String userName,
+      required final String userImageURL,
       required final String uid}) = _$_FirestoreUser;
 
   factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
@@ -250,6 +271,8 @@ abstract class _FirestoreUser implements FirestoreUser {
   String get email;
   @override
   String get userName;
+  @override
+  String get userImageURL;
   @override
   String get uid;
   @override

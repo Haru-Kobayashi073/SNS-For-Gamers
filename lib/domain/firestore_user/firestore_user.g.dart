@@ -12,6 +12,7 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'],
       email: json['email'] as String,
       userName: json['userName'] as String,
+      userImageURL: json['userImageURL'] as String,
       uid: json['uid'] as String,
     );
 
@@ -21,5 +22,6 @@ Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
       'updatedAt': instance.updatedAt,
       'email': instance.email,
       'userName': instance.userName,
+      'userImageURL': instance.userImageURL,
       'uid': instance.uid,
     };

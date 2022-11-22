@@ -16,6 +16,7 @@ abstract class FirestoreUser with _$FirestoreUser {
 
     required String email,
     required String userName,
+    required String userImageURL,
     required String uid,
   }) = _FirestoreUser;
 
