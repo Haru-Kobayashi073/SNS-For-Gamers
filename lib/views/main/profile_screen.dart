@@ -35,7 +35,7 @@ class ProfileScreen extends ConsumerWidget {
           //   child: Image.file(
           //     profileModel.croppedFile!)),
       RoundedButton(
-          onPressed: () async =>await profileModel.uploadUserImage(currentUserDoc: mainModel.currentUserDoc),
+          onPressed: () async => await profileModel.uploadUserImage(currentUserDoc: mainModel.currentUserDoc),
             widthRate: 0.4,
             color: Colors.blue,
             text: 'Upload')

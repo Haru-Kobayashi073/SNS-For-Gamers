@@ -18,6 +18,8 @@ const String loadingText = 'Loading';
 const String usersFieldKey = "users";
 // message
 const String userCreatedMsg = "ユーザーが作成できました";
+//prefs key
+const String isDarkThemePrefsKey = 'isDarkTheme';
 
 // bottom navigation bar
 const String homeText = "Home";
