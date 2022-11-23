@@ -9,6 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:sns_vol2/models/main_model.dart';
 
 final profileProvider = ChangeNotifierProvider((ref) => ProfileModel());
 
@@ -41,6 +43,22 @@ class ProfileModel extends ChangeNotifier {
     croppedFile = await returnCroppedFile(xFile: xFile);
     final String url = await uploadImageAndGetURL(uid: uid, file: file);
     await currentUserDoc.reference.update({'userImageURL': url});
+    notifyListeners();
+  }
+
+  void follow(
+      {required MainModel mainModel,
+      required FirestoreUser passiveFirestoreUser}) {
+    mainModel.followingUids.add(passiveFirestoreUser.uid);
+    //mainmodelのListにフォローする対象のUidを追加していく
+    notifyListeners();
+  }
+
+  void unfollow(
+      {required MainModel mainModel,
+      required FirestoreUser passiveFirestoreUser}) {
+    mainModel.followingUids.remove(passiveFirestoreUser.uid);
+    //mainmodelのListにフォローする対象のUidを追加していく
     notifyListeners();
   }
 }

@@ -14,6 +14,9 @@ abstract class FirestoreUser with _$FirestoreUser {
     //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
     //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
 
+    required int followerCount,
+    required int followingCount,
+
     required String email,
     required String userName,
     required String userImageURL,

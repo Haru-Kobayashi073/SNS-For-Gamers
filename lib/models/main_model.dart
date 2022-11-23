@@ -20,9 +20,12 @@ class MainModel extends ChangeNotifier {
   int counter = 0;
   User? currentUser = null;
   late DocumentSnapshot<Map<String, dynamic>> currentUserDoc;
-  late FirestoreUser firestoreUser;
   //Snapshotは簡単に言うとusersが持つドキュメント5行ぐらいのこと
   //jsonみたいなものでもある
+  late FirestoreUser firestoreUser;
+
+  //token
+  List<String> followingUids = [];
 
   //以下関数がMainModelが起動した時の処理
   //ユーザーの動作を必要としないモデルの関数

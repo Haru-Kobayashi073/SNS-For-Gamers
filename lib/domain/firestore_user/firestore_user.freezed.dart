@@ -24,6 +24,8 @@ mixin _$FirestoreUser {
   dynamic get updatedAt =>
       throw _privateConstructorUsedError; //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  int get followerCount => throw _privateConstructorUsedError;
+  int get followingCount => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
@@ -44,6 +46,8 @@ abstract class $FirestoreUserCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      int followerCount,
+      int followingCount,
       String email,
       String userName,
       String userImageURL,
@@ -65,6 +69,8 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? followerCount = null,
+    Object? followingCount = null,
     Object? email = null,
     Object? userName = null,
     Object? userImageURL = null,
@@ -79,6 +85,14 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      followerCount: null == followerCount
+          ? _value.followerCount
+          : followerCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followingCount: null == followingCount
+          ? _value.followingCount
+          : followingCount // ignore: cast_nullable_to_non_nullable
+              as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -110,6 +124,8 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      int followerCount,
+      int followingCount,
       String email,
       String userName,
       String userImageURL,
@@ -129,6 +145,8 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? followerCount = null,
+    Object? followingCount = null,
     Object? email = null,
     Object? userName = null,
     Object? userImageURL = null,
@@ -143,6 +161,14 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      followerCount: null == followerCount
+          ? _value.followerCount
+          : followerCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followingCount: null == followingCount
+          ? _value.followingCount
+          : followingCount // ignore: cast_nullable_to_non_nullable
+              as int,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -169,6 +195,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
   const _$_FirestoreUser(
       {required this.createdAt,
       required this.updatedAt,
+      required this.followerCount,
+      required this.followingCount,
       required this.email,
       required this.userName,
       required this.userImageURL,
@@ -184,6 +212,10 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
 //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   @override
+  final int followerCount;
+  @override
+  final int followingCount;
+  @override
   final String email;
   @override
   final String userName;
@@ -194,7 +226,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, email: $email, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
+    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, email: $email, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
   }
 
   @override
@@ -204,6 +236,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       ..add(DiagnosticsProperty('type', 'FirestoreUser'))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('followerCount', followerCount))
+      ..add(DiagnosticsProperty('followingCount', followingCount))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
@@ -217,6 +251,10 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
             other is _$_FirestoreUser &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            (identical(other.followerCount, followerCount) ||
+                other.followerCount == followerCount) &&
+            (identical(other.followingCount, followingCount) ||
+                other.followingCount == followingCount) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
@@ -231,6 +269,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       runtimeType,
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
+      followerCount,
+      followingCount,
       email,
       userName,
       userImageURL,
@@ -254,6 +294,8 @@ abstract class _FirestoreUser implements FirestoreUser {
   const factory _FirestoreUser(
       {required final dynamic createdAt,
       required final dynamic updatedAt,
+      required final int followerCount,
+      required final int followingCount,
       required final String email,
       required final String userName,
       required final String userImageURL,
@@ -268,6 +310,10 @@ abstract class _FirestoreUser implements FirestoreUser {
   dynamic get updatedAt;
   @override //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  int get followerCount;
+  @override
+  int get followingCount;
+  @override
   String get email;
   @override
   String get userName;
