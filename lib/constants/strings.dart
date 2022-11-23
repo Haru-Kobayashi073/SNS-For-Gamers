@@ -7,6 +7,7 @@ const String loginTitle = "ログイン";
 const String cropperTitle = 'クロッパー';
 const String accountTitle = 'アカウント';
 const String themeTitle = 'テーマ';
+const String passiveUserProfileTitle = 'プロフィール';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -19,6 +20,7 @@ const String uploadText = 'アップロードする';
 const String usersFieldKey = "users";
 // message
 const String userCreatedMsg = "ユーザーが作成できました";
+const String noAccountMsg = 'アカウントをお持ちでない場合';
 //prefs key
 const String isDarkThemePrefsKey = 'isDarkTheme';
 

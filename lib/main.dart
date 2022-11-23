@@ -86,7 +86,7 @@ class MyHomePage extends ConsumerWidget {
               children: [
                 //注意：ページジャないのでScaffold
                 HomeScreen(),
-                SearchScreen(),
+                SearchScreen(passiveUser: mainModel.firestoreUser,),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),

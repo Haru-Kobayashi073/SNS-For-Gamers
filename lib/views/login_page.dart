@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 //package
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
@@ -11,8 +12,7 @@ import 'package:sns_vol2/models/login_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({Key? key})
-      : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LoginModel loginModel = ref.watch(loginProvider);
@@ -31,8 +31,8 @@ class LoginPage extends ConsumerWidget {
             keybordType: TextInputType.emailAddress,
             onChanged: (text) => loginModel.email = text,
             controller: emailEditingCntoroller,
-            color: Colors.white,
-            borderColor: Colors.white,
+            color: Colors.grey.shade200,
+            borderColor: Colors.black,
             hintText: mailAddressText,
           ),
           RoundedPasswordField(
@@ -40,14 +40,17 @@ class LoginPage extends ConsumerWidget {
               obscureText: loginModel.isObscure,
               passwordEditingController: passwordEditingCntoroller,
               toggleObscureText: () => loginModel.toggleIsObscure(),
-              color: Colors.white,
-              borderColor: Colors.white),
+              color: Colors.grey.shade200,
+              borderColor: Colors.black),
           RoundedButton(
-              onPressed: () async => await loginModel.login(
-                  context: context),
-              widthRate: 0.35,
-              color: Colors.blue,
-              text: loginTitle,)
+            onPressed: () async => await loginModel.login(context: context),
+            widthRate: 0.35,
+            color: Colors.blue,
+            text: loginTitle,
+          ),
+          TextButton(
+              onPressed: () => routes.toSignUpPage(context: context),
+              child: const Text(noAccountMsg))
         ],
       ),
     );

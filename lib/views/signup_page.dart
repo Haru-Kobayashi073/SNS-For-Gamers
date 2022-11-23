@@ -33,8 +33,8 @@ class SignUpPage extends ConsumerWidget {
             keybordType: TextInputType.emailAddress,
             onChanged: (text) => signUpModel.email = text,
             controller: emailEditingCntoroller,
-            color: Colors.white,
-            borderColor: Colors.white,
+            color: Colors.grey.shade200,
+            borderColor: Colors.black,
             hintText: mailAddressText,
           ),
           RoundedPasswordField(
@@ -42,8 +42,8 @@ class SignUpPage extends ConsumerWidget {
               obscureText: signUpModel.isObscure,
               passwordEditingController: passwordEditingCntoroller,
               toggleObscureText: () => signUpModel.toggleIsObscure(),
-              color: Colors.white,
-              borderColor: Colors.white),
+              color: Colors.grey.shade200,
+              borderColor: Colors.black),
           RoundedButton(
             onPressed: () async =>
                 await signUpModel.createUser(context: context),

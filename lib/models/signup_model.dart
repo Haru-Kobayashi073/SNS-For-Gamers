@@ -5,6 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sns_vol2/constants/strings.dart';
+//constants
+import 'package:sns_vol2/constants/routes.dart' as routes;
+
 //domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 
@@ -53,6 +56,7 @@ class SignUpModel extends ChangeNotifier {
       final User? user = result.user;
       final String uid = user!.uid;
       await createFirestoreUser(context: context, uid: uid);
+      routes.toMyApppPage(context: context);
     } on FirebaseAuthException catch (e) {
       print(e.toString());
     }
@@ -64,4 +68,3 @@ class SignUpModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-
