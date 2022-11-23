@@ -16,10 +16,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ProfileModel profileModel = ref.watch(profileProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
-    final int follwerCount = firestoreUser.followerCount;
-    final int plusOneFollwerCount = firestoreUser.followerCount + 1;
-    final bool isFollowing =
-        mainModel.followingUids.contains(firestoreUser.uid);
+    final int followerCount = firestoreUser.followerCount;
 
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       profileModel.croppedFile == null
@@ -42,10 +39,7 @@ class ProfileScreen extends ConsumerWidget {
         'フォロー中: ' + firestoreUser.followingCount.toString(),
         style: TextStyle(fontSize: 24),
       ),
-      Text(
-        isFollowing
-            ? 'フォロワー: ' + plusOneFollwerCount.toString()
-            : 'フォロワー: ' + follwerCount.toString(),
+      Text('フォロワー: ' + firestoreUser.followerCount.toString(),
         style: TextStyle(fontSize: 24),
       ),
       RoundedButton(
@@ -54,22 +48,6 @@ class ProfileScreen extends ConsumerWidget {
           widthRate: 0.5,
           color: Colors.blue,
           text: uploadText),
-      SizedBox(
-        height: 30,
-      ),
-      isFollowing
-          ? RoundedButton(
-              onPressed: () => profileModel.unfollow(
-                  mainModel: mainModel, passiveFirestoreUser: firestoreUser),
-              widthRate: 0.5,
-              color: Colors.blue,
-              text: 'フォローを外す')
-          : RoundedButton(
-              onPressed: () => profileModel.follow(
-                  mainModel: mainModel, passiveFirestoreUser: firestoreUser),
-              widthRate: 0.5,
-              color: Colors.blue,
-              text: 'フォロー')
     ]);
   }
 }

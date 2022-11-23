@@ -32,7 +32,7 @@ class SignUpModel extends ChangeNotifier {
     final Timestamp now = Timestamp.now();
     final FirestoreUser firestoreUser = FirestoreUser(
       userName: 'Alice',
-      userImageURL: 'aaa',
+      userImageURL: '',
       followerCount: 0,
       followingCount: 0,
       uid: uid,

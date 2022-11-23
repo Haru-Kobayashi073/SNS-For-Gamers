@@ -5,10 +5,12 @@ import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main/search_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/models/main_model.dart';
 
 class SearchScreen extends ConsumerWidget {
-  const SearchScreen({Key? key, required FirestoreUser passiveUser})
+  const SearchScreen({Key? key, required FirestoreUser passiveUser, required this.mainModel})
       : super(key: key);
+  final MainModel mainModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +25,7 @@ class SearchScreen extends ConsumerWidget {
           return ListTile(
             title: Text(firestoreUser.uid),
             onTap: () => routes.toPassiveUserProfilePagepPage(
-                context: context, passiveUser: firestoreUser),
+                context: context, passiveUser: firestoreUser, mainModel: mainModel),
           );
         });
   }

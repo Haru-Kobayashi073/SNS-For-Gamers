@@ -46,47 +46,4 @@ class ProfileModel extends ChangeNotifier {
     await currentUserDoc.reference.update({'userImageURL': url});
     notifyListeners();
   }
-
-  Future<void> follow(
-      {required MainModel mainModel,
-      required FirestoreUser passiveFirestoreUser}) async {
-    mainModel.followingUids.add(passiveFirestoreUser.uid);
-    //mainmodelのListにフォローする対象のUidを追加していく
-    notifyListeners();
-    final String tokenId = returnUuidV4();
-    final FollowingToken followingToken = FollowingToken(
-        passiveUid: passiveFirestoreUser.uid,
-        createdAt: Timestamp.now(),
-        tokenId: tokenId);
-    final FirestoreUser activeUser = mainModel.firestoreUser;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(activeUser.uid)
-        .collection('tokens')
-        .doc(tokenId)
-        .set(followingToken.toJson());
-  }
-
-  Future<void> unfollow(
-      {required MainModel mainModel,
-      required FirestoreUser passiveFirestoreUser}) async {
-    mainModel.followingUids.remove(passiveFirestoreUser.uid);
-    //mainmodelのListにフォローする対象のUidを追加していく
-    notifyListeners();
-    //followしているTokenを取得する
-    final FirestoreUser activeUser = mainModel.firestoreUser;
-    //qshotというdataの塊の存在を取得
-    final QuerySnapshot<Map<String, dynamic>> qshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(activeUser.uid)
-        .collection('tokens')
-        .where('passiveUid', isEqualTo: passiveFirestoreUser.uid)
-        .get();
-    //passiveUidが受動的なユーザーと同じだった場合にコレクションする
-    //一個しか取得してないけど複数している扱い
-    final List<DocumentSnapshot<Map<String, dynamic>>> docs = qshot.docs;
-    final DocumentSnapshot<Map<String, dynamic>> token = docs.first;
-    //await FirebaseFirestore.instance.collection('users').doc(activeUser.uid).collection('tokens').doc(tokenId).delete();
-    await token.reference.delete();
-  }
 }

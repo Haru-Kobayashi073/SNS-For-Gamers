@@ -1,0 +1,13 @@
+ isFollowing
+          ? RoundedButton(
+              onPressed: () => profileModel.unfollow(
+                  mainModel: mainModel, passiveFirestoreUser: firestoreUser),
+              widthRate: 0.5,
+              color: Colors.blue,
+              text: 'フォローを外す')
+          : RoundedButton(
+              onPressed: () => profileModel.follow(
+                  mainModel: mainModel, passiveFirestoreUser: firestoreUser),
+              widthRate: 0.5,
+              color: Colors.blue,
+              text: 'フォロー')
