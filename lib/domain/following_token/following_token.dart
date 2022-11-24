@@ -6,6 +6,8 @@ part 'following_token.g.dart';
 
 @freezed
 abstract class FollowingToken with _$FollowingToken {
+  //DBに保存するcreated_atやIdが必要。
+  //自分がフォローしたことの印
   const factory FollowingToken({
     required String passiveUid,
     required dynamic createdAt,

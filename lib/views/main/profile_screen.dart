@@ -35,12 +35,21 @@ class ProfileScreen extends ConsumerWidget {
       //   radius: 160,
       //   child: Image.file(
       //     profileModel.croppedFile!)),
-      Text(
-        'フォロー中: ' + firestoreUser.followingCount.toString(),
-        style: TextStyle(fontSize: 24),
-      ),
-      Text('フォロワー: ' + firestoreUser.followerCount.toString(),
-        style: TextStyle(fontSize: 24),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'フォロー中: ' + firestoreUser.followingCount.toString(),
+            style: TextStyle(fontSize: 20),
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Text(
+            'フォロワー: ' + firestoreUser.followerCount.toString(),
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
       ),
       RoundedButton(
           onPressed: () async => await profileModel.uploadUserImage(

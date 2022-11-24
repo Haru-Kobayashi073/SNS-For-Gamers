@@ -35,16 +35,22 @@ class PassiveUserProfilePage extends ConsumerWidget {
         children: [
           UserImage(length: 100, userImageURL: passiveUser.userImageURL),
           Center(child: Text(passiveUser.uid)),
-          Text(
-        'フォロー中: ' + passiveUser.followingCount.toString(),
-        style: TextStyle(fontSize: 24),
-      ),
-      Text(
-        isFollowing
-            ? 'フォロワー: ' + plusOneFollwerCount.toString()
-            : 'フォロワー: ' + followerCount.toString(),
-        style: TextStyle(fontSize: 24),
-      ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'フォロー中: ' + passiveUser.followingCount.toString(),
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(width: 30,),
+              Text(
+                isFollowing
+                    ? 'フォロワー: ' + plusOneFollwerCount.toString()
+                    : 'フォロワー: ' + followerCount.toString(),
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
           isFollowing
               ? RoundedButton(
                   onPressed: () => passiveUserProfileModel.unfollow(
