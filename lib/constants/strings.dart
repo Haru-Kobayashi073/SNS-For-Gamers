@@ -16,6 +16,7 @@ const String loginText = "ログインする";
 const String logoutText = "ログアウトを行う";
 const String loadingText = 'Loading';
 const String uploadText = 'アップロードする';
+const String createPostText = '投稿を作成する';
 // FieldKey
 const String usersFieldKey = "users";
 // message

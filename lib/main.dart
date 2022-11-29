@@ -9,6 +9,7 @@ import 'package:sns_vol2/constants/themes.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
+import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
@@ -43,7 +44,9 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
-      theme: themeModel.isDarkTheme ? darkThemeData(context: context) : lightThemeData(context: context),
+      theme: themeModel.isDarkTheme
+          ? darkThemeData(context: context)
+          : lightThemeData(context: context),
       home: onceUser == null
           ? LoginPage()
           : MyHomePage(
@@ -65,10 +68,15 @@ class MyHomePage extends ConsumerWidget {
     final MainModel mainModel = ref.watch(mainProvider);
     final SNSBottomNavigationBarModel snsBottomNavigationBarModel =
         ref.watch(snsBottomNavigationBarProvider);
+    final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => createPostModel.showPostDialog(context: context),
+        child: const Icon(Icons.new_label),
       ),
       drawer: SNSDrawer(
         mainModel: mainModel,
@@ -84,9 +92,12 @@ class MyHomePage extends ConsumerWidget {
                   snsBottomNavigationBarModel.onPageChanged(index: index),
               //childrenの数はElementsの数
               children: [
-                //注意：ページジャないのでScaffold
+                //注意：ページじゃないのでScaffold
                 HomeScreen(),
-                SearchScreen(passiveUser: mainModel.firestoreUser, mainModel: mainModel,),
+                SearchScreen(
+                  passiveUser: mainModel.firestoreUser,
+                  mainModel: mainModel,
+                ),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),
