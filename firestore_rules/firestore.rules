@@ -3,9 +3,8 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{uid} {
       allow read: if isAuthenticated();
-      allow update: if false;
-      allow create, delete: if isTheSameUser();
-      match /token/{tokenId} {
+      allow create, delete: if isTheSameUser(uid);
+      match /tokens/{tokenId} {
         allow read, create, delete: if isTheSameUser(uid);
       }
       match /followers/{followerUid} {
