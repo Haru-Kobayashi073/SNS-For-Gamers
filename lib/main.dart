@@ -75,7 +75,7 @@ class MyHomePage extends ConsumerWidget {
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => createPostModel.showPostDialog(context: context),
+        onPressed: () => createPostModel.showPostDialog(context: context, mainModel: mainModel),
         child: const Icon(Icons.new_label),
       ),
       drawer: SNSDrawer(

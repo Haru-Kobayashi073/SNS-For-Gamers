@@ -10,6 +10,10 @@ service cloud.firestore {
       match /followers/{followerUid} {
         allow create, delete: if isTheSameUser(followerUid);
       }
+      match /posts/{postId} {
+        allow read: if isAuthenticated();
+        allow create, delete: if isTheSameUser(uid);
+      }
     }
   }
   function isAuthenticated() {
