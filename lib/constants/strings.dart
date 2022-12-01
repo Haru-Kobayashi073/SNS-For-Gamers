@@ -8,6 +8,7 @@ const String cropperTitle = 'クロッパー';
 const String accountTitle = 'アカウント';
 const String themeTitle = 'テーマ';
 const String passiveUserProfileTitle = 'プロフィール';
+const String adminTitle = '管理者';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";

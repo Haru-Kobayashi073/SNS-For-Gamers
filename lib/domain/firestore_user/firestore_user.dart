@@ -17,6 +17,8 @@ abstract class FirestoreUser with _$FirestoreUser {
     required int followerCount,
     required int followingCount,
 
+    required bool isAdmin,
+
     required String email,
     required String userName,
     required String userImageURL,

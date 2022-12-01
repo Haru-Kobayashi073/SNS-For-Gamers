@@ -35,6 +35,7 @@ class SignUpModel extends ChangeNotifier {
       userImageURL: '',
       followerCount: 0,
       followingCount: 0,
+      isAdmin: false,
       uid: uid,
       email: email,
       createdAt: now,

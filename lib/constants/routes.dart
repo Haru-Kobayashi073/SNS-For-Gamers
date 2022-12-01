@@ -5,6 +5,7 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
+import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
 import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
@@ -36,3 +37,6 @@ void toPassiveUserProfilePagepPage(
                   passiveUser: passiveUser,
                   mainModel: mainModel,
                 )));
+
+void toAdminpPage({required BuildContext context}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => AdminPage()));

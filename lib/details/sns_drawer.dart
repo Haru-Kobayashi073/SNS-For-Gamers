@@ -17,16 +17,20 @@ class SNSDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: Text(accountTitle),
+            title: const Text(accountTitle),
             onTap: () =>
                 routes.toAccountPage(context: context, mainModel: mainModel),
           ),
           ListTile(
-            title: Text(themeTitle),
+            title: const Text(themeTitle),
             trailing: CupertinoSwitch(
               value: themeModel.isDarkTheme,
               onChanged: (value) => themeModel.setIsDarkTheme(value: value),
             ),
+          ),
+          if(mainModel.firestoreUser.isAdmin) ListTile(
+            title: const Text(adminTitle),
+            onTap: () => routes.toAdminpPage(context: context),
           )
         ],
       ),
