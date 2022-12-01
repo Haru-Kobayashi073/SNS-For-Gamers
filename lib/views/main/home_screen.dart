@@ -5,11 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
+import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
+import 'package:sns_vol2/models/main_model.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key, required this.mainModel}) : super(key: key);
+  final MainModel mainModel;
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -46,6 +50,16 @@ class HomeScreen extends ConsumerWidget {
                       final doc = postDocs[index];
                       final Post post = Post.fromJson(doc.data()!);
                       return ListTile(
+                        leading: UserImage(
+                            length: 32,
+                            userImageURL:
+                                post.uid == mainModel.firestoreUser.uid
+                                    ? mainModel.firestoreUser.userImageURL
+                                    : post.imageURL),
+                        trailing: const InkWell(
+                          child: Icon(Icons.favorite),
+                          // onTap: ,
+                        ),
                         title: Text(post.text),
                       );
                     }),

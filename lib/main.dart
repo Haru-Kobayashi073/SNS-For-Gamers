@@ -93,7 +93,7 @@ class MyHomePage extends ConsumerWidget {
               //childrenの数はElementsの数
               children: [
                 //注意：ページじゃないのでScaffold
-                HomeScreen(),
+                HomeScreen(mainModel: mainModel,),
                 SearchScreen(
                   passiveUser: mainModel.firestoreUser,
                   mainModel: mainModel,

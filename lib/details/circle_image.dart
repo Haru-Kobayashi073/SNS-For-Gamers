@@ -13,8 +13,9 @@ class CircleImage extends StatelessWidget {
       width: length,
       height: length,
       decoration: BoxDecoration(
-        // shape: BoxShape.circle,
-        image: DecorationImage(image: image),
+        border: Border.all(color: Colors.grey),
+        shape: BoxShape.circle,
+        image: DecorationImage(fit: BoxFit.fill, image: image),
       ),
     );
   }
