@@ -1,6 +1,7 @@
 //package
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,3 +30,5 @@ Future<File?> returnCroppedFile({required XFile? xFile}) async {
       ));
   return result;
 }
+
+User? returnAuthUser() => FirebaseAuth.instance.currentUser;

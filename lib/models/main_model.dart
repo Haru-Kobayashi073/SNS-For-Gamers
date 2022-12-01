@@ -18,7 +18,7 @@ class MainModel extends ChangeNotifier {
   bool isLoading = false;
 
   int counter = 0;
-  User? currentUser = null;
+  late User? currentUser;
   late DocumentSnapshot<Map<String, dynamic>> currentUserDoc;
   //Snapshotは簡単に言うとusersが持つドキュメント5行ぐらいのこと
   //jsonみたいなものでもある
