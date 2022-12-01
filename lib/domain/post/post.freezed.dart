@@ -28,7 +28,6 @@ mixin _$Post {
   String get text => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  dynamic get required => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,8 +47,7 @@ abstract class $PostCopyWith<$Res> {
       int likeCount,
       String text,
       String postId,
-      String uid,
-      dynamic required});
+      String uid});
 }
 
 /// @nodoc
@@ -73,7 +71,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? text = null,
     Object? postId = null,
     Object? uid = null,
-    Object? required = null,
   }) {
     return _then(_value.copyWith(
       updatedAt: null == updatedAt
@@ -108,10 +105,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      required: null == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ) as $Val);
   }
 }
@@ -130,8 +123,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int likeCount,
       String text,
       String postId,
-      String uid,
-      dynamic required});
+      String uid});
 }
 
 /// @nodoc
@@ -151,7 +143,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? text = null,
     Object? postId = null,
     Object? uid = null,
-    Object? required = null,
   }) {
     return _then(_$_Post(
       updatedAt: null == updatedAt
@@ -186,7 +177,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      required: null == required ? _value.required : required,
     ));
   }
 }
@@ -202,8 +192,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.likeCount,
       required this.text,
       required this.postId,
-      required this.uid,
-      this.required})
+      required this.uid})
       : _hashTags = hashTags;
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
@@ -229,12 +218,10 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   final String postId;
   @override
   final String uid;
-  @override
-  final dynamic required;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, postId: $postId, uid: $uid, required: $required)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, postId: $postId, uid: $uid)';
   }
 
   @override
@@ -249,8 +236,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('postId', postId))
-      ..add(DiagnosticsProperty('uid', uid))
-      ..add(DiagnosticsProperty('required', required));
+      ..add(DiagnosticsProperty('uid', uid));
   }
 
   @override
@@ -267,8 +253,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
                 other.likeCount == likeCount) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.uid, uid) || other.uid == uid) &&
-            const DeepCollectionEquality().equals(other.required, required));
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
@@ -282,8 +267,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       likeCount,
       text,
       postId,
-      uid,
-      const DeepCollectionEquality().hash(required));
+      uid);
 
   @JsonKey(ignore: true)
   @override
@@ -308,8 +292,7 @@ abstract class _Post implements Post {
       required final int likeCount,
       required final String text,
       required final String postId,
-      required final String uid,
-      final dynamic required}) = _$_Post;
+      required final String uid}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
@@ -329,8 +312,6 @@ abstract class _Post implements Post {
   String get postId;
   @override
   String get uid;
-  @override
-  dynamic get required;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

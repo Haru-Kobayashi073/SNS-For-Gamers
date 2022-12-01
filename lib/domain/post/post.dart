@@ -19,7 +19,6 @@ abstract class Post with _$Post {
     required String text,
     required String postId,
     required String uid,
-    required 
   }) =  _Post;
 
   factory Post

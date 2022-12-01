@@ -26,6 +26,7 @@ class MainModel extends ChangeNotifier {
 
   //token
   List<String> followingUids = [];
+  List<String> likePostIds = [];
 
   //以下関数がMainModelが起動した時の処理
   //ユーザーの動作を必要としないモデルの関数
