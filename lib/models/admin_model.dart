@@ -12,7 +12,7 @@ final adminProvider = ChangeNotifierProvider((ref) => AdminModel());
 
 class AdminModel extends ChangeNotifier {
   Future<void> admin() async {
-    //管理者だけにできる処理
+    // 管理者だけにできる処理
     // WriteBatch batch = FirebaseFirestore.instance.batch();
     // final String activveUid = returnAuthUser()!.uid;
     // for (int i = 0; i < 100; i++) {
