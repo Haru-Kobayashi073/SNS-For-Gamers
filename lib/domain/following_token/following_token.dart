@@ -12,6 +12,7 @@ abstract class FollowingToken with _$FollowingToken {
     required String passiveUid,
     required dynamic createdAt,
     required String tokenId,
+    required String tokenType,
   }) = _FollowingToken;
 
   factory FollowingToken.fromJson(Map<String, dynamic> json) =>

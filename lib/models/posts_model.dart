@@ -34,6 +34,7 @@ class PostsModel extends ChangeNotifier {
         createdAt: now,
         postId: postId,
         tokenId: tokenId,
+        tokenType: 'likePost',
         postRef: postRef);
     //自分がいいねしたことの印
     await currentUserDoc.reference
@@ -78,7 +79,7 @@ class PostsModel extends ChangeNotifier {
     final DocumentSnapshot<Map<String, dynamic>> token = docs.first;
     await token.reference.delete();
     //投稿がいいねされた印を削除
-    await currentUserDoc.reference
+    await postDoc.reference
         .collection("postLikes")
         .doc(activeUid)
         .delete();

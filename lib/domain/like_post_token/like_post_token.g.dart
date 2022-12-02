@@ -14,6 +14,7 @@ _$_LikePostToken _$$_LikePostTokenFromJson(Map<String, dynamic> json) =>
       postId: json['postId'] as String,
       tokenId: json['tokenId'] as String,
       postRef: json['postRef'],
+      tokenType: json['tokenType'] as String,
     );
 
 Map<String, dynamic> _$$_LikePostTokenToJson(_$_LikePostToken instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_LikePostTokenToJson(_$_LikePostToken instance) =>
       'postId': instance.postId,
       'tokenId': instance.tokenId,
       'postRef': instance.postRef,
+      'tokenType': instance.tokenType,
     };

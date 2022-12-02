@@ -13,7 +13,8 @@ abstract class Follower with _$Follower {
 ({
     required String followedUid,
     required dynamic createdAt,
-    required String followerUid
+    required String followerUid,
+    
   }) =  _Follower;
 
   factory Follower
