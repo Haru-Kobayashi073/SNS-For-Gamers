@@ -28,6 +28,8 @@ mixin _$Post {
   String get text => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get userImageURL => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +49,9 @@ abstract class $PostCopyWith<$Res> {
       int likeCount,
       String text,
       String postId,
-      String uid});
+      String uid,
+      String userName,
+      String userImageURL});
 }
 
 /// @nodoc
@@ -71,6 +75,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? text = null,
     Object? postId = null,
     Object? uid = null,
+    Object? userName = null,
+    Object? userImageURL = null,
   }) {
     return _then(_value.copyWith(
       updatedAt: null == updatedAt
@@ -105,6 +111,14 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userImageURL: null == userImageURL
+          ? _value.userImageURL
+          : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -123,7 +137,9 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int likeCount,
       String text,
       String postId,
-      String uid});
+      String uid,
+      String userName,
+      String userImageURL});
 }
 
 /// @nodoc
@@ -143,6 +159,8 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? text = null,
     Object? postId = null,
     Object? uid = null,
+    Object? userName = null,
+    Object? userImageURL = null,
   }) {
     return _then(_$_Post(
       updatedAt: null == updatedAt
@@ -177,6 +195,14 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userImageURL: null == userImageURL
+          ? _value.userImageURL
+          : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -192,7 +218,9 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.likeCount,
       required this.text,
       required this.postId,
-      required this.uid})
+      required this.uid,
+      required this.userName,
+      required this.userImageURL})
       : _hashTags = hashTags;
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
@@ -218,10 +246,14 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   final String postId;
   @override
   final String uid;
+  @override
+  final String userName;
+  @override
+  final String userImageURL;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, postId: $postId, uid: $uid)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL)';
   }
 
   @override
@@ -236,7 +268,9 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('postId', postId))
-      ..add(DiagnosticsProperty('uid', uid));
+      ..add(DiagnosticsProperty('uid', uid))
+      ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('userImageURL', userImageURL));
   }
 
   @override
@@ -253,7 +287,11 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
                 other.likeCount == likeCount) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.uid, uid) || other.uid == uid));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
+            (identical(other.userImageURL, userImageURL) ||
+                other.userImageURL == userImageURL));
   }
 
   @JsonKey(ignore: true)
@@ -267,7 +305,9 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       likeCount,
       text,
       postId,
-      uid);
+      uid,
+      userName,
+      userImageURL);
 
   @JsonKey(ignore: true)
   @override
@@ -292,7 +332,9 @@ abstract class _Post implements Post {
       required final int likeCount,
       required final String text,
       required final String postId,
-      required final String uid}) = _$_Post;
+      required final String uid,
+      required final String userName,
+      required final String userImageURL}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
@@ -312,6 +354,10 @@ abstract class _Post implements Post {
   String get postId;
   @override
   String get uid;
+  @override
+  String get userName;
+  @override
+  String get userImageURL;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

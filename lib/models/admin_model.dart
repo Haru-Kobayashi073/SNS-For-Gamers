@@ -6,13 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 
 final adminProvider = ChangeNotifierProvider((ref) => AdminModel());
 
 class AdminModel extends ChangeNotifier {
-  Future<void> admin() async {
+  Future<void> admin(
+      {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc,
+      required FirestoreUser firestoreUser}) async {
     // 管理者だけにできる処理
+    
+    // //ユーザーのemail削除
+    // final WriteBatch batch = FirebaseFirestore.instance.batch();
+    // final userQshot =
+    //     await FirebaseFirestore.instance.collection('users').get();
+    // for (final user in userQshot.docs) {
+    //   batch.update(user.reference, {
+    //     "email": FieldValue.delete(),
+    //   });
+    // }
+    // //postにuserImageURLの追加、userNameの追加
+    // final postQshot = await currentUserDoc.reference.collection('posts').get();
+    // for (final post in postQshot.docs) {
+    //   batch.update(post.reference, {
+    //     "userName": firestoreUser.userName,
+    //     "userImageURL": firestoreUser.userImageURL
+    //     });
+    // }
+    // await batch.commit();
+
+    //投稿を99個作成
     // WriteBatch batch = FirebaseFirestore.instance.batch();
     // final String activveUid = returnAuthUser()!.uid;
     // for (int i = 0; i < 100; i++) {

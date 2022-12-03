@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
 
 final createPostModelProvider =
@@ -35,7 +36,7 @@ class CreatePostModel extends ChangeNotifier {
           onTap: () async {
             if (textEditingController.text.isNotEmpty) {
               //メインの動作
-              await createPost(currentUserDoc: mainModel.currentUserDoc);
+              await createPost(mainModel: mainModel);
               await controller.dismiss();
               text = "";
             } else {
@@ -55,9 +56,9 @@ class CreatePostModel extends ChangeNotifier {
   }
 
   Future<void> createPost(
-      {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc}) async {
+      {required MainModel mainModel}) async {
     final Timestamp now = Timestamp.now();
-    final String activeUid = currentUserDoc.id;
+    final String activeUid = mainModel.currentUserDoc.id;
     final String postId = returnUuidV4();
     final Post post = Post(
         updatedAt: now,
@@ -65,11 +66,13 @@ class CreatePostModel extends ChangeNotifier {
         hashTags: [],
         imageURL: "",
         likeCount: 0,
+        userName: mainModel.firestoreUser.userName,
+        userImageURL: mainModel.firestoreUser.userImageURL,
         text: text,
         postId: postId,
         uid: activeUid);
 //currentUserDoc.reference = FirebaseFirestore.instance.collection('users').doc(firestoreUser.uid)
-    await currentUserDoc.reference
+    await mainModel.currentUserDoc.reference
         .collection('posts')
         .doc(postId)
         .set(post.toJson());

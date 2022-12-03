@@ -16,6 +16,8 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       text: json['text'] as String,
       postId: json['postId'] as String,
       uid: json['uid'] as String,
+      userName: json['userName'] as String,
+      userImageURL: json['userImageURL'] as String,
     );
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
@@ -27,4 +29,6 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'text': instance.text,
       'postId': instance.postId,
       'uid': instance.uid,
+      'userName': instance.userName,
+      'userImageURL': instance.userImageURL,
     };

@@ -27,7 +27,6 @@ mixin _$FirestoreUser {
   int get followerCount => throw _privateConstructorUsedError;
   int get followingCount => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -50,7 +49,6 @@ abstract class $FirestoreUserCopyWith<$Res> {
       int followerCount,
       int followingCount,
       bool isAdmin,
-      String email,
       String userName,
       String userImageURL,
       String uid});
@@ -74,7 +72,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? followerCount = null,
     Object? followingCount = null,
     Object? isAdmin = null,
-    Object? email = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? uid = null,
@@ -100,10 +97,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -134,7 +127,6 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       int followerCount,
       int followingCount,
       bool isAdmin,
-      String email,
       String userName,
       String userImageURL,
       String uid});
@@ -156,7 +148,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? followerCount = null,
     Object? followingCount = null,
     Object? isAdmin = null,
-    Object? email = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? uid = null,
@@ -182,10 +173,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -211,7 +198,6 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       required this.followerCount,
       required this.followingCount,
       required this.isAdmin,
-      required this.email,
       required this.userName,
       required this.userImageURL,
       required this.uid});
@@ -232,8 +218,6 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
   @override
   final bool isAdmin;
   @override
-  final String email;
-  @override
   final String userName;
   @override
   final String userImageURL;
@@ -242,7 +226,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, email: $email, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
+    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
   }
 
   @override
@@ -255,7 +239,6 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       ..add(DiagnosticsProperty('followerCount', followerCount))
       ..add(DiagnosticsProperty('followingCount', followingCount))
       ..add(DiagnosticsProperty('isAdmin', isAdmin))
-      ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
       ..add(DiagnosticsProperty('uid', uid));
@@ -273,7 +256,6 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
             (identical(other.followingCount, followingCount) ||
                 other.followingCount == followingCount) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userImageURL, userImageURL) ||
@@ -290,7 +272,6 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       followerCount,
       followingCount,
       isAdmin,
-      email,
       userName,
       userImageURL,
       uid);
@@ -316,7 +297,6 @@ abstract class _FirestoreUser implements FirestoreUser {
       required final int followerCount,
       required final int followingCount,
       required final bool isAdmin,
-      required final String email,
       required final String userName,
       required final String userImageURL,
       required final String uid}) = _$_FirestoreUser;
@@ -335,8 +315,6 @@ abstract class _FirestoreUser implements FirestoreUser {
   int get followingCount;
   @override
   bool get isAdmin;
-  @override
-  String get email;
   @override
   String get userName;
   @override

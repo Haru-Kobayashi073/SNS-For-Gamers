@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 
@@ -30,7 +31,7 @@ class SNSDrawer extends StatelessWidget {
           ),
           if(mainModel.firestoreUser.isAdmin) ListTile(
             title: const Text(adminTitle),
-            onTap: () => routes.toAdminpPage(context: context),
+            onTap: () => routes.toAdminpPage(context: context, mainModel: mainModel),
           )
         ],
       ),

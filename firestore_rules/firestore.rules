@@ -3,6 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{uid} {
       allow read: if isAuthenticated();
+      allow update: if isAdmin();
       allow create, delete: if isTheSameUserOrAdmin(uid);
       match /tokens/{tokenId} {
         allow read, create, delete: if isTheSameUserOrAdmin(uid);
@@ -12,6 +13,7 @@ service cloud.firestore {
       }
       match /posts/{postId} {
         allow read: if isAuthenticated();
+        allow update: if isAdmin();
         allow create, delete: if isTheSameUserOrAdmin(uid);
         match /postLikes/{activeUid} {
           allow create, delete: if isTheSameUserOrAdmin(activeUid);

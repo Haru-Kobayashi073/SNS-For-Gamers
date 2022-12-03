@@ -43,8 +43,8 @@ void toPassiveUserProfilePagepPage(
                   mainModel: mainModel,
                 )));
 
-void toAdminpPage({required BuildContext context}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => AdminPage()));
+void toAdminpPage({required BuildContext context, required MainModel mainModel}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => AdminPage(mainModel: mainModel,)));
 
 void toCommentsPage(
         {required BuildContext context,
