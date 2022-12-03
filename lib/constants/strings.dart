@@ -9,6 +9,7 @@ const String accountTitle = 'アカウント';
 const String themeTitle = 'テーマ';
 const String passiveUserProfileTitle = 'プロフィール';
 const String adminTitle = '管理者';
+const String commentTitle = 'コメント';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -19,6 +20,7 @@ const String loadingText = 'Loading';
 const String uploadText = 'アップロードする';
 const String createPostText = '投稿を作成する';
 const String reloadText = '再読み込みを行う';
+const String createCommentText = 'コメントを作成';
 // FieldKey
 const String usersFieldKey = "users";
 // message
