@@ -16,6 +16,10 @@ service cloud.firestore {
         match /postLikes/{activeUid} {
           allow create, delete: if isTheSameUserOrAdmin(activeUid);
         }
+        match /postComments/{postCommentId} {
+          allow read: if isAuthenticated();
+          allow create, delete: if isTheSameUserOrAdmin(uid);
+        }
       }
     }
   }

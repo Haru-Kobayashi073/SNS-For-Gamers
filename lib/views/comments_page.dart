@@ -26,7 +26,7 @@ class CommentsPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(commentTitle)),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => commentsModel.showCommentFlashBar(context: context, mainModel: mainModel),
+        onPressed: () => commentsModel.showCommentFlashBar(context: context, mainModel: mainModel, postDoc: postDoc),
         child: const Icon(Icons.new_label),
       ),
       body: Container(),
