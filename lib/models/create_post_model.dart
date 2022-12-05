@@ -66,6 +66,7 @@ class CreatePostModel extends ChangeNotifier {
         hashTags: [],
         imageURL: "",
         likeCount: 0,
+        postCommentCount: 0,
         userName: mainModel.firestoreUser.userName,
         userImageURL: mainModel.firestoreUser.userImageURL,
         text: text,

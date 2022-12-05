@@ -55,20 +55,12 @@ class CommentCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                CommentLikeButton(
-                  mainModel: mainModel,
-                  comment: comment,
-                  commentsModel: commentsModel,
-                  commentDoc: commentDoc,
-                  post: post,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(comment.likeCount.toString()),
-                ),
-              ],
+            CommentLikeButton(
+              mainModel: mainModel,
+              comment: comment,
+              commentsModel: commentsModel,
+              commentDoc: commentDoc,
+              post: post,
             ),
           ],
         ),

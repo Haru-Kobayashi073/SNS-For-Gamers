@@ -16,7 +16,16 @@ class AdminModel extends ChangeNotifier {
       {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc,
       required FirestoreUser firestoreUser}) async {
     // 管理者だけにできる処理
-    
+
+    // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
+    // final postsQshot = await currentUserDoc.reference.collection('posts').get();
+    // for (final post in postsQshot.docs) {
+    //   writeBatch.update(post.reference, {
+    //     'postCommentCount': 0,
+    //   });
+    // }
+    // await writeBatch.commit();
+
     // //ユーザーのemail削除
     // final WriteBatch batch = FirebaseFirestore.instance.batch();
     // final userQshot =

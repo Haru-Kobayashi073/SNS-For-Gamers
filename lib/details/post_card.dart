@@ -62,19 +62,11 @@ class PostCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                PostLikeButton(
-                    mainModel: mainModel,
-                    post: post,
-                    postsModel: postsModel,
-                    postDoc: postDoc),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(post.likeCount.toString()),
-                ),
-              ],
-            ),
+            PostLikeButton(
+                mainModel: mainModel,
+                post: post,
+                postsModel: postsModel,
+                postDoc: postDoc),
           ],
         ),
       ]),

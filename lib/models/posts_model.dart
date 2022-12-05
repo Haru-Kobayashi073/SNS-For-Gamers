@@ -28,7 +28,6 @@ class PostsModel extends ChangeNotifier {
     final Timestamp now = Timestamp.now();
     final String activeUid = currentUserDoc.id;
     final String passiveUid = post.uid;
-    notifyListeners();
     final LikePostToken likePostToken = LikePostToken(
         activeUid: activeUid,
         passiveUid: passiveUid,
@@ -38,6 +37,8 @@ class PostsModel extends ChangeNotifier {
         tokenType: likePostTokenTypeString,
         postRef: postRef);
     //自分がいいねしたことの印
+    mainModel.likePostTokens.add(likePostToken);
+    notifyListeners();
     await currentUserDoc.reference
         .collection('tokens')
         .doc(tokenId)
@@ -65,19 +66,28 @@ class PostsModel extends ChangeNotifier {
     mainModel.likePostIds.remove(postId);
     final currentUserDoc = mainModel.currentUserDoc;
     final String activeUid = currentUserDoc.id;
+    final deleteLikePostToken = mainModel.likePostTokens
+        .where((element) => element.postId == postId)
+        .toList()
+        .first;
+    mainModel.likePostTokens.remove(deleteLikePostToken);
     notifyListeners();
     //自分がいいねした印を削除
     //qshotというdataの塊の存在を取得
-    final QuerySnapshot<Map<String, dynamic>> qshot = await currentUserDoc
-        .reference
-        .collection('tokens')
-        .where('postId', isEqualTo: postId)
-        .get();
+    // final QuerySnapshot<Map<String, dynamic>> qshot = await currentUserDoc
+    //     .reference
+    //     .collection('tokens')
+    //     .where('postId', isEqualTo: postId)
+    //     .get();
     //passiveUidが受動的なユーザーと同じだった場合にコレクションする
     //一個しか取得してないけど複数している扱い
-    final List<DocumentSnapshot<Map<String, dynamic>>> docs = qshot.docs;
-    final DocumentSnapshot<Map<String, dynamic>> token = docs.first;
-    await token.reference.delete();
+    // final List<DocumentSnapshot<Map<String, dynamic>>> docs = qshot.docs;
+    // final DocumentSnapshot<Map<String, dynamic>> token = docs.first;
+
+    await currentUserDoc.reference
+        .collection('tokens')
+        .doc(deleteLikePostToken.tokenId)
+        .delete();
     //投稿がいいねされた印を削除
     await postDoc.reference.collection("postLikes").doc(activeUid).delete();
   }

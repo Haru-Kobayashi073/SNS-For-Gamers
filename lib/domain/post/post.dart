@@ -17,6 +17,7 @@ abstract class Post with _$Post {
     required String imageURL,
     required int likeCount,
     required String text,
+    required int postCommentCount,
     required String postId,
     required String uid,
     required String userName,

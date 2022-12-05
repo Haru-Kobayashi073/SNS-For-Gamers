@@ -24,21 +24,39 @@ class CommentLikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return mainModel.likeCommentIds.contains(comment.postCommentId)
-        ? InkWell(
-            child: const Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ),
-            onTap: () async => await commentsModel.unlike(comment: comment, mainModel: mainModel, post: post, commentDoc: commentDoc),
-          )
-        : InkWell(
-            child: const Icon(Icons.favorite),
-            onTap: () async => await commentsModel.like(
-                comment: comment,
-                mainModel: mainModel,
-                post: post,
-                commentDoc: commentDoc),
-          );
+    final bool isLike = mainModel.likeCommentIds.contains(comment.postCommentId);
+    final int plusOneCount = comment.likeCount + 1;
+
+    return Row(
+      children: [
+        Container(
+          child: isLike
+              ? InkWell(
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                  onTap: () async => await commentsModel.unlike(
+                      comment: comment,
+                      mainModel: mainModel,
+                      post: post,
+                      commentDoc: commentDoc),
+                )
+              : InkWell(
+                  child: const Icon(Icons.favorite),
+                  onTap: () async => await commentsModel.like(
+                      comment: comment,
+                      mainModel: mainModel,
+                      post: post,
+                      commentDoc: commentDoc),
+                ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+              isLike ? plusOneCount.toString() : comment.likeCount.toString()),
+        ),
+      ],
+    );
   }
 }
