@@ -144,6 +144,7 @@ class CommentsModel extends ChangeNotifier {
         updatedAt: now,
         comment: commentString,
         likeCount: 0,
+        postRef: postDoc.reference,
         postCommentId: postCommentId,
         postCommentReplyCount: 0,
         userName: firestoreUser.userName,

@@ -1,6 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /{path=**}/postComments/{postCommentId} {
+      allow read: if isAdmin();
+    }
     match /users/{uid} {
       allow read: if isAuthenticated();
       allow update: if isAdmin();

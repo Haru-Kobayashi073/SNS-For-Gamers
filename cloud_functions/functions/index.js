@@ -66,3 +66,21 @@ exports.onPostCommentLikeDelete = functions.firestore.document('users/{uid}/post
     });
   }
 );
+
+exports.onPostCommentCreate = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{id}').onCreate(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.postRef.update({
+      "postCommentCount": admin.firestore.FieldValue.increment(plusOne),
+    });
+  }
+);
+
+exports.onPostCommentDelete = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{id}').onDelete(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.postRef.update({
+      "postCommentCount": admin.firestore.FieldValue.increment(minusOne),
+    });
+  }
+);

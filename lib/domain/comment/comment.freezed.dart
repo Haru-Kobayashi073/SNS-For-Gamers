@@ -24,6 +24,7 @@ mixin _$Comment {
   dynamic get updatedAt =>
       throw _privateConstructorUsedError; //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  dynamic get postRef => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   String get postCommentId => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $CommentCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      dynamic postRef,
       String comment,
       int likeCount,
       String postCommentId,
@@ -69,6 +71,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? postRef = null,
     Object? comment = null,
     Object? likeCount = null,
     Object? postCommentId = null,
@@ -85,6 +88,10 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postRef: null == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       comment: null == comment
           ? _value.comment
@@ -128,6 +135,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      dynamic postRef,
       String comment,
       int likeCount,
       String postCommentId,
@@ -149,6 +157,7 @@ class __$$_CommentCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? postRef = null,
     Object? comment = null,
     Object? likeCount = null,
     Object? postCommentId = null,
@@ -165,6 +174,10 @@ class __$$_CommentCopyWithImpl<$Res>
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postRef: null == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       comment: null == comment
           ? _value.comment
@@ -204,6 +217,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   const _$_Comment(
       {required this.createdAt,
       required this.updatedAt,
+      required this.postRef,
       required this.comment,
       required this.likeCount,
       required this.postCommentId,
@@ -222,6 +236,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   @override
+  final dynamic postRef;
+  @override
   final String comment;
   @override
   final int likeCount;
@@ -238,7 +254,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, comment: $comment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
+    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -248,6 +264,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('type', 'Comment'))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('postRef', postRef))
       ..add(DiagnosticsProperty('comment', comment))
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('postCommentId', postCommentId))
@@ -264,6 +281,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
             other is _$_Comment &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
@@ -284,6 +302,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       runtimeType,
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(postRef),
       comment,
       likeCount,
       postCommentId,
@@ -310,6 +329,7 @@ abstract class _Comment implements Comment {
   const factory _Comment(
       {required final dynamic createdAt,
       required final dynamic updatedAt,
+      required final dynamic postRef,
       required final String comment,
       required final int likeCount,
       required final String postCommentId,
@@ -326,6 +346,8 @@ abstract class _Comment implements Comment {
   dynamic get updatedAt;
   @override //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  dynamic get postRef;
+  @override
   String get comment;
   @override
   int get likeCount;

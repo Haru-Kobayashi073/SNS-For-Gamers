@@ -24,7 +24,8 @@ class CommentLikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLike = mainModel.likeCommentIds.contains(comment.postCommentId);
+    final bool isLike =
+        mainModel.likeCommentIds.contains(comment.postCommentId);
     final int plusOneCount = comment.likeCount + 1;
 
     return Row(

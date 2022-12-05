@@ -13,6 +13,7 @@ abstract class Comment with _$Comment {
     required dynamic updatedAt,
     //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
     //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+    required dynamic postRef,
     required String comment,
     required int likeCount,
     required String postCommentId,
