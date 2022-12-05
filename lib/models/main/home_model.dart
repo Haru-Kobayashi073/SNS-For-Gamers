@@ -63,6 +63,7 @@ class HomeModel extends ChangeNotifier {
     final qshot = await returnQuery().get();
     postDocs = qshot.docs;
     endLoading();
+    notifyListeners();
   }
 
   Future<void> onLoading() async {

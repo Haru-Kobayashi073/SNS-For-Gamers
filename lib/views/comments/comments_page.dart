@@ -11,6 +11,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/views/comments/components/comment_card.dart';
 
 class CommentsPage extends ConsumerWidget {
   const CommentsPage(
@@ -51,7 +52,12 @@ class CommentsPage extends ConsumerWidget {
                     final commentDoc = commentDocs[index];
                     final Comment comment =
                         Comment.fromJson(commentDoc.data()!);
-                    return Container();
+                    return CommentCard(
+                        comment: comment,
+                        post: post,
+                        mainModel: mainModel,
+                        commentsModel: commentsModel,
+                        commentDoc: commentDoc);
                   }),
             ),
     );

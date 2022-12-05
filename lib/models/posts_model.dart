@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/like_post_token/like_post_token.dart';
@@ -34,7 +35,7 @@ class PostsModel extends ChangeNotifier {
         createdAt: now,
         postId: postId,
         tokenId: tokenId,
-        tokenType: 'likePost',
+        tokenType: likePostTokenTypeString,
         postRef: postRef);
     //自分がいいねしたことの印
     await currentUserDoc.reference
@@ -55,7 +56,8 @@ class PostsModel extends ChangeNotifier {
         .set(postLike.toJson());
   }
 
-  Future<void> unlike({required Post post,
+  Future<void> unlike(
+      {required Post post,
       required DocumentSnapshot<Map<String, dynamic>> postDoc,
       required DocumentReference<Map<String, dynamic>> postRef,
       required MainModel mainModel}) async {
@@ -66,10 +68,8 @@ class PostsModel extends ChangeNotifier {
     notifyListeners();
     //自分がいいねした印を削除
     //qshotというdataの塊の存在を取得
-    final QuerySnapshot<Map<String, dynamic>> qshot = await FirebaseFirestore
-        .instance
-        .collection('users')
-        .doc(activeUid)
+    final QuerySnapshot<Map<String, dynamic>> qshot = await currentUserDoc
+        .reference
         .collection('tokens')
         .where('postId', isEqualTo: postId)
         .get();
@@ -79,9 +79,6 @@ class PostsModel extends ChangeNotifier {
     final DocumentSnapshot<Map<String, dynamic>> token = docs.first;
     await token.reference.delete();
     //投稿がいいねされた印を削除
-    await postDoc.reference
-        .collection("postLikes")
-        .doc(activeUid)
-        .delete();
+    await postDoc.reference.collection("postLikes").doc(activeUid).delete();
   }
 }

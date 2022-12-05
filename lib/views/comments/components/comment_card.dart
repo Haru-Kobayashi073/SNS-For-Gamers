@@ -1,27 +1,28 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sns_vol2/details/post_like_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
+import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/posts_model.dart';
+import 'package:sns_vol2/views/comments/comment_like_button.dart';
 
-class PostCard extends StatelessWidget {
-  const PostCard({
-    Key? key,
-    required this.mainModel,
-    required this.post,
-    required this.postDoc,
-    required this.commentsModel,
-    required this.postsModel,
-  }) : super(key: key);
+class CommentCard extends StatelessWidget {
+  const CommentCard(
+      {Key? key,
+      required this.comment,
+      required this.post,
+      required this.mainModel,
+      required this.commentsModel,
+      required this.commentDoc})
+      : super(key: key);
+  final Comment comment;
+  final Post post;
   final MainModel mainModel;
   final CommentsModel commentsModel;
-  final PostsModel postsModel;
-  final DocumentSnapshot<Map<String, dynamic>> postDoc;
-  final Post post;
+  final DocumentSnapshot<Map<String, dynamic>> commentDoc;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +37,9 @@ class PostCard extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: UserImage(
-                  length: 48,
-                  userImageURL: post.uid == mainModel.firestoreUser.uid
-                      ? mainModel.firestoreUser.userImageURL
-                      : post.imageURL),
+              child: UserImage(length: 48, userImageURL: comment.userImageURL),
             ),
-            Text(post.text),
+            Text(comment.comment),
           ],
         ),
         Row(
@@ -54,24 +51,22 @@ class PostCard extends StatelessWidget {
                   child: Icon(
                     Icons.messenger_outline_rounded,
                   ),
-                  onTap: () async => await commentsModel.init(
-                      context: context,
-                      mainModel: mainModel,
-                      post: post,
-                      postDoc: postDoc),
+                  onTap: () {},
                 ),
               ],
             ),
             Row(
               children: [
-                PostLikeButton(
-                    mainModel: mainModel,
-                    post: post,
-                    postsModel: postsModel,
-                    postDoc: postDoc),
+                CommentLikeButton(
+                  mainModel: mainModel,
+                  comment: comment,
+                  commentsModel: commentsModel,
+                  commentDoc: commentDoc,
+                  post: post,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(post.likeCount.toString()),
+                  child: Text(comment.likeCount.toString()),
                 ),
               ],
             ),

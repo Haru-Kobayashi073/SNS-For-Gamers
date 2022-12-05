@@ -9,6 +9,7 @@ import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/following_token/following_token.dart';
+import 'package:sns_vol2/domain/like_comment_token/like_comment_token.dart';
 import 'package:sns_vol2/domain/like_post_token/like_post_token.dart';
 //domain
 
@@ -30,8 +31,10 @@ class MainModel extends ChangeNotifier {
   //token
   List<LikePostToken> likePostTokens = [];
   List<FollowingToken> followingTokens = [];
+  List<LikeCommentToken> likeCommentTokens = [];
   List<String> followingUids = [];
   List<String> likePostIds = [];
+  List<String> likeCommentIds = [];
 
   //以下関数がMainModelが起動した時の処理
   //ユーザーの動作を必要としないモデルの関数
@@ -90,6 +93,14 @@ class MainModel extends ChangeNotifier {
           final LikePostToken likePostToken = LikePostToken.fromJson(tokenMap);
           likePostTokens.add(likePostToken);
           likePostIds.add(likePostToken.postId);
+          break;
+        case TokenType.likeComment:
+          final LikeCommentToken likeCommentToken =
+              LikeCommentToken.fromJson(tokenMap);
+          likeCommentTokens.add(likeCommentToken);
+          likeCommentIds.add(likeCommentToken.postCommentId);
+          break;
+        case TokenType.mistake:
           break;
       }
     }

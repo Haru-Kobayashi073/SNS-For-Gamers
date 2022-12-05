@@ -1,22 +1,30 @@
 //Stringにしたい
-enum TokenType { following, likePost }
+enum TokenType { following, likePost, likeComment, mistake }
 
 //引数にTokenType.followingを入れるとStringの”following”がreturnされます
 String returnTokenTypeString({required TokenType tokenType}) =>
     tokenType.toString().substring(10);
 
-String followingTokenType =
+String followingTokenTypeString =
     returnTokenTypeString(tokenType: TokenType.following);
 
-String likePostTokenType = returnTokenTypeString(tokenType: TokenType.likePost);
+String likePostTokenTypeString =
+    returnTokenTypeString(tokenType: TokenType.likePost);
+
+String likeCommentTokenTypeString =
+    returnTokenTypeString(tokenType: TokenType.following);
 
 TokenType mapToTokenType({required Map<String, dynamic> tokenMap}) {
   //tokenのデータを取得してそのTokenTypeのStringを得る
   //それがfollowingかlikePostかを判別
   final String tokenTypeString = tokenMap['tokenType'];
-  if (tokenTypeString == followingTokenType) {
+  if (tokenTypeString == followingTokenTypeString) {
     return TokenType.following;
-  } else {
+  } else if (tokenTypeString == likePostTokenTypeString) {
     return TokenType.likePost;
+  } else if (tokenTypeString == likeCommentTokenTypeString) {
+    return TokenType.likeComment;
+  } else {
+    return TokenType.mistake;
   }
 }

@@ -8,7 +8,7 @@ import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
-import 'package:sns_vol2/views/comments_page.dart';
+import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
 import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
