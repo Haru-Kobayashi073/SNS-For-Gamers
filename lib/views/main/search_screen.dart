@@ -8,7 +8,8 @@ import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/models/main_model.dart';
 
 class SearchScreen extends ConsumerWidget {
-  const SearchScreen({Key? key, required FirestoreUser passiveUser, required this.mainModel})
+  const SearchScreen(
+      {Key? key, required FirestoreUser passiveUser, required this.mainModel})
       : super(key: key);
   final MainModel mainModel;
 
@@ -24,8 +25,10 @@ class SearchScreen extends ConsumerWidget {
           final FirestoreUser firestoreUser = searchModel.users[index];
           return ListTile(
             title: Text(firestoreUser.uid),
-            onTap: () => routes.toPassiveUserProfilePagepPage(
-                context: context, passiveUser: firestoreUser, mainModel: mainModel),
+            onTap: () => routes.toPassiveUserProfilePage(
+                context: context,
+                passiveUser: firestoreUser,
+                mainModel: mainModel),
           );
         });
   }

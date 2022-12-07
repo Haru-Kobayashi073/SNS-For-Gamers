@@ -28,6 +28,7 @@ class CommentsModel extends ChangeNotifier {
   List<DocumentSnapshot<Map<String, dynamic>>> commentDocs = [];
   Query<Map<String, dynamic>> returnQuery(
       {required DocumentSnapshot<Map<String, dynamic>> postDoc}) {
+    //postに紐づくコメントが欲しい
     return postDoc.reference
         .collection('postComments')
         .orderBy('likeCount', descending: true);

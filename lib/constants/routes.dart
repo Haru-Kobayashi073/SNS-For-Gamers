@@ -1,6 +1,7 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 //packages
@@ -10,10 +11,11 @@ import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
+import 'package:sns_vol2/views/replies/replies_page.dart';
 import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 
-void toMyApppPage({required BuildContext context}) =>
+void toMyAppPage({required BuildContext context}) =>
     Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
 
 void toSignUpPage({required BuildContext context}) => Navigator.push(
@@ -31,7 +33,7 @@ void toAccountPage(
                   mainModel: mainModel,
                 )));
 
-void toPassiveUserProfilePagepPage(
+void toPassiveUserProfilePage(
         {required BuildContext context,
         required FirestoreUser passiveUser,
         required MainModel mainModel}) =>
@@ -43,8 +45,14 @@ void toPassiveUserProfilePagepPage(
                   mainModel: mainModel,
                 )));
 
-void toAdminpPage({required BuildContext context, required MainModel mainModel}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => AdminPage(mainModel: mainModel,)));
+void toAdminPage(
+        {required BuildContext context, required MainModel mainModel}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AdminPage(
+                  mainModel: mainModel,
+                )));
 
 void toCommentsPage(
         {required BuildContext context,
@@ -59,3 +67,16 @@ void toCommentsPage(
                   postDoc: postDoc,
                   mainModel: mainModel,
                 )));
+
+void toRepliesPage(
+        {required BuildContext context,
+        required Comment comment,
+        required DocumentSnapshot<Map<String, dynamic>> commentDoc,
+        required MainModel mainModel}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RepliesPage(
+                comment: comment,
+                commentDoc: commentDoc,
+                mainModel: mainModel)));

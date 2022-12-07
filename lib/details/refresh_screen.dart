@@ -9,10 +9,10 @@ import 'package:sns_vol2/models/posts_model.dart';
 
 class RefreshScreen extends StatelessWidget {
   const RefreshScreen({Key? key, required this.child, required this.onRefresh, required this.onLoading, required this.refreshController}) : super(key: key);
+  final Widget child;
   final void Function()? onRefresh;
   final void Function()? onLoading;
   final RefreshController refreshController;
-  final Widget child;
 
   @override
   Widget build(BuildContext context) {

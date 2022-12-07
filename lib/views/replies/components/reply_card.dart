@@ -3,28 +3,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/details/user_image.dart';
 //domain
-import 'package:sns_vol2/domain/comment/comment.dart';
+import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/models/comments_model.dart';
+import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
-import 'package:sns_vol2/views/comments/comment_like_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CommentCard extends ConsumerWidget {
-  const CommentCard({
+class ReplyCard extends ConsumerWidget {
+  const ReplyCard({
     Key? key,
-    required this.comment,
-    required this.post,
-    required this.mainModel,
-    required this.commentsModel,
-    required this.commentDoc,
+    required this.reply
   }) : super(key: key);
-  final Comment comment;
-  final Post post;
-  final MainModel mainModel;
-  final CommentsModel commentsModel;
-  final DocumentSnapshot<Map<String, dynamic>> commentDoc;
+  final Reply reply;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,9 +32,19 @@ class CommentCard extends ConsumerWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: UserImage(length: 48, userImageURL: comment.userImageURL),
+              child: UserImage(length: 48, userImageURL: reply.userImageURL),
             ),
-            Text(comment.comment),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(reply.userName),
+                const SizedBox(height: 5,),
+                Text(
+                  reply.reply,
+                  style: const TextStyle(overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
           ],
         ),
         Row(
@@ -53,23 +54,19 @@ class CommentCard extends ConsumerWidget {
               children: [
                 InkWell(
                   child: const Icon(
-                    Icons.reply,
+                    Icons.favorite,
                   ),
-                  onTap: () async => await repliesModel.init(
-                      context: context,
-                      comment: comment,
-                      commentDoc: commentDoc,
-                      mainModel: mainModel),
+                  onTap: () {}
                 ),
               ],
             ),
-            CommentLikeButton(
-              mainModel: mainModel,
-              comment: comment,
-              commentsModel: commentsModel,
-              commentDoc: commentDoc,
-              post: post,
-            ),
+            // ReplyLikeButton(
+            //   mainModel: mainModel,
+            //   reply: reply,
+            //   replysModel: replysModel,
+            //   replyDoc: replyDoc,
+            //   post: post,
+            // ),
           ],
         ),
       ]),

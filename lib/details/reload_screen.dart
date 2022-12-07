@@ -11,11 +11,12 @@ class ReloadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
           child: RoundedButton(
               onPressed: onReload,
-              widthRate: 0.4,
+              widthRate: 0.6,
               color: Colors.blue,
               text: reloadText),
         )
