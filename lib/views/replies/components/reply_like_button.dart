@@ -19,14 +19,14 @@ class ReplyLikeButton extends StatelessWidget {
   final Comment comment;
   final Reply reply;
   final RepliesModel repliesModel;
-  final DocumentSnapshot<Map<String, dynamic>> replyDoc;
+  final DocumentSnapshot replyDoc;
 
   @override
   Widget build(BuildContext context) {
     final bool isLike =
         mainModel.likeReplyIds.contains(reply.postCommentReplyId);
     final likeCount = reply.likeCount;
-    final int plusOneCount = likeCount + 1;
+    // final int plusOneCount = likeCount + 1;
 
     return Row(
       children: [
@@ -54,7 +54,8 @@ class ReplyLikeButton extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
-              isLike ? plusOneCount.toString() : reply.likeCount.toString()),
+              // isLike ? plusOneCount.toString() : 
+              reply.likeCount.toString()),
         ),
       ],
     );

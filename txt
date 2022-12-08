@@ -39,8 +39,10 @@ class RepliesPage extends ConsumerWidget {
           child: const Icon(Icons.new_label),
         ),
         body: replyDocs.isEmpty
-            ? const Text('何もコンテンツはありません') :
-            // ReloadScreen(onReload: () async =>await repliesModel.onReload(commentDoc: commentDoc)) :
+            ? ReloadScreen(
+                onReload: () async =>
+                    await repliesModel.onReload(commentDoc: commentDoc))
+            :
             // RefreshScreen(
             //     onRefresh: () async =>
             //         await repliesModel.onRefresh(commentDoc: commentDoc),
@@ -79,3 +81,17 @@ class RepliesPage extends ConsumerWidget {
 }
 
 
+ // RefreshScreen(
+          //     onRefresh: () async =>
+          //         await repliesModel.onRefresh(commentDoc: commentDoc),
+          //     onLoading: () async =>
+          //         await repliesModel.onLoading(commentDoc: commentDoc),
+          //     refreshController: repliesModel.refreshController,
+          //     child: ListView.builder(
+          //         itemCount: replyDocs.length,
+          //         itemBuilder: (BuildContext context, int index) {
+          //           final replyDoc = replyDocs[index];
+          //           final Reply reply = Reply.fromJson(replyDoc.data()!);
+          //           return ReplyCard(reply: reply, comment: comment, mainModel: mainModel, replyDoc: replyDoc,);
+          //         }),
+          //   ),

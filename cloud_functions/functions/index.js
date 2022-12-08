@@ -6,6 +6,7 @@ const config = functions.config();
 admin.initializeApp(config.firebase);
 
 const fireStore = admin.firestore();
+//cloudfunctionsはrulesを無視することができる
 
 exports.onFollowerCreate = functions.firestore.document('users/{uid}/followers/{followerUid}').onCreate(
   async (snap,_) => {

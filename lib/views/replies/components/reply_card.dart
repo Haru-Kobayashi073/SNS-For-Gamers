@@ -23,7 +23,7 @@ class ReplyCard extends ConsumerWidget {
   final Reply reply;
   final Comment comment;
   final MainModel mainModel;
-  final DocumentSnapshot<Map<String, dynamic>> replyDoc;
+  final DocumentSnapshot replyDoc;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

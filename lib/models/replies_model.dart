@@ -151,7 +151,7 @@ class RepliesModel extends ChangeNotifier {
       {required Reply reply,
       required MainModel mainModel,
       required Comment comment,
-      required DocumentSnapshot<Map<String, dynamic>> replyDoc}) async {
+      required DocumentSnapshot replyDoc}) async {
     //setting
     final String postCommentReplyId = reply.postCommentReplyId;
     mainModel.likeReplyIds.add(postCommentReplyId);
@@ -160,7 +160,7 @@ class RepliesModel extends ChangeNotifier {
     final Timestamp now = Timestamp.now();
     final String activeUid = currentUserDoc.id;
     final String passiveUid = comment.uid;
-    final DocumentReference<Map<String, dynamic>> postCommentReplyRef =
+    final DocumentReference postCommentReplyRef =
         replyDoc.reference;
     //自分がコメントにいいねしたことの印
     final LikeReplyToken likeReplyToken = LikeReplyToken(
@@ -195,7 +195,7 @@ class RepliesModel extends ChangeNotifier {
       {required Reply reply,
       required MainModel mainModel,
       required Comment comment,
-      required DocumentSnapshot<Map<String, dynamic>> replyDoc}) async {
+      required DocumentSnapshot replyDoc}) async {
     final String postCommentReplyId = reply.postCommentReplyId;
     mainModel.likeReplyIds.remove(postCommentReplyId);
     final currentUserDoc = mainModel.currentUserDoc;
