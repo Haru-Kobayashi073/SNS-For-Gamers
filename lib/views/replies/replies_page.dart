@@ -53,7 +53,7 @@ class RepliesPage extends ConsumerWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final replyDoc = replyDocs[index];
                     final Reply reply = Reply.fromJson(replyDoc.data()!);
-                    return ReplyCard(reply: reply);
+                    return ReplyCard(reply: reply, comment: comment, mainModel: mainModel, replyDoc: replyDoc,);
                   }),
             ),
     );

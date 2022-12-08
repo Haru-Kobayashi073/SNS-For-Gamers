@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/details/user_image.dart';
+import 'package:sns_vol2/domain/comment/comment.dart';
 //domain
 import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/domain/post/post.dart';
@@ -9,13 +10,20 @@ import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/views/replies/components/reply_like_button.dart';
 
 class ReplyCard extends ConsumerWidget {
   const ReplyCard({
     Key? key,
-    required this.reply
+    required this.reply,
+    required this.comment,
+    required this.mainModel,
+    required this.replyDoc,
   }) : super(key: key);
   final Reply reply;
+  final Comment comment;
+  final MainModel mainModel;
+  final DocumentSnapshot<Map<String, dynamic>> replyDoc;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +46,9 @@ class ReplyCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(reply.userName),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Text(
                   reply.reply,
                   style: const TextStyle(overflow: TextOverflow.ellipsis),
@@ -50,23 +60,12 @@ class ReplyCard extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              children: [
-                InkWell(
-                  child: const Icon(
-                    Icons.favorite,
-                  ),
-                  onTap: () {}
-                ),
-              ],
-            ),
-            // ReplyLikeButton(
-            //   mainModel: mainModel,
-            //   reply: reply,
-            //   replysModel: replysModel,
-            //   replyDoc: replyDoc,
-            //   post: post,
-            // ),
+            ReplyLikeButton(
+                mainModel: mainModel,
+                reply: reply,
+                comment: comment,
+                repliesModel: repliesModel,
+                replyDoc: replyDoc)
           ],
         ),
       ]),

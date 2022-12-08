@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:sns_vol2/domain/like_reply_token/like_reply_token.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
+import 'package:sns_vol2/domain/reply_like/reply_like.dart';
 import 'package:sns_vol2/models/main_model.dart';
 
 final repliesProvider = ChangeNotifierProvider((ref) => RepliesModel());
@@ -142,5 +145,77 @@ class RepliesModel extends ChangeNotifier {
         .collection('postCommentReplies')
         .doc(postCommentReplyId)
         .set(reply.toJson());
+  }
+
+  Future<void> like(
+      {required Reply reply,
+      required MainModel mainModel,
+      required Comment comment,
+      required DocumentSnapshot<Map<String, dynamic>> replyDoc}) async {
+    //setting
+    final String postCommentReplyId = reply.postCommentReplyId;
+    mainModel.likeReplyIds.add(postCommentReplyId);
+    final currentUserDoc = mainModel.currentUserDoc;
+    final String tokenId = returnUuidV4();
+    final Timestamp now = Timestamp.now();
+    final String activeUid = currentUserDoc.id;
+    final String passiveUid = comment.uid;
+    final DocumentReference<Map<String, dynamic>> postCommentReplyRef =
+        replyDoc.reference;
+    //自分がコメントにいいねしたことの印
+    final LikeReplyToken likeReplyToken = LikeReplyToken(
+        activeUid: activeUid,
+        passiveUid: passiveUid,
+        createdAt: now,
+        postCommentReplyId: postCommentReplyId,
+        tokenId: tokenId,
+        postCommentReplyRef: postCommentReplyRef,
+        tokenType: likeReplyTokenTypeString);
+    mainModel.likeReplyTokens.add(likeReplyToken);
+    notifyListeners();
+    //自分がリプライにいいねしたことの印
+    await currentUserDoc.reference
+        .collection('tokens')
+        .doc(tokenId)
+        .set(likeReplyToken.toJson());
+    //コメントにいいねがついたことの印
+    final ReplyLike replyLike = ReplyLike(
+        activeUid: activeUid,
+        createdAt: now,
+        postCommentReplyCreatorUid: reply.uid,
+        postCommentReplyRef: postCommentReplyRef,
+        postCommentReplyId: postCommentReplyId);
+    await postCommentReplyRef
+        .collection('postCommentReplyLikes')
+        .doc(activeUid)
+        .set(replyLike.toJson());
+  }
+
+  Future<void> unlike(
+      {required Reply reply,
+      required MainModel mainModel,
+      required Comment comment,
+      required DocumentSnapshot<Map<String, dynamic>> replyDoc}) async {
+    final String postCommentReplyId = reply.postCommentReplyId;
+    mainModel.likeReplyIds.remove(postCommentReplyId);
+    final currentUserDoc = mainModel.currentUserDoc;
+    final String activeUid = currentUserDoc.id;
+    //自分がいいねしたことの印を削除
+    final deleteLikeReplyToken = mainModel.likeReplyTokens
+        .where((element) => element.postCommentReplyId == postCommentReplyId)
+        .toList()
+        .first;
+    mainModel.likeReplyTokens.remove(deleteLikeReplyToken);
+    notifyListeners();
+    await currentUserDoc.reference
+        .collection('tokens')
+        .doc(deleteLikeReplyToken.tokenId)
+        .delete();
+    final DocumentReference<Map<String, dynamic>> postCommentReplyRef =
+        deleteLikeReplyToken.postCommentReplyRef;
+    await postCommentReplyRef
+        .collection('postCommentReplyLikes')
+        .doc(activeUid)
+        .delete();
   }
 }

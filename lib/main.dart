@@ -36,6 +36,22 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const int _mcgpalette2PrimaryValue = 0xFF388D5D;
+    const MaterialColor customSwatch = MaterialColor(
+      _mcgpalette2PrimaryValue,
+      <int, Color>{
+        50: Color(0xFFE7F1EC),
+        100: Color(0xFFC3DDCE),
+        200: Color(0xFF9CC6AE),
+        300: Color(0xFF74AF8E),
+        400: Color(0xFF569E75),
+        500: Color(_mcgpalette2PrimaryValue),
+        600: Color(0xFF328555),
+        700: Color(0xFF2B7A4B),
+        800: Color(0xFF247041),
+        900: Color(0xFF175D30),
+      },
+    );
     // MyAppが起動した最初の時にユーザーがログインしているかどうかの確認
     //この変数を一回きり
     final User? onceUser = FirebaseAuth.instance.currentUser;
@@ -47,6 +63,11 @@ class MyApp extends ConsumerWidget {
       theme: themeModel.isDarkTheme
           ? darkThemeData(context: context)
           : lightThemeData(context: context),
+      
+      
+      // ThemeData(
+      //   primarySwatch: customSwatch,
+      // ),
       home: onceUser == null
           ? LoginPage()
           : MyHomePage(
@@ -72,10 +93,12 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        // backgroundColor: const Color(0xFF388D5D),
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => createPostModel.showPostDialog(context: context, mainModel: mainModel),
+        onPressed: () => createPostModel.showPostDialog(
+            context: context, mainModel: mainModel),
         child: const Icon(Icons.new_label),
       ),
       drawer: SNSDrawer(
@@ -93,7 +116,9 @@ class MyHomePage extends ConsumerWidget {
               //childrenの数はElementsの数
               children: [
                 //注意：ページじゃないのでScaffold
-                HomeScreen(mainModel: mainModel,),
+                HomeScreen(
+                  mainModel: mainModel,
+                ),
                 SearchScreen(
                   passiveUser: mainModel.firestoreUser,
                   mainModel: mainModel,

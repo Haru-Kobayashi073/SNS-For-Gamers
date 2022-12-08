@@ -30,7 +30,7 @@ mixin _$Reply {
   String get postCommentReplyId => throw _privateConstructorUsedError;
   int get likeCount =>
       throw _privateConstructorUsedError; // required int postCommentReplyCount,
-  String get userName => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError; //resource.data.uid
   String get uid => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
 
@@ -247,6 +247,7 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
 // required int postCommentReplyCount,
   @override
   final String userName;
+//resource.data.uid
   @override
   final String uid;
   @override
@@ -357,7 +358,7 @@ abstract class _Reply implements Reply {
   int get likeCount;
   @override // required int postCommentReplyCount,
   String get userName;
-  @override
+  @override //resource.data.uid
   String get uid;
   @override
   String get userImageURL;
