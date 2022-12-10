@@ -59,7 +59,7 @@ class PostCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          post.userName,
+                          mainModel.firestoreUser.userName,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,

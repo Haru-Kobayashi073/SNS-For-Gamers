@@ -1,3 +1,4 @@
+const { firestore } = require('firebase-admin');
 const admin = require('firebase-admin');
 const functions = require("firebase-functions");
 const plusOne = 1;
@@ -122,6 +123,19 @@ exports.onPostCommentReplyDelete = functions.firestore.document('users/{uid}/pos
     const newValue = snap.data();
     await newValue.postCommentRef.update({
       "postCommentReplyCount": admin.firestore.FieldValue.increment(minusOne),
+    });
+  }
+);
+
+exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUpdateLogs/{userUpdateLogId}').onCreate(
+  async (snap,_) => {
+    ///newValueにUserUpdateLogの情報が入っている
+    const newValue = snap.data();
+    await newValue.userRef.update({
+      'userName': newValue.userName,
+      'userImageURL': newValue.userImageURL,
+      //updatedAtは改ざんされないようにcloud Functionsで制限する
+      'updatedAt': admin.firestore.Timestamp.now(),
     });
   }
 );

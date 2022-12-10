@@ -8,6 +8,10 @@ service cloud.firestore {
       allow read: if isAuthenticated();
       allow update: if isAdmin();
       allow create, delete: if isTheSameUserOrAdmin(uid);
+      match /userUpdateLogs/{userUpdateLogId} {
+        //本人にしかlogを作成できないようにする
+        allow create: if isTheSameUserOrAdmin(uid);
+      }
       match /userMutes/{activeUid} {
         //作成と削除は受動的なユーザーのみが作成することができる
         allow create, delete: if isTheSameUserOrAdmin(activeUid);

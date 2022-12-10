@@ -18,32 +18,5 @@ final profileProvider = ChangeNotifierProvider((ref) => ProfileModel());
 class ProfileModel extends ChangeNotifier {
   File? croppedFile = null;
 
-  // Future<void> pickImage() async {
-  //   xFile = await returnXFile();
-  // }
-
-  Future<String> uploadImageAndGetURL(
-      {required String uid, required File file}) async {
-    final String fileName = returnJpgFileName();
-    final Reference storageRef = FirebaseStorage.instance
-        .ref()
-        .child('users')
-        .child(uid)
-        .child(fileName);
-    // users/uid/ファイル名 にアップロード
-    await storageRef.putFile(file);
-    // users/uid/ファイル名 のURLを取得している
-    return await storageRef.getDownloadURL();
-  }
-
-  Future<void> uploadUserImage(
-      {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc}) async {
-    final XFile xFile = await returnXFile();
-    final File file = File(xFile.path);
-    final String uid = currentUserDoc.id;
-    croppedFile = await returnCroppedFile(xFile: xFile);
-    final String url = await uploadImageAndGetURL(uid: uid, file: file);
-    await currentUserDoc.reference.update({'userImageURL': url});
-    notifyListeners();
-  }
+  
 }

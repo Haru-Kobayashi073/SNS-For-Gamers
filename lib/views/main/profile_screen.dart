@@ -5,8 +5,10 @@ import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:sns_vol2/models/edit_profile_model.dart';
 import 'package:sns_vol2/models/main/profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/constants/routes.dart' as routes;
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key, required this.mainModel}) : super(key: key);
@@ -14,12 +16,15 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ProfileModel profileModel = ref.watch(profileProvider);
+    // final ProfileModel profileModel = ref.watch(profileProvider);
+    final EditProfileModel editProfileModel = ref.watch(editProfileProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final int followerCount = firestoreUser.followerCount;
+    final maxWidth = MediaQuery.of(context).size.width;
+
 
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      profileModel.croppedFile == null
+      editProfileModel.croppedFile == null
           ? Container(
               alignment: Alignment.center,
               child: UserImage(
@@ -28,13 +33,21 @@ class ProfileScreen extends ConsumerWidget {
               ),
             )
           : ClipRRect(
-              borderRadius: BorderRadius.circular(300.0),
-              child: Image.file(profileModel.croppedFile!),
-            ),
+                      borderRadius: BorderRadius.circular(300.0),
+                      child: Container(
+                        width: maxWidth * 0.25,
+                        height: maxWidth * 0.25,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.file(editProfileModel.croppedFile!)),
+                    ),
       // : CircleAvatar(
       //   radius: 160,
       //   child: Image.file(
       //     profileModel.croppedFile!)),
+      Text(firestoreUser.userName),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -52,11 +65,18 @@ class ProfileScreen extends ConsumerWidget {
         ],
       ),
       RoundedButton(
-          onPressed: () async => await profileModel.uploadUserImage(
-              currentUserDoc: mainModel.currentUserDoc),
+          onPressed: () {},
+          // async => await profileModel.uploadUserImage(
+          //     currentUserDoc: mainModel.currentUserDoc),
           widthRate: 0.5,
           color: Colors.blue,
           text: uploadText),
+      RoundedButton(
+          onPressed: () =>
+              routes.toEditProfilePage(context: context, mainModel: mainModel),
+          widthRate: 0.6,
+          color: Colors.black,
+          text: editProfileText)
     ]);
   }
 }
