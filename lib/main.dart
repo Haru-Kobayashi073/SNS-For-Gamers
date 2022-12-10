@@ -10,6 +10,7 @@ import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
+import 'package:sns_vol2/models/mute_user_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
@@ -63,8 +64,7 @@ class MyApp extends ConsumerWidget {
       theme: themeModel.isDarkTheme
           ? darkThemeData(context: context)
           : lightThemeData(context: context),
-      
-      
+
       // ThemeData(
       //   primarySwatch: customSwatch,
       // ),
@@ -90,6 +90,7 @@ class MyHomePage extends ConsumerWidget {
     final SNSBottomNavigationBarModel snsBottomNavigationBarModel =
         ref.watch(snsBottomNavigationBarProvider);
     final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
+    final MuteUserModel muteUserModel = ref.watch(muteUserProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -118,6 +119,7 @@ class MyHomePage extends ConsumerWidget {
                 //注意：ページじゃないのでScaffold
                 HomeScreen(
                   mainModel: mainModel,
+                  muteUserModel: muteUserModel,
                 ),
                 SearchScreen(
                   passiveUser: mainModel.firestoreUser,

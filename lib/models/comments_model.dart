@@ -4,7 +4,6 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/strings.dart';

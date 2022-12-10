@@ -2,25 +2,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/post_card.dart';
-import 'package:sns_vol2/details/post_like_button.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
-import 'package:sns_vol2/details/rounded_button.dart';
-import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_user_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({Key? key, required this.mainModel}) : super(key: key);
+  const HomeScreen(
+      {Key? key, required this.mainModel, required this.muteUserModel})
+      : super(key: key);
   final MainModel mainModel;
+  final MuteUserModel muteUserModel;
+
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -43,11 +42,22 @@ class HomeScreen extends ConsumerWidget {
                   final postDoc = postDocs[index];
                   final Post post = Post.fromJson(postDoc.data()!);
                   return PostCard(
-                      mainModel: mainModel,
-                      post: post,
-                      postDoc: postDoc,
-                      commentsModel: commentsModel,
-                      postsModel: postsModel);
+                    mainModel: mainModel,
+                    post: post,
+                    postDoc: postDoc,
+                    commentsModel: commentsModel,
+                    postsModel: postsModel,
+                    muteUserModel: muteUserModel,
+                    onselected: (result) {
+                      if (result == '0') {
+                        muteUserModel.showDialog(
+                            context: context,
+                            passiveUid: post.uid,
+                            mainModel: mainModel,
+                            docs: postDocs);
+                      }
+                    },
+                  );
                 }),
           );
   }
