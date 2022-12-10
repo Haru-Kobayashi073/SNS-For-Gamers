@@ -87,7 +87,7 @@ class PostCard extends StatelessWidget {
                   child: Icon(
                     Icons.messenger_outline_rounded,
                   ),
-                  onTap: () async => await commentsModel.init(
+                  onTap: () async => await commentsModel.onCommentButtonPressed(
                       context: context,
                       mainModel: mainModel,
                       post: post,

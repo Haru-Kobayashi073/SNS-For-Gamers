@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/others.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final homeProvider = ChangeNotifierProvider((ref) => HomeModel());
 
@@ -14,6 +16,7 @@ class HomeModel extends ChangeNotifier {
   late User? currentUser;
   final RefreshController refreshController = RefreshController();
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
+  List<String> muteUids = [];
   Query<Map<String, dynamic>> returnQuery() {
     final User? currentUser = returnAuthUser();
     return FirebaseFirestore.instance
@@ -29,11 +32,8 @@ class HomeModel extends ChangeNotifier {
   }
 
   Future<void> init() async {
-    startLoading();
-    final query = returnQuery();
-    final qshot = await query.get();
-    postDocs = qshot.docs;
-    endLoading();
+    muteUids = await returnMuteUids();
+    await onReload();
   }
 
   void startLoading() {
@@ -48,32 +48,21 @@ class HomeModel extends ChangeNotifier {
 
   Future<void> onRefresh() async {
     refreshController.refreshCompleted();
-    if (postDocs.isNotEmpty) {
-      final qshot = await returnQuery().endBeforeDocument(postDocs.first).get();
-      final reversed = qshot.docs.reversed.toList();
-      for (final postDoc in reversed) {
-        postDocs.insert(0, postDoc);
-      }
-    }
+    await voids.processNewDocs(
+        docs: postDocs, query: returnQuery(), muteUids: muteUids);
     notifyListeners();
   }
 
   Future<void> onReload() async {
-    startLoading();
-    final qshot = await returnQuery().get();
-    postDocs = qshot.docs;
-    endLoading();
+    await voids.processBasicDocs(
+        docs: postDocs, query: returnQuery(), muteUids: muteUids);
     notifyListeners();
   }
 
   Future<void> onLoading() async {
     refreshController.loadComplete();
-    if (postDocs.isNotEmpty) {
-      final qshot = await returnQuery().startAfterDocument(postDocs.last).get();
-      for (final postDoc in qshot.docs) {
-        postDocs.add(postDoc);
-      }
-    }
+    await voids.processOldDocs(
+        docs: postDocs, query: returnQuery(), muteUids: muteUids);
     notifyListeners();
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/enums.dart';
+import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/domain/comment/comment.dart';
@@ -25,6 +26,7 @@ class CommentsModel extends ChangeNotifier {
   //投稿ごとにリフレッシュできる必要があるから、毎回情報を捨てる必要がある
   RefreshController refreshController = RefreshController();
   List<DocumentSnapshot<Map<String, dynamic>>> commentDocs = [];
+  List<String> muteUids = [];
   Query<Map<String, dynamic>> returnQuery(
       {required DocumentSnapshot<Map<String, dynamic>> postDoc}) {
     //postに紐づくコメントが欲しい
@@ -36,8 +38,17 @@ class CommentsModel extends ChangeNotifier {
   //同じデータを無駄に取得しないようにする
   String indexPostId = '';
 
+  CommentsModel() {
+    ///muteUidsを読み込むのは一回だけでいい
+    init();
+  }
+
+  Future<void> init() async {
+    muteUids = await returnMuteUids();
+  }
+
   //コメントボタンが押された時の処理
-  Future<void> init(
+  Future<void> onCommentButtonPressed(
       {required DocumentSnapshot<Map<String, dynamic>> postDoc,
       required BuildContext context,
       required Post post,
@@ -64,45 +75,48 @@ class CommentsModel extends ChangeNotifier {
   Future<void> onRefresh(
       {required DocumentSnapshot<Map<String, dynamic>> postDoc}) async {
     refreshController.refreshCompleted();
-    if (commentDocs.isNotEmpty) {
-      final qshot = await returnQuery(postDoc: postDoc)
-          .endBeforeDocument(commentDocs.first)
-          .get();
-      final reversed = qshot.docs.reversed.toList();
-      for (final commentDoc in reversed) {
-        commentDocs.insert(0, postDoc);
-      }
-    }
+    // if (commentDocs.isNotEmpty) {
+    //   final qshot = await returnQuery(postDoc: postDoc)
+    //       .endBeforeDocument(commentDocs.first)
+    //       .get();
+    //   final reversed = qshot.docs.reversed.toList();
+    //   for (final commentDoc in reversed) {
+    //     commentDocs.insert(0, postDoc);
+    //   }
+    // }
+    await voids.processNewDocs(
+        docs: commentDocs,
+        query: returnQuery(postDoc: postDoc),
+        muteUids: muteUids);
     notifyListeners();
   }
 
-  Future<void> onReload(
-      {required DocumentSnapshot<Map<String, dynamic>> postDoc}) async {
-    startLoading();
-    final qshot = await returnQuery(postDoc: postDoc).get();
-    commentDocs = qshot.docs;
-    endLoading();
+  Future<void> onReload({
+    required DocumentSnapshot<Map<String, dynamic>> postDoc,
+  }) async {
+    await voids.processBasicDocs(
+        docs: commentDocs,
+        query: returnQuery(postDoc: postDoc),
+        muteUids: muteUids);
     notifyListeners();
   }
 
-  Future<void> onLoading(
-      {required DocumentSnapshot<Map<String, dynamic>> postDoc}) async {
+  Future<void> onLoading({
+    required DocumentSnapshot<Map<String, dynamic>> postDoc,
+  }) async {
     refreshController.loadComplete();
-    if (commentDocs.isNotEmpty) {
-      final qshot = await returnQuery(postDoc: postDoc)
-          .startAfterDocument(commentDocs.last)
-          .get();
-      for (final commentDoc in qshot.docs) {
-        commentDocs.add(commentDoc);
-      }
-    }
+    await voids.processOldDocs(
+        docs: commentDocs,
+        query: returnQuery(postDoc: postDoc),
+        muteUids: muteUids);
     notifyListeners();
   }
 
-  void showCommentFlashBar(
-      {required BuildContext context,
-      required MainModel mainModel,
-      required DocumentSnapshot<Map<String, dynamic>> postDoc}) {
+  void showCommentFlashBar({
+    required BuildContext context,
+    required MainModel mainModel,
+    required DocumentSnapshot<Map<String, dynamic>> postDoc,
+  }) {
     voids.showFlashBar(
         context: context,
         mainModel: mainModel,
