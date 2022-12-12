@@ -91,7 +91,9 @@ class PostCard extends StatelessWidget {
                       context: context,
                       mainModel: mainModel,
                       post: post,
-                      postDoc: postDoc),
+                      postDoc: postDoc,
+                      muteUserModel: muteUserModel
+                      ),
                 ),
               ],
             ),

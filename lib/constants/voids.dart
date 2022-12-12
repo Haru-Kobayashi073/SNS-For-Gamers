@@ -48,7 +48,9 @@ Future<void> processNewDocs(
     final qshot = await query.endBeforeDocument(docs.first).get();
     final reversed = qshot.docs.reversed.toList();
     for (final doc in reversed) {
-      if (isValidUser(muteUids: muteUids, doc: doc)) docs.insert(0, doc);
+      if (isValidUser(muteUids: muteUids, doc: doc)) {
+        docs.insert(0, doc);
+      }
     }
   }
 }
@@ -60,9 +62,11 @@ Future<void> processBasicDocs(
     required List<String> muteUids}) async {
   final qshot = await query.get();
   for (final doc in qshot.docs) {
-  //doc['uid']は投稿主のuid
-  //！は否定
-    if (isValidUser(muteUids: muteUids, doc: doc)) docs.add(doc);
+    //doc['uid']は投稿主のuid
+    //！は否定
+    if (isValidUser(muteUids: muteUids, doc: doc)) {
+      docs.add(doc);
+    }
     //addだと上手くいく
   }
 }

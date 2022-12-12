@@ -94,12 +94,13 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: const Color(0xFF388D5D),
+        backgroundColor: const Color(0xFF388D5D),
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => createPostModel.showPostDialog(
             context: context, mainModel: mainModel),
+        backgroundColor: const Color(0xFF388D5D),
         child: const Icon(Icons.new_label),
       ),
       drawer: SNSDrawer(

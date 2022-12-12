@@ -45,6 +45,7 @@ class EditProfileModel extends ChangeNotifier {
         userName: userName,
         userImageURL: userImageURL,
         userRef: currentUserDoc.reference,
+        uid: currentUserDoc.id
       );
       // doc()とidを指定しないと、勝手に生成してくれる
       await currentUserDoc.reference

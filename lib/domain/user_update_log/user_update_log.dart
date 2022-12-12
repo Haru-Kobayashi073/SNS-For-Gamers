@@ -20,6 +20,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     required String userImageURL,
     //どのユーザーをupdateするか判別するのに必要
     required dynamic userRef,
+    required String uid,
   }) = _UserUpdateLog;
 
   factory UserUpdateLog.fromJson(Map<String, dynamic> json) =>

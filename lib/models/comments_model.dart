@@ -16,6 +16,7 @@ import 'package:sns_vol2/domain/like_comment_token/like_comment_token.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/models/mute_user_model.dart';
 
 final commentsProvider = ChangeNotifierProvider((ref) => CommentsModel());
 
@@ -41,6 +42,7 @@ class CommentsModel extends ChangeNotifier {
   CommentsModel() {
     ///muteUidsを読み込むのは一回だけでいい
     init();
+    print("initialize");
   }
 
   Future<void> init() async {
@@ -48,14 +50,21 @@ class CommentsModel extends ChangeNotifier {
   }
 
   //コメントボタンが押された時の処理
-  Future<void> onCommentButtonPressed(
-      {required DocumentSnapshot<Map<String, dynamic>> postDoc,
-      required BuildContext context,
-      required Post post,
-      required MainModel mainModel}) async {
+  Future<void> onCommentButtonPressed({
+    required DocumentSnapshot<Map<String, dynamic>> postDoc,
+    required BuildContext context,
+    required Post post,
+    required MainModel mainModel,
+    required MuteUserModel muteUserModel
+  }) async {
     refreshController = RefreshController();
     routes.toCommentsPage(
-        context: context, post: post, mainModel: mainModel, postDoc: postDoc);
+      context: context,
+      post: post,
+      mainModel: mainModel,
+      postDoc: postDoc,
+      muteUserModel: muteUserModel
+    );
     if (indexPostId != post.postId) {
       await onReload(postDoc: postDoc);
     }
@@ -94,6 +103,7 @@ class CommentsModel extends ChangeNotifier {
   Future<void> onReload({
     required DocumentSnapshot<Map<String, dynamic>> postDoc,
   }) async {
+    commentDocs = [];
     await voids.processBasicDocs(
         docs: commentDocs,
         query: returnQuery(postDoc: postDoc),

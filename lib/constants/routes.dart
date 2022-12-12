@@ -7,6 +7,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 //packages
 import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_user_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
@@ -59,7 +60,9 @@ void toCommentsPage(
         {required BuildContext context,
         required Post post,
         required DocumentSnapshot<Map<String, dynamic>> postDoc,
-        required MainModel mainModel}) =>
+        required MainModel mainModel,
+        required MuteUserModel muteUserModel
+        }) =>
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -67,6 +70,7 @@ void toCommentsPage(
                   post: post,
                   postDoc: postDoc,
                   mainModel: mainModel,
+                  muteUserModel: muteUserModel,
                 )));
 
 void toRepliesPage(

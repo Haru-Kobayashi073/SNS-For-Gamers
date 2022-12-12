@@ -22,60 +22,53 @@ class ProfileScreen extends ConsumerWidget {
     final int followerCount = firestoreUser.followerCount;
     final maxWidth = MediaQuery.of(context).size.width;
 
-
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center, 
+      children: [
       editProfileModel.croppedFile == null
           ? Container(
               alignment: Alignment.center,
               child: UserImage(
-                length: 100,
+                length: 80,
                 userImageURL: mainModel.firestoreUser.userImageURL,
               ),
             )
           : ClipRRect(
-                      borderRadius: BorderRadius.circular(300.0),
-                      child: Container(
-                        width: maxWidth * 0.25,
-                        height: maxWidth * 0.25,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.file(editProfileModel.croppedFile!)),
-                    ),
-      // : CircleAvatar(
-      //   radius: 160,
-      //   child: Image.file(
-      //     profileModel.croppedFile!)),
-      Text(firestoreUser.userName),
+              borderRadius: BorderRadius.circular(300.0),
+              child: Container(
+                  width: maxWidth * 0.25,
+                  height: maxWidth * 0.25,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.file(editProfileModel.croppedFile!)),
+            ),
+      Text(
+        firestoreUser.userName,
+        style: TextStyle(fontSize: 24),
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'フォロー中: ' + firestoreUser.followingCount.toString(),
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 16),
           ),
           SizedBox(
             width: 30,
           ),
           Text(
             'フォロワー: ' + firestoreUser.followerCount.toString(),
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 16),
           ),
         ],
       ),
       RoundedButton(
-          onPressed: () {},
-          // async => await profileModel.uploadUserImage(
-          //     currentUserDoc: mainModel.currentUserDoc),
-          widthRate: 0.5,
-          color: Colors.blue,
-          text: uploadText),
-      RoundedButton(
           onPressed: () =>
               routes.toEditProfilePage(context: context, mainModel: mainModel),
           widthRate: 0.6,
-          color: Colors.black,
+          color: Colors.grey,
           text: editProfileText)
     ]);
   }

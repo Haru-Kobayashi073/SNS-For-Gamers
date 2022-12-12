@@ -15,6 +15,7 @@ class SNSBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      selectedItemColor: const Color(0xFF388D5D),
       items: bottomNavigationBarElements,
       currentIndex: snsBottomNavigationBarModel.currentIndex,
       onTap: ((index) => snsBottomNavigationBarModel.onTabTapped(index: index)),

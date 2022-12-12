@@ -27,6 +27,7 @@ mixin _$UserUpdateLog {
   String get userImageURL =>
       throw _privateConstructorUsedError; //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $UserUpdateLogCopyWith<$Res> {
       {dynamic logCreatedAt,
       String userName,
       String userImageURL,
-      dynamic userRef});
+      dynamic userRef,
+      String uid});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
     Object? userName = null,
     Object? userImageURL = null,
     Object? userRef = null,
+    Object? uid = null,
   }) {
     return _then(_value.copyWith(
       logCreatedAt: null == logCreatedAt
@@ -82,6 +85,10 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_UserUpdateLogCopyWith<$Res>
       {dynamic logCreatedAt,
       String userName,
       String userImageURL,
-      dynamic userRef});
+      dynamic userRef,
+      String uid});
 }
 
 /// @nodoc
@@ -116,6 +124,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
     Object? userName = null,
     Object? userImageURL = null,
     Object? userRef = null,
+    Object? uid = null,
   }) {
     return _then(_$_UserUpdateLog(
       logCreatedAt: null == logCreatedAt
@@ -134,6 +143,10 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -145,7 +158,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       {required this.logCreatedAt,
       required this.userName,
       required this.userImageURL,
-      required this.userRef});
+      required this.userRef,
+      required this.uid});
 
   factory _$_UserUpdateLog.fromJson(Map<String, dynamic> json) =>
       _$$_UserUpdateLogFromJson(json);
@@ -161,10 +175,12 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
 //どのユーザーをupdateするか判別するのに必要
   @override
   final dynamic userRef;
+  @override
+  final String uid;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, userRef: $userRef)';
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, userRef: $userRef, uid: $uid)';
   }
 
   @override
@@ -175,7 +191,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       ..add(DiagnosticsProperty('logCreatedAt', logCreatedAt))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
-      ..add(DiagnosticsProperty('userRef', userRef));
+      ..add(DiagnosticsProperty('userRef', userRef))
+      ..add(DiagnosticsProperty('uid', uid));
   }
 
   @override
@@ -189,7 +206,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
                 other.userName == userName) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL) &&
-            const DeepCollectionEquality().equals(other.userRef, userRef));
+            const DeepCollectionEquality().equals(other.userRef, userRef) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
@@ -199,7 +217,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       const DeepCollectionEquality().hash(logCreatedAt),
       userName,
       userImageURL,
-      const DeepCollectionEquality().hash(userRef));
+      const DeepCollectionEquality().hash(userRef),
+      uid);
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +239,8 @@ abstract class _UserUpdateLog implements UserUpdateLog {
       {required final dynamic logCreatedAt,
       required final String userName,
       required final String userImageURL,
-      required final dynamic userRef}) = _$_UserUpdateLog;
+      required final dynamic userRef,
+      required final String uid}) = _$_UserUpdateLog;
 
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
       _$_UserUpdateLog.fromJson;
@@ -234,6 +254,8 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   String get userImageURL;
   @override //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef;
+  @override
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$_UserUpdateLogCopyWith<_$_UserUpdateLog> get copyWith =>
