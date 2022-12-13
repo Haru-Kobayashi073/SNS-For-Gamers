@@ -43,7 +43,7 @@ class CommentLikeButton extends StatelessWidget {
                       commentDoc: commentDoc),
                 )
               : InkWell(
-                  child: const Icon(Icons.favorite),
+                  child: const Icon(Icons.favorite_border),
                   onTap: () async => await commentsModel.like(
                       comment: comment,
                       mainModel: mainModel,

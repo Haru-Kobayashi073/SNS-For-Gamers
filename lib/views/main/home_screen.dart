@@ -30,35 +30,50 @@ class HomeScreen extends ConsumerWidget {
     final PostsModel postsModel = ref.watch(postsProvider);
     final CommentsModel commentsModel = ref.watch(commentsProvider);
     final postDocs = homeModel.postDocs;
-    return postDocs.isEmpty
-        ? ReloadScreen(onReload: () async => await homeModel.onReload())
-        : RefreshScreen(
-            onRefresh: () async => await homeModel.onRefresh(),
-            onLoading: () async => await homeModel.onLoading(),
-            refreshController: homeModel.refreshController,
-            child: ListView.builder(
-                itemCount: homeModel.postDocs.length,
-                itemBuilder: (context, int index) {
-                  final postDoc = postDocs[index];
-                  final Post post = Post.fromJson(postDoc.data()!);
-                  return PostCard(
-                    mainModel: mainModel,
-                    post: post,
-                    postDoc: postDoc,
-                    commentsModel: commentsModel,
-                    postsModel: postsModel,
-                    muteUserModel: muteUserModel,
-                    onselected: (result) {
-                      if (result == '0') {
-                        muteUserModel.showDialog(
-                            context: context,
-                            passiveUid: post.uid,
-                            mainModel: mainModel,
-                            docs: postDocs);
-                      }
-                    },
-                  );
-                }),
-          );
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromRGBO(240, 236, 236, 1)
+    // gradient: LinearGradient(
+    //   begin: Alignment.bottomCenter,
+    //   end: Alignment.topCenter,
+    //   colors: [
+    //     Color.fromARGB(255, 98, 252, 165),
+    //     Color.fromARGB(255, 71, 179, 118),
+    //     Color(0xFF388D5D),
+    //     ],
+    // ),
+  ),
+      child: postDocs.isEmpty
+          ? ReloadScreen(onReload: () async => await homeModel.onReload())
+          : RefreshScreen(
+              onRefresh: () async => await homeModel.onRefresh(),
+              onLoading: () async => await homeModel.onLoading(),
+              refreshController: homeModel.refreshController,
+              child: ListView.builder(
+                  itemCount: homeModel.postDocs.length,
+                  itemBuilder: (context, int index) {
+                    final postDoc = postDocs[index];
+                    final Post post = Post.fromJson(postDoc.data()!);
+                    return PostCard(
+                      mainModel: mainModel,
+                      post: post,
+                      postDoc: postDoc,
+                      commentsModel: commentsModel,
+                      postsModel: postsModel,
+                      muteUserModel: muteUserModel,
+                      onselected: (result) {
+                        if (result == '0') {
+                          muteUserModel.showDialog(
+                              context: context,
+                              passiveUid: post.uid,
+                              mainModel: mainModel,
+                              docs: postDocs);
+                        }
+                      },
+                    );
+                  }),
+            ),
+    );
   }
 }

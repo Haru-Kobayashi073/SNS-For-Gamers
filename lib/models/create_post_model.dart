@@ -32,7 +32,7 @@ class CreatePostModel extends ChangeNotifier {
       title: const Text(createPostText),
       primaryActionBuilder: (context, controller, _) {
         return InkWell(
-          child: Icon(Icons.send),
+          child: const Icon(Icons.send, color: Color(0xFF388D5D),),
           onTap: () async {
             if (textEditingController.text.isNotEmpty) {
               //メインの動作
@@ -48,7 +48,7 @@ class CreatePostModel extends ChangeNotifier {
       },
       negativeActionBuilder: (context, controller, _) {
         return InkWell(
-          child: const Icon(Icons.close),
+          child: const Icon(Icons.close, color: Color(0xFF388D5D),),
           onTap: () async => await controller.dismiss(),
         );
       },

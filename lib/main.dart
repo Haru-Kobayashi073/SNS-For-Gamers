@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/themes.dart';
-import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
@@ -94,14 +93,19 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF388D5D),
-        title: Text(title),
+        // backgroundColor: const Color(0xFF388D5D),
+        backgroundColor: const Color(0xffffffff),
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0,
+        title: Text(title, style: const TextStyle(color: Colors.black),),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => createPostModel.showPostDialog(
             context: context, mainModel: mainModel),
-        backgroundColor: const Color(0xFF388D5D),
-        child: const Icon(Icons.new_label),
+        // backgroundColor: const Color(0xffD6A34A),
+        backgroundColor: Colors.black,
+        // backgroundColor: const Color(0xFF388D5D),
+        child: const Icon(Icons.new_label, color: Colors.white,),
       ),
       drawer: SNSDrawer(
         mainModel: mainModel,
@@ -109,7 +113,7 @@ class MyHomePage extends ConsumerWidget {
       ),
       body: mainModel.isLoading
           ? Center(
-              child: const Text(loadingText),
+              child: Text(loadingText),
             )
           : PageView(
               controller: snsBottomNavigationBarModel.pageController,

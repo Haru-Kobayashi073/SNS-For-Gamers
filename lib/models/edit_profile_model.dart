@@ -17,7 +17,7 @@ import 'package:sns_vol2/views/login_page.dart';
 final editProfileProvider = ChangeNotifierProvider((ref) => EditProfileModel());
 
 class EditProfileModel extends ChangeNotifier {
-  File? croppedFile = null;
+  File? croppedFile;
   String userName = '';
 
   Future<void> updateUserInfo(

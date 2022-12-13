@@ -5,6 +5,7 @@ import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 //domain
 import 'package:sns_vol2/domain/comment/comment.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
@@ -14,16 +15,16 @@ import 'package:sns_vol2/views/comments/comment_like_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CommentCard extends ConsumerWidget {
-  const CommentCard({
-    Key? key,
-    required this.comment,
-    required this.post,
-    required this.mainModel,
-    required this.commentsModel,
-    required this.commentDoc,
-    required this.onSelected,
-    required this.muteUserModel
-  }) : super(key: key);
+  const CommentCard(
+      {Key? key,
+      required this.comment,
+      required this.post,
+      required this.mainModel,
+      required this.commentsModel,
+      required this.commentDoc,
+      required this.onSelected,
+      required this.muteUserModel})
+      : super(key: key);
   final Comment comment;
   final Post post;
   final MainModel mainModel;
@@ -34,7 +35,10 @@ class CommentCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //updateされた瞬間にmainModelのfirestoreUserは更新されている
     final RepliesModel repliesModel = ref.watch(repliesProvider);
+    final FirestoreUser firestoreUser = mainModel.firestoreUser;
+    final bool isMyComment = comment.uid == firestoreUser.uid;
 
     return Container(
       decoration: const BoxDecoration(
@@ -50,22 +54,23 @@ class CommentCard extends ConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: UserImage(length: 48, userImageURL: comment.userImageURL),
+                  child:
+                      UserImage(length: 48, userImageURL: firestoreUser.userImageURL),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                          children: [
-                            Text(
-                              mainModel.firestoreUser.userName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                      children: [
+                        Text(
+                            firestoreUser.userName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
                         ),
+                      ],
+                    ),
                     Text(comment.comment),
                   ],
                 ),

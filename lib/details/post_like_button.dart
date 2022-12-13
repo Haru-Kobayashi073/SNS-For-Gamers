@@ -21,7 +21,7 @@ class PostLikeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int plusOneCount = post.likeCount + 1;
-    final bool isLike = mainModel.likeCommentIds.contains(post.postId);
+    final bool isLike = mainModel.likePostIds.contains(post.postId);
     return Row(
       children: [
         Container(
@@ -38,7 +38,10 @@ class PostLikeButton extends StatelessWidget {
                         mainModel: mainModel),
                   )
                 : InkWell(
-                    child: const Icon(Icons.favorite),
+                    child: const Icon(
+                      Icons.favorite_border, 
+                      // color: Colors.white,
+                      ),
                     onTap: () async => await postsModel.like(
                         post: post,
                         postDoc: postDoc,

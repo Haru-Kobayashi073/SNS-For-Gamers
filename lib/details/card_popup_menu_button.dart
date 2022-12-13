@@ -13,6 +13,7 @@ class CardPopupMenuButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          color: Colors.white,
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         const PopupMenuItem<String>(
