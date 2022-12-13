@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //packages
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
@@ -17,14 +18,33 @@ class AdminModel extends ChangeNotifier {
       required FirestoreUser firestoreUser}) async {
     // 管理者だけにできる処理
 
-    final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
-    final postsQshot = await currentUserDoc.reference
-        .collection('posts')
-        .orderBy('createdAt', descending: true).limit(100).get();
-    for (final postDoc in postsQshot.docs) {
-      writeBatch.delete(postDoc.reference);
-    }
-    await writeBatch.commit();
+    await Fluttertoast.showToast(
+        msg: "管理者の動作が完了しました",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red[900],
+        textColor: Colors.white,
+        fontSize: 16.0);
+    // final usersQshot =
+    //     await FirebaseFirestore.instance.collection('users').get();
+    // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
+    // for (final user in usersQshot.docs) {
+    //   writeBatch.update(user.reference, {
+    //     'muteCount': 0,
+    //   });
+    // }
+    // await writeBatch.commit();
+
+
+    // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
+    // final postsQshot = await currentUserDoc.reference
+    //     .collection('posts')
+    //     .orderBy('createdAt', descending: true).limit(100).get();
+    // for (final postDoc in postsQshot.docs) {
+    //   writeBatch.delete(postDoc.reference);
+    // }
+    // await writeBatch.commit();
 
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
     // final commentsQshot =

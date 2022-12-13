@@ -8,27 +8,27 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_user_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({
-    Key? key,
-    required this.mainModel,
-    required this.post,
-    required this.postDoc,
-    required this.commentsModel,
-    required this.postsModel,
-    required this.onselected,
-    required this.muteUserModel
-  }) : super(key: key);
+  const PostCard(
+      {Key? key,
+      required this.mainModel,
+      required this.post,
+      required this.postDoc,
+      required this.commentsModel,
+      required this.postsModel,
+      required this.onselected,
+      required this.muteUserModel})
+      : super(key: key);
   final MainModel mainModel;
   final CommentsModel commentsModel;
   final PostsModel postsModel;
   final DocumentSnapshot<Map<String, dynamic>> postDoc;
   final Post post;
   final void Function(String)? onselected;
-  final MuteUserModel muteUserModel;
+  final MuteUsersModel muteUserModel;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +45,9 @@ class PostCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Container(
           decoration: BoxDecoration(
-            // color: Colors.white,
-            // border: Border.all(color: Colors.grey, width: 3)
-          ),
+              // color: Colors.white,
+              // border: Border.all(color: Colors.grey, width: 3)
+              ),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(children: [
             Row(
@@ -81,8 +81,9 @@ class PostCard extends StatelessWidget {
                         Text(
                           post.text,
                           style: TextStyle(
-                            // color: Colors.white
-                            ),),
+                              // color: Colors.white
+                              ),
+                        ),
                       ],
                     ),
                   ],
@@ -103,13 +104,13 @@ class PostCard extends StatelessWidget {
                         Icons.messenger_outline_rounded,
                         // color: Colors.white,
                       ),
-                      onTap: () async => await commentsModel.onCommentButtonPressed(
-                          context: context,
-                          mainModel: mainModel,
-                          post: post,
-                          postDoc: postDoc,
-                          muteUserModel: muteUserModel
-                          ),
+                      onTap: () async =>
+                          await commentsModel.onCommentButtonPressed(
+                              context: context,
+                              mainModel: mainModel,
+                              post: post,
+                              postDoc: postDoc,
+                              muteUserModel: muteUserModel),
                     ),
                   ],
                 ),

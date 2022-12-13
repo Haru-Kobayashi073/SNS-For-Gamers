@@ -9,7 +9,7 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_user_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/comments/comment_like_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +31,7 @@ class CommentCard extends ConsumerWidget {
   final CommentsModel commentsModel;
   final DocumentSnapshot<Map<String, dynamic>> commentDoc;
   final void Function(String)? onSelected;
-  final MuteUserModel muteUserModel;
+  final MuteUsersModel muteUserModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,8 +54,8 @@ class CommentCard extends ConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child:
-                      UserImage(length: 48, userImageURL: firestoreUser.userImageURL),
+                  child: UserImage(
+                      length: 48, userImageURL: firestoreUser.userImageURL),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class CommentCard extends ConsumerWidget {
                     Row(
                       children: [
                         Text(
-                            firestoreUser.userName,
+                          firestoreUser.userName,
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,

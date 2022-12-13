@@ -35,6 +35,24 @@ exports.onFollowerDelete = functions.firestore.document('users/{uid}/followers/{
   }
 );
 
+exports.onUserMutesCreate = functions.firestore.document('users/{uid}/userMutes/{activeUid}').onCreate(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.passiveUserRef.update({
+      'muteCount': admin.firestore.FieldValue.increment(plusOne),
+    });
+  }
+);
+
+exports.onUserMutesDelete = functions.firestore.document('users/{uid}/userMutes/{activeUid}').onDelete(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.passiveUserRef.update({
+      'muteCount': admin.firestore.FieldValue.increment(minusOne),
+    });
+  }
+);
+
 exports.onPostLikeCreate = functions.firestore.document('users/{uid}/posts/{postId}/postLikes/{activeUid}').onCreate(
   async (snap,_) => {
     const newValue = snap.data();

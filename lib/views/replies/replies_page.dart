@@ -10,7 +10,7 @@ import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_user_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/replies/components/reply_card.dart';
 
@@ -28,7 +28,7 @@ class RepliesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
-    final MuteUserModel muteUserModel = ref.watch(muteUserProvider);
+    final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
     final replyDocs = repliesModel.replyDocs;
     return Scaffold(
       appBar: AppBar(title: const Text(replyTitle)),
@@ -40,48 +40,47 @@ class RepliesPage extends ConsumerWidget {
             comment: comment),
         child: const Icon(Icons.new_label),
       ),
-      body:
-          StreamBuilder<QuerySnapshot>(
-              //streamにQueryのようなものを入れる
-              stream: commentDoc.reference
-                  .collection('postCommentReplies')
-                  .orderBy('likeCount', descending: true)
-                  .snapshots(), //ゲットじゃなくてリアルタイム取得の印
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError ||
-                    snapshot.connectionState == ConnectionState.waiting) {
-                  return const Text('Loading');
-                } else if (!snapshot.hasData) {
-                  return const Text('データがありません');
-                } else {
-                  final replyDocs = snapshot.data!.docs;
-                  return ListView(
-                    //DocumentSnapshot <Map<String, dynamic>> は不可
-                    children: replyDocs.map((DocumentSnapshot replyDoc) {
-                      final Map<String, dynamic> data =
-                          replyDoc.data()! as Map<String, dynamic>;
-                      final Reply reply = Reply.fromJson(data);
-                      return ReplyCard(
-                          reply: reply,
-                          comment: comment,
+      body: StreamBuilder<QuerySnapshot>(
+        //streamにQueryのようなものを入れる
+        stream: commentDoc.reference
+            .collection('postCommentReplies')
+            .orderBy('likeCount', descending: true)
+            .snapshots(), //ゲットじゃなくてリアルタイム取得の印
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError ||
+              snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading');
+          } else if (!snapshot.hasData) {
+            return const Text('データがありません');
+          } else {
+            final replyDocs = snapshot.data!.docs;
+            return ListView(
+              //DocumentSnapshot <Map<String, dynamic>> は不可
+              children: replyDocs.map((DocumentSnapshot replyDoc) {
+                final Map<String, dynamic> data =
+                    replyDoc.data()! as Map<String, dynamic>;
+                final Reply reply = Reply.fromJson(data);
+                return ReplyCard(
+                  reply: reply,
+                  comment: comment,
+                  mainModel: mainModel,
+                  replyDoc: replyDoc,
+                  muteUserModel: muteUserModel,
+                  onSelected: (result) {
+                    if (result == '0') {
+                      muteUserModel.showDialog(
+                          context: context,
+                          passiveUid: reply.uid,
                           mainModel: mainModel,
-                          replyDoc: replyDoc,
-                          muteUserModel: muteUserModel,
-                          onSelected: (result) {
-                            if (result == '0') {
-                              muteUserModel.showDialog(
-                                  context: context,
-                                  passiveUid: reply.uid,
-                                  mainModel: mainModel,
-                                  docs: []);
-                            }
-                          },
-                          );
-                    }).toList(),
-                  );
-                }
-              },
-            ),
+                          docs: []);
+                    }
+                  },
+                );
+              }).toList(),
+            );
+          }
+        },
+      ),
     );
   }
 }

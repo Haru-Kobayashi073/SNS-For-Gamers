@@ -11,7 +11,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_user_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/comments/components/comment_card.dart';
 
 class CommentsPage extends ConsumerWidget {
@@ -20,13 +20,12 @@ class CommentsPage extends ConsumerWidget {
       required this.post,
       required this.postDoc,
       required this.mainModel,
-      required this.muteUserModel
-      })
+      required this.muteUserModel})
       : super(key: key);
   final Post post;
   final DocumentSnapshot<Map<String, dynamic>> postDoc;
   final MainModel mainModel;
-  final MuteUserModel muteUserModel;
+  final MuteUsersModel muteUserModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

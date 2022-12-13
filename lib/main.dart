@@ -9,7 +9,7 @@ import 'package:sns_vol2/constants/themes.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
-import 'package:sns_vol2/models/mute_user_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/login_page.dart';
@@ -89,7 +89,7 @@ class MyHomePage extends ConsumerWidget {
     final SNSBottomNavigationBarModel snsBottomNavigationBarModel =
         ref.watch(snsBottomNavigationBarProvider);
     final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
-    final MuteUserModel muteUserModel = ref.watch(muteUserProvider);
+    final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -97,7 +97,10 @@ class MyHomePage extends ConsumerWidget {
         backgroundColor: const Color(0xffffffff),
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
-        title: Text(title, style: const TextStyle(color: Colors.black),),
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.black),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => createPostModel.showPostDialog(
@@ -105,7 +108,10 @@ class MyHomePage extends ConsumerWidget {
         // backgroundColor: const Color(0xffD6A34A),
         backgroundColor: Colors.black,
         // backgroundColor: const Color(0xFF388D5D),
-        child: const Icon(Icons.new_label, color: Colors.white,),
+        child: const Icon(
+          Icons.new_label,
+          color: Colors.white,
+        ),
       ),
       drawer: SNSDrawer(
         mainModel: mainModel,

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
@@ -11,10 +12,15 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
 import 'package:sns_vol2/domain/user_mute/user_mute.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
-final muteUserProvider = ChangeNotifierProvider((ref) => MuteUserModel());
+final muteUsersProvider = ChangeNotifierProvider((ref) => MuteUsersModel());
 
-class MuteUserModel extends ChangeNotifier {
+class MuteUsersModel extends ChangeNotifier {
+  bool showMuteUsers = false;
+  List<DocumentSnapshot<Map<String, dynamic>>> muteUserDocs = [];
+  final RefreshController refreshController = RefreshController();
+
   Future<void> muteUser(
       {required MainModel mainModel,
       required String passiveUid,
@@ -54,6 +60,22 @@ class MuteUserModel extends ChangeNotifier {
         .collection('userMutes')
         .doc(activeUid)
         .set(userMute.toJson());
+  }
+
+  Future<void> getMuteUsers({required MainModel mainModel}) async {
+    showMuteUsers = true;
+    final muteUids = mainModel.muteUids;
+    if (muteUids.length <= 10) {
+      //uidがmuteUidsに含まれているユーザーを全取得
+      //10人しか取得できない
+      final Query<Map<String, dynamic>> query = FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', whereIn: muteUids);
+      //processBasicDocsはmuteしているユーザーを弾くので使用できない
+      final qshot = await query.get();
+      muteUserDocs = qshot.docs;
+    }
+    notifyListeners();
   }
 
   void showDialog(

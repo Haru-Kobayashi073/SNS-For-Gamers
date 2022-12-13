@@ -12,6 +12,7 @@ const String adminTitle = '管理者';
 const String commentTitle = 'コメント';
 const String replyTitle = 'リプライ';
 const String editProfileTitle = 'プロフィール編集';
+const String muteUsersPageTitle = 'ミュートしているユーザー';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -26,6 +27,7 @@ const String createCommentText = 'コメントを作成';
 const String createReplyText = 'リプライを作成する';
 const String editProfileText = 'プロフィールを編集する';
 const String updateText = '更新';
+const String showMuteUsersText = 'ミュートしているユーザーを表示';
 // FieldKey
 const String usersFieldKey = "users";
 // message
