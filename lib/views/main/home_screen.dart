@@ -63,7 +63,7 @@ class HomeScreen extends ConsumerWidget {
                       muteUserModel: muteUserModel,
                       onselected: (result) {
                         if (result == '0') {
-                          muteUserModel.showDialog(
+                          muteUserModel.showMuteUserDialog(
                               context: context,
                               passiveUid: post.uid,
                               mainModel: mainModel,

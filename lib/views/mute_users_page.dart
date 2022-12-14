@@ -34,6 +34,8 @@ class MuteUsersPage extends ConsumerWidget {
                         FirestoreUser.fromJson(muteUserDoc.data()!);
                     return ListTile(
                       title: Text(muteFirestoreUser.userName),
+                      onTap: () => muteUsersModel.showUnMuteUserDialog(context: context, passiveUid: muteFirestoreUser.uid, mainModel: mainModel,
+                      muteUserDoc: muteUserDoc),
                     );
                   }),
             )

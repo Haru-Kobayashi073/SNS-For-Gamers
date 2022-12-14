@@ -28,6 +28,16 @@ const String createReplyText = 'リプライを作成する';
 const String editProfileText = 'プロフィールを編集する';
 const String updateText = '更新';
 const String showMuteUsersText = 'ミュートしているユーザーを表示';
+const String yesText = 'はい';
+const String noText = 'いいえ';
+const String backText = '戻る';
+const String muteUserText = 'ユーザーをミュートする';
+const String unMuteUserText = 'ユーザーをミュートする';
+
+
+//alert
+const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
+const String unMuteUserAlertMsg = '本当にこのユーザーのミュートを解除しますか？';
 // FieldKey
 const String usersFieldKey = "users";
 // message

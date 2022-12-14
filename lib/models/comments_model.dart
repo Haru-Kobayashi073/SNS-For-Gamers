@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/lists.dart';
+import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/domain/comment/comment.dart';
@@ -236,9 +237,9 @@ class CommentsModel extends ChangeNotifier {
         .first;
     mainModel.likeCommentTokens.remove(deleteLikeCommentToken);
     notifyListeners();
-    await currentUserDoc.reference
-        .collection('tokens')
-        .doc(deleteLikeCommentToken.tokenId)
+    await currentUserDocToTokenDocRef(
+            currentUserDoc: currentUserDoc,
+            tokenId: deleteLikeCommentToken.tokenId)
         .delete();
     final DocumentReference<Map<String, dynamic>> postCommentRef =
         deleteLikeCommentToken.postCommentRef;

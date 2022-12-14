@@ -21,6 +21,22 @@ class MuteUsersModel extends ChangeNotifier {
   List<DocumentSnapshot<Map<String, dynamic>>> muteUserDocs = [];
   final RefreshController refreshController = RefreshController();
 
+  Future<void> getMuteUsers({required MainModel mainModel}) async {
+    showMuteUsers = true;
+    final muteUids = mainModel.muteUids;
+    if (muteUids.length <= 10) {
+      //uidがmuteUidsに含まれているユーザーを全取得
+      //10人しか取得できない
+      final Query<Map<String, dynamic>> query = FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', whereIn: muteUids);
+      //processBasicDocsはmuteしているユーザーを弾くので使用できない
+      final qshot = await query.get();
+      muteUserDocs = qshot.docs;
+    }
+    notifyListeners();
+  }
+
   Future<void> muteUser(
       {required MainModel mainModel,
       required String passiveUid,
@@ -62,23 +78,7 @@ class MuteUsersModel extends ChangeNotifier {
         .set(userMute.toJson());
   }
 
-  Future<void> getMuteUsers({required MainModel mainModel}) async {
-    showMuteUsers = true;
-    final muteUids = mainModel.muteUids;
-    if (muteUids.length <= 10) {
-      //uidがmuteUidsに含まれているユーザーを全取得
-      //10人しか取得できない
-      final Query<Map<String, dynamic>> query = FirebaseFirestore.instance
-          .collection('users')
-          .where('uid', whereIn: muteUids);
-      //processBasicDocsはmuteしているユーザーを弾くので使用できない
-      final qshot = await query.get();
-      muteUserDocs = qshot.docs;
-    }
-    notifyListeners();
-  }
-
-  void showDialog(
+  void showMuteUserDialog(
       {required BuildContext context,
       required String passiveUid,
       required MainModel mainModel,
@@ -89,13 +89,12 @@ class MuteUsersModel extends ChangeNotifier {
         //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
         builder: (BuildContext innerContext) {
           return CupertinoAlertDialog(
-            title: const Text('ユーザーをミュートする'),
-            content: const Text('このユーザーを本当にミュートしますか？'),
+            content: const Text(muteUserAlertMsg),
             actions: <CupertinoDialogAction>[
               CupertinoDialogAction(
                 isDefaultAction: true,
                 onPressed: () => Navigator.pop(innerContext),
-                child: const Text('いいえ'),
+                child: const Text(noText),
               ),
               CupertinoDialogAction(
                 isDestructiveAction: true,
@@ -104,14 +103,14 @@ class MuteUsersModel extends ChangeNotifier {
                   await muteUser(
                       mainModel: mainModel, passiveUid: passiveUid, docs: docs);
                 },
-                child: const Text('はい'),
+                child: const Text(yesText),
               ),
             ],
           );
         });
   }
 
-  void showPopup(
+  void showMuteUserPopup(
       {required BuildContext context,
       required String passiveUid,
       required MainModel mainModel,
@@ -122,23 +121,116 @@ class MuteUsersModel extends ChangeNotifier {
         //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
         builder: (BuildContext innerContext) {
           return CupertinoActionSheet(
-              title: const Text('行う操作を選択'),
               actions: <CupertinoActionSheetAction>[
                 CupertinoActionSheetAction(
                   isDestructiveAction: true,
                   onPressed: () {
                     Navigator.pop(innerContext);
-                    showDialog(
+                    showMuteUserDialog(
                         context: context,
                         passiveUid: passiveUid,
                         mainModel: mainModel,
                         docs: docs);
                   },
-                  child: const Text('ユーザーをミュートする'),
+                  child: const Text(muteUserText),
                 ),
                 CupertinoActionSheetAction(
                   onPressed: () => Navigator.pop(innerContext),
-                  child: const Text('戻る'),
+                  child: const Text(backText),
+                ),
+              ]);
+        });
+  }
+
+  Future<void> unMuteUser(
+      {required MainModel mainModel,
+      required String passiveUid,
+      //docsにはpostDocs、commentDocsが含まれる
+      required DocumentSnapshot<Map<String, dynamic>>
+          muteUserDoc}) async {
+    //muteUsersModel側の処理
+    muteUserDocs.remove(muteUserDoc);
+    mainModel.muteUids.remove(passiveUid);
+    final currentUserDoc = mainModel.currentUserDoc;
+    final String activeUid = currentUserDoc.id;
+
+    final deleteMuteUserToken = mainModel.muteUserTokens
+        .where((element) => element.passiveUid == passiveUid)
+        .toList()
+        .first;
+    mainModel.muteUserTokens.remove(deleteMuteUserToken);
+    notifyListeners();
+    //自分がミュートしたことの印を削除
+    await currentUserDocToTokenDocRef(
+            currentUserDoc: currentUserDoc,
+            tokenId: deleteMuteUserToken.tokenId)
+        .delete();
+    //ユーザーのミュートれた印を削除
+    final DocumentReference<Map<String, dynamic>> muteUserRef =
+        FirebaseFirestore.instance.collection('users').doc(passiveUid);
+    await muteUserRef.collection('userMutes').doc(activeUid).delete();
+  }
+
+  void showUnMuteUserDialog(
+      {required BuildContext context,
+      required String passiveUid,
+      required MainModel mainModel,
+      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) {
+    showCupertinoModalPopup(
+        context: context,
+        //中で別のinnercontextを生成する
+        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
+        builder: (BuildContext innerContext) {
+          return CupertinoAlertDialog(
+            content: const Text(unMuteUserAlertMsg),
+            actions: <CupertinoDialogAction>[
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                onPressed: () => Navigator.pop(innerContext),
+                child: const Text(noText),
+              ),
+              CupertinoDialogAction(
+                isDestructiveAction: true,
+                onPressed: () async {
+                  Navigator.pop(innerContext);
+                  await unMuteUser(
+                      mainModel: mainModel, passiveUid: passiveUid, muteUserDoc: muteUserDoc);
+                },
+                child: const Text(yesText),
+              ),
+            ],
+          );
+        });
+  }
+
+  void showUnMuteUserPopup(
+      {required BuildContext context,
+      required String passiveUid,
+      required MainModel mainModel,
+      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) {
+    showCupertinoModalPopup(
+        context: context,
+        //中で別のinnercontextを生成する
+        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
+        builder: (BuildContext innerContext) {
+          return CupertinoActionSheet(
+              actions: <CupertinoActionSheetAction>[
+                CupertinoActionSheetAction(
+                  isDestructiveAction: true,
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    showUnMuteUserDialog(
+                        context: context,
+                        passiveUid: passiveUid,
+                        mainModel: mainModel,
+                        muteUserDoc: muteUserDoc
+                        );
+                  },
+                  child: const Text(unMuteUserText),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(innerContext),
+                  child: const Text(backText),
                 ),
               ]);
         });

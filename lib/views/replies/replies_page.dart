@@ -68,7 +68,7 @@ class RepliesPage extends ConsumerWidget {
                   muteUserModel: muteUserModel,
                   onSelected: (result) {
                     if (result == '0') {
-                      muteUserModel.showDialog(
+                      muteUserModel.showMuteUserDialog(
                           context: context,
                           passiveUid: reply.uid,
                           mainModel: mainModel,

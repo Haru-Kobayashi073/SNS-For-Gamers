@@ -64,7 +64,7 @@ class CommentsPage extends ConsumerWidget {
                       muteUserModel: muteUserModel,
                       onSelected: (result) {
                         if (result == '0') {
-                          muteUserModel.showDialog(
+                          muteUserModel.showMuteUserDialog(
                               context: context,
                               passiveUid: post.uid,
                               mainModel: mainModel,
