@@ -10,9 +10,9 @@ import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 
 //なぜFutureを使うかというと、画像ファイルの取得には時間がかかるから非同期処理をする必要がある
-Future<XFile> returnXFile() async {
+Future<dynamic> returnXFile() async {
   final ImagePicker picker = ImagePicker();
-  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  final  image = await picker.pickImage(source: ImageSource.gallery);
   return image!;
 }
 

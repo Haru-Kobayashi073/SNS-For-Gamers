@@ -21,6 +21,7 @@ import 'package:sns_vol2/views/main/search_screen.dart';
 //options
 import 'firebase_options.dart';
 //constants
+import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
 void main() async {
@@ -92,25 +93,26 @@ class MyHomePage extends ConsumerWidget {
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
 
     return Scaffold(
+      backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         // backgroundColor: const Color(0xFF388D5D),
-        backgroundColor: const Color(0xffffffff),
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: colors.appBarBackColor,
+        iconTheme: const IconThemeData(color: colors.appBarTextColor),
         elevation: 0,
         title: Text(
           title,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: colors.appBarTextColor),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => createPostModel.showPostDialog(
             context: context, mainModel: mainModel),
         // backgroundColor: const Color(0xffD6A34A),
-        backgroundColor: Colors.black,
+        backgroundColor: colors.floatingButtonBackColor,
         // backgroundColor: const Color(0xFF388D5D),
         child: const Icon(
           Icons.new_label,
-          color: Colors.white,
+          color: colors.floatingButtonIconColor,
         ),
       ),
       drawer: SNSDrawer(
@@ -131,6 +133,7 @@ class MyHomePage extends ConsumerWidget {
                 HomeScreen(
                   mainModel: mainModel,
                   muteUserModel: muteUserModel,
+                  createPostModel: createPostModel,
                 ),
                 SearchScreen(
                   passiveUser: mainModel.firestoreUser,

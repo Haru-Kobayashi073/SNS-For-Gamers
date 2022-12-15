@@ -47,7 +47,9 @@ class MuteUsersPage extends ConsumerWidget {
                           mainModel: mainModel),
                       widthRate: 0.7,
                       color: Colors.black,
-                      text: showMuteUsersText)
+                      text: showMuteUsersText,
+                      textColor: Colors.white,
+                      )
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main/search_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/models/main_model.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -18,18 +19,23 @@ class SearchScreen extends ConsumerWidget {
     final SearchModel searchModel = ref.watch(searchProvider);
     final FirestoreUser passiveUser;
 
-    return ListView.builder(
-        itemCount: searchModel.users.length,
-        itemBuilder: (context, index) {
-          //usersの配列から１つ１つを取得している
-          final FirestoreUser firestoreUser = searchModel.users[index];
-          return ListTile(
-            title: Text(firestoreUser.uid),
-            onTap: () => routes.toPassiveUserProfilePage(
-                context: context,
-                passiveUser: firestoreUser,
-                mainModel: mainModel),
-          );
-        });
+    return Container(
+      decoration: const BoxDecoration(
+        color: colors.backScreenColor),
+      child: ListView.builder(
+          itemCount: searchModel.users.length,
+          itemBuilder: (context, index) {
+            //usersの配列から１つ１つを取得している
+            final FirestoreUser firestoreUser = searchModel.users[index];
+            return ListTile(
+              tileColor: colors.backScreenColor,
+              title: Text(firestoreUser.uid, style: TextStyle(color: colors.listTileTextColor),),
+              onTap: () => routes.toPassiveUserProfilePage(
+                  context: context,
+                  passiveUser: firestoreUser,
+                  mainModel: mainModel),
+            );
+          }),
+    );
   }
 }

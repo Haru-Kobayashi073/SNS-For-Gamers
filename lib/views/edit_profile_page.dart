@@ -60,8 +60,9 @@ class EditProfilePage extends ConsumerWidget {
                 onPressed: () async => await editProfileModel.updateUserInfo(
                     context: context, mainModel: mainModel),
                 widthRate: 0.3,
-                color: Colors.blue,
-                text: updateText)
+                color: Colors.black,
+                text: updateText,
+                textColor: Colors.white,)
           ],
         ),
       ),

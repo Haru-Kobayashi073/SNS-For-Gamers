@@ -21,58 +21,14 @@ class AdminModel extends ChangeNotifier {
       required FirestoreUser firestoreUser}) async {
     // 管理者だけにできる処理
 
+    final usersQshot =
+        await FirebaseFirestore.instance.collection('users').get();
     final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
-    for (int i = 0; i < 35; i++) {
-      final String passiveUid = i.toString();
-      final Timestamp now = Timestamp.now();
-      //ユーザーを作成する
-      final FirestoreUser firestoreUser = FirestoreUser(
-          createdAt: now,
-          updatedAt: now,
-          followerCount: 0,
-          followingCount: 0,
-          muteCount: 0,
-          isAdmin: false,
-          userName: passiveUid,
-          userImageURL: '',
-          uid: passiveUid);
-      writeBatch.set(
-          FirebaseFirestore.instance.collection('users').doc(passiveUid),
-          firestoreUser.toJson());
-      //ミュートした印を作成する
-      final String tokenId = returnUuidV4();
-      final String activeUid = currentUserDoc.id;
-      final passiveUserDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(passiveUid)
-          .get();
-      final MuteUserToken muteUserToken = MuteUserToken(
-          activeUid: activeUid,
-          passiveUid: passiveUid,
-          createdAt: now,
-          tokenId: tokenId,
-          tokenType: muteUserTokenTypeString);
-      notifyListeners();
-      //currentUserDoc.ref ...
-      //自分がミュートしたことの印
-      writeBatch.set(
-          currentUserDocToTokenDocRef(
-              currentUserDoc: currentUserDoc, tokenId: tokenId),
-          muteUserToken.toJson());
-      // await currentUserDocToTokenDocRef(
-      //         currentUserDoc: currentUserDoc, tokenId: tokenId)
-      //     .set(muteUserToken.toJson());
-      //ミュートされたことの印
-      final UserMute userMute = UserMute(
-          activeUid: activeUid,
-          createdAt: now,
-          passiveUid: passiveUid,
-          passiveUserRef: passiveUserDoc.reference);
-      writeBatch.set(
-          passiveUserDoc.reference.collection('userMutes').doc(activeUid),
-          userMute.toJson());
+    for (final user in usersQshot.docs) {
+      writeBatch.update(user.reference, {
+        'video': '',
+      });
     }
-
     await writeBatch.commit();
     await Fluttertoast.showToast(
         msg: "管理者の動作が完了しました",
@@ -82,14 +38,58 @@ class AdminModel extends ChangeNotifier {
         backgroundColor: Colors.red[900],
         textColor: Colors.white,
         fontSize: 16.0);
-    // final usersQshot =
-    //     await FirebaseFirestore.instance.collection('users').get();
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
-    // for (final user in usersQshot.docs) {
-    //   writeBatch.update(user.reference, {
-    //     'muteCount': 0,
-    //   });
+    // for (int i = 0; i < 35; i++) {
+    //   final String passiveUid = i.toString();
+    //   final Timestamp now = Timestamp.now();
+    //   //ユーザーを作成する
+    //   final FirestoreUser firestoreUser = FirestoreUser(
+    //       createdAt: now,
+    //       updatedAt: now,
+    //       followerCount: 0,
+    //       followingCount: 0,
+    //       muteCount: 0,
+    //       isAdmin: false,
+    //       userName: passiveUid,
+    //       userImageURL: '',
+    //       uid: passiveUid);
+    //   writeBatch.set(
+    //       FirebaseFirestore.instance.collection('users').doc(passiveUid),
+    //       firestoreUser.toJson());
+    //   //ミュートした印を作成する
+    //   final String tokenId = returnUuidV4();
+    //   final String activeUid = currentUserDoc.id;
+    //   final passiveUserDoc = await FirebaseFirestore.instance
+    //       .collection('users')
+    //       .doc(passiveUid)
+    //       .get();
+    //   final MuteUserToken muteUserToken = MuteUserToken(
+    //       activeUid: activeUid,
+    //       passiveUid: passiveUid,
+    //       createdAt: now,
+    //       tokenId: tokenId,
+    //       tokenType: muteUserTokenTypeString);
+    //   notifyListeners();
+    //   //currentUserDoc.ref ...
+    //   //自分がミュートしたことの印
+    //   writeBatch.set(
+    //       currentUserDocToTokenDocRef(
+    //           currentUserDoc: currentUserDoc, tokenId: tokenId),
+    //       muteUserToken.toJson());
+    //   // await currentUserDocToTokenDocRef(
+    //   //         currentUserDoc: currentUserDoc, tokenId: tokenId)
+    //   //     .set(muteUserToken.toJson());
+    //   //ミュートされたことの印
+    //   final UserMute userMute = UserMute(
+    //       activeUid: activeUid,
+    //       createdAt: now,
+    //       passiveUid: passiveUid,
+    //       passiveUserRef: passiveUserDoc.reference);
+    //   writeBatch.set(
+    //       passiveUserDoc.reference.collection('userMutes').doc(activeUid),
+    //       userMute.toJson());
     // }
+
     // await writeBatch.commit();
 
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();

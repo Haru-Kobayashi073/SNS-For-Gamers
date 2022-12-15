@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CardPopupMenuButton extends StatelessWidget {
   const CardPopupMenuButton(
@@ -14,7 +15,11 @@ class CardPopupMenuButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      color: Colors.white,
+      icon: const Icon(
+        Icons.more_horiz,
+        color: colors.cardTextPrimaryColor,
+        ),
+      // color: colors.cardTextPrimaryColor,
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         const PopupMenuItem<String>(

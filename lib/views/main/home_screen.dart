@@ -7,18 +7,21 @@ import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
+import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen(
-      {Key? key, required this.mainModel, required this.muteUserModel})
+      {Key? key, required this.mainModel, required this.muteUserModel, required this.createPostModel})
       : super(key: key);
   final MainModel mainModel;
   final MuteUsersModel muteUserModel;
+  final CreatePostModel createPostModel;
 
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
@@ -32,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = homeModel.postDocs;
 
     return Container(
-      decoration: const BoxDecoration(color: Color.fromRGBO(240, 236, 236, 1)
+      decoration: const BoxDecoration(color: colors.backScreenColor
           // gradient: LinearGradient(
           //   begin: Alignment.bottomCenter,
           //   end: Alignment.topCenter,
@@ -61,6 +64,7 @@ class HomeScreen extends ConsumerWidget {
                       commentsModel: commentsModel,
                       postsModel: postsModel,
                       muteUserModel: muteUserModel,
+                      createPostModel: createPostModel,
                       onselected: (result) {
                         if (result == '0') {
                           muteUserModel.showMuteUserDialog(

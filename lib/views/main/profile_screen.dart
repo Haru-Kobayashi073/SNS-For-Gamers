@@ -9,6 +9,7 @@ import 'package:sns_vol2/models/edit_profile_model.dart';
 import 'package:sns_vol2/models/main/profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key, required this.mainModel}) : super(key: key);
@@ -22,54 +23,60 @@ class ProfileScreen extends ConsumerWidget {
     final int followerCount = firestoreUser.followerCount;
     final maxWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center, 
-      children: [
-      editProfileModel.croppedFile == null
-          ? Container(
-              alignment: Alignment.center,
-              child: UserImage(
-                length: 80,
-                userImageURL: mainModel.firestoreUser.userImageURL,
-              ),
-            )
-          : ClipRRect(
-              borderRadius: BorderRadius.circular(300.0),
-              child: Container(
-                  width: maxWidth * 0.25,
-                  height: maxWidth * 0.25,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.file(editProfileModel.croppedFile!)),
-            ),
-      Text(
-        firestoreUser.userName,
-        style: TextStyle(fontSize: 24),
+    return Container(
+      decoration: BoxDecoration(
+        color: colors.backScreenColor
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center, 
         children: [
-          Text(
-            'フォロー中: ' + firestoreUser.followingCount.toString(),
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(
-            width: 30,
-          ),
-          Text(
-            'フォロワー: ' + firestoreUser.followerCount.toString(),
-            style: TextStyle(fontSize: 16),
-          ),
-        ],
-      ),
-      RoundedButton(
-          onPressed: () =>
-              routes.toEditProfilePage(context: context, mainModel: mainModel),
-          widthRate: 0.6,
-          color: Colors.grey,
-          text: editProfileText)
-    ]);
+        editProfileModel.croppedFile == null
+            ? Container(
+                alignment: Alignment.center,
+                child: UserImage(
+                  length: 80,
+                  userImageURL: mainModel.firestoreUser.userImageURL,
+                ),
+              )
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(300.0),
+                child: Container(
+                    width: maxWidth * 0.25,
+                    height: maxWidth * 0.25,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.file(editProfileModel.croppedFile!)),
+              ),
+        Text(
+          firestoreUser.userName,
+          style: TextStyle(fontSize: 24,color: colors.profileTextColor),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'フォロー中: ' + firestoreUser.followingCount.toString(),
+              style: TextStyle(fontSize: 16,color: colors.profileTextColor),
+            ),
+            SizedBox(
+              width: 30,
+            ),
+            Text(
+              'フォロワー: ' + firestoreUser.followerCount.toString(),
+              style: TextStyle(fontSize: 16,color: colors.profileTextColor),
+            ),
+          ],
+        ),
+        RoundedButton(
+            onPressed: () =>
+                routes.toEditProfilePage(context: context, mainModel: mainModel),
+            widthRate: 0.6,
+            color: Colors.black,
+            text: editProfileText,
+            textColor: Colors.white,)
+      ]),
+    );
   }
 }

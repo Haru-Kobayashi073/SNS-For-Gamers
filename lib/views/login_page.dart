@@ -45,8 +45,9 @@ class LoginPage extends ConsumerWidget {
           RoundedButton(
             onPressed: () async => await loginModel.login(context: context),
             widthRate: 0.35,
-            color: Colors.blue,
+            color: Colors.black,
             text: loginTitle,
+            textColor: Colors.white,
           ),
           TextButton(
               onPressed: () => routes.toSignUpPage(context: context),

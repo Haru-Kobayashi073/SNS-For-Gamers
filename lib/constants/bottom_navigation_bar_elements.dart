@@ -4,9 +4,12 @@ import 'package:sns_vol2/constants/strings.dart';
 
 final List<BottomNavigationBarItem> bottomNavigationBarElements = [
   BottomNavigationBarItem(icon: Icon(Icons.home),
-  label: homeText),
+  label: homeText
+  ),
   BottomNavigationBarItem(icon: Icon(Icons.search),
-  label: searchText),
+  label: searchText
+  ),
   BottomNavigationBarItem(icon: Icon(Icons.person),
-  label: profileText),
+  label: profileText
+  ),
 ];

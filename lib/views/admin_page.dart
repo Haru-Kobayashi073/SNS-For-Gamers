@@ -27,8 +27,9 @@ class AdminPage extends ConsumerWidget {
             child: RoundedButton(
                 onPressed: () async => await adminModel.admin(currentUserDoc: mainModel.currentUserDoc, firestoreUser: mainModel.firestoreUser),
                 widthRate: 0.4,
-                color: Colors.blue,
-                text: adminTitle),
+                color: Colors.red,
+                text: adminTitle,
+                textColor: Colors.black,),
           )
         ],
       ),

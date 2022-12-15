@@ -56,14 +56,17 @@ class PassiveUserProfilePage extends ConsumerWidget {
                   onPressed: () => passiveUserProfileModel.unfollow(
                       mainModel: mainModel, passiveUser: passiveUser),
                   widthRate: 0.5,
-                  color: Colors.blue,
-                  text: 'フォローを外す')
+                  color: Colors.black,
+                  text: 'フォローを外す',
+                  textColor: Colors.white,
+                  )
               : RoundedButton(
                   onPressed: () => passiveUserProfileModel.follow(
                       mainModel: mainModel, passiveUser: passiveUser),
                   widthRate: 0.5,
-                  color: Colors.blue,
-                  text: 'フォロー')
+                  color: Colors.black,
+                  text: 'フォロー',
+                  textColor: Colors.white,)
         ],
       ),
     );

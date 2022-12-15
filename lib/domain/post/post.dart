@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ abstract class Post with _$Post {
     required String imageURL,
     required int likeCount,
     required String text,
+    required dynamic video,
     required int postCommentCount,
     required String postId,
     required String uid,

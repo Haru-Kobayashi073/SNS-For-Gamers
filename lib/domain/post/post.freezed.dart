@@ -26,6 +26,7 @@ mixin _$Post {
   String get imageURL => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
+  dynamic get video => throw _privateConstructorUsedError;
   int get postCommentCount => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $PostCopyWith<$Res> {
       String imageURL,
       int likeCount,
       String text,
+      dynamic video,
       int postCommentCount,
       String postId,
       String uid,
@@ -75,6 +77,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? imageURL = null,
     Object? likeCount = null,
     Object? text = null,
+    Object? video = null,
     Object? postCommentCount = null,
     Object? postId = null,
     Object? uid = null,
@@ -106,6 +109,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      video: null == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       postCommentCount: null == postCommentCount
           ? _value.postCommentCount
           : postCommentCount // ignore: cast_nullable_to_non_nullable
@@ -143,6 +150,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String imageURL,
       int likeCount,
       String text,
+      dynamic video,
       int postCommentCount,
       String postId,
       String uid,
@@ -165,6 +173,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? imageURL = null,
     Object? likeCount = null,
     Object? text = null,
+    Object? video = null,
     Object? postCommentCount = null,
     Object? postId = null,
     Object? uid = null,
@@ -196,6 +205,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      video: null == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       postCommentCount: null == postCommentCount
           ? _value.postCommentCount
           : postCommentCount // ignore: cast_nullable_to_non_nullable
@@ -230,6 +243,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.imageURL,
       required this.likeCount,
       required this.text,
+      required this.video,
       required this.postCommentCount,
       required this.postId,
       required this.uid,
@@ -257,6 +271,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
   final String text;
   @override
+  final dynamic video;
+  @override
   final int postCommentCount;
   @override
   final String postId;
@@ -269,7 +285,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL)';
   }
 
   @override
@@ -283,6 +299,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('imageURL', imageURL))
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('text', text))
+      ..add(DiagnosticsProperty('video', video))
       ..add(DiagnosticsProperty('postCommentCount', postCommentCount))
       ..add(DiagnosticsProperty('postId', postId))
       ..add(DiagnosticsProperty('uid', uid))
@@ -303,6 +320,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.text, text) || other.text == text) &&
+            const DeepCollectionEquality().equals(other.video, video) &&
             (identical(other.postCommentCount, postCommentCount) ||
                 other.postCommentCount == postCommentCount) &&
             (identical(other.postId, postId) || other.postId == postId) &&
@@ -323,6 +341,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       imageURL,
       likeCount,
       text,
+      const DeepCollectionEquality().hash(video),
       postCommentCount,
       postId,
       uid,
@@ -351,6 +370,7 @@ abstract class _Post implements Post {
       required final String imageURL,
       required final int likeCount,
       required final String text,
+      required final dynamic video,
       required final int postCommentCount,
       required final String postId,
       required final String uid,
@@ -371,6 +391,8 @@ abstract class _Post implements Post {
   int get likeCount;
   @override
   String get text;
+  @override
+  dynamic get video;
   @override
   int get postCommentCount;
   @override
