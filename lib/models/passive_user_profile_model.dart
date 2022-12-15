@@ -24,7 +24,10 @@ class PassiveUserProfileModel extends ChangeNotifier {
     final String tokenId = returnUuidV4();
     final Timestamp now = Timestamp.now();
     final FollowingToken followingToken = FollowingToken(
-        passiveUid: passiveUser.uid, createdAt: now, tokenId: tokenId, tokenType: 'following');
+        passiveUid: passiveUser.uid,
+        createdAt: now,
+        tokenId: tokenId,
+        tokenType: 'following');
     final FirestoreUser activeUser = mainModel.firestoreUser;
     //自分がフォローした印
     await FirebaseFirestore.instance
@@ -44,6 +47,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
         .collection("followers")
         .doc(activeUser.uid)
         .set(follower.toJson());
+    print('ユーザーをフォローしました。');
   }
 
   Future<void> unfollow(
@@ -75,5 +79,6 @@ class PassiveUserProfileModel extends ChangeNotifier {
         .collection("followers")
         .doc(activeUser.uid)
         .delete();
+    print('ユーザーのフォローを外しました');
   }
 }

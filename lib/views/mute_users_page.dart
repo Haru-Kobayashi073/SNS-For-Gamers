@@ -23,8 +23,8 @@ class MuteUsersPage extends ConsumerWidget {
           ?
           // Text(showMuteUsersText)
           RefreshScreen(
-              onRefresh: () {},
-              onLoading: () {},
+              onRefresh: () =>  muteUsersModel.onRefresh(),
+              onLoading: () async => await muteUsersModel.onLoading(),
               refreshController: muteUsersModel.refreshController,
               child: ListView.builder(
                   itemCount: muteUsersModel.muteUserDocs.length,

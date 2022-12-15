@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/enums.dart';
+import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
@@ -20,19 +21,56 @@ class MuteUsersModel extends ChangeNotifier {
   bool showMuteUsers = false;
   List<DocumentSnapshot<Map<String, dynamic>>> muteUserDocs = [];
   final RefreshController refreshController = RefreshController();
+  List<String> muteUids = [];
+  //.whereと.createdAtの２つ以上のフィールドで絞っている
+  //indexをfirestoreで作成する必要がある
+  Query<Map<String, dynamic>> returnQuery(
+          {required List<String> max10MuteUids}) =>
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', whereIn: max10MuteUids)
+          .orderBy('createdAt', descending: true);
 
   Future<void> getMuteUsers({required MainModel mainModel}) async {
     showMuteUsers = true;
-    final muteUids = mainModel.muteUids;
-    if (muteUids.length <= 10) {
-      //uidがmuteUidsに含まれているユーザーを全取得
-      //10人しか取得できない
-      final Query<Map<String, dynamic>> query = FirebaseFirestore.instance
-          .collection('users')
-          .where('uid', whereIn: muteUids);
-      //processBasicDocsはmuteしているユーザーを弾くので使用できない
-      final qshot = await query.get();
-      muteUserDocs = qshot.docs;
+    muteUids = mainModel.muteUids;
+    //uidがmuteUidsに含まれているユーザーを全取得
+    //processBasicDocsはmuteしているユーザーを弾くので使用できない
+    await process();
+    notifyListeners();
+  }
+
+  void onRefresh() {
+    refreshController.refreshCompleted();
+    //必ずしも実装する必要はない =>　新しく取得するのは能動的
+    notifyListeners();
+  }
+
+  Future<void> onReload() async {
+    await process();
+    notifyListeners();
+  }
+
+  Future<void> onLoading() async {
+    refreshController.loadComplete();
+    await process();
+    notifyListeners();
+  }
+
+  Future<void> process() async {
+    if (muteUids.length > muteUserDocs.length) {
+      //序盤のmuteUserDocsの長さを保持
+      final userDocsLength = muteUserDocs.length;
+      //max10MuteUidsには10個までしかUidを入れない。＝>なぜならWhereInで検索にかけるから
+      List<String> max10MuteUids = (muteUids.length - muteUserDocs.length) > 10
+          ? muteUids.sublist(userDocsLength, userDocsLength + tenCount)
+          : muteUids.sublist(userDocsLength, muteUids.length);
+      if (max10MuteUids.isNotEmpty) {
+        final qshot = await returnQuery(max10MuteUids: max10MuteUids).get();
+        for (final userDoc in qshot.docs) {
+          muteUserDocs.add(userDoc);
+        }
+      }
     }
     notifyListeners();
   }
@@ -120,25 +158,24 @@ class MuteUsersModel extends ChangeNotifier {
         //中で別のinnercontextを生成する
         //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
         builder: (BuildContext innerContext) {
-          return CupertinoActionSheet(
-              actions: <CupertinoActionSheetAction>[
-                CupertinoActionSheetAction(
-                  isDestructiveAction: true,
-                  onPressed: () {
-                    Navigator.pop(innerContext);
-                    showMuteUserDialog(
-                        context: context,
-                        passiveUid: passiveUid,
-                        mainModel: mainModel,
-                        docs: docs);
-                  },
-                  child: const Text(muteUserText),
-                ),
-                CupertinoActionSheetAction(
-                  onPressed: () => Navigator.pop(innerContext),
-                  child: const Text(backText),
-                ),
-              ]);
+          return CupertinoActionSheet(actions: <CupertinoActionSheetAction>[
+            CupertinoActionSheetAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(innerContext);
+                showMuteUserDialog(
+                    context: context,
+                    passiveUid: passiveUid,
+                    mainModel: mainModel,
+                    docs: docs);
+              },
+              child: const Text(muteUserText),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () => Navigator.pop(innerContext),
+              child: const Text(backText),
+            ),
+          ]);
         });
   }
 
@@ -146,8 +183,7 @@ class MuteUsersModel extends ChangeNotifier {
       {required MainModel mainModel,
       required String passiveUid,
       //docsにはpostDocs、commentDocsが含まれる
-      required DocumentSnapshot<Map<String, dynamic>>
-          muteUserDoc}) async {
+      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) async {
     //muteUsersModel側の処理
     muteUserDocs.remove(muteUserDoc);
     mainModel.muteUids.remove(passiveUid);
@@ -194,7 +230,9 @@ class MuteUsersModel extends ChangeNotifier {
                 onPressed: () async {
                   Navigator.pop(innerContext);
                   await unMuteUser(
-                      mainModel: mainModel, passiveUid: passiveUid, muteUserDoc: muteUserDoc);
+                      mainModel: mainModel,
+                      passiveUid: passiveUid,
+                      muteUserDoc: muteUserDoc);
                 },
                 child: const Text(yesText),
               ),
@@ -213,26 +251,24 @@ class MuteUsersModel extends ChangeNotifier {
         //中で別のinnercontextを生成する
         //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
         builder: (BuildContext innerContext) {
-          return CupertinoActionSheet(
-              actions: <CupertinoActionSheetAction>[
-                CupertinoActionSheetAction(
-                  isDestructiveAction: true,
-                  onPressed: () {
-                    Navigator.pop(innerContext);
-                    showUnMuteUserDialog(
-                        context: context,
-                        passiveUid: passiveUid,
-                        mainModel: mainModel,
-                        muteUserDoc: muteUserDoc
-                        );
-                  },
-                  child: const Text(unMuteUserText),
-                ),
-                CupertinoActionSheetAction(
-                  onPressed: () => Navigator.pop(innerContext),
-                  child: const Text(backText),
-                ),
-              ]);
+          return CupertinoActionSheet(actions: <CupertinoActionSheetAction>[
+            CupertinoActionSheetAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(innerContext);
+                showUnMuteUserDialog(
+                    context: context,
+                    passiveUid: passiveUid,
+                    mainModel: mainModel,
+                    muteUserDoc: muteUserDoc);
+              },
+              child: const Text(unMuteUserText),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () => Navigator.pop(innerContext),
+              child: const Text(backText),
+            ),
+          ]);
         });
   }
 }
