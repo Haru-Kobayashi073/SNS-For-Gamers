@@ -12,6 +12,7 @@ import 'package:sns_vol2/domain/following_token/following_token.dart';
 import 'package:sns_vol2/domain/like_comment_token/like_comment_token.dart';
 import 'package:sns_vol2/domain/like_post_token/like_post_token.dart';
 import 'package:sns_vol2/domain/like_reply_token/like_reply_token.dart';
+import 'package:sns_vol2/domain/mute_comment_token/mute_comment_token.dart';
 import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
 //domain
 
@@ -41,6 +42,8 @@ class MainModel extends ChangeNotifier {
   List<String> likeReplyIds = [];
   List<MuteUserToken> muteUserTokens = [];
   List<String> muteUids = [];
+  List<MuteCommentToken> muteCommentTokens = [];
+  List<String> muteCommentIds = [];
 
   //以下関数がMainModelが起動した時の処理
   //ユーザーの動作を必要としないモデルの関数
@@ -120,6 +123,11 @@ class MainModel extends ChangeNotifier {
           final MuteUserToken muteUserToken = MuteUserToken.fromJson(tokenMap);
           muteUserTokens.add(muteUserToken);
           muteUids.add(muteUserToken.passiveUid);
+          break;
+        case TokenType.muteComment:
+          final MuteCommentToken muteCommentToken = MuteCommentToken.fromJson(tokenMap);
+          muteCommentTokens.add(muteCommentToken);
+          muteCommentIds.add(muteCommentToken.postCommentId);
           break;
         case TokenType.mistake:
           break;

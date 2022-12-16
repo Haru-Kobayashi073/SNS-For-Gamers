@@ -1,5 +1,6 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
@@ -14,6 +15,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/replies/components/reply_card.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 class RepliesPage extends ConsumerWidget {
   const RepliesPage(
@@ -70,11 +72,31 @@ class RepliesPage extends ConsumerWidget {
                   muteUserModel: muteUserModel,
                   onSelected: (result) {
                     if (result == '0') {
-                      muteUserModel.showMuteUserDialog(
-                          context: context,
-                          passiveUid: reply.uid,
-                          mainModel: mainModel,
-                          docs: []);
+                      voids.showPopup(
+                              context: context,
+                              builder: (BuildContext innerContext) =>
+                                  CupertinoActionSheet(
+                                    actions: <CupertinoDialogAction>[
+                                      CupertinoDialogAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          Navigator.pop(innerContext);
+                                          muteUserModel.showMuteUserDialog(
+                                              context: context,
+                                              passiveUid: reply.uid,
+                                              mainModel: mainModel,
+                                              docs: []);
+                                        },
+                                        child: const Text(yesText),
+                                      ),
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        onPressed: () =>
+                                            Navigator.pop(innerContext),
+                                        child: const Text(noText),
+                                      ),
+                                    ],
+                                  ));
                     }
                   },
                 );

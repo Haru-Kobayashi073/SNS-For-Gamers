@@ -1,7 +1,9 @@
 //flutter
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
@@ -14,6 +16,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen(
@@ -67,11 +70,31 @@ class HomeScreen extends ConsumerWidget {
                       createPostModel: createPostModel,
                       onselected: (result) {
                         if (result == '0') {
-                          muteUserModel.showMuteUserDialog(
+                          voids.showPopup(
                               context: context,
-                              passiveUid: post.uid,
-                              mainModel: mainModel,
-                              docs: postDocs);
+                              builder: (BuildContext innerContext) =>
+                                  CupertinoActionSheet(
+                                    actions: <CupertinoDialogAction>[
+                                      CupertinoDialogAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          Navigator.pop(innerContext);
+                                          muteUserModel.showMuteUserDialog(
+                                              context: context,
+                                              passiveUid: post.uid,
+                                              mainModel: mainModel,
+                                              docs: postDocs);
+                                        },
+                                        child: const Text(yesText),
+                                      ),
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        onPressed: () =>
+                                            Navigator.pop(innerContext),
+                                        child: const Text(noText),
+                                      ),
+                                    ],
+                                  ));
                         }
                       },
                     );

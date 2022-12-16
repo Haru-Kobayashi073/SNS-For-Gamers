@@ -35,6 +35,10 @@ service cloud.firestore {
           allow create: if isAuthenticated();
           // postCommentReplyのdataのuidが現在ログインしているう人と同じであれば消去できる
           allow delete: if isTheSameUserOrAdmin(resource.data.uid);
+          match /postCommentMutes/{activeUid} {
+            //作成と削除は受動的なユーザーのみが作成することができる
+            allow create, delete: if isTheSameUserOrAdmin(activeUid);
+          }
           match /postCommentLikes/{activeUid} {
             allow create, delete: if isTheSameUserOrAdmin(activeUid);
           }

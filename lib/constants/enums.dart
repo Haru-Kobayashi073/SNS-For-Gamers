@@ -5,6 +5,7 @@ enum TokenType {
   likeComment,
   likeReply,
   muteUser,
+  muteComment,
   mistake
 }
 
@@ -27,6 +28,9 @@ String likeReplyTokenTypeString =
 String muteUserTokenTypeString =
     returnTokenTypeString(tokenType: TokenType.muteUser);
 
+String muteCommentTokenTypeString =
+    returnTokenTypeString(tokenType: TokenType.muteComment);
+
 TokenType mapToTokenType({required Map<String, dynamic> tokenMap}) {
   //tokenのデータを取得してそのTokenTypeのStringを得る
   //それがfollowingかlikePostかを判別
@@ -41,6 +45,8 @@ TokenType mapToTokenType({required Map<String, dynamic> tokenMap}) {
     return TokenType.likeReply;
   } else if (tokenTypeString == muteUserTokenTypeString) {
     return TokenType.muteUser;
+  } else if (tokenTypeString == muteCommentTokenTypeString) {
+    return TokenType.muteComment;
   } else {
     return TokenType.mistake;
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flash/flash.dart';
 import 'package:sns_vol2/constants/bools.dart';
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
@@ -82,4 +83,20 @@ Future<void> processOldDocs(
       if (isValidUser(muteUids: muteUids, doc: doc)) docs.add(doc);
     }
   }
+}
+
+void showPopup({required BuildContext context, required Widget Function(BuildContext) builder}) {
+  showCupertinoModalPopup(
+        context: context,
+        //中で別のinnercontextを生成する
+        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
+        // builder: (BuildContext innerContext) {
+        //   return CupertinoAlertDialog(
+        //     content: const Text(muteUserAlertMsg),
+        //     actions: [],
+            
+        //   );
+        // }
+        builder: builder
+        );
 }

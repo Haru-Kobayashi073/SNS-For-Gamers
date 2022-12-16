@@ -32,12 +32,14 @@ const String yesText = 'はい';
 const String noText = 'いいえ';
 const String backText = '戻る';
 const String muteUserText = 'ユーザーをミュートする';
-const String unMuteUserText = 'ユーザーをミュートする';
-
+const String unMuteUserText = 'ユーザーのミュートを解除する';
+const String muteCommentText = 'コメントをミュートする';
+const String unMuteCommentText = 'コメントのミュートを解除する';
 
 //alert
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
 const String unMuteUserAlertMsg = '本当にこのユーザーのミュートを解除しますか？';
+const String muteCommentAlertMsg = '本当にコメントをミュートしますか';
 // FieldKey
 const String usersFieldKey = "users";
 // message

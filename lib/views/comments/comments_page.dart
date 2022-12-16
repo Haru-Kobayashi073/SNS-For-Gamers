@@ -1,5 +1,6 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //package
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,9 +12,11 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_comments_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/comments/components/comment_card.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 class CommentsPage extends ConsumerWidget {
   const CommentsPage(
@@ -31,6 +34,7 @@ class CommentsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final CommentsModel commentsModel = ref.watch(commentsProvider);
+    final MuteCommentsModel muteCommentsModel = ref.watch(muteCommentsProvider);
     final commentDocs = commentsModel.commentDocs;
 
     return Scaffold(
@@ -70,11 +74,45 @@ class CommentsPage extends ConsumerWidget {
                       muteUserModel: muteUserModel,
                       onSelected: (result) {
                         if (result == '0') {
-                          muteUserModel.showMuteUserDialog(
+                          voids.showPopup(
                               context: context,
-                              passiveUid: post.uid,
-                              mainModel: mainModel,
-                              docs: commentDocs);
+                              builder: (BuildContext innerContext) =>
+                                  CupertinoActionSheet(
+                                    actions: <CupertinoDialogAction>[
+                                      CupertinoDialogAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          Navigator.pop(innerContext);
+                                          muteUserModel.showMuteUserDialog(
+                                              context: context,
+                                              passiveUid: comment.uid,
+                                              mainModel: mainModel,
+                                              docs: commentDocs);
+                                        },
+                                        child: const Text(muteUserText),
+                                      ),
+                                      CupertinoDialogAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          Navigator.pop(innerContext);
+                                          // TODO: ミュートコメントの処理 コメントをミュートからのダイアログでユーザーをミュートと出てくるのを直す
+                                          muteCommentsModel
+                                              .showMuteCommentDialog(
+                                                  context: context,
+                                                  mainModel: mainModel,
+                                                  commentDoc: commentDoc,
+                                                  commentDocs: commentDocs);
+                                        },
+                                        child: const Text(muteCommentText),
+                                      ),
+                                      CupertinoDialogAction(
+                                        isDefaultAction: true,
+                                        onPressed: () =>
+                                            Navigator.pop(innerContext),
+                                        child: const Text(noText),
+                                      ),
+                                    ],
+                                  ));
                         }
                       },
                     );

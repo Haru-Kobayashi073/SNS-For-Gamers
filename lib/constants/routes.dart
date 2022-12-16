@@ -103,3 +103,5 @@ void toMuteUsersPage(
             builder: (context) => MuteUsersPage(
                   mainModel: mainModel,
                 )));
+
+void toHomePage() {}
