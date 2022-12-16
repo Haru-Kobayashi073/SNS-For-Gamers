@@ -147,6 +147,38 @@ class MuteUsersModel extends ChangeNotifier {
         .doc(activeUid)
         .set(userMute.toJson());
   }
+  
+  Future<void> unMuteUser(
+      {required MainModel mainModel,
+      required String passiveUid,
+      //docsにはpostDocs、commentDocsが含まれる
+      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) async {
+    //muteUsersModel側の処理
+    muteUserDocs.remove(muteUserDoc);
+    mainModel.muteUids.remove(passiveUid);
+    final currentUserDoc = mainModel.currentUserDoc;
+    final String activeUid = currentUserDoc.id;
+
+    final deleteMuteUserToken = mainModel.muteUserTokens
+        .where((element) => element.passiveUid == passiveUid)
+        .toList()
+        .first;
+    if (newMuteUserTokens.contains(deleteMuteUserToken)) {
+      //もし削除するミュートユーザーが新しい人なら
+      newMuteUserTokens.remove(deleteMuteUserToken);
+    }
+    mainModel.muteUserTokens.remove(deleteMuteUserToken);
+    notifyListeners();
+    //自分がミュートしたことの印を削除
+    await currentUserDocToTokenDocRef(
+            currentUserDoc: currentUserDoc,
+            tokenId: deleteMuteUserToken.tokenId)
+        .delete();
+    //ユーザーのミュートれた印を削除
+    final DocumentReference<Map<String, dynamic>> muteUserRef =
+        FirebaseFirestore.instance.collection('users').doc(passiveUid);
+    await muteUserRef.collection('userMutes').doc(activeUid).delete();
+  }
 
   void showMuteUserDialog(
       {required BuildContext context,
@@ -180,68 +212,6 @@ class MuteUsersModel extends ChangeNotifier {
         });
   }
 
-  void showMuteUserPopup(
-      {required BuildContext context,
-      required String passiveUid,
-      required MainModel mainModel,
-      required List<DocumentSnapshot<Map<String, dynamic>>> docs}) {
-    showCupertinoModalPopup(
-        context: context,
-        //中で別のinnercontextを生成する
-        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
-        builder: (BuildContext innerContext) {
-          return CupertinoActionSheet(actions: <CupertinoActionSheetAction>[
-            CupertinoActionSheetAction(
-              isDestructiveAction: true,
-              onPressed: () {
-                Navigator.pop(innerContext);
-                showMuteUserDialog(
-                    context: context,
-                    passiveUid: passiveUid,
-                    mainModel: mainModel,
-                    docs: docs);
-              },
-              child: const Text(muteUserText),
-            ),
-            CupertinoActionSheetAction(
-              onPressed: () => Navigator.pop(innerContext),
-              child: const Text(backText),
-            ),
-          ]);
-        });
-  }
-
-  Future<void> unMuteUser(
-      {required MainModel mainModel,
-      required String passiveUid,
-      //docsにはpostDocs、commentDocsが含まれる
-      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) async {
-    //muteUsersModel側の処理
-    muteUserDocs.remove(muteUserDoc);
-    mainModel.muteUids.remove(passiveUid);
-    final currentUserDoc = mainModel.currentUserDoc;
-    final String activeUid = currentUserDoc.id;
-
-    final deleteMuteUserToken = mainModel.muteUserTokens
-        .where((element) => element.passiveUid == passiveUid)
-        .toList()
-        .first;
-    if (newMuteUserTokens.contains(deleteMuteUserToken)) {
-      //もし削除するミュートユーザーが新しい人なら
-      newMuteUserTokens.remove(deleteMuteUserToken);
-    }
-    mainModel.muteUserTokens.remove(deleteMuteUserToken);
-    notifyListeners();
-    //自分がミュートしたことの印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteMuteUserToken.tokenId)
-        .delete();
-    //ユーザーのミュートれた印を削除
-    final DocumentReference<Map<String, dynamic>> muteUserRef =
-        FirebaseFirestore.instance.collection('users').doc(passiveUid);
-    await muteUserRef.collection('userMutes').doc(activeUid).delete();
-  }
 
   void showUnMuteUserDialog(
       {required BuildContext context,
@@ -274,37 +244,6 @@ class MuteUsersModel extends ChangeNotifier {
               ),
             ],
           );
-        });
-  }
-
-  void showUnMuteUserPopup(
-      {required BuildContext context,
-      required String passiveUid,
-      required MainModel mainModel,
-      required DocumentSnapshot<Map<String, dynamic>> muteUserDoc}) {
-    showCupertinoModalPopup(
-        context: context,
-        //中で別のinnercontextを生成する
-        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
-        builder: (BuildContext innerContext) {
-          return CupertinoActionSheet(actions: <CupertinoActionSheetAction>[
-            CupertinoActionSheetAction(
-              isDestructiveAction: true,
-              onPressed: () {
-                Navigator.pop(innerContext);
-                showUnMuteUserDialog(
-                    context: context,
-                    passiveUid: passiveUid,
-                    mainModel: mainModel,
-                    muteUserDoc: muteUserDoc);
-              },
-              child: const Text(unMuteUserText),
-            ),
-            CupertinoActionSheetAction(
-              onPressed: () => Navigator.pop(innerContext),
-              child: const Text(backText),
-            ),
-          ]);
         });
   }
 }

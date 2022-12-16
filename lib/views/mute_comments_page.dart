@@ -5,37 +5,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
+import 'package:sns_vol2/details/user_image.dart';
+import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_users_model.dart';
+import 'package:sns_vol2/models/mute_comments_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+//package
 
-class MuteUsersPage extends ConsumerWidget {
-  const MuteUsersPage({Key? key, required this.mainModel}) : super(key: key);
+class MuteCommentsPage extends ConsumerWidget {
+  const MuteCommentsPage({Key? key, required this.mainModel}) : super(key: key);
   final MainModel mainModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
-    final muteUserDocs = muteUsersModel.muteUserDocs;
-
+    final MuteCommentsModel muteCommentsModel = ref.watch(muteCommentsProvider);
+    final muteCommentDocs = muteCommentsModel.muteCommentDocs;
     return Scaffold(
-      appBar: AppBar(title: const Text(muteUsersPageTitle)),
-      body: muteUsersModel.showMuteUsers
-          ?
-          // Text(showMuteUsersText)
-          RefreshScreen(
-              onRefresh: () async => await muteUsersModel.onRefresh(),
-              onLoading: () async => await muteUsersModel.onLoading(),
-              refreshController: muteUsersModel.refreshController,
+      appBar: AppBar(title: const Text(muteCommentsPageTitle)),
+      body: muteCommentsModel.showMuteComments
+          ? RefreshScreen(
+              onRefresh: () async => await muteCommentsModel.onRefresh(),
+              onLoading: () async => await muteCommentsModel.onLoading(),
+              refreshController: muteCommentsModel.refreshController,
               child: ListView.builder(
-                  itemCount: muteUsersModel.muteUserDocs.length,
+                  itemCount: muteCommentsModel.muteCommentDocs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final muteUserDoc = muteUserDocs[index];
-                    final FirestoreUser muteFirestoreUser =
-                        FirestoreUser.fromJson(muteUserDoc.data()!);
+                    final muteCommentDoc = muteCommentDocs[index];
+                    final Comment muteComment =
+                        Comment.fromJson(muteCommentDoc.data()!);
                     return ListTile(
-                      title: Text(muteFirestoreUser.userName),
+                      leading: UserImage(length: 100, userImageURL: muteComment.userImageURL),
+                      title: Text(muteComment.userName),
+                      subtitle: Text(muteComment.comment),
                       onTap: () => voids.showPopup(
                           context: context,
                           builder: (BuildContext innerContext) =>
@@ -45,13 +47,13 @@ class MuteUsersPage extends ConsumerWidget {
                                     isDestructiveAction: true,
                                     onPressed: () async {
                                       Navigator.pop(innerContext);
-                                      muteUsersModel.showUnMuteUserDialog(
+                                      muteCommentsModel.showUnMuteCommentDialog(
                                           context: context,
-                                          passiveUid: muteFirestoreUser.uid,
                                           mainModel: mainModel,
-                                          muteUserDoc: muteUserDoc);
+                                          commentDoc: muteCommentDoc,
+                                          commentDocs: muteCommentDocs);
                                     },
-                                    child: const Text(muteUserText),
+                                    child: const Text(unMuteCommentText),
                                   ),
                                   CupertinoDialogAction(
                                     isDefaultAction: true,
@@ -68,11 +70,11 @@ class MuteUsersPage extends ConsumerWidget {
               child: Column(
                 children: [
                   RoundedButton(
-                    onPressed: () async =>
-                        await muteUsersModel.getMuteUsers(mainModel: mainModel),
+                    onPressed: () async => await muteCommentsModel
+                        .getMuteComments(mainModel: mainModel),
                     widthRate: 0.7,
                     color: Colors.black,
-                    text: showMuteUsersText,
+                    text: showMuteCommentsText,
                     textColor: Colors.white,
                   )
                 ],

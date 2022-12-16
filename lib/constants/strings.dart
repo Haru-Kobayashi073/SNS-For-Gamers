@@ -13,6 +13,7 @@ const String commentTitle = 'コメント';
 const String replyTitle = 'リプライ';
 const String editProfileTitle = 'プロフィール編集';
 const String muteUsersPageTitle = 'ミュートしているユーザー';
+const String muteCommentsPageTitle = 'ミュートしているコメント';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -35,11 +36,13 @@ const String muteUserText = 'ユーザーをミュートする';
 const String unMuteUserText = 'ユーザーのミュートを解除する';
 const String muteCommentText = 'コメントをミュートする';
 const String unMuteCommentText = 'コメントのミュートを解除する';
+const String showMuteCommentsText = 'ミュートしているコメントを表示';
 
 //alert
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
 const String unMuteUserAlertMsg = '本当にこのユーザーのミュートを解除しますか？';
 const String muteCommentAlertMsg = '本当にコメントをミュートしますか';
+const String unMuteCommentAlertMsg = '本当にこのコメントのミュートを解除しますか？';
 // FieldKey
 const String usersFieldKey = "users";
 // message

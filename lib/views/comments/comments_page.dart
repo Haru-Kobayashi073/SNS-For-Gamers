@@ -95,7 +95,6 @@ class CommentsPage extends ConsumerWidget {
                                         isDestructiveAction: true,
                                         onPressed: () async {
                                           Navigator.pop(innerContext);
-                                          // TODO: ミュートコメントの処理 コメントをミュートからのダイアログでユーザーをミュートと出てくるのを直す
                                           muteCommentsModel
                                               .showMuteCommentDialog(
                                                   context: context,

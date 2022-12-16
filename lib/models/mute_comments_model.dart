@@ -35,7 +35,7 @@ class MuteCommentsModel extends ChangeNotifier {
           .collectionGroup('postComments')
           .where('postCommentId', whereIn: max10MutePostCommentIds);
 
-  Future<void> getPostComments({required MainModel mainModel}) async {
+  Future<void> getMuteComments({required MainModel mainModel}) async {
     showMuteComments = true;
     mutePostCommentIds = mainModel.muteCommentIds;
     //PostCommentIdがmutePostCommentIdsに含まれているユーザーを全取得
@@ -193,7 +193,7 @@ class MuteCommentsModel extends ChangeNotifier {
         });
   }
 
-  Future<void> unMuteUser(
+  Future<void> unMuteComment(
       {required MainModel mainModel,
       //docsにはpostDocs、commentDocsが含まれる
       required DocumentSnapshot<Map<String, dynamic>> commentDoc,
@@ -227,7 +227,7 @@ class MuteCommentsModel extends ChangeNotifier {
     await muteCommentRef.collection('postCommentMutes').doc(activeUid).delete();
   }
 
-  void showUnMuteUserDialog(
+  void showUnMuteCommentDialog(
       {required BuildContext context,
       required MainModel mainModel,
       //docsにはpostDocs、commentDocsが含まれる
@@ -239,13 +239,13 @@ class MuteCommentsModel extends ChangeNotifier {
         //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
         builder: (BuildContext innerContext) {
           return CupertinoAlertDialog(
-            content: const Text(unMuteUserAlertMsg),
+            content: const Text(unMuteCommentAlertMsg),
             actions: <CupertinoDialogAction>[
               CupertinoDialogAction(
                 isDestructiveAction: true,
                 onPressed: () async {
                   Navigator.pop(innerContext);
-                  await unMuteUser(
+                  await unMuteComment(
                       mainModel: mainModel,
                       commentDoc: commentDoc,
                       commentDocs: commentDocs);
@@ -262,7 +262,7 @@ class MuteCommentsModel extends ChangeNotifier {
         });
   }
 
-  void showUnMuteUserPopup(
+  void showUnMuteCommentPopup(
       {required BuildContext context,
       required MainModel mainModel,
       //docsにはpostDocs、commentDocsが含まれる
@@ -278,13 +278,13 @@ class MuteCommentsModel extends ChangeNotifier {
               isDestructiveAction: true,
               onPressed: () {
                 Navigator.pop(innerContext);
-                showUnMuteUserDialog(
+                showUnMuteCommentDialog(
                     context: context,
                     mainModel: mainModel,
                     commentDoc: commentDoc,
                     commentDocs: commentDocs);
               },
-              child: const Text(unMuteUserText),
+              child: const Text(unMuteCommentText),
             ),
             CupertinoActionSheetAction(
               onPressed: () => Navigator.pop(innerContext),
