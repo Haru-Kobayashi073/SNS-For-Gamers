@@ -21,6 +21,8 @@ class MuteUsersModel extends ChangeNotifier {
   bool showMuteUsers = false;
   List<DocumentSnapshot<Map<String, dynamic>>> muteUserDocs = [];
   final RefreshController refreshController = RefreshController();
+  //新しくミュートするユーザー
+  List<MuteUserToken> newMuteUserTokens = [];
   List<String> muteUids = [];
   //.whereと.createdAtの２つ以上のフィールドで絞っている
   //indexをfirestoreで作成する必要がある
@@ -40,9 +42,10 @@ class MuteUsersModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onRefresh() {
+  Future<void> onRefresh() async {
     refreshController.refreshCompleted();
     //必ずしも実装する必要はない =>　新しく取得するのは能動的
+    await processNewMuteUsers();
     notifyListeners();
   }
 
@@ -54,6 +57,33 @@ class MuteUsersModel extends ChangeNotifier {
   Future<void> onLoading() async {
     refreshController.loadComplete();
     await process();
+    notifyListeners();
+  }
+
+  Future<void> processNewMuteUsers() async {
+    //newMuteUserTokensをfor文で回し、passiveUidだけをまとめている
+    final List<String> newMuteUids =
+        newMuteUserTokens.map((e) => e.passiveUid).toList();
+    //新しくミュートしたユーザーが10以上の場合
+    final List<String> max10MuteUids = newMuteUids.length > 10
+        ? newMuteUids.sublist(0, tenCount) //10より大きかったら取り出す
+        : newMuteUids; //10より大きかったらそのまま適用
+    if (max10MuteUids.isNotEmpty) {
+      final qshot = await returnQuery(max10MuteUids: max10MuteUids).get();
+      //いつもの新しいdocsに対して行う処理
+      final reversed = qshot.docs.reversed.toList();
+      for (final muteUserDoc in reversed) {
+        muteUserDocs.insert(0, muteUserDoc);
+        //muteUserDocsに加えたということは、もう新しくない
+        //新しいやつからはぶく
+        //tokensに含まれるpassiveUidがミュートされるべきユーザーと同じuidのやつを取得
+        final deleteNewMuteUserToken = newMuteUserTokens
+            .where((element) => element.passiveUid == muteUserDoc.id)
+            .toList()
+            .first;
+        newMuteUserTokens.remove(deleteNewMuteUserToken);
+      }
+    }
     notifyListeners();
   }
 
@@ -94,6 +124,8 @@ class MuteUsersModel extends ChangeNotifier {
         createdAt: now,
         tokenId: tokenId,
         tokenType: muteUserTokenTypeString);
+    //新しくミュートしたユーザー
+    newMuteUserTokens.add(muteUserToken);
     mainModel.muteUserTokens.add(muteUserToken);
     mainModel.muteUids.add(passiveUid);
     //muteしたいユーザーが作成したコンテンツを除外
@@ -194,6 +226,10 @@ class MuteUsersModel extends ChangeNotifier {
         .where((element) => element.passiveUid == passiveUid)
         .toList()
         .first;
+    if (newMuteUserTokens.contains(deleteMuteUserToken)) {
+      //もし削除するミュートユーザーが新しい人なら
+      newMuteUserTokens.remove(deleteMuteUserToken);
+    }
     mainModel.muteUserTokens.remove(deleteMuteUserToken);
     notifyListeners();
     //自分がミュートしたことの印を削除

@@ -12,22 +12,49 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/domain/user_mute/user_mute.dart';
+import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_users_model.dart';
 
 final adminProvider = ChangeNotifierProvider((ref) => AdminModel());
 
 class AdminModel extends ChangeNotifier {
   Future<void> admin(
       {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc,
-      required FirestoreUser firestoreUser}) async {
+      required FirestoreUser firestoreUser,
+      required MuteUsersModel muteUsersModel,
+      required MainModel mainModel}) async {
     // 管理者だけにできる処理
 
-    final usersQshot =
-        await FirebaseFirestore.instance.collection('users').get();
     final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
-    for (final user in usersQshot.docs) {
-      writeBatch.update(user.reference, {
-        'video': '',
-      });
+    final String activeUid = returnAuthUser()!.uid;
+    for (int i = 0; i < 35; i++) {
+      final Timestamp now = Timestamp.now();
+      final String passiveUid = "newMuteUser${i.toString()}";
+      //ユーザーを作成する
+      final FirestoreUser firestoreUser = FirestoreUser(
+          createdAt: now,
+          updatedAt: now,
+          followerCount: 0,
+          followingCount: 0,
+          muteCount: 0,
+          isAdmin: false,
+          userName: passiveUid,
+          userImageURL: '',
+          uid: passiveUid);
+      writeBatch.set(
+          FirebaseFirestore.instance.collection('users').doc(passiveUid),
+          firestoreUser.toJson());
+      //今回はフロントエンドだけの処理を疑似的に実装したいのでDBに保存する必要はない
+      final MuteUserToken muteUserToken = MuteUserToken(
+          activeUid: activeUid,
+          passiveUid: passiveUid,
+          createdAt: now,
+          tokenId: returnUuidV4(),
+          tokenType: muteUserTokenTypeString);
+      //フロントだけ
+      muteUsersModel.newMuteUserTokens.add(muteUserToken);
+      //timestampをずらす
+      await Future.delayed(const Duration(milliseconds: 500));
     }
     await writeBatch.commit();
     await Fluttertoast.showToast(
@@ -38,58 +65,14 @@ class AdminModel extends ChangeNotifier {
         backgroundColor: Colors.red[900],
         textColor: Colors.white,
         fontSize: 16.0);
+    // final usersQshot =
+    //     await FirebaseFirestore.instance.collection('users').get();
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
-    // for (int i = 0; i < 35; i++) {
-    //   final String passiveUid = i.toString();
-    //   final Timestamp now = Timestamp.now();
-    //   //ユーザーを作成する
-    //   final FirestoreUser firestoreUser = FirestoreUser(
-    //       createdAt: now,
-    //       updatedAt: now,
-    //       followerCount: 0,
-    //       followingCount: 0,
-    //       muteCount: 0,
-    //       isAdmin: false,
-    //       userName: passiveUid,
-    //       userImageURL: '',
-    //       uid: passiveUid);
-    //   writeBatch.set(
-    //       FirebaseFirestore.instance.collection('users').doc(passiveUid),
-    //       firestoreUser.toJson());
-    //   //ミュートした印を作成する
-    //   final String tokenId = returnUuidV4();
-    //   final String activeUid = currentUserDoc.id;
-    //   final passiveUserDoc = await FirebaseFirestore.instance
-    //       .collection('users')
-    //       .doc(passiveUid)
-    //       .get();
-    //   final MuteUserToken muteUserToken = MuteUserToken(
-    //       activeUid: activeUid,
-    //       passiveUid: passiveUid,
-    //       createdAt: now,
-    //       tokenId: tokenId,
-    //       tokenType: muteUserTokenTypeString);
-    //   notifyListeners();
-    //   //currentUserDoc.ref ...
-    //   //自分がミュートしたことの印
-    //   writeBatch.set(
-    //       currentUserDocToTokenDocRef(
-    //           currentUserDoc: currentUserDoc, tokenId: tokenId),
-    //       muteUserToken.toJson());
-    //   // await currentUserDocToTokenDocRef(
-    //   //         currentUserDoc: currentUserDoc, tokenId: tokenId)
-    //   //     .set(muteUserToken.toJson());
-    //   //ミュートされたことの印
-    //   final UserMute userMute = UserMute(
-    //       activeUid: activeUid,
-    //       createdAt: now,
-    //       passiveUid: passiveUid,
-    //       passiveUserRef: passiveUserDoc.reference);
-    //   writeBatch.set(
-    //       passiveUserDoc.reference.collection('userMutes').doc(activeUid),
-    //       userMute.toJson());
+    // for (final user in usersQshot.docs) {
+    //   writeBatch.update(user.reference, {
+    //     'muteCount': 0,
+    //   });
     // }
-
     // await writeBatch.commit();
 
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();

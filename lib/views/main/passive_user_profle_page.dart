@@ -9,6 +9,7 @@ import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/passive_user_profile_model.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class PassiveUserProfilePage extends ConsumerWidget {
   const PassiveUserProfilePage(
@@ -27,6 +28,7 @@ class PassiveUserProfilePage extends ConsumerWidget {
     final int plusOneFollwerCount = passiveUser.followerCount + 1;
 
     return Scaffold(
+      backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         title: Text(passiveUserProfileTitle),
       ),

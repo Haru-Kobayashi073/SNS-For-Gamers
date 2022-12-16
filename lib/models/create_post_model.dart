@@ -13,6 +13,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/others.dart' as others;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 final createPostModelProvider =
     ChangeNotifierProvider((ref) => CreatePostModel());
@@ -84,7 +85,7 @@ class CreatePostModel extends ChangeNotifier {
         return InkWell(
           child: const Icon(
             Icons.send,
-            color: Color(0xFF388D5D),
+            color: colors.postDialogIconColor,
           ),
           onTap: () async {
             if (textEditingController.text.isNotEmpty) {
@@ -106,7 +107,7 @@ class CreatePostModel extends ChangeNotifier {
         return InkWell(
           child: const Icon(
             Icons.close,
-            color: Color(0xFF388D5D),
+            color: colors.postDialogIconColor,
           ),
           onTap: () async {
             await controller.dismiss();

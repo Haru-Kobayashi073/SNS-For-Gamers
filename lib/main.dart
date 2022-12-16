@@ -69,7 +69,7 @@ class MyApp extends ConsumerWidget {
       //   primarySwatch: customSwatch,
       // ),
       home: onceUser == null
-          ? LoginPage()
+          ? const LoginPage()
           : MyHomePage(
               title: appTitle,
               themeModel: themeModel,
@@ -91,17 +91,29 @@ class MyHomePage extends ConsumerWidget {
         ref.watch(snsBottomNavigationBarProvider);
     final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
+    // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
+      // key: scaffoldKey,
       appBar: AppBar(
-        // backgroundColor: const Color(0xFF388D5D),
-        backgroundColor: colors.appBarBackColor,
         iconTheme: const IconThemeData(color: colors.appBarTextColor),
         elevation: 0,
+        backgroundColor: colors.appBarBackColor,
         title: Text(
           title,
           style: const TextStyle(color: colors.appBarTextColor),
+        ),
+        // leading: IconButton(
+        //     onPressed: () => scaffoldKey.currentState!.openDrawer(),
+        //     icon: const Icon(Icons.notes_rounded),
+        //     iconSize: 30,
+        //     ),
+      ),
+      drawer: Drawer(
+        child: SNSDrawer(
+          mainModel: mainModel,
+          themeModel: themeModel,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -109,18 +121,13 @@ class MyHomePage extends ConsumerWidget {
             context: context, mainModel: mainModel),
         // backgroundColor: const Color(0xffD6A34A),
         backgroundColor: colors.floatingButtonBackColor,
-        // backgroundColor: const Color(0xFF388D5D),
         child: const Icon(
           Icons.new_label,
           color: colors.floatingButtonIconColor,
         ),
       ),
-      drawer: SNSDrawer(
-        mainModel: mainModel,
-        themeModel: themeModel,
-      ),
       body: mainModel.isLoading
-          ? Center(
+          ? const Center(
               child: Text(loadingText),
             )
           : PageView(

@@ -13,6 +13,7 @@ import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/comments/components/comment_card.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CommentsPage extends ConsumerWidget {
   const CommentsPage(
@@ -33,7 +34,12 @@ class CommentsPage extends ConsumerWidget {
     final commentDocs = commentsModel.commentDocs;
 
     return Scaffold(
-      appBar: AppBar(title: Text(commentTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: AppBar(
+        title: Text(commentTitle),
+        backgroundColor: colors.appBarBackColor,
+        elevation: 0,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => commentsModel.showCommentFlashBar(
             context: context, mainModel: mainModel, postDoc: postDoc),

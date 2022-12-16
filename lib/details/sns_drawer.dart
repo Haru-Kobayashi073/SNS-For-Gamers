@@ -11,37 +11,36 @@ class SNSDrawer extends StatelessWidget {
       : super(key: key);
   final MainModel mainModel;
   final ThemeModel themeModel;
+  
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: [
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text(accountTitle),
+          onTap: () =>
+              routes.toAccountPage(context: context, mainModel: mainModel),
+        ),
+        ListTile(
+          title: const Text(themeTitle),
+          trailing: CupertinoSwitch(
+            value: themeModel.isDarkTheme,
+            onChanged: (value) => themeModel.setIsDarkTheme(value: value),
+          ),
+        ),
+        ListTile(
+          title: const Text(muteUsersPageTitle),
+          onTap: () =>
+              routes.toMuteUsersPage(context: context, mainModel: mainModel),
+        ),
+        if (mainModel.firestoreUser.isAdmin)
           ListTile(
-            title: const Text(accountTitle),
+            title: const Text(adminTitle),
             onTap: () =>
-                routes.toAccountPage(context: context, mainModel: mainModel),
-          ),
-          ListTile(
-            title: const Text(themeTitle),
-            trailing: CupertinoSwitch(
-              value: themeModel.isDarkTheme,
-              onChanged: (value) => themeModel.setIsDarkTheme(value: value),
-            ),
-          ),
-          ListTile(
-            title: const Text(muteUsersPageTitle),
-            onTap: () =>
-                routes.toMuteUsersPage(context: context, mainModel: mainModel),
-          ),
-          if (mainModel.firestoreUser.isAdmin)
-            ListTile(
-              title: const Text(adminTitle),
-              onTap: () =>
-                  routes.toAdminPage(context: context, mainModel: mainModel),
-            )
-        ],
-      ),
+                routes.toAdminPage(context: context, mainModel: mainModel),
+          )
+      ],
     );
   }
 }

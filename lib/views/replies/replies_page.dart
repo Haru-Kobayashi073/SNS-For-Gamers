@@ -13,6 +13,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/replies/components/reply_card.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class RepliesPage extends ConsumerWidget {
   const RepliesPage(
@@ -31,6 +32,7 @@ class RepliesPage extends ConsumerWidget {
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
     final replyDocs = repliesModel.replyDocs;
     return Scaffold(
+      backgroundColor: colors.backScreenColor,
       appBar: AppBar(title: const Text(replyTitle)),
       floatingActionButton: FloatingActionButton(
         onPressed: () => repliesModel.showReplyFlashBar(

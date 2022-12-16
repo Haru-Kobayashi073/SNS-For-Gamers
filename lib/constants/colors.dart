@@ -21,3 +21,6 @@ const Color backScreenColor = Color.fromARGB(255, 59, 107, 80);
 const Color listTileTextColor = Colors.white;
 
 const Color profileTextColor = Colors.white;
+
+
+const Color postDialogIconColor =  Color.fromARGB(255, 59, 107, 80);

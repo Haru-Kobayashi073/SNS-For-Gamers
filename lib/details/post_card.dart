@@ -43,17 +43,13 @@ class PostCard extends StatelessWidget {
     final bool isMyComment = post.uid == firestoreUser.uid;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Material(
-        // elevation: 20,
+        elevation: 20,
         // color: Color.fromARGB(255, 58, 58, 58),
-        color: Color.fromARGB(255, 225, 231, 225),
+        color: const Color.fromARGB(255, 225, 231, 225),
         borderRadius: BorderRadius.circular(30),
         child: Container(
-          decoration: const BoxDecoration(
-              // color: Colors.white,
-              // border: Border.all(color: Colors.grey, width: 3)
-              ),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(children: [
             Row(

@@ -82,9 +82,12 @@ class MainModel extends ChangeNotifier {
     final tokensQshot =
         await currentUserDoc.reference.collection('tokens').get();
     final tokenDocs = tokensQshot.docs;
+    //新しい順に並び替える
+    //古い順にするならaとbを変える
+    tokenDocs.sort(
+        (a, b) => (b['createdAt'] as Timestamp).compareTo(a['createdAt']));
     for (final token in tokenDocs) {
       final Map<String, dynamic> tokenMap = token.data();
-      final String tokenTyoeString = tokenMap['tokenType'];
       //Stringからenumに変換してミスのないようにしたい
       final TokenType tokenType = mapToTokenType(tokenMap: tokenMap);
       //switch文enumの相性は良く、絶対に失敗しない
@@ -124,9 +127,11 @@ class MainModel extends ChangeNotifier {
     }
   }
 
-  void updateFrontUserInfo({required String newUserName, required String newUserImageURL}) {
+  void updateFrontUserInfo(
+      {required String newUserName, required String newUserImageURL}) {
     //firestoreUserの中身を現在の現在のfirestoreUserをほぼコピーしてuserNameだけ変更したものに更新
-    firestoreUser = firestoreUser.copyWith(userName: newUserName, userImageURL: newUserImageURL);
+    firestoreUser = firestoreUser.copyWith(
+        userName: newUserName, userImageURL: newUserImageURL);
     notifyListeners();
   }
 
