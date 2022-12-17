@@ -12,6 +12,7 @@ import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
@@ -20,7 +21,10 @@ import 'package:sns_vol2/constants/voids.dart' as voids;
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen(
-      {Key? key, required this.mainModel, required this.muteUserModel, required this.createPostModel})
+      {Key? key,
+      required this.mainModel,
+      required this.muteUserModel,
+      required this.createPostModel})
       : super(key: key);
   final MainModel mainModel;
   final MuteUsersModel muteUserModel;
@@ -35,6 +39,7 @@ class HomeScreen extends ConsumerWidget {
     final HomeModel homeModel = ref.watch(homeProvider);
     final PostsModel postsModel = ref.watch(postsProvider);
     final CommentsModel commentsModel = ref.watch(commentsProvider);
+    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final postDocs = homeModel.postDocs;
 
     return Container(
@@ -84,7 +89,19 @@ class HomeScreen extends ConsumerWidget {
                                               mainModel: mainModel,
                                               docs: postDocs);
                                         },
-                                        child: const Text(yesText),
+                                        child: const Text(muteUserText),
+                                      ),
+                                      CupertinoDialogAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          Navigator.pop(innerContext);
+                                          mutePostsModel.showMutePostDialog(
+                                              context: context,
+                                              mainModel: mainModel,
+                                              postDoc: postDoc,
+                                              postDocs: postDocs);
+                                        },
+                                        child: const Text(mutePostText),
                                       ),
                                       CupertinoDialogAction(
                                         isDefaultAction: true,

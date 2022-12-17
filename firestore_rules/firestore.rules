@@ -1,6 +1,10 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    //collectionGroupのルール
+    match /{path=**}/posts/{postCommentId} {
+      allow read: if isAdmin();
+    }
     match /{path=**}/postComments/{postCommentId} {
       allow read: if isAdmin();
     }
@@ -27,6 +31,9 @@ service cloud.firestore {
         allow update: if isAdmin();
         allow create, delete: if isTheSameUserOrAdmin(uid);
         match /postLikes/{activeUid} {
+          allow create, delete: if isTheSameUserOrAdmin(activeUid);
+        }
+        match /postMutes/{activeUid} {
           allow create, delete: if isTheSameUserOrAdmin(activeUid);
         }
         match /postComments/{postCommentId} {
