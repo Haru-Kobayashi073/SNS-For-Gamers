@@ -49,10 +49,10 @@ const String mutePostText = '投稿をミュートする';
 //alert
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
 const String unMuteUserAlertMsg = '本当にこのユーザーのミュートを解除しますか？';
-const String muteCommentAlertMsg = '本当にコメントをミュートしますか';
+const String muteCommentAlertMsg = '本当にコメントをミュートしますか?';
 const String unMuteCommentAlertMsg = '本当にこのコメントのミュートを解除しますか？';
 const String mutePostAlertMsg = 'この投稿を本当にミュートしますか？';
-const String unMutePostAlertMsg = '本当にこの投稿のミュートを解除します';
+const String unMutePostAlertMsg = '本当にこの投稿のミュートを解除しますか？';
 // FieldKey
 const String usersFieldKey = "users";
 // message

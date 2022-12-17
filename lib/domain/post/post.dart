@@ -18,6 +18,7 @@ abstract class Post with _$Post {
     required List<String> hashTags,
     required String imageURL,
     required int likeCount,
+    required int muteCount,
     required String text,
     required dynamic video,
     required int postCommentCount,

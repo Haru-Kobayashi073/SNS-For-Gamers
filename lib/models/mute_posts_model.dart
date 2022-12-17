@@ -224,7 +224,7 @@ class MutePostsModel extends ChangeNotifier {
     //ユーザーのミュートれた印を削除
     final DocumentReference<Map<String, dynamic>> mutePostRef =
         deleteMutePostToken.postRef;
-    await mutePostRef.collection('PostMutes').doc(activeUid).delete();
+    await mutePostRef.collection('postMutes').doc(activeUid).delete();
   }
 
   void showUnMutePostDialog(

@@ -25,6 +25,7 @@ mixin _$Post {
   List<String> get hashTags => throw _privateConstructorUsedError;
   String get imageURL => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
+  int get muteCount => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   dynamic get video => throw _privateConstructorUsedError;
   int get postCommentCount => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $PostCopyWith<$Res> {
       List<String> hashTags,
       String imageURL,
       int likeCount,
+      int muteCount,
       String text,
       dynamic video,
       int postCommentCount,
@@ -76,6 +78,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? hashTags = null,
     Object? imageURL = null,
     Object? likeCount = null,
+    Object? muteCount = null,
     Object? text = null,
     Object? video = null,
     Object? postCommentCount = null,
@@ -104,6 +107,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
       text: null == text
           ? _value.text
@@ -149,6 +156,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       List<String> hashTags,
       String imageURL,
       int likeCount,
+      int muteCount,
       String text,
       dynamic video,
       int postCommentCount,
@@ -172,6 +180,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? hashTags = null,
     Object? imageURL = null,
     Object? likeCount = null,
+    Object? muteCount = null,
     Object? text = null,
     Object? video = null,
     Object? postCommentCount = null,
@@ -200,6 +209,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
       text: null == text
           ? _value.text
@@ -242,6 +255,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required final List<String> hashTags,
       required this.imageURL,
       required this.likeCount,
+      required this.muteCount,
       required this.text,
       required this.video,
       required this.postCommentCount,
@@ -269,6 +283,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
   final int likeCount;
   @override
+  final int muteCount;
+  @override
   final String text;
   @override
   final dynamic video;
@@ -285,7 +301,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, text: $text, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, muteCount: $muteCount, text: $text, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL)';
   }
 
   @override
@@ -298,6 +314,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('hashTags', hashTags))
       ..add(DiagnosticsProperty('imageURL', imageURL))
       ..add(DiagnosticsProperty('likeCount', likeCount))
+      ..add(DiagnosticsProperty('muteCount', muteCount))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('video', video))
       ..add(DiagnosticsProperty('postCommentCount', postCommentCount))
@@ -319,6 +336,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
                 other.imageURL == imageURL) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
+            (identical(other.muteCount, muteCount) ||
+                other.muteCount == muteCount) &&
             (identical(other.text, text) || other.text == text) &&
             const DeepCollectionEquality().equals(other.video, video) &&
             (identical(other.postCommentCount, postCommentCount) ||
@@ -340,6 +359,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       const DeepCollectionEquality().hash(_hashTags),
       imageURL,
       likeCount,
+      muteCount,
       text,
       const DeepCollectionEquality().hash(video),
       postCommentCount,
@@ -369,6 +389,7 @@ abstract class _Post implements Post {
       required final List<String> hashTags,
       required final String imageURL,
       required final int likeCount,
+      required final int muteCount,
       required final String text,
       required final dynamic video,
       required final int postCommentCount,
@@ -389,6 +410,8 @@ abstract class _Post implements Post {
   String get imageURL;
   @override
   int get likeCount;
+  @override
+  int get muteCount;
   @override
   String get text;
   @override
