@@ -11,6 +11,7 @@ import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_replies_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/replies/components/reply_card.dart';
@@ -32,9 +33,9 @@ class RepliesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
-    final replyDocs = repliesModel.replyDocs;
+    final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      // backgroundColor: colors.backScreenColor,
       appBar: AppBar(title: const Text(replyTitle)),
       floatingActionButton: FloatingActionButton(
         onPressed: () => repliesModel.showReplyFlashBar(
@@ -55,6 +56,7 @@ class RepliesPage extends ConsumerWidget {
               snapshot.connectionState == ConnectionState.waiting) {
             return const Text('Loading');
           } else if (!snapshot.hasData) {
+            print('aaaaaaaaaaa');
             return const Text('データがありません');
           } else {
             final replyDocs = snapshot.data!.docs;
@@ -73,30 +75,42 @@ class RepliesPage extends ConsumerWidget {
                   onSelected: (result) {
                     if (result == '0') {
                       voids.showPopup(
-                              context: context,
-                              builder: (BuildContext innerContext) =>
-                                  CupertinoActionSheet(
-                                    actions: <CupertinoDialogAction>[
-                                      CupertinoDialogAction(
-                                        isDestructiveAction: true,
-                                        onPressed: () async {
-                                          Navigator.pop(innerContext);
-                                          muteUserModel.showMuteUserDialog(
-                                              context: context,
-                                              passiveUid: reply.uid,
-                                              mainModel: mainModel,
-                                              docs: []);
-                                        },
-                                        child: const Text(yesText),
-                                      ),
-                                      CupertinoDialogAction(
-                                        isDefaultAction: true,
-                                        onPressed: () =>
-                                            Navigator.pop(innerContext),
-                                        child: const Text(noText),
-                                      ),
-                                    ],
-                                  ));
+                          context: context,
+                          builder: (BuildContext innerContext) =>
+                              CupertinoActionSheet(
+                                actions: <CupertinoDialogAction>[
+                                  CupertinoDialogAction(
+                                    isDestructiveAction: true,
+                                    onPressed: () async {
+                                      Navigator.pop(innerContext);
+                                      muteUserModel.showMuteUserDialog(
+                                          context: context,
+                                          passiveUid: reply.uid,
+                                          mainModel: mainModel,
+                                          docs: []);
+                                    },
+                                    child: const Text(muteUserText),
+                                  ),
+                                  CupertinoDialogAction(
+                                    isDestructiveAction: true,
+                                    onPressed: () async {
+                                      Navigator.pop(innerContext);
+                                      //リアルタイム取得なので表示しなければいい
+                                      muteRepliesModel.showMuteReplyDialog(
+                                          context: context,
+                                          mainModel: mainModel,
+                                          replyDoc: replyDoc);
+                                    },
+                                    child: const Text(muteReplyText),
+                                  ),
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    onPressed: () =>
+                                        Navigator.pop(innerContext),
+                                    child: const Text(noText),
+                                  ),
+                                ],
+                              ));
                     }
                   },
                 );

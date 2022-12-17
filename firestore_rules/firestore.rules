@@ -8,6 +8,9 @@ service cloud.firestore {
     match /{path=**}/postComments/{postCommentId} {
       allow read: if isAdmin();
     }
+    match /{path=**}/postCommentReplies/{postCommentId} {
+      allow read: if isAdmin();
+    }
     match /users/{uid} {
       allow read: if isAuthenticated();
       allow update: if isAdmin();
@@ -55,6 +58,9 @@ service cloud.firestore {
             allow create: if isAuthenticated();
             // postCommentReplyのdataのuidが現在ログインしているう人と同じであれば消去できる
             allow delete: if isTheSameUserOrAdmin(resource.data.uid);
+            match /postCommentReplyMutes/{activeUid} {
+              allow create, delete: if isTheSameUserOrAdmin(activeUid);
+            }
             match /postCommentReplyLikes/{activeUid} {
               allow create, delete: if isTheSameUserOrAdmin(activeUid);
             }

@@ -15,6 +15,7 @@ const String editProfileTitle = 'プロフィール編集';
 const String muteUsersPageTitle = 'ミュートしているユーザー';
 const String muteCommentsPageTitle = 'ミュートしているコメント';
 const String mutePostsPageTitle = 'ミュートしている投稿';
+const String muteRepliesPageTitle = 'ミュートしているリプライ';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -45,6 +46,9 @@ const String muteReplyButtonText = 'リプライをミュート';
 const String unMutePostText = '投稿のミュートを解除する';
 const String showMutePostsText = 'ミュートしている投稿を表示';
 const String mutePostText = '投稿をミュートする';
+const String showMuteRepliesText = 'ミュートしているリプライを表示';
+const String muteReplyText = 'リプライをミュート';
+const String unMuteReplyText = 'リプライのミュートを解除';
 
 //alert
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
@@ -53,6 +57,8 @@ const String muteCommentAlertMsg = '本当にコメントをミュートしま�
 const String unMuteCommentAlertMsg = '本当にこのコメントのミュートを解除しますか？';
 const String mutePostAlertMsg = 'この投稿を本当にミュートしますか？';
 const String unMutePostAlertMsg = '本当にこの投稿のミュートを解除しますか？';
+const String muteReplyAlertMsg = 'このリプライを本当にミュートしますか？';
+const String unMuteReplyAlertMsg = '本当にこのリプライのミュートを解除しますか？';
 // FieldKey
 const String usersFieldKey = "users";
 // message

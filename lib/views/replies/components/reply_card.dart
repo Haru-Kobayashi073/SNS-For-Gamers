@@ -37,9 +37,9 @@ class ReplyCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
 
-    return !isValidUser(muteUids: mainModel.muteUids, doc: replyDoc)
-        ? const SizedBox()
-        : Container(
+    return isValidUser(muteUids: mainModel.muteUids, doc: replyDoc) &&
+            isValidReply(muteReplyIds: mainModel.muteReplyIds, reply: reply)
+        ? Container(
             decoration: const BoxDecoration(
                 border: Border(
               bottom: BorderSide(color: Colors.grey, width: 0),
@@ -94,6 +94,9 @@ class ReplyCard extends ConsumerWidget {
                 ],
               ),
             ]),
-          );
+          )
+        : const Center(
+          child: Text('リプライが取得できませんでした'),
+        );
   }
 }
