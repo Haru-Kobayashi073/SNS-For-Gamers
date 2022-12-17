@@ -18,6 +18,7 @@ abstract class Comment with _$Comment {
     required int likeCount,
     required String postCommentId,
     required int postCommentReplyCount,
+    required int muteCount,
     required String userName,
     required String uid,
     required String userImageURL,

@@ -107,6 +107,24 @@ exports.onPostCommentDelete = functions.firestore.document('users/{uid}/posts/{p
   }
 );
 
+exports.onPostCommentMuteCreate = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{postCommentId}/postCommentMutes/{activeUid}').onCreate(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.postCommentRef.update({
+      "muteCount": admin.firestore.FieldValue.increment(plusOne),
+    });
+  }
+);
+
+exports.onPostCommentMuteDelete = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{postCommentId}/postCommentMutes/{activeUid}').onDelete(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.postCommentRef.update({
+      "muteCount": admin.firestore.FieldValue.increment(minusOne),
+    });
+  }
+);
+
 exports.onPostCommentReplyLikeCreate = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{postCommentId}/postCommentReplies/{postCommentReplyId}/postCommentReplyLikes/{activeUid}').onCreate(
   async (snap,_) => {
     //リプライのlikeCountを増やしたい

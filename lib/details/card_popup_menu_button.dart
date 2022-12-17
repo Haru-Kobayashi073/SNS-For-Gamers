@@ -4,9 +4,10 @@ import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CardPopupMenuButton extends StatelessWidget {
   const CardPopupMenuButton(
-      {super.key, required this.muteUserModel, required this.onSelected});
+      {super.key, required this.muteUserModel, required this.onSelected, required this.text});
   final MuteUsersModel muteUserModel;
   final void Function(String)? onSelected;
+  final String text;
   // final  selectedValue
 
   @override
@@ -18,13 +19,13 @@ class CardPopupMenuButton extends StatelessWidget {
       icon: const Icon(
         Icons.more_horiz,
         color: colors.cardTextPrimaryColor,
-        ),
+      ),
       // color: colors.cardTextPrimaryColor,
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        const PopupMenuItem<String>(
+        PopupMenuItem<String>(
           value: '0',
-          child: Text('ユーザーをミュート'),
+          child: Text(text),
         ),
       ],
     );

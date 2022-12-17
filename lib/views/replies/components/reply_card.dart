@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/constants/bools.dart';
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/comment/comment.dart';
@@ -75,7 +76,10 @@ class ReplyCard extends ConsumerWidget {
                     ],
                   ),
                   CardPopupMenuButton(
-                      muteUserModel: muteUserModel, onSelected: onSelected)
+                    muteUserModel: muteUserModel,
+                    onSelected: onSelected,
+                    text: muteReplyButtonText,
+                  )
                 ],
               ),
               Row(

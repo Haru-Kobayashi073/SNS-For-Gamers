@@ -37,6 +37,10 @@ const String unMuteUserText = 'ユーザーのミュートを解除する';
 const String muteCommentText = 'コメントをミュートする';
 const String unMuteCommentText = 'コメントのミュートを解除する';
 const String showMuteCommentsText = 'ミュートしているコメントを表示';
+const String mutePostButtonText = '投稿をミュート';
+const String muteCommentButtonText = 'コメントをミュート';
+const String muteUserButtonText = 'ユーザーをミュート';
+const String muteReplyButtonText = 'リプライをミュート';
 
 //alert
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';

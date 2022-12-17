@@ -29,6 +29,7 @@ mixin _$Comment {
   int get likeCount => throw _privateConstructorUsedError;
   String get postCommentId => throw _privateConstructorUsedError;
   int get postCommentReplyCount => throw _privateConstructorUsedError;
+  int get muteCount => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $CommentCopyWith<$Res> {
       int likeCount,
       String postCommentId,
       int postCommentReplyCount,
+      int muteCount,
       String userName,
       String uid,
       String userImageURL});
@@ -76,6 +78,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? likeCount = null,
     Object? postCommentId = null,
     Object? postCommentReplyCount = null,
+    Object? muteCount = null,
     Object? userName = null,
     Object? uid = null,
     Object? userImageURL = null,
@@ -109,6 +112,10 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.postCommentReplyCount
           : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -140,6 +147,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       int likeCount,
       String postCommentId,
       int postCommentReplyCount,
+      int muteCount,
       String userName,
       String uid,
       String userImageURL});
@@ -162,6 +170,7 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? likeCount = null,
     Object? postCommentId = null,
     Object? postCommentReplyCount = null,
+    Object? muteCount = null,
     Object? userName = null,
     Object? uid = null,
     Object? userImageURL = null,
@@ -195,6 +204,10 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.postCommentReplyCount
           : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -222,6 +235,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       required this.likeCount,
       required this.postCommentId,
       required this.postCommentReplyCount,
+      required this.muteCount,
       required this.userName,
       required this.uid,
       required this.userImageURL});
@@ -246,6 +260,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   final int postCommentReplyCount;
   @override
+  final int muteCount;
+  @override
   final String userName;
   @override
   final String uid;
@@ -254,7 +270,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
+    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -269,6 +285,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('postCommentId', postCommentId))
       ..add(DiagnosticsProperty('postCommentReplyCount', postCommentReplyCount))
+      ..add(DiagnosticsProperty('muteCount', muteCount))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('uid', uid))
       ..add(DiagnosticsProperty('userImageURL', userImageURL));
@@ -289,6 +306,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
                 other.postCommentId == postCommentId) &&
             (identical(other.postCommentReplyCount, postCommentReplyCount) ||
                 other.postCommentReplyCount == postCommentReplyCount) &&
+            (identical(other.muteCount, muteCount) ||
+                other.muteCount == muteCount) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.uid, uid) || other.uid == uid) &&
@@ -307,6 +326,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       likeCount,
       postCommentId,
       postCommentReplyCount,
+      muteCount,
       userName,
       uid,
       userImageURL);
@@ -334,6 +354,7 @@ abstract class _Comment implements Comment {
       required final int likeCount,
       required final String postCommentId,
       required final int postCommentReplyCount,
+      required final int muteCount,
       required final String userName,
       required final String uid,
       required final String userImageURL}) = _$_Comment;
@@ -355,6 +376,8 @@ abstract class _Comment implements Comment {
   String get postCommentId;
   @override
   int get postCommentReplyCount;
+  @override
+  int get muteCount;
   @override
   String get userName;
   @override

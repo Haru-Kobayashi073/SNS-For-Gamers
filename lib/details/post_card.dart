@@ -1,6 +1,7 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/post_like_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
@@ -96,6 +97,7 @@ class PostCard extends StatelessWidget {
                 CardPopupMenuButton(
                   onSelected: onselected,
                   muteUserModel: muteUserModel,
+                  text: mutePostButtonText,
                 ),
               ],
             ),
