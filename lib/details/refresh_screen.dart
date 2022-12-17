@@ -1,12 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sns_vol2/details/post_card.dart';
-import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/models/comments_model.dart';
-import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/posts_model.dart';
-
 class RefreshScreen extends StatelessWidget {
   const RefreshScreen({Key? key, required this.onRefresh, required this.onLoading, required this.refreshController, required this.child}) : super(key: key);
   final void Function()? onRefresh;

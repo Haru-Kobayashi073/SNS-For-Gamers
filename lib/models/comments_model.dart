@@ -43,7 +43,6 @@ class CommentsModel extends ChangeNotifier {
   CommentsModel() {
     ///muteUidsを読み込むのは一回だけでいい
     init();
-    print("initialize");
   }
 
   Future<void> init() async {

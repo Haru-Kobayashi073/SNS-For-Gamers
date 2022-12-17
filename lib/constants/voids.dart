@@ -26,7 +26,7 @@ void showFlashBar({
         controller: textEditingController,
         style: const TextStyle(fontWeight: FontWeight.bold),
         onChanged: onchanged,
-        maxLength: 10,
+        maxLength: 30,
       ),
     ),
     title: Text(titleString),

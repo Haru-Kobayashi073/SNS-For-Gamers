@@ -67,7 +67,6 @@ class HomeScreen extends ConsumerWidget {
                       commentsModel: commentsModel,
                       postsModel: postsModel,
                       muteUserModel: muteUserModel,
-                      createPostModel: createPostModel,
                       onselected: (result) {
                         if (result == '0') {
                           voids.showPopup(

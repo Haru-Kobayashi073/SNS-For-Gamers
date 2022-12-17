@@ -7,14 +7,13 @@ import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
-import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 
-class PostCard extends StatelessWidget {
-  const PostCard(
+class InCommentPostCard extends StatelessWidget {
+  const InCommentPostCard(
       {Key? key,
       required this.mainModel,
       required this.post,
@@ -23,7 +22,6 @@ class PostCard extends StatelessWidget {
       required this.postsModel,
       required this.muteUserModel,
       required this.onselected,
-      // required this.createPostModel
       })
       : super(key: key);
   final MainModel mainModel;
@@ -33,7 +31,6 @@ class PostCard extends StatelessWidget {
   final Post post;
   final MuteUsersModel muteUserModel;
   final void Function(String)? onselected;
-  // final CreatePostModel createPostModel;
 
   @override
   Widget build(BuildContext context) {
@@ -126,13 +123,7 @@ class PostCard extends StatelessWidget {
                         Icons.messenger_outline_rounded,
                         color: colors.cardTextPrimaryColor,
                       ),
-                      onTap: () async =>
-                          await commentsModel.onCommentButtonPressed(
-                              context: context,
-                              mainModel: mainModel,
-                              post: post,
-                              postDoc: postDoc,
-                              muteUserModel: muteUserModel),
+                      onTap: () => commentsModel.showCommentFlashBar(context: context, mainModel: mainModel, postDoc: postDoc),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

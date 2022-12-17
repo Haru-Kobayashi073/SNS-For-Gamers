@@ -40,75 +40,83 @@ class CommentCard extends ConsumerWidget {
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final bool isMyComment = comment.uid == firestoreUser.uid;
 
-    return Container(
-      decoration: const BoxDecoration(
-          border: Border(
-        bottom: BorderSide(color: Colors.grey, width: 0),
-      )),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Material(
+        elevation: 20,
+        color: const Color.fromARGB(255, 225, 231, 225),
+          borderRadius: BorderRadius.circular(30),
+        child: Container(
+          // decoration: const BoxDecoration(
+          //     border: Border(
+          //   bottom: BorderSide(color: Colors.grey, width: 0),
+          // )),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Column(children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: UserImage(
-                      length: 48, userImageURL: firestoreUser.userImageURL),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: UserImage(
+                          length: 48, userImageURL: firestoreUser.userImageURL),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          firestoreUser.userName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              firestoreUser.userName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
                         ),
+                        Text(comment.comment),
                       ],
                     ),
-                    Text(comment.comment),
                   ],
                 ),
-              ],
-            ),
-            CardPopupMenuButton(
-              onSelected: onSelected,
-              muteUserModel: muteUserModel,
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
-              children: [
-                InkWell(
-                  child: const Icon(
-                    Icons.reply,
-                  ),
-                  onTap: () async => await repliesModel.init(
-                      context: context,
-                      comment: comment,
-                      commentDoc: commentDoc,
-                      mainModel: mainModel),
+                CardPopupMenuButton(
+                  onSelected: onSelected,
+                  muteUserModel: muteUserModel,
                 ),
               ],
             ),
-            CommentLikeButton(
-              mainModel: mainModel,
-              comment: comment,
-              commentsModel: commentsModel,
-              commentDoc: commentDoc,
-              post: post,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      child: const Icon(
+                        Icons.reply,
+                      ),
+                      onTap: () async => await repliesModel.init(
+                          context: context,
+                          comment: comment,
+                          commentDoc: commentDoc,
+                          mainModel: mainModel),
+                    ),
+                  ],
+                ),
+                CommentLikeButton(
+                  mainModel: mainModel,
+                  comment: comment,
+                  commentsModel: commentsModel,
+                  commentDoc: commentDoc,
+                  post: post,
+                ),
+              ],
             ),
-          ],
+          ]),
         ),
-      ]),
+      ),
     );
   }
 }
