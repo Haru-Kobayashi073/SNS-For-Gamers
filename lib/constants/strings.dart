@@ -50,7 +50,7 @@ const String showMuteRepliesText = 'ミュートしているリプライを表�
 const String muteReplyText = 'リプライをミュート';
 const String unMuteReplyText = 'リプライのミュートを解除';
 
-//alert
+//alert msg
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
 const String unMuteUserAlertMsg = '本当にこのユーザーのミュートを解除しますか？';
 const String muteCommentAlertMsg = '本当にコメントをミュートしますか?';
@@ -64,6 +64,14 @@ const String usersFieldKey = "users";
 // message
 const String userCreatedMsg = "ユーザーが作成できました";
 const String noAccountMsg = 'アカウントをお持ちでない場合';
+const String adminMsg = "管理者の動作が完了しました";
+const String emailAlreadyInUseMsg = "入力されたメールアドレスはすでに登録済みです。";
+const String invalidEmailMsg = "入力されたメールアドレスは無効です。";
+const String operationNotAllowedMsg = "管理者によって許可されていません。";
+const String weakPasswordMsg = "入力されたパスワードは危険です。";
+const String userNotFoundMsg = "入力されたメールアドレスに対応するユーザーが見つかりませんでした。";
+const String userDisabledMsg = "ユーザーが無効化されています";
+const String wrongPasswordMsg = "パスワードが違います。";
 //prefs key
 const String isDarkThemePrefsKey = 'isDarkTheme';
 

@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sns_vol2/constants/strings.dart';
 //constants
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 //domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
@@ -45,8 +46,9 @@ class SignUpModel extends ChangeNotifier {
     await FirebaseFirestore.instance.collection('users').doc(uid).set(userData);
     //usersコレクションの中にfirstUserを作る処理
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(userCreatedMsg)));
+    // ScaffoldMessenger.of(context)
+    //     .showSnackBar(SnackBar(content: Text(userCreatedMsg)));
+    await voids.showfluttertoast(msg: userCreatedMsg);
     notifyListeners();
   }
 
@@ -59,7 +61,22 @@ class SignUpModel extends ChangeNotifier {
       await createFirestoreUser(context: context, uid: uid);
       routes.toMyAppPage(context: context);
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
+      final String errorCode = e.code;
+      switch (errorCode) {
+        case "email-already-in-use":
+          voids.showfluttertoast(msg: emailAlreadyInUseMsg);
+          break;
+        case "invalid-email":
+          voids.showfluttertoast(msg: invalidEmailMsg);
+          break;
+        case "operation-not-allowed":
+          //Firebaseでemail/passwordが許可されていないので開発側の過失
+          debugPrint(operationNotAllowedMsg);
+          break;
+        case "weak-password":
+          voids.showfluttertoast(msg: weakPasswordMsg);
+          break;
+      }
     }
   }
 

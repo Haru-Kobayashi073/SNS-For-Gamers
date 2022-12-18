@@ -35,9 +35,14 @@ class RepliesPage extends ConsumerWidget {
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
     final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     return Scaffold(
-      // backgroundColor: colors.backScreenColor,
-      appBar: AppBar(title: const Text(replyTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: colors.appBarBackColor,
+        title: const Text(replyTitle)
+      ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: colors.floatingButtonBackColor,
         onPressed: () => repliesModel.showReplyFlashBar(
             context: context,
             mainModel: mainModel,

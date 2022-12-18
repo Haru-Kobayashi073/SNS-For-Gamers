@@ -111,6 +111,7 @@ class MyHomePage extends ConsumerWidget {
         //     ),
       ),
       drawer: Drawer(
+        // backgroundColor: colors.backScreenColor,
         child: SNSDrawer(
           mainModel: mainModel,
           themeModel: themeModel,

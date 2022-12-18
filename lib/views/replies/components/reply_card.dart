@@ -39,62 +39,66 @@ class ReplyCard extends ConsumerWidget {
 
     return isValidUser(muteUids: mainModel.muteUids, doc: replyDoc) &&
             isValidReply(muteReplyIds: mainModel.muteReplyIds, reply: reply)
-        ? Container(
-            decoration: const BoxDecoration(
-                border: Border(
-              bottom: BorderSide(color: Colors.grey, width: 0),
-            )),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+        ? Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Material(
+            elevation: 20,
+                color: const Color.fromARGB(255, 225, 231, 225),
+                borderRadius: BorderRadius.circular(30),
+            child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Column(children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: UserImage(
-                            length: 48, userImageURL: reply.userImageURL),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            reply.userName,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UserImage(
+                                length: 48, userImageURL: reply.userImageURL),
                           ),
-                          Text(
-                            reply.reply,
-                            style: const TextStyle(
-                                overflow: TextOverflow.ellipsis),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                reply.userName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                reply.reply,
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      CardPopupMenuButton(
+                        muteUserModel: muteUserModel,
+                        onSelected: onSelected,
+                        text: muteReplyButtonText,
+                      )
                     ],
                   ),
-                  CardPopupMenuButton(
-                    muteUserModel: muteUserModel,
-                    onSelected: onSelected,
-                    text: muteReplyButtonText,
-                  )
-                ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ReplyLikeButton(
+                          mainModel: mainModel,
+                          reply: reply,
+                          comment: comment,
+                          repliesModel: repliesModel,
+                          replyDoc: replyDoc)
+                    ],
+                  ),
+                ]),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ReplyLikeButton(
-                      mainModel: mainModel,
-                      reply: reply,
-                      comment: comment,
-                      repliesModel: repliesModel,
-                      replyDoc: replyDoc)
-                ],
-              ),
-            ]),
-          )
+          ),
+        )
         : const Center(
           child: Text('リプライが取得できませんでした'),
         );

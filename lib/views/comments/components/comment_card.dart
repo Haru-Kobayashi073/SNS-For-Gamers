@@ -51,10 +51,6 @@ class CommentCard extends ConsumerWidget {
               color: const Color.fromARGB(255, 225, 231, 225),
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                // decoration: const BoxDecoration(
-                //     border: Border(
-                //   bottom: BorderSide(color: Colors.grey, width: 0),
-                // )),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Column(children: [

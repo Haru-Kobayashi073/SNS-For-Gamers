@@ -44,7 +44,7 @@ class ReplyLikeButton extends StatelessWidget {
                       replyDoc: replyDoc),
                 )
               : InkWell(
-                  child: const Icon(Icons.favorite),
+                  child: const Icon(Icons.favorite_border),
                   onTap: () async => await repliesModel.like(
                       reply: reply,
                       mainModel: mainModel,

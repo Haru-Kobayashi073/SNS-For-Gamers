@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flash/flash.dart';
+import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:sns_vol2/constants/bools.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/post/post.dart';
@@ -99,4 +100,16 @@ void showPopup({required BuildContext context, required Widget Function(BuildCon
         // }
         builder: builder
         );
+}
+
+Future<void> showfluttertoast({required String msg}) async {
+  //flashにtoastが定められているので分ける
+  await fluttertoast.Fluttertoast.showToast(
+        msg: msg,
+        toastLength: fluttertoast.Toast.LENGTH_SHORT,
+        gravity: fluttertoast.ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red[900],
+        textColor: Colors.white,
+        fontSize: 16.0);
 }

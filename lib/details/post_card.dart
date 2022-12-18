@@ -15,18 +15,17 @@ import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class PostCard extends StatelessWidget {
-  const PostCard(
-      {Key? key,
-      required this.mainModel,
-      required this.post,
-      required this.postDoc,
-      required this.commentsModel,
-      required this.postsModel,
-      required this.muteUserModel,
-      required this.onselected,
-      // required this.createPostModel
-      })
-      : super(key: key);
+  const PostCard({
+    Key? key,
+    required this.mainModel,
+    required this.post,
+    required this.postDoc,
+    required this.commentsModel,
+    required this.postsModel,
+    required this.muteUserModel,
+    required this.onselected,
+    // required this.createPostModel
+  }) : super(key: key);
   final MainModel mainModel;
   final CommentsModel commentsModel;
   final PostsModel postsModel;
@@ -105,19 +104,23 @@ class PostCard extends StatelessWidget {
             // Container() :
             Row(
               children: [
-                SizedBox(width: maxWidth * 0.15,),
+                SizedBox(
+                  width: maxWidth * 0.15,
+                ),
                 Container(
                   width: maxWidth * 0.7,
                   height: maxHeight * 0.23,
-                  child: const Image(
-                      image: NetworkImage(
-                          'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480')
-                          ),
-                  // child: Image.file(createPostModel.video!, fit: BoxFit.cover),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                    image: NetworkImage(
+                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'),
+                  )),
                 ),
               ],
             ),
-            const SizedBox(height: 7,),
+            const SizedBox(
+              height: 7,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

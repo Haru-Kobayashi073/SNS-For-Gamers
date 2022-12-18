@@ -57,14 +57,7 @@ class AdminModel extends ChangeNotifier {
       await Future.delayed(const Duration(milliseconds: 500));
     }
     await writeBatch.commit();
-    await Fluttertoast.showToast(
-        msg: "管理者の動作が完了しました",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red[900],
-        textColor: Colors.white,
-        fontSize: 16.0);
+    
     // final usersQshot =
     //     await FirebaseFirestore.instance.collection('users').get();
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
