@@ -11,6 +11,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/auth/reauthentication_page.dart';
+import 'package:sns_vol2/views/auth/update_password_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
@@ -23,13 +24,13 @@ import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 
 void toMyAppPage({required BuildContext context}) =>
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const MyApp()));
 
 void toSignUpPage({required BuildContext context}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => SignUpPage()));
+    context, MaterialPageRoute(builder: (context) => const SignUpPage()));
 
 void toLoginpPage({required BuildContext context}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => LoginPage()));
+    context, MaterialPageRoute(builder: (context) => const LoginPage()));
 
 void toAccountPage(
         {required BuildContext context, required MainModel mainModel}) =>
@@ -135,11 +136,9 @@ void toMuteRepliesPage(
                   mainModel: mainModel,
                 )));
 
-void toReauthenticationPage(
-        {required BuildContext context, required MainModel mainModel}) =>
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>  ReauthenticationPage(
-                  // mainModel: mainModel,
-                )));
+void toReauthenticationPage({required BuildContext context}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => const ReauthenticationPage()));
+
+void toUpdatePasswordPage({required BuildContext context}) => Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const UpdatePasswordPage()));

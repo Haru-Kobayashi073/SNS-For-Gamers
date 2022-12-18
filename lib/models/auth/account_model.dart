@@ -7,6 +7,7 @@ import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/routes.dart' as routes;
 
 final accountProvider = ChangeNotifierProvider((ref) => AccountModel());
 
@@ -18,7 +19,8 @@ class AccountModel extends ChangeNotifier {
   ReauthenticationState reauthenticationState =
       ReauthenticationState.initialValue;
 
-  Future<void> reauthenticateWithCredential() async {
+  Future<void> reauthenticateWithCredential(
+      {required BuildContext context}) async {
     currentUser = returnAuthUser();
     final String email = currentUser!.email!;
     //FirebaseAuthの大事な作業に必要
@@ -32,6 +34,7 @@ class AccountModel extends ChangeNotifier {
           break;
         case ReauthenticationState.updatePassword:
           // updatePasswordPageに飛ばす
+          routes.toUpdatePasswordPage(context: context);
           break;
         case ReauthenticationState.updateEmail:
           // updateEmailPageに飛ばす

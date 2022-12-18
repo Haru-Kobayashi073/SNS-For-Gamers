@@ -29,7 +29,7 @@ class AccountPage extends ConsumerWidget {
               accountModel.reauthenticationState =
                   ReauthenticationState.updatePassword;
               routes.toReauthenticationPage(
-                  context: context, mainModel: mainModel);
+                  context: context);
             },
           ),
           ListTile(
@@ -39,7 +39,7 @@ class AccountPage extends ConsumerWidget {
               accountModel.reauthenticationState =
                   ReauthenticationState.updateEmail;
               routes.toReauthenticationPage(
-                  context: context, mainModel: mainModel);
+                  context: context);
             },
           ),
           ListTile(
