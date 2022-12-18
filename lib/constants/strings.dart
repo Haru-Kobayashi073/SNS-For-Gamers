@@ -19,6 +19,7 @@ const String muteRepliesPageTitle = 'ミュートしているリプライ';
 const String reauthenticationPageTitle = '再認証';
 const String updatePasswordPageTitle = 'パスワードを変更';
 const String updateEmailPageTitle = 'メールアドレスを変更';
+
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -86,6 +87,9 @@ const String reauthenticatedMsg = '再認証が完了しました';
 const String requiresRecentLoginMsg = '再認証を行なってください';
 const String updatedPasswordMsg = "パスワードの変更が完了しました。";
 const String sendMailMsg = "メールが送信されました";
+const String missingAndroidPkgNameMsg = 'Android Pkg Nameが見つかりません';
+const String missingIosBundleIdMsg = 'ios bundle idが見つかりません。';
+
 
 //prefs key
 const String isDarkThemePrefsKey = 'isDarkTheme';

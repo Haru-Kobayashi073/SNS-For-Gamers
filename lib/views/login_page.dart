@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/forget_password_text.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
 //model
 import 'package:sns_vol2/models/login_model.dart';
-import 'package:sns_vol2/models/main_model.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -52,7 +52,8 @@ class LoginPage extends ConsumerWidget {
           ),
           TextButton(
               onPressed: () => routes.toSignUpPage(context: context),
-              child: const Text(noAccountMsg))
+              child: const Text(noAccountMsg)),
+          const ForgetPasswordText()
         ],
       ),
     );

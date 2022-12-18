@@ -38,7 +38,7 @@ class TextFieldAndButtonScreen extends StatelessWidget {
                 controller: controller,
                 color: Colors.white,
                 borderColor: Colors.grey,
-                hintText: ''),
+                hintText: hintText),
             RoundedButton(
                 onPressed: onPressed,
                 widthRate: 0.5,
