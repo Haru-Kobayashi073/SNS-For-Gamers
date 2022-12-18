@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignPage extends ConsumerWidget {
-  const SignPage({Key? key}) : super(key: key);
+class UpdatePasswordPage extends ConsumerWidget {
+  const UpdatePasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -10,6 +10,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
+import 'package:sns_vol2/views/auth/reauthentication_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
@@ -132,4 +133,13 @@ void toMuteRepliesPage(
         MaterialPageRoute(
             builder: (context) => MuteRepliesPage(
                   mainModel: mainModel,
+                )));
+
+void toReauthenticationPage(
+        {required BuildContext context, required MainModel mainModel}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>  ReauthenticationPage(
+                  // mainModel: mainModel,
                 )));
