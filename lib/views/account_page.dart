@@ -33,7 +33,7 @@ class AccountPage extends ConsumerWidget {
             },
           ),
           ListTile(
-            title: const Text(updateEmailText),
+            title: Text('$updateEmailText \n ${accountModel.currentUser!.email!}'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               accountModel.reauthenticationState =

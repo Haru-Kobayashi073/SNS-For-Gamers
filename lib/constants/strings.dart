@@ -18,6 +18,7 @@ const String mutePostsPageTitle = 'ミュートしている投稿';
 const String muteRepliesPageTitle = 'ミュートしているリプライ';
 const String reauthenticationPageTitle = '再認証';
 const String updatePasswordPageTitle = 'パスワードを変更';
+const String updateEmailPageTitle = 'メールアドレスを変更';
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -55,6 +56,7 @@ const String reauthenticateText = '再認証';
 const String updatePasswordText = "パスワードを変更する";
 const String updateEmailText = "メールアドレスを変更する";
 const String updateButtonText = "変更";
+const String explainUpdateEmailText = '新しいメールアドレスを入力してください。\n メールが送信されます。';
 
 //alert msg
 const String muteUserAlertMsg = 'このユーザーを本当にミュートしますか？';
@@ -83,6 +85,7 @@ const String invalidCredentialMsg = 'プロバイダのクリデンシャルが�
 const String reauthenticatedMsg = '再認証が完了しました';
 const String requiresRecentLoginMsg = '再認証を行なってください';
 const String updatedPasswordMsg = "パスワードの変更が完了しました。";
+const String sendMailMsg = "メールが送信されました";
 
 //prefs key
 const String isDarkThemePrefsKey = 'isDarkTheme';

@@ -38,6 +38,7 @@ class AccountModel extends ChangeNotifier {
           break;
         case ReauthenticationState.updateEmail:
           // updateEmailPageに飛ばす
+          routes.toUpdateEmailPage(context: context);
           break;
       }
     } on FirebaseAuthException catch (e) {

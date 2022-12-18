@@ -11,6 +11,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/views/account_page.dart';
 import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/auth/reauthentication_page.dart';
+import 'package:sns_vol2/views/auth/update_email_page.dart';
 import 'package:sns_vol2/views/auth/update_password_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
@@ -142,3 +143,7 @@ void toReauthenticationPage({required BuildContext context}) => Navigator.push(
 void toUpdatePasswordPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const UpdatePasswordPage()));
+
+void toUpdateEmailPage({required BuildContext context}) => Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const UpdateEmailPage()));

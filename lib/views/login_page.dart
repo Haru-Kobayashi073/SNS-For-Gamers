@@ -24,6 +24,7 @@ class LoginPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [

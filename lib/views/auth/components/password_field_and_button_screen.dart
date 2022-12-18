@@ -8,18 +8,19 @@ class PasswordFieldAndButtonScreen extends StatelessWidget {
       {super.key,
       required this.appbarTitle,
       required this.buttonText,
-      required this.onPressed,
-      required this.onChanged,
       required this.obscureText,
       required this.toggleObscureText,
-      required this.textEditingController});
+      required this.textEditingController,
+      required this.onPressed,
+      required this.onChanged,
+      });
   final String appbarTitle;
   final String buttonText;
   final bool obscureText;
   final TextEditingController textEditingController;
+  final void Function()? toggleObscureText;
   final void Function()? onPressed;
   final void Function(String)? onChanged;
-  final void Function()? toggleObscureText;
 
   @override
   Widget build(BuildContext context) {
