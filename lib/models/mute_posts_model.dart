@@ -17,9 +17,7 @@ import 'package:sns_vol2/domain/user_mute/user_mute.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 
-
-final mutePostsProvider =
-    ChangeNotifierProvider((ref) => MutePostsModel());
+final mutePostsProvider = ChangeNotifierProvider((ref) => MutePostsModel());
 
 class MutePostsModel extends ChangeNotifier {
   bool showMutePosts = false;
@@ -67,14 +65,11 @@ class MutePostsModel extends ChangeNotifier {
     final List<String> newMutePostIds =
         newMutePostTokens.map((e) => e.postId).toList();
     //新しくミュートしたコメントが10以上の場合
-    final List<String> max10MutePostIds =
-        newMutePostIds.length > 10
-            ? newMutePostIds.sublist(0, tenCount) //10より大きかったら取り出す
-            : newMutePostIds; //10より大きかったらそのまま適用
+    final List<String> max10MutePostIds = newMutePostIds.length > 10
+        ? newMutePostIds.sublist(0, tenCount) //10より大きかったら取り出す
+        : newMutePostIds; //10より大きかったらそのまま適用
     if (max10MutePostIds.isNotEmpty) {
-      final qshot =
-          await returnQuery(max10MutePostIds: max10MutePostIds)
-              .get();
+      final qshot = await returnQuery(max10MutePostIds: max10MutePostIds).get();
       //いつもの新しいdocsに対して行う処理
       final reversed = qshot.docs.reversed.toList();
       for (final mutePostDoc in reversed) {
@@ -99,14 +94,12 @@ class MutePostsModel extends ChangeNotifier {
       //max10MutePostIdsには10個までしかPostIdを入れない。＝>なぜならWhereInで検索にかけるから
       List<String> max10MutePostIds =
           (mutePostIds.length - mutePostDocs.length) >= 10
-              ? mutePostIds.sublist(mutePostDocsLength,
-                  mutePostDocsLength + tenCount)
-              : mutePostIds.sublist(
-                  mutePostDocsLength, mutePostIds.length);
+              ? mutePostIds.sublist(
+                  mutePostDocsLength, mutePostDocsLength + tenCount)
+              : mutePostIds.sublist(mutePostDocsLength, mutePostIds.length);
       if (max10MutePostIds.isNotEmpty) {
         final qshot =
-            await returnQuery(max10MutePostIds: max10MutePostIds)
-                .get();
+            await returnQuery(max10MutePostIds: max10MutePostIds).get();
         for (final mutePostDoc in qshot.docs) {
           mutePostDocs.add(mutePostDoc);
         }
@@ -119,8 +112,7 @@ class MutePostsModel extends ChangeNotifier {
       {required MainModel mainModel,
       //docsにはpostDocs、PostDocsが含まれる
       required DocumentSnapshot<Map<String, dynamic>> postDoc,
-      required List<DocumentSnapshot<Map<String, dynamic>>>
-          postDocs}) async {
+      required List<DocumentSnapshot<Map<String, dynamic>>> postDocs}) async {
     final String tokenId = returnUuidV4();
     final Timestamp now = Timestamp.now();
     final currentUserDoc = mainModel.currentUserDoc;
@@ -143,15 +135,11 @@ class MutePostsModel extends ChangeNotifier {
     notifyListeners();
     //currentUserDoc.ref ...
     //自分がミュートしたことの印
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc, tokenId: tokenId)
+    await userDocToTokenDocRef(userDoc: currentUserDoc, tokenId: tokenId)
         .set(mutePostToken.toJson());
     //ミュートされたことの印
     final PostMute postMute = PostMute(
-        activeUid: activeUid,
-        createdAt: now,
-        postId: postId,
-        postRef: postRef);
+        activeUid: activeUid, createdAt: now, postId: postId, postRef: postRef);
     await postDoc.reference
         .collection('postMutes')
         .doc(activeUid)
@@ -197,8 +185,7 @@ class MutePostsModel extends ChangeNotifier {
       {required MainModel mainModel,
       //docsにはpostDocs、PostDocsが含まれる
       required DocumentSnapshot<Map<String, dynamic>> postDoc,
-      required List<DocumentSnapshot<Map<String, dynamic>>>
-          postDocs}) async {
+      required List<DocumentSnapshot<Map<String, dynamic>>> postDocs}) async {
     //mutePostsModel側の処理
     final String postId = postDoc.id;
     mutePostDocs.remove(postDoc);
@@ -217,9 +204,8 @@ class MutePostsModel extends ChangeNotifier {
     mainModel.mutePostTokens.remove(deleteMutePostToken);
     notifyListeners();
     //自分がミュートしたことの印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteMutePostToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteMutePostToken.tokenId)
         .delete();
     //ユーザーのミュートれた印を削除
     final DocumentReference<Map<String, dynamic>> mutePostRef =

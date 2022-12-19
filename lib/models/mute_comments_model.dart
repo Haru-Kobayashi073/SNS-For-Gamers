@@ -143,8 +143,7 @@ class MuteCommentsModel extends ChangeNotifier {
     notifyListeners();
     //currentUserDoc.ref ...
     //自分がミュートしたことの印
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc, tokenId: tokenId)
+    await userDocToTokenDocRef(userDoc: currentUserDoc, tokenId: tokenId)
         .set(muteCommentToken.toJson());
     //ミュートされたことの印
     final CommentMute commentMute = CommentMute(
@@ -217,9 +216,8 @@ class MuteCommentsModel extends ChangeNotifier {
     mainModel.muteCommentTokens.remove(deleteMuteCommentToken);
     notifyListeners();
     //自分がミュートしたことの印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteMuteCommentToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteMuteCommentToken.tokenId)
         .delete();
     //ユーザーのミュートれた印を削除
     final DocumentReference<Map<String, dynamic>> muteCommentRef =

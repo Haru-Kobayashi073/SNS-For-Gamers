@@ -237,9 +237,8 @@ class CommentsModel extends ChangeNotifier {
         .first;
     mainModel.likeCommentTokens.remove(deleteLikeCommentToken);
     notifyListeners();
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteLikeCommentToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteLikeCommentToken.tokenId)
         .delete();
     final DocumentReference<Map<String, dynamic>> postCommentRef =
         deleteLikeCommentToken.postCommentRef;

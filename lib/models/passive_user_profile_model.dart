@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 //constants
 import 'package:sns_vol2/constants/strings.dart';
@@ -100,7 +101,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
         passiveUid: passiveUser.uid,
         createdAt: now,
         tokenId: tokenId,
-        tokenType: 'following');
+        tokenType: followingTokenTypeString);
     final FirestoreUser activeUser = mainModel.firestoreUser;
     //自分がフォローした印
     await FirebaseFirestore.instance

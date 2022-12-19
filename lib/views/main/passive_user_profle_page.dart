@@ -81,53 +81,9 @@ class PassiveUserProfilePage extends ConsumerWidget {
                             return PostCard(
                               mainModel: mainModel,
                               post: post,
-                              postDoc: postDoc,
-                              commentsModel: commentsModel,
-                              postsModel: postsModel,
-                              muteUserModel: muteUsersModel,
-                              onselected: (result) {
-                                if (result == '0') {
-                                  voids.showPopup(
-                                      context: context,
-                                      builder: (BuildContext innerContext) =>
-                                          CupertinoActionSheet(
-                                            actions: <CupertinoDialogAction>[
-                                              CupertinoDialogAction(
-                                                isDestructiveAction: true,
-                                                onPressed: () async {
-                                                  Navigator.pop(innerContext);
-                                                  muteUsersModel
-                                                      .showMuteUserDialog(
-                                                          context: context,
-                                                          passiveUid: post.uid,
-                                                          mainModel: mainModel,
-                                                          docs: postDocs);
-                                                },
-                                                child: const Text(muteUserText),
-                                              ),
-                                              CupertinoDialogAction(
-                                                isDestructiveAction: true,
-                                                onPressed: () async {
-                                                  Navigator.pop(innerContext);
-                                                  mutePostsModel
-                                                      .showMutePostDialog(
-                                                          context: context,
-                                                          mainModel: mainModel,
-                                                          postDoc: postDoc,
-                                                          postDocs: postDocs);
-                                                },
-                                                child: const Text(mutePostText),
-                                              ),
-                                              CupertinoDialogAction(
-                                                isDefaultAction: true,
-                                                onPressed: () =>
-                                                    Navigator.pop(innerContext),
-                                                child: const Text(noText),
-                                              ),
-                                            ],
-                                          ));
-                                }
-                              },
+                              index: index,
+                              postDocs: postDocs,
+                              muteUsersModel: muteUsersModel,
                             );
                           }),
                     ),

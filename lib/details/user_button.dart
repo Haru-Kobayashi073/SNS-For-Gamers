@@ -6,6 +6,7 @@ import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/passive_user_profile_model.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class UserButton extends ConsumerWidget {
   const UserButton(
@@ -21,30 +22,33 @@ class UserButton extends ConsumerWidget {
 
     return mainModel.currentUserDoc.id == passiveUid
         ? //自分か本人か
-        RoundedButton(
-            onPressed: () => routes.toEditProfilePage(
-                context: context, mainModel: mainModel),
-            widthRate: 0.6,
-            color: Colors.black,
-            text: editProfileText,
-            textColor: Colors.white,
+        const Icon(
+          Icons.edit,
           )
+        // RoundedButton(
+        //     onPressed: () => routes.toEditProfilePage(
+        //         context: context, mainModel: mainModel),
+        //     widthRate: 0.25,
+        //     color: colors.profileSomeButtonBackColor,
+        //     text: editProfileText,
+        //     textColor: colors.profileSomeButtonTextColor,
+        //   )
         : mainModel.followingUids.contains(passiveUser.uid)
             ? RoundedButton(
                 onPressed: () => passiveUserProfileModel.unfollow(
                     mainModel: mainModel, passiveUser: passiveUser),
                 widthRate: 0.5,
-                color: Colors.black,
+                color: colors.profileSomeButtonBackColor,
                 text: 'フォローを外す',
-                textColor: Colors.white,
+                textColor: colors.profileSomeButtonTextColor,
               )
             : RoundedButton(
                 onPressed: () => passiveUserProfileModel.follow(
                     mainModel: mainModel, passiveUser: passiveUser),
                 widthRate: 0.5,
-                color: Colors.black,
+                color: colors.profileSomeButtonBackColor,
                 text: 'フォロー',
-                textColor: Colors.white,
+                textColor: colors.profileSomeButtonTextColor,
               );
   }
 }

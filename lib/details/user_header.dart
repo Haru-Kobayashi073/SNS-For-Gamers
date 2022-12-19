@@ -6,7 +6,8 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
 
 class UserHeader extends StatelessWidget {
-  const UserHeader({super.key, required this.mainModel, required this.firestoreUser});
+  const UserHeader(
+      {super.key, required this.mainModel, required this.firestoreUser});
   final MainModel mainModel;
   final FirestoreUser firestoreUser;
 
@@ -17,44 +18,63 @@ class UserHeader extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.25,
       child: Column(children: [
-        // editProfileModel.croppedFile == null?
-        Container(
-          alignment: Alignment.center,
-          child: UserImage(
-            length: 80,
-            userImageURL: firestoreUser.userImageURL,
-          ),
-        ),
-        // : ClipRRect(
-        //     borderRadius: BorderRadius.circular(300.0),
-        //     child: Container(
-        //         width: maxWidth * 0.25,
-        //         height: maxWidth * 0.25,
-        //         decoration: BoxDecoration(
-        //           border: Border.all(color: Colors.grey),
-        //           shape: BoxShape.circle,
-        //         ),
-        //         child: Image.file(editProfileModel.croppedFile!)),
-        //   ),
-        Text(
-          firestoreUser.userName,
-          style: const TextStyle(fontSize: 24, color: colors.profileTextColor),
-        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              'フォロー中: ' + firestoreUser.followingCount.toString(),
-              style:
-                  const TextStyle(fontSize: 16, color: colors.profileTextColor),
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: UserImage(
+                    length: 80,
+                    userImageURL: firestoreUser.userImageURL,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
+                Text(
+                  firestoreUser.userName,
+                  style: const TextStyle(
+                      fontSize: 24, color: colors.profileTextColor),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 30,
-            ),
-            Text(
-              'フォロワー: ' + firestoreUser.followerCount.toString(),
-              style:
-                  const TextStyle(fontSize: 16, color: colors.profileTextColor),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      firestoreUser.followingCount.toString(),
+                      style: const TextStyle(
+                          fontSize: 20, color: colors.profileTextColor),
+                    ),
+                    const Text(
+                      'following',
+                      style: TextStyle(
+                          fontSize: 16, color: colors.profileTextColor),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      firestoreUser.followerCount.toString(),
+                      style: TextStyle(
+                          fontSize: 20, color: colors.profileTextColor),
+                    ),
+                    const Text(
+                      'follower',
+                      style: TextStyle(
+                          fontSize: 16, color: colors.profileTextColor),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

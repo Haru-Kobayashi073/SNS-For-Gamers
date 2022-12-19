@@ -23,11 +23,11 @@ class HomeScreen extends ConsumerWidget {
   const HomeScreen(
       {Key? key,
       required this.mainModel,
-      required this.muteUserModel,
+      required this.muteUsersModel,
       required this.createPostModel})
       : super(key: key);
   final MainModel mainModel;
-  final MuteUsersModel muteUserModel;
+  final MuteUsersModel muteUsersModel;
   final CreatePostModel createPostModel;
 
   Future<void> logout() async {
@@ -42,70 +42,38 @@ class HomeScreen extends ConsumerWidget {
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final postDocs = homeModel.postDocs;
 
-    return Container(
-      decoration: const BoxDecoration(color: colors.backScreenColor),
-      child: postDocs.isEmpty
-          ? ReloadScreen(onReload: () async => await homeModel.onReload())
-          : RefreshScreen(
-              onRefresh: () async => await homeModel.onRefresh(),
-              onLoading: () async => await homeModel.onLoading(),
-              refreshController: homeModel.refreshController,
-              child: ListView.builder(
-                  itemCount: homeModel.postDocs.length,
-                  itemBuilder: (context, int index) {
-                    final postDoc = postDocs[index];
-                    final Post post = Post.fromJson(postDoc.data()!);
-                    return PostCard(
-                      mainModel: mainModel,
-                      post: post,
-                      postDoc: postDoc,
-                      commentsModel: commentsModel,
-                      postsModel: postsModel,
-                      muteUserModel: muteUserModel,
-                      onselected: (result) {
-                        if (result == '0') {
-                          voids.showPopup(
-                              context: context,
-                              builder: (BuildContext innerContext) =>
-                                  CupertinoActionSheet(
-                                    actions: <CupertinoDialogAction>[
-                                      CupertinoDialogAction(
-                                        isDestructiveAction: true,
-                                        onPressed: () async {
-                                          Navigator.pop(innerContext);
-                                          muteUserModel.showMuteUserDialog(
-                                              context: context,
-                                              passiveUid: post.uid,
-                                              mainModel: mainModel,
-                                              docs: postDocs);
-                                        },
-                                        child: const Text(muteUserText),
-                                      ),
-                                      CupertinoDialogAction(
-                                        isDestructiveAction: true,
-                                        onPressed: () async {
-                                          Navigator.pop(innerContext);
-                                          mutePostsModel.showMutePostDialog(
-                                              context: context,
-                                              mainModel: mainModel,
-                                              postDoc: postDoc,
-                                              postDocs: postDocs);
-                                        },
-                                        child: const Text(mutePostText),
-                                      ),
-                                      CupertinoDialogAction(
-                                        isDefaultAction: true,
-                                        onPressed: () =>
-                                            Navigator.pop(innerContext),
-                                        child: const Text(noText),
-                                      ),
-                                    ],
-                                  ));
-                        }
-                      },
-                    );
-                  }),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(color: colors.backScreenColor),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              decoration: const BoxDecoration(color: colors.backScreenColor),
+              child: postDocs.isEmpty
+                  ? ReloadScreen(
+                      onReload: () async => await homeModel.onReload())
+                  : RefreshScreen(
+                      onRefresh: () async => await homeModel.onRefresh(),
+                      onLoading: () async => await homeModel.onLoading(),
+                      refreshController: homeModel.refreshController,
+                      child: ListView.builder(
+                          itemCount: homeModel.postDocs.length,
+                          itemBuilder: (context, int index) {
+                            final postDoc = postDocs[index];
+                            final Post post = Post.fromJson(postDoc.data()!);
+                            return PostCard(
+                              mainModel: mainModel,
+                              post: post,
+                              index: index,
+                              postDocs: postDocs,
+                              muteUsersModel: muteUsersModel,
+                            );
+                          }),
+                    ),
             ),
+          ]),
+        ),
+      ),
     );
   }
 }

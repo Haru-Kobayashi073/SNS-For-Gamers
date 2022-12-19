@@ -24,14 +24,14 @@ class ReplyCard extends ConsumerWidget {
       required this.mainModel,
       required this.replyDoc,
       required this.onSelected,
-      required this.muteUserModel})
+      required this.muteUsersModel})
       : super(key: key);
   final Reply reply;
   final Comment comment;
   final MainModel mainModel;
   final DocumentSnapshot replyDoc;
   final void Function(String)? onSelected;
-  final MuteUsersModel muteUserModel;
+  final MuteUsersModel muteUsersModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -78,9 +78,9 @@ class ReplyCard extends ConsumerWidget {
                         ],
                       ),
                       CardPopupMenuButton(
-                        muteUserModel: muteUserModel,
                         onSelected: onSelected,
                         text: muteReplyButtonText,
+                        muteUsersModel: muteUsersModel,
                       )
                     ],
                   ),

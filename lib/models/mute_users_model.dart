@@ -133,8 +133,7 @@ class MuteUsersModel extends ChangeNotifier {
     notifyListeners();
     //currentUserDoc.ref ...
     //自分がミュートしたことの印
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc, tokenId: tokenId)
+    await userDocToTokenDocRef(userDoc: currentUserDoc, tokenId: tokenId)
         .set(muteUserToken.toJson());
     //ミュートされたことの印
     final UserMute userMute = UserMute(
@@ -147,7 +146,7 @@ class MuteUsersModel extends ChangeNotifier {
         .doc(activeUid)
         .set(userMute.toJson());
   }
-  
+
   Future<void> unMuteUser(
       {required MainModel mainModel,
       required String passiveUid,
@@ -170,9 +169,8 @@ class MuteUsersModel extends ChangeNotifier {
     mainModel.muteUserTokens.remove(deleteMuteUserToken);
     notifyListeners();
     //自分がミュートしたことの印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteMuteUserToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteMuteUserToken.tokenId)
         .delete();
     //ユーザーのミュートれた印を削除
     final DocumentReference<Map<String, dynamic>> muteUserRef =
@@ -211,7 +209,6 @@ class MuteUsersModel extends ChangeNotifier {
           );
         });
   }
-
 
   void showUnMuteUserDialog(
       {required BuildContext context,

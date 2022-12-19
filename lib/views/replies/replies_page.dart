@@ -32,7 +32,7 @@ class RepliesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
-    final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
+    final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     return Scaffold(
       backgroundColor: colors.backScreenColor,
@@ -76,7 +76,7 @@ class RepliesPage extends ConsumerWidget {
                   comment: comment,
                   mainModel: mainModel,
                   replyDoc: replyDoc,
-                  muteUserModel: muteUserModel,
+                  muteUsersModel: muteUsersModel,
                   onSelected: (result) {
                     if (result == '0') {
                       voids.showPopup(
@@ -88,7 +88,7 @@ class RepliesPage extends ConsumerWidget {
                                     isDestructiveAction: true,
                                     onPressed: () async {
                                       Navigator.pop(innerContext);
-                                      muteUserModel.showMuteUserDialog(
+                                      muteUsersModel.showMuteUserDialog(
                                           context: context,
                                           passiveUid: reply.uid,
                                           mainModel: mainModel,

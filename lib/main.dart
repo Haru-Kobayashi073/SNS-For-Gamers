@@ -142,7 +142,7 @@ class MyHomePage extends ConsumerWidget {
                 //注意：ページじゃないのでScaffold
                 HomeScreen(
                   mainModel: mainModel,
-                  muteUserModel: muteUserModel,
+                  muteUsersModel: muteUserModel,
                   createPostModel: createPostModel,
                 ),
                 SearchScreen(

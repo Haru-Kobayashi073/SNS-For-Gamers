@@ -1,6 +1,8 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/post_like_button.dart';
@@ -8,39 +10,38 @@ import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
-import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
-class PostCard extends StatelessWidget {
+class PostCard extends ConsumerWidget {
   const PostCard({
     Key? key,
     required this.mainModel,
     required this.post,
-    required this.postDoc,
-    required this.commentsModel,
-    required this.postsModel,
-    required this.muteUserModel,
-    required this.onselected,
-    // required this.createPostModel
+    required this.index,
+    required this.postDocs,
+    required this.muteUsersModel,
   }) : super(key: key);
   final MainModel mainModel;
-  final CommentsModel commentsModel;
-  final PostsModel postsModel;
-  final DocumentSnapshot<Map<String, dynamic>> postDoc;
+  final List<DocumentSnapshot<Map<String, dynamic>>> postDocs;
+  final int index;
   final Post post;
-  final MuteUsersModel muteUserModel;
-  final void Function(String)? onselected;
-  // final CreatePostModel createPostModel;
+  final MuteUsersModel muteUsersModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final maxWidth = MediaQuery.of(context).size.width;
     final maxHeight = MediaQuery.of(context).size.height;
+    final PostsModel postsModel = ref.watch(postsProvider);
+    final CommentsModel commentsModel = ref.watch(commentsProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
+    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyComment = post.uid == firestoreUser.uid;
+    final postDoc = postDocs[index];
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -94,9 +95,49 @@ class PostCard extends StatelessWidget {
                   ],
                 ),
                 CardPopupMenuButton(
-                  onSelected: onselected,
-                  muteUserModel: muteUserModel,
+                  muteUsersModel: muteUsersModel,
                   text: mutePostButtonText,
+                  onSelected: (result) {
+                    if (result == '0') {
+                      voids.showPopup(
+                          context: context,
+                          builder: (BuildContext innerContext) =>
+                              CupertinoActionSheet(
+                                actions: <CupertinoDialogAction>[
+                                  CupertinoDialogAction(
+                                    isDestructiveAction: true,
+                                    onPressed: () async {
+                                      Navigator.pop(innerContext);
+                                      muteUsersModel.showMuteUserDialog(
+                                          context: context,
+                                          passiveUid: post.uid,
+                                          mainModel: mainModel,
+                                          docs: postDocs);
+                                    },
+                                    child: const Text(muteUserText),
+                                  ),
+                                  CupertinoDialogAction(
+                                    isDestructiveAction: true,
+                                    onPressed: () async {
+                                      Navigator.pop(innerContext);
+                                      mutePostsModel.showMutePostDialog(
+                                          context: context,
+                                          mainModel: mainModel,
+                                          postDoc: postDoc,
+                                          postDocs: postDocs);
+                                    },
+                                    child: const Text(mutePostText),
+                                  ),
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    onPressed: () =>
+                                        Navigator.pop(innerContext),
+                                    child: const Text(noText),
+                                  ),
+                                ],
+                              ));
+                    }
+                  },
                 ),
               ],
             ),
@@ -137,7 +178,7 @@ class PostCard extends StatelessWidget {
                               mainModel: mainModel,
                               post: post,
                               postDoc: postDoc,
-                              muteUserModel: muteUserModel),
+                              muteUserModel: muteUsersModel),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

@@ -1,17 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/domain/post/post.dart';
+import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
-class CardPopupMenuButton extends StatelessWidget {
+class CardPopupMenuButton extends ConsumerWidget {
   const CardPopupMenuButton(
-      {super.key, required this.muteUserModel, required this.onSelected, required this.text});
-  final MuteUsersModel muteUserModel;
-  final void Function(String)? onSelected;
+      {super.key,
+      // required this.post,
+      // required this.postDoc,
+      // required this.postDocs,
+      // required this.mainModel,
+      required this.onSelected,
+      required this.muteUsersModel,
+      required this.text});
+  final MuteUsersModel muteUsersModel;
   final String text;
-  // final  selectedValue
+  final void Function(String)? onSelected;
+  // final Post post;
+  // final MainModel mainModel;
+  // final DocumentSnapshot<Map<String, dynamic>> postDoc;
+  // final List<DocumentSnapshot<Map<String, dynamic>>> postDocs;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
+
     return PopupMenuButton<String>(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -21,13 +41,13 @@ class CardPopupMenuButton extends StatelessWidget {
         color: colors.cardTextPrimaryColor,
       ),
       // color: colors.cardTextPrimaryColor,
-      onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
           value: '0',
           child: Text(text),
         ),
       ],
+      onSelected: onSelected,
     );
   }
 }

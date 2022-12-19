@@ -86,7 +86,7 @@ class CommentCard extends ConsumerWidget {
                       ),
                       CardPopupMenuButton(
                         onSelected: onSelected,
-                        muteUserModel: muteUserModel,
+                        muteUsersModel: muteUserModel,
                         text: muteCommentButtonText,
                       ),
                     ],

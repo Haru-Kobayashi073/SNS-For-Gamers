@@ -22,7 +22,6 @@ class InCommentPostCard extends StatelessWidget {
       required this.commentsModel,
       required this.postsModel,
       required this.muteUserModel,
-      required this.onselected,
       })
       : super(key: key);
   final MainModel mainModel;
@@ -31,7 +30,6 @@ class InCommentPostCard extends StatelessWidget {
   final DocumentSnapshot<Map<String, dynamic>> postDoc;
   final Post post;
   final MuteUsersModel muteUserModel;
-  final void Function(String)? onselected;
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +90,9 @@ class InCommentPostCard extends StatelessWidget {
                   ],
                 ),
                 CardPopupMenuButton(
-                  onSelected: onselected,
-                  muteUserModel: muteUserModel,
+                  muteUsersModel: muteUserModel,
                   text: mutePostButtonText,
+                  onSelected: (value) {},
                 ),
               ],
             ),

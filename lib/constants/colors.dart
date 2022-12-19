@@ -26,3 +26,6 @@ const Color profileTextColor = Colors.white;
 
 const Color postDialogIconColor = Color.fromARGB(255, 59, 107, 80);
 
+const Color profileSomeButtonBackColor = Color.fromARGB(255, 225, 231, 225);
+const Color profileSomeButtonTextColor =  Color.fromARGB(255, 59, 107, 80);
+
