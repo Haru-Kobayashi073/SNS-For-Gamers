@@ -13,6 +13,7 @@ import 'package:sns_vol2/views/admin_page.dart';
 import 'package:sns_vol2/views/auth/reauthentication_page.dart';
 import 'package:sns_vol2/views/auth/update_email_page.dart';
 import 'package:sns_vol2/views/auth/update_password_page.dart';
+import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/auth/verify_password_reset_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
@@ -152,3 +153,7 @@ void toUpdateEmailPage({required BuildContext context}) => Navigator.push(
 void toVerifyPasswordResetPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const VerifyPasswordResetPage()));
+
+void toVerifyEmailPage({required BuildContext context}) => Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const VerifyEmailPage()));

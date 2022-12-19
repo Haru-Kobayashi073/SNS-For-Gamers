@@ -12,6 +12,7 @@ import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
+import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
@@ -68,12 +69,13 @@ class MyApp extends ConsumerWidget {
       // ThemeData(
       //   primarySwatch: customSwatch,
       // ),
-      home: onceUser == null
-          ? const LoginPage()
-          : MyHomePage(
+      home: onceUser == null //ユーザーが存在していないなら
+          ? const LoginPage() //ログインページへ
+          : onceUser.emailVerified ? //ユーザーが存在し、メールが認証されている
+          MyHomePage(
               title: appTitle,
               themeModel: themeModel,
-            ),
+            ) : const VerifyEmailPage() //ユーザーは存在するけれど、メールが認証されていない
     );
   }
 }
