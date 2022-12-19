@@ -12,10 +12,11 @@ import 'package:sns_vol2/constants/voids.dart' as voids;
 final homeProvider = ChangeNotifierProvider((ref) => HomeModel());
 
 class HomeModel extends ChangeNotifier {
+  //フォローしているユーザーの投稿の取得に使用する
+  List<DocumentSnapshot<Map<String,dynamic>>> postDocs = [];
   bool isLoading = false;
   late User? currentUser;
   final RefreshController refreshController = RefreshController();
-  List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
   List<String> muteUids = [];
   Query<Map<String, dynamic>> returnQuery() {
     final User? currentUser = returnAuthUser();

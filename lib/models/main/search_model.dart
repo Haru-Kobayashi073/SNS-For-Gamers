@@ -8,7 +8,7 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 final searchProvider = ChangeNotifierProvider((ref) => SearchModel());
 
 class SearchModel extends ChangeNotifier {
-  List<FirestoreUser> users = [];
+  List<DocumentSnapshot<Map<String,dynamic>>> userDocs = [];
 
   SearchModel() {
     init();
@@ -17,9 +17,8 @@ class SearchModel extends ChangeNotifier {
   //SearchModelが起動したら、initでusersを全員getする。その後に、Listに格納
   Future<void> init() async {
     final QuerySnapshot<Map<String, dynamic>> qshot =
-        await FirebaseFirestore.instance.collection('users').get();
-    final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs = qshot.docs;
-    users = docs.map((e) => FirestoreUser.fromJson(e.data())).toList();
+        await FirebaseFirestore.instance.collection('users').limit(30).get();
+    userDocs = qshot.docs;
     notifyListeners();
   }
 }

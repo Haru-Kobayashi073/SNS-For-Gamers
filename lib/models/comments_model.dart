@@ -38,7 +38,7 @@ class CommentsModel extends ChangeNotifier {
   }
 
   //同じデータを無駄に取得しないようにする
-  String indexPostId = '';
+  String indexPostCommentId = '';
 
   CommentsModel() {
     ///muteUidsを読み込むのは一回だけでいい
@@ -63,10 +63,10 @@ class CommentsModel extends ChangeNotifier {
         mainModel: mainModel,
         postDoc: postDoc,
         muteUserModel: muteUserModel);
-    if (indexPostId != post.postId) {
+    if (indexPostCommentId != post.postId) {
       await onReload(postDoc: postDoc);
     }
-    indexPostId = post.postId;
+    indexPostCommentId = post.postId;
   }
 
   void startLoading() {

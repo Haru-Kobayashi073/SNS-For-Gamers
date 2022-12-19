@@ -10,19 +10,18 @@ class RefreshScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: true,
-          header: const WaterDropHeader(),
-          onRefresh: onRefresh,
-          onLoading: onLoading,
-          controller: refreshController,
-          child: child,
-        ))
-      ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.75,
+      child: Expanded(
+          child: SmartRefresher(
+        enablePullDown: true,
+        enablePullUp: true,
+        header: const WaterDropHeader(),
+        onRefresh: onRefresh,
+        onLoading: onLoading,
+        controller: refreshController,
+        child: child,
+      )),
     );
   }
 }

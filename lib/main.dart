@@ -146,7 +146,6 @@ class MyHomePage extends ConsumerWidget {
                   createPostModel: createPostModel,
                 ),
                 SearchScreen(
-                  passiveUser: mainModel.firestoreUser,
                   mainModel: mainModel,
                 ),
                 ProfileScreen(

@@ -7,34 +7,40 @@ import 'package:sns_vol2/models/main/search_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/passive_user_profile_model.dart';
 
 class SearchScreen extends ConsumerWidget {
   const SearchScreen(
-      {Key? key, required FirestoreUser passiveUser, required this.mainModel})
+      {Key? key, required this.mainModel})
       : super(key: key);
   final MainModel mainModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SearchModel searchModel = ref.watch(searchProvider);
-    final FirestoreUser passiveUser;
+    final PassiveUserProfileModel passiveUserProfileModel =
+        ref.watch(passiveUserProfileProvider);
 
     return Container(
-      decoration: const BoxDecoration(
-        color: colors.backScreenColor),
+      decoration: const BoxDecoration(color: colors.backScreenColor),
       child: ListView.builder(
-          itemCount: searchModel.users.length,
+          itemCount: searchModel.userDocs.length,
           itemBuilder: (context, index) {
             //usersの配列から１つ１つを取得している
-            final FirestoreUser firestoreUser = searchModel.users[index];
+            final userDoc = searchModel.userDocs[index];
+            final FirestoreUser firestoreUser =
+                FirestoreUser.fromJson(userDoc.data()!);
             return ListTile(
-              tileColor: colors.backScreenColor,
-              title: Text(firestoreUser.uid, style: TextStyle(color: colors.listTileTextColor),),
-              onTap: () => routes.toPassiveUserProfilePage(
-                  context: context,
-                  passiveUser: firestoreUser,
-                  mainModel: mainModel),
-            );
+                tileColor: colors.backScreenColor,
+                title: Text(
+                  firestoreUser.uid,
+                  style: TextStyle(color: colors.listTileTextColor),
+                ),
+                onTap: () async =>
+                    await passiveUserProfileModel.onUserIconPressed(
+                        mainModel: mainModel,
+                        context: context,
+                        passiveUserDoc: userDoc));
           }),
     );
   }

@@ -1,11 +1,15 @@
 //flutter
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 //constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/routes.dart' as routes;
 //domain
 import 'package:sns_vol2/domain/follower/follower.dart';
 import 'package:sns_vol2/domain/following_token/following_token.dart';
@@ -16,6 +20,75 @@ final passiveUserProfileProvider =
     ChangeNotifierProvider((ref) => PassiveUserProfileModel());
 
 class PassiveUserProfileModel extends ChangeNotifier {
+  bool isLoading = false;
+  late User? currentUser;
+  RefreshController refreshController = RefreshController();
+  List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
+  String indexUid = "";
+  Query<Map<String, dynamic>> returnQuery(
+      {required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
+    return passiveUserDoc.reference
+        .collection('posts')
+        .orderBy('createdAt', descending: true);
+  }
+
+  Future<void> onUserIconPressed(
+      {required MainModel mainModel, required BuildContext context,
+      required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
+    refreshController = RefreshController();
+    routes.toPassiveUserProfilePage(
+      passiveUserDoc: passiveUserDoc,
+        context: context, mainModel: mainModel);
+    final String passiveUid = passiveUserDoc.id;
+    if (indexUid != passiveUid) {
+      await onReload(muteUids: mainModel.muteUids, passiveUserDoc: passiveUserDoc);
+    }
+    indexUid = passiveUid;
+  }
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void endLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> onRefresh(
+      {required List<String> muteUids,
+      required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
+    refreshController.refreshCompleted();
+    await voids.processNewDocs(
+        docs: postDocs,
+        query: returnQuery(passiveUserDoc: passiveUserDoc),
+        muteUids: muteUids);
+    notifyListeners();
+  }
+
+  Future<void> onReload(
+      {required List<String> muteUids,
+      required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
+    await voids.processBasicDocs(
+        docs: postDocs,
+        query: returnQuery(passiveUserDoc: passiveUserDoc),
+        muteUids: muteUids);
+    notifyListeners();
+  }
+
+  Future<void> onLoading(
+      {required List<String> muteUids,
+      required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
+    refreshController.loadComplete();
+    await voids.processOldDocs(
+        docs: postDocs,
+        query: returnQuery(passiveUserDoc: passiveUserDoc),
+        muteUids: muteUids);
+    notifyListeners();
+  }
+
+
   Future<void> follow(
       {required MainModel mainModel,
       required FirestoreUser passiveUser}) async {

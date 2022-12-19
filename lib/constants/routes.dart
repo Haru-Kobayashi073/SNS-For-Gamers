@@ -46,14 +46,14 @@ void toAccountPage(
 
 void toPassiveUserProfilePage(
         {required BuildContext context,
-        required FirestoreUser passiveUser,
-        required MainModel mainModel}) =>
+        required MainModel mainModel,
+        required DocumentSnapshot<Map<String,dynamic>> passiveUserDoc}) =>
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PassiveUserProfilePage(
-                  passiveUser: passiveUser,
                   mainModel: mainModel,
+                  passiveUserDoc: passiveUserDoc,
                 )));
 
 void toAdminPage(

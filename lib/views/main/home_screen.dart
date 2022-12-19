@@ -43,17 +43,7 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = homeModel.postDocs;
 
     return Container(
-      decoration: const BoxDecoration(color: colors.backScreenColor
-          // gradient: LinearGradient(
-          //   begin: Alignment.bottomCenter,
-          //   end: Alignment.topCenter,
-          //   colors: [
-          //     Color.fromARGB(255, 98, 252, 165),
-          //     Color.fromARGB(255, 71, 179, 118),
-          //     Color(0xFF388D5D),
-          //     ],
-          // ),
-          ),
+      decoration: const BoxDecoration(color: colors.backScreenColor),
       child: postDocs.isEmpty
           ? ReloadScreen(onReload: () async => await homeModel.onReload())
           : RefreshScreen(
