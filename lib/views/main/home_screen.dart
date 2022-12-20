@@ -43,36 +43,35 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = homeModel.postDocs;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(color: colors.backScreenColor),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-              decoration: const BoxDecoration(color: colors.backScreenColor),
-              child: postDocs.isEmpty
-                  ? ReloadScreen(
-                      onReload: () async => await homeModel.onReload())
-                  : RefreshScreen(
-                      onRefresh: () async => await homeModel.onRefresh(),
-                      onLoading: () async => await homeModel.onLoading(),
-                      refreshController: homeModel.refreshController,
-                      child: ListView.builder(
-                          itemCount: homeModel.postDocs.length,
-                          itemBuilder: (context, int index) {
-                            final postDoc = postDocs[index];
-                            final Post post = Post.fromJson(postDoc.data()!);
-                            return PostCard(
-                              mainModel: mainModel,
-                              post: post,
-                              index: index,
-                              postDocs: postDocs,
-                              muteUsersModel: muteUsersModel,
-                            );
-                          }),
-                    ),
-            ),
-          ]),
-        ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(color: colors.backScreenColor),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+            decoration: const BoxDecoration(color: colors.backScreenColor),
+            child: postDocs.isEmpty
+                ? ReloadScreen(
+                    onReload: () async => await homeModel.onReload())
+                : RefreshScreen(
+                    onRefresh: () async => await homeModel.onRefresh(),
+                    onLoading: () async => await homeModel.onLoading(),
+                    refreshController: homeModel.refreshController,
+                    child: ListView.builder(
+                        itemCount: homeModel.postDocs.length,
+                        itemBuilder: (context, int index) {
+                          final postDoc = postDocs[index];
+                          final Post post = Post.fromJson(postDoc.data()!);
+                          return PostCard(
+                            mainModel: mainModel,
+                            post: post,
+                            index: index,
+                            postDocs: postDocs,
+                            muteUsersModel: muteUsersModel,
+                          );
+                        }),
+                  ),
+          ),
+        ]),
       ),
     );
   }

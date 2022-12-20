@@ -32,7 +32,7 @@ const String createPostText = '投稿を作成する';
 const String reloadText = '再読み込みを行う';
 const String createCommentText = 'コメントを作成';
 const String createReplyText = 'リプライを作成する';
-const String editProfileText = "edit";//'編集'
+const String editProfileText = "edit"; //'編集'
 const String updateText = '更新';
 const String showMuteUsersText = 'ミュートしているユーザーを表示';
 const String yesText = 'はい';
@@ -89,7 +89,7 @@ const String updatedPasswordMsg = "パスワードの変更が完了しました
 const String sendMailMsg = "メールが送信されました";
 const String missingAndroidPkgNameMsg = 'Android Pkg Nameが見つかりません';
 const String missingIosBundleIdMsg = 'ios bundle idが見つかりません。';
-
+const String createdPostMsg = "投稿が完了しました。";
 
 //prefs key
 const String isDarkThemePrefsKey = 'isDarkTheme';

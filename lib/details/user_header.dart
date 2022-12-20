@@ -20,25 +20,14 @@ class UserHeader extends StatelessWidget {
       child: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: UserImage(
-                    length: 80,
-                    userImageURL: firestoreUser.userImageURL,
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Text(
-                  firestoreUser.userName,
-                  style: const TextStyle(
-                      fontSize: 24, color: colors.profileTextColor),
-                ),
-              ],
+            Container(
+              alignment: Alignment.center,
+              child: UserImage(
+                length: 80,
+                userImageURL: firestoreUser.userImageURL,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +67,17 @@ class UserHeader extends StatelessWidget {
             ),
           ],
         ),
-        UserButton(mainModel: mainModel, passiveUser: firestoreUser)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              firestoreUser.userName,
+              style:
+                  const TextStyle(fontSize: 24, color: colors.profileTextColor),
+            ),
+            UserButton(mainModel: mainModel, passiveUser: firestoreUser),
+          ],
+        )
       ]),
     );
   }

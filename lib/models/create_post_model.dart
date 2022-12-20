@@ -2,18 +2,15 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flash/flash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/main.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/others.dart' as others;
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final createPostModelProvider =
     ChangeNotifierProvider((ref) => CreatePostModel());
@@ -93,7 +90,7 @@ class CreatePostModel extends ChangeNotifier {
               await createPost(mainModel: mainModel);
               // await uploadImageAndGetURL(
               //     uid: mainModel.currentUserDoc.id, file: video!);
-              
+
               await controller.dismiss();
               text = "";
             } else {
@@ -140,5 +137,6 @@ class CreatePostModel extends ChangeNotifier {
         .collection('posts')
         .doc(postId)
         .set(post.toJson());
+    await voids.showfluttertoast(msg: createdPostMsg);
   }
 }

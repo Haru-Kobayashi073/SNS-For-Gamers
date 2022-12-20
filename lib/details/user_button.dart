@@ -22,17 +22,16 @@ class UserButton extends ConsumerWidget {
 
     return mainModel.currentUserDoc.id == passiveUid
         ? //自分か本人か
-        const Icon(
-          Icons.edit,
+        // IconButton(onPressed: () => routes.toEditProfilePage(
+        //         context: context, mainModel: mainModel), icon: const Icon(Icons.edit))
+        RoundedButton(
+            onPressed: () => routes.toEditProfilePage(
+                context: context, mainModel: mainModel),
+            widthRate: 0.25,
+            color: colors.profileSomeButtonBackColor,
+            text: editProfileText,
+            textColor: colors.profileSomeButtonTextColor,
           )
-        // RoundedButton(
-        //     onPressed: () => routes.toEditProfilePage(
-        //         context: context, mainModel: mainModel),
-        //     widthRate: 0.25,
-        //     color: colors.profileSomeButtonBackColor,
-        //     text: editProfileText,
-        //     textColor: colors.profileSomeButtonTextColor,
-        //   )
         : mainModel.followingUids.contains(passiveUser.uid)
             ? RoundedButton(
                 onPressed: () => passiveUserProfileModel.unfollow(
