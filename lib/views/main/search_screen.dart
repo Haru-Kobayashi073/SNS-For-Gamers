@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main/search_model.dart';
@@ -10,9 +11,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/passive_user_profile_model.dart';
 
 class SearchScreen extends ConsumerWidget {
-  const SearchScreen(
-      {Key? key, required this.mainModel})
-      : super(key: key);
+  const SearchScreen({Key? key, required this.mainModel}) : super(key: key);
   final MainModel mainModel;
 
   @override
@@ -20,28 +19,47 @@ class SearchScreen extends ConsumerWidget {
     final SearchModel searchModel = ref.watch(searchProvider);
     final PassiveUserProfileModel passiveUserProfileModel =
         ref.watch(passiveUserProfileProvider);
+    final userDocs = searchModel.userDocs;
 
-    return Container(
-      decoration: const BoxDecoration(color: colors.backScreenColor),
-      child: ListView.builder(
-          itemCount: searchModel.userDocs.length,
-          itemBuilder: (context, index) {
-            //usersの配列から１つ１つを取得している
-            final userDoc = searchModel.userDocs[index];
-            final FirestoreUser firestoreUser =
-                FirestoreUser.fromJson(userDoc.data()!);
-            return ListTile(
-                tileColor: colors.backScreenColor,
-                title: Text(
-                  firestoreUser.uid,
-                  style: TextStyle(color: colors.listTileTextColor),
-                ),
-                onTap: () async =>
-                    await passiveUserProfileModel.onUserIconPressed(
-                        mainModel: mainModel,
-                        context: context,
-                        passiveUserDoc: userDoc));
-          }),
+    return Scaffold(
+      backgroundColor: colors.backScreenColor,
+      body: FloatingSearchBar(
+        backgroundColor: colors.searchBarBackColor,
+        onQueryChanged: (text) async {
+          searchModel.searchTerm = text;
+          await searchModel.operation(muteUids: mainModel.muteUids);
+        },
+        clearQueryOnClose: true,
+        body: IndexedStack(
+          children: [
+            FloatingSearchBarScrollNotifier(
+              child: ListView.builder(
+                  itemCount: userDocs.length,
+                  itemBuilder: (context, index) {
+                    //usersの配列から１つ１つを取得している
+                    final userDoc = userDocs[index];
+                    final FirestoreUser firestoreUser =
+                        FirestoreUser.fromJson(userDoc.data()!);
+                    return ListTile(
+                        tileColor: colors.backScreenColor,
+                        title: Text(
+                          firestoreUser.userName,
+                          style:
+                              const TextStyle(color: colors.listTileTextColor),
+                        ),
+                        onTap: () async =>
+                            await passiveUserProfileModel.onUserIconPressed(
+                                mainModel: mainModel,
+                                context: context,
+                                passiveUserDoc: userDoc));
+                  }),
+            ),
+          ],
+        ),
+        builder: (context, transition) {
+          return Container();
+        },
+      ),
     );
   }
 }

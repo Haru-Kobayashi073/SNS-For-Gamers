@@ -17,8 +17,14 @@ abstract class FirestoreUser with _$FirestoreUser {
     required int followerCount,
     required int followingCount,
     required int muteCount,
+    required int postCount,
+    required double userNameNegativeScore,
+    required double userNamePositiveScore,
+    required String userNameSentiment,
+    required String userNameLanguageCode,
 
     required bool isAdmin,
+    required Map<String,dynamic> searchToken,
 
     required String userName,
     required String userImageURL,

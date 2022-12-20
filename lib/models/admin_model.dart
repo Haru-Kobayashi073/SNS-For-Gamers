@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/enums.dart';
+import 'package:sns_vol2/constants/lists.dart';
+import 'package:sns_vol2/constants/maps.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
@@ -31,32 +33,20 @@ class AdminModel extends ChangeNotifier {
     //followerを作成
     //adminでs作成した70人を取得
     final usersDocs =
-        await FirebaseFirestore.instance.collection("users").limit(75).get();
+        await FirebaseFirestore.instance.collection("users").get();
     final WriteBatch batch = FirebaseFirestore.instance.batch();
     final User currentUser = returnAuthUser()!;
     final String currentUid = currentUser.uid;
     for (final userDoc in usersDocs.docs) {
-      final Timestamp now = Timestamp.now();
-      final String tokenId = returnUuidV4();
-      //フォローした証
-      final FollowingToken followingToken = FollowingToken(
-          passiveUid: currentUser.uid,
-          createdAt: now,
-          tokenId: tokenId,
-          tokenType: followingTokenTypeString);
-      batch.set(userDocToTokenDocRef(userDoc: userDoc, tokenId: tokenId),
-          followingToken.toJson());
-      //フォローされた証
-      final Follower follower = Follower(
-          followedUid: currentUid, createdAt: now, followerUid: userDoc.id);
-      batch.set(
-          FirebaseFirestore.instance
-              .collection("users")
-              .doc(currentUid)
-              .collection("followers")
-              .doc(follower.followerUid),
-          follower.toJson());
-      await Future.delayed(Duration(milliseconds: 100));
+      batch.update(userDoc.reference, {
+        "searchToken": returnSearchToken(
+            searchWords: returnSearchWords(searchTerm: userDoc["userName"])),
+        "postCount": 0,
+        "userNameLanguageCode": "en",
+        "userNameNegativeScore": 0,
+        "userNamePositiveScore": 0,
+        "userNameSentiment": "POSItIVE",
+      });
     }
     await batch.commit();
     await voids.showfluttertoast(msg: "処理が終わりました");

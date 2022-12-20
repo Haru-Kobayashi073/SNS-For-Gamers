@@ -27,7 +27,13 @@ mixin _$FirestoreUser {
   int get followerCount => throw _privateConstructorUsedError;
   int get followingCount => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
+  int get postCount => throw _privateConstructorUsedError;
+  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  double get userNamePositiveScore => throw _privateConstructorUsedError;
+  String get userNameSentiment => throw _privateConstructorUsedError;
+  String get userNameLanguageCode => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
+  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -50,7 +56,13 @@ abstract class $FirestoreUserCopyWith<$Res> {
       int followerCount,
       int followingCount,
       int muteCount,
+      int postCount,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
+      String userNameLanguageCode,
       bool isAdmin,
+      Map<String, dynamic> searchToken,
       String userName,
       String userImageURL,
       String uid});
@@ -74,7 +86,13 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? followerCount = null,
     Object? followingCount = null,
     Object? muteCount = null,
+    Object? postCount = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
+    Object? userNameLanguageCode = null,
     Object? isAdmin = null,
+    Object? searchToken = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? uid = null,
@@ -100,10 +118,34 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      postCount: null == postCount
+          ? _value.postCount
+          : postCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchToken: null == searchToken
+          ? _value.searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -134,7 +176,13 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       int followerCount,
       int followingCount,
       int muteCount,
+      int postCount,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
+      String userNameLanguageCode,
       bool isAdmin,
+      Map<String, dynamic> searchToken,
       String userName,
       String userImageURL,
       String uid});
@@ -156,7 +204,13 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? followerCount = null,
     Object? followingCount = null,
     Object? muteCount = null,
+    Object? postCount = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
+    Object? userNameLanguageCode = null,
     Object? isAdmin = null,
+    Object? searchToken = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? uid = null,
@@ -182,10 +236,34 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
+      postCount: null == postCount
+          ? _value.postCount
+          : postCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchToken: null == searchToken
+          ? _value._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -211,10 +289,17 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       required this.followerCount,
       required this.followingCount,
       required this.muteCount,
+      required this.postCount,
+      required this.userNameNegativeScore,
+      required this.userNamePositiveScore,
+      required this.userNameSentiment,
+      required this.userNameLanguageCode,
       required this.isAdmin,
+      required final Map<String, dynamic> searchToken,
       required this.userName,
       required this.userImageURL,
-      required this.uid});
+      required this.uid})
+      : _searchToken = searchToken;
 
   factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
       _$$_FirestoreUserFromJson(json);
@@ -232,7 +317,24 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
   @override
   final int muteCount;
   @override
+  final int postCount;
+  @override
+  final double userNameNegativeScore;
+  @override
+  final double userNamePositiveScore;
+  @override
+  final String userNameSentiment;
+  @override
+  final String userNameLanguageCode;
+  @override
   final bool isAdmin;
+  final Map<String, dynamic> _searchToken;
+  @override
+  Map<String, dynamic> get searchToken {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_searchToken);
+  }
+
   @override
   final String userName;
   @override
@@ -242,7 +344,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, muteCount: $muteCount, isAdmin: $isAdmin, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
+    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, muteCount: $muteCount, postCount: $postCount, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userNameLanguageCode: $userNameLanguageCode, isAdmin: $isAdmin, searchToken: $searchToken, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
   }
 
   @override
@@ -255,7 +357,13 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       ..add(DiagnosticsProperty('followerCount', followerCount))
       ..add(DiagnosticsProperty('followingCount', followingCount))
       ..add(DiagnosticsProperty('muteCount', muteCount))
+      ..add(DiagnosticsProperty('postCount', postCount))
+      ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
+      ..add(DiagnosticsProperty('userNamePositiveScore', userNamePositiveScore))
+      ..add(DiagnosticsProperty('userNameSentiment', userNameSentiment))
+      ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
       ..add(DiagnosticsProperty('isAdmin', isAdmin))
+      ..add(DiagnosticsProperty('searchToken', searchToken))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
       ..add(DiagnosticsProperty('uid', uid));
@@ -274,7 +382,19 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
                 other.followingCount == followingCount) &&
             (identical(other.muteCount, muteCount) ||
                 other.muteCount == muteCount) &&
+            (identical(other.postCount, postCount) ||
+                other.postCount == postCount) &&
+            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
+                other.userNameNegativeScore == userNameNegativeScore) &&
+            (identical(other.userNamePositiveScore, userNamePositiveScore) ||
+                other.userNamePositiveScore == userNamePositiveScore) &&
+            (identical(other.userNameSentiment, userNameSentiment) ||
+                other.userNameSentiment == userNameSentiment) &&
+            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
+                other.userNameLanguageCode == userNameLanguageCode) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            const DeepCollectionEquality()
+                .equals(other._searchToken, _searchToken) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userImageURL, userImageURL) ||
@@ -291,7 +411,13 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       followerCount,
       followingCount,
       muteCount,
+      postCount,
+      userNameNegativeScore,
+      userNamePositiveScore,
+      userNameSentiment,
+      userNameLanguageCode,
       isAdmin,
+      const DeepCollectionEquality().hash(_searchToken),
       userName,
       userImageURL,
       uid);
@@ -317,7 +443,13 @@ abstract class _FirestoreUser implements FirestoreUser {
       required final int followerCount,
       required final int followingCount,
       required final int muteCount,
+      required final int postCount,
+      required final double userNameNegativeScore,
+      required final double userNamePositiveScore,
+      required final String userNameSentiment,
+      required final String userNameLanguageCode,
       required final bool isAdmin,
+      required final Map<String, dynamic> searchToken,
       required final String userName,
       required final String userImageURL,
       required final String uid}) = _$_FirestoreUser;
@@ -337,7 +469,19 @@ abstract class _FirestoreUser implements FirestoreUser {
   @override
   int get muteCount;
   @override
+  int get postCount;
+  @override
+  double get userNameNegativeScore;
+  @override
+  double get userNamePositiveScore;
+  @override
+  String get userNameSentiment;
+  @override
+  String get userNameLanguageCode;
+  @override
   bool get isAdmin;
+  @override
+  Map<String, dynamic> get searchToken;
   @override
   String get userName;
   @override

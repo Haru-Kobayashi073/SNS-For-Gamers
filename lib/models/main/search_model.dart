@@ -3,22 +3,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:sns_vol2/constants/ints.dart';
+import 'package:sns_vol2/constants/lists.dart';
+import 'package:sns_vol2/constants/others.dart';
+import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final searchProvider = ChangeNotifierProvider((ref) => SearchModel());
 
 class SearchModel extends ChangeNotifier {
-  List<DocumentSnapshot<Map<String,dynamic>>> userDocs = [];
-
-  SearchModel() {
-    init();
-  }
+  String searchTerm = "";
+  List<DocumentSnapshot<Map<String, dynamic>>> userDocs = [];
 
   //SearchModelが起動したら、initでusersを全員getする。その後に、Listに格納
-  Future<void> init() async {
-    final QuerySnapshot<Map<String, dynamic>> qshot =
-        await FirebaseFirestore.instance.collection('users').limit(30).get();
-    userDocs = qshot.docs;
-    notifyListeners();
+  Future<void> operation({required List<String> muteUids}) async {
+    if (searchTerm.length > maxSearchLength) {
+      await voids.showfluttertoast(msg: maxSearchLengthMsg);
+    } else if (searchTerm.isNotEmpty) {
+      final List<String> searchWords =
+          returnSearchWords(searchTerm: searchTerm);
+      //queryは文字数-1個のwhereが必要
+      final Query<Map<String, dynamic>> query =
+          returnSearchQuery(searchWords: searchWords);
+      await voids.processBasicDocs(docs: userDocs, query: query, muteUids: muteUids);
+      notifyListeners();
+    }
   }
 }

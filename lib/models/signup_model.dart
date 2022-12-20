@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sns_vol2/constants/lists.dart';
+import 'package:sns_vol2/constants/maps.dart';
 import 'package:sns_vol2/constants/strings.dart';
 //constants
 import 'package:sns_vol2/constants/routes.dart' as routes;
@@ -37,7 +39,13 @@ class SignUpModel extends ChangeNotifier {
       followerCount: 0,
       followingCount: 0,
       muteCount: 0,
+      postCount: 0,
+      userNameLanguageCode: "en",
+      userNameNegativeScore: 0,
+      userNamePositiveScore: 0,
+      userNameSentiment: "POSItIVE",
       isAdmin: false,
+      searchToken: returnSearchToken(searchWords: returnSearchWords(searchTerm: "alice")),
       uid: uid,
       createdAt: now,
       updatedAt: now,
@@ -48,8 +56,8 @@ class SignUpModel extends ChangeNotifier {
 
     // ScaffoldMessenger.of(context)
     //     .showSnackBar(SnackBar(content: Text(userCreatedMsg)));
-    await voids.showfluttertoast(msg: userCreatedMsg);
     notifyListeners();
+    await voids.showfluttertoast(msg: userCreatedMsg);
   }
 
   Future<dynamic> createUser({required BuildContext context}) async {

@@ -60,23 +60,26 @@ class MyApp extends ConsumerWidget {
     final ThemeModel themeModel = ref.watch(themeProvider);
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: appTitle,
-      theme: themeModel.isDarkTheme
-          ? darkThemeData(context: context)
-          : lightThemeData(context: context),
+        debugShowCheckedModeBanner: false,
+        title: appTitle,
+        theme: themeModel.isDarkTheme
+            ? darkThemeData(context: context)
+            : lightThemeData(context: context),
 
-      // ThemeData(
-      //   primarySwatch: customSwatch,
-      // ),
-      home: onceUser == null //ユーザーが存在していないなら
-          ? const LoginPage() //ログインページへ
-          : onceUser.emailVerified ? //ユーザーが存在し、メールが認証されている
-          MyHomePage(
-              title: appTitle,
-              themeModel: themeModel,
-            ) : const VerifyEmailPage() //ユーザーは存在するけれど、メールが認証されていない
-    );
+        // ThemeData(
+        //   primarySwatch: customSwatch,
+        // ),
+        home: onceUser == null //ユーザーが存在していないなら
+            ? const LoginPage() //ログインページへ
+            : onceUser.emailVerified?
+                //ユーザーが存在し、メールが認証されている
+                MyHomePage(
+                    title: appTitle,
+                    themeModel: themeModel,
+                  )
+                : const VerifyEmailPage()
+        //ユーザーは存在するけれど、メールが認証されていない
+        );
   }
 }
 
