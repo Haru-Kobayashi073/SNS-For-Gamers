@@ -24,5 +24,24 @@ class SNSBottomNavigationBar extends StatelessWidget {
       currentIndex: snsBottomNavigationBarModel.currentIndex,
       onTap: ((index) => snsBottomNavigationBarModel.onTabTapped(index: index)),
     );
+    // return BottomAppBar(
+    //   color: colors.bottomNaviBarBackColor,
+    //   shape: CircularNotchedRectangle(),
+    //   child: Padding(
+    //     padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       children: [
+    //         // SizedBox(width: 1,),
+    //         bottomAppBarElements[0],
+    //         bottomAppBarElements[1],
+    //         SizedBox(width: 10,),
+    //         bottomAppBarElements[2],
+    //         bottomAppBarElements[3],
+    //         // SizedBox(width: 1,),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }

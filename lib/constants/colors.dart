@@ -5,12 +5,12 @@ const Color cardTextPrimaryColor = Color.fromARGB(255, 59, 107, 80);
 const Color cardBackColor = Color.fromARGB(255, 225, 231, 225);
 
 //ボトムナビゲーションのテキストテーマ
-const Color bottomNaviBarTextColor = Colors.white;
-const Color bottomNaviUnselectedColor = Color.fromARGB(255, 193, 193, 193);
+const Color bottomNaviBarTextColor = Color.fromARGB(255, 225, 231, 225);
+const Color bottomNaviUnselectedColor = Color.fromARGB(255, 172, 170, 170);
 const Color bottomNaviBarBackColor = Color.fromARGB(255, 59, 107, 80);
 
 // AppBarのテキストテーマ
-const Color appBarTextColor = Colors.white;
+const Color appBarTextColor = Color.fromARGB(255, 225, 231, 225);
 
 const Color appBarBackColor = Color.fromARGB(255, 59, 107, 80);
 

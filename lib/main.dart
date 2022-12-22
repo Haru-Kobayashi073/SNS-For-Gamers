@@ -16,6 +16,7 @@ import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/views/main/articles_screen.dart';
 import 'package:sns_vol2/views/main/home_screen.dart';
 import 'package:sns_vol2/views/main/profile_screen.dart';
 import 'package:sns_vol2/views/main/search_screen.dart';
@@ -132,6 +133,7 @@ class MyHomePage extends ConsumerWidget {
           color: colors.floatingButtonIconColor,
         ),
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: mainModel.isLoading
           ? const Center(
               child: Text(loadingText),
@@ -151,6 +153,7 @@ class MyHomePage extends ConsumerWidget {
                 SearchScreen(
                   mainModel: mainModel,
                 ),
+                ArticleScreen(),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),

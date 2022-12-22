@@ -99,6 +99,8 @@ const String isDarkThemePrefsKey = 'isDarkTheme';
 const String homeText = "Home";
 const String searchText = "Search";
 const String profileText = "Profile";
+const String articleText = "Article";
+
 String returnUuidV4() {
   const Uuid uuid = Uuid();
   return uuid.v4();
