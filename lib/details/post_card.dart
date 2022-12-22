@@ -48,14 +48,13 @@ class PostCard extends ConsumerWidget {
       child: Material(
         elevation: 20,
         // color: Color.fromARGB(255, 58, 58, 58),
-        color: const Color.fromARGB(255, 225, 231, 225),
+        color: Color.fromARGB(255, 216, 218, 216),
         borderRadius: BorderRadius.circular(30),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

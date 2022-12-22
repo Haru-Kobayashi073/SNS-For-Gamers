@@ -18,6 +18,7 @@ class SNSBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: colors.bottomNaviBarTextColor,
       unselectedIconTheme: IconThemeData(color: colors.bottomNaviUnselectedColor),
+      unselectedItemColor: colors.bottomNaviUnselectedColor,
       backgroundColor: colors.bottomNaviBarBackColor,
       elevation: 0,
       items: bottomNavigationBarElements,

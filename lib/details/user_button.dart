@@ -19,19 +19,42 @@ class UserButton extends ConsumerWidget {
     final PassiveUserProfileModel passiveUserProfileModel =
         ref.watch(passiveUserProfileProvider);
     final String passiveUid = passiveUser.uid;
+    final maxWidth = MediaQuery.of(context).size.width;
 
     return mainModel.currentUserDoc.id == passiveUid
         ? //自分か本人か
-        // IconButton(onPressed: () => routes.toEditProfilePage(
-        //         context: context, mainModel: mainModel), icon: const Icon(Icons.edit))
-        RoundedButton(
-            onPressed: () => routes.toEditProfilePage(
+        SizedBox(
+        width: maxWidth * 0.25,
+        child: ClipRRect(
+            child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: colors.profileSomeButtonTextColor,
+            side: const BorderSide(
+              width: 2,
+            color:colors.profileSomeButtonBackColor
+        ),
+          ),
+          onPressed: () => routes.toEditProfilePage(
                 context: context, mainModel: mainModel),
-            widthRate: 0.25,
-            color: colors.profileSomeButtonBackColor,
-            text: editProfileText,
-            textColor: colors.profileSomeButtonTextColor,
-          )
+          child: const Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
+            ),
+            child: Text(
+              editProfileText,
+              style: TextStyle(color: colors.profileSomeButtonBackColor),
+            ),
+          ),
+        )))
+        // RoundedButton(
+        //     onPressed: () => routes.toEditProfilePage(
+        //         context: context, mainModel: mainModel),
+        //     widthRate: 0.25,
+        //     color: colors.profileSomeButtonBackColor,
+        //     text: editProfileText,
+        //     textColor: colors.profileSomeButtonTextColor,
+        //   )
         : mainModel.followingUids.contains(passiveUser.uid)
             ? RoundedButton(
                 onPressed: () => passiveUserProfileModel.unfollow(

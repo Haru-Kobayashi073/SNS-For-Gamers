@@ -6,7 +6,7 @@ const Color cardBackColor = Color.fromARGB(255, 225, 231, 225);
 
 //ボトムナビゲーションのテキストテーマ
 const Color bottomNaviBarTextColor = Color.fromARGB(255, 225, 231, 225);
-const Color bottomNaviUnselectedColor = Color.fromARGB(255, 172, 170, 170);
+const Color bottomNaviUnselectedColor = Color.fromARGB(255, 187, 187, 187);
 const Color bottomNaviBarBackColor = Color.fromARGB(255, 59, 107, 80);
 
 // AppBarのテキストテーマ

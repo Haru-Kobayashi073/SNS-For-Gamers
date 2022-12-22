@@ -14,71 +14,142 @@ class UserHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final EditProfileModel editProfileModel =
+    final maxHeight = MediaQuery.of(context).size.height;
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              child: UserImage(
-                length: 80,
-                userImageURL: firestoreUser.userImageURL,
+      height: maxHeight * 0.25,
+      // child: Column(
+      //   children: [
+      //   Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: [
+      //       Container(
+      //         alignment: Alignment.center,
+      //         child: UserImage(
+      //           length: 80,
+      //           userImageURL: firestoreUser.userImageURL,
+      //         ),
+      //       ),
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 firestoreUser.followingCount.toString(),
+      //                 style: const TextStyle(
+      //                     fontSize: 20, color: colors.profileTextColor),
+      //               ),
+      //               const Text(
+      //                 'following',
+      //                 style: TextStyle(
+      //                     fontSize: 16, color: colors.profileTextColor),
+      //               ),
+      //             ],
+      //           ),
+      //           const SizedBox(
+      //             width: 30,
+      //           ),
+      //           Column(
+      //             children: [
+      //               Text(
+      //                 firestoreUser.followerCount.toString(),
+      //                 style: TextStyle(
+      //                     fontSize: 20, color: colors.profileTextColor),
+      //               ),
+      //               const Text(
+      //                 'follower',
+      //                 style: TextStyle(
+      //                     fontSize: 16, color: colors.profileTextColor),
+      //               ),
+      //             ],
+      //           ),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      //   Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //     children: [
+      //       Text(
+      //         firestoreUser.userName,
+      //         style:
+      //             const TextStyle(fontSize: 24, color: colors.profileTextColor),
+      //       ),
+      //       UserButton(mainModel: mainModel, passiveUser: firestoreUser),
+      //     ],
+      //   )
+      // ]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: UserImage(
+                    length: 80,
+                    userImageURL: firestoreUser.userImageURL,
+                  ),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
+              Text(
+                firestoreUser.userName,
+                style: const TextStyle(
+                    fontSize: 24, color: colors.profileTextColor),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              SizedBox(height: maxHeight * 0.02,),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      firestoreUser.followingCount.toString(),
-                      style: const TextStyle(
-                          fontSize: 20, color: colors.profileTextColor),
+                    Column(
+                      children: [
+                        Text(
+                          firestoreUser.followingCount.toString(),
+                          style: const TextStyle(
+                              fontSize: 20, color: colors.profileTextColor),
+                        ),
+                        const Text(
+                          'following',
+                          style: TextStyle(
+                              fontSize: 16, color: colors.profileTextColor),
+                        ),
+                      ],
                     ),
-                    const Text(
-                      'following',
-                      style: TextStyle(
-                          fontSize: 16, color: colors.profileTextColor),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          firestoreUser.followerCount.toString(),
+                          style: TextStyle(
+                              fontSize: 20, color: colors.profileTextColor),
+                        ),
+                        const Text(
+                          'follower',
+                          style: TextStyle(
+                              fontSize: 16, color: colors.profileTextColor),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      firestoreUser.followerCount.toString(),
-                      style: TextStyle(
-                          fontSize: 20, color: colors.profileTextColor),
-                    ),
-                    const Text(
-                      'follower',
-                      style: TextStyle(
-                          fontSize: 16, color: colors.profileTextColor),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              firestoreUser.userName,
-              style:
-                  const TextStyle(fontSize: 24, color: colors.profileTextColor),
-            ),
-            UserButton(mainModel: mainModel, passiveUser: firestoreUser),
-          ],
-        )
-      ]),
+              ),
+              UserButton(mainModel: mainModel, passiveUser: firestoreUser),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
