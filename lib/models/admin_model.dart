@@ -39,13 +39,13 @@ class AdminModel extends ChangeNotifier {
     final String currentUid = currentUser.uid;
     for (final userDoc in usersDocs.docs) {
       batch.update(userDoc.reference, {
-        "searchToken": returnSearchToken(
-            searchWords: returnSearchWords(searchTerm: userDoc["userName"])),
-        "postCount": 0,
-        "userNameLanguageCode": "en",
-        "userNameNegativeScore": 0,
-        "userNamePositiveScore": 0,
-        "userNameSentiment": "POSItIVE",
+        // "searchToken": returnSearchToken(
+        //     searchWords: returnSearchWords(searchTerm: userDoc["userName"])),
+        // "postCount": 0,
+        // "userNameLanguageCode": "en",
+        // "userNameNegativeScore": 0,
+        // "userNamePositiveScore": 0,
+        "userNameSentiment": "POSITIVE",
       });
     }
     await batch.commit();

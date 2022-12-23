@@ -50,7 +50,9 @@ Future<void> processNewDocs(
     final qshot = await query.endBeforeDocument(docs.first).get();
     final reversed = qshot.docs.reversed.toList();
     for (final doc in reversed) {
-      if (isValidUser(muteUids: muteUids, doc: doc)) {
+      //正しいユーザーかどうかの処理と、重複処理
+      if (isValidUser(muteUids: muteUids, doc: doc) &&
+          !reversed.contains(doc)) {
         docs.insert(0, doc);
       }
     }
@@ -63,10 +65,12 @@ Future<void> processBasicDocs(
     required Query<Map<String, dynamic>> query,
     required List<String> muteUids}) async {
   final qshot = await query.get();
-  for (final doc in qshot.docs) {
+  final basicDocs = qshot.docs;
+  for (final doc in basicDocs) {
     //doc['uid']は投稿主のuid
     //！は否定
-    if (isValidUser(muteUids: muteUids, doc: doc)) {
+    //正しいユーザーかどうかの処理と、重複処理
+    if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc)) {
       docs.add(doc);
     }
     //addだと上手くいく
@@ -80,36 +84,38 @@ Future<void> processOldDocs(
     required List<String> muteUids}) async {
   if (docs.isNotEmpty) {
     final qshot = await query.startAfterDocument(docs.last).get();
-    for (final doc in qshot.docs) {
-      if (isValidUser(muteUids: muteUids, doc: doc)) docs.add(doc);
+    final oldDocs = qshot.docs;
+    for (final doc in oldDocs) {
+      if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc)) docs.add(doc);
     }
   }
 }
 
-void showPopup({required BuildContext context, required Widget Function(BuildContext) builder}) {
+void showPopup(
+    {required BuildContext context,
+    required Widget Function(BuildContext) builder}) {
   showCupertinoModalPopup(
-        context: context,
-        //中で別のinnercontextを生成する
-        //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
-        // builder: (BuildContext innerContext) {
-        //   return CupertinoAlertDialog(
-        //     content: const Text(muteUserAlertMsg),
-        //     actions: [],
-            
-        //   );
-        // }
-        builder: builder
-        );
+      context: context,
+      //中で別のinnercontextを生成する
+      //!showPopupとbuilderの引数のcontextは名前を変える   >Navigator.popでどちらも反応してしまうから
+      // builder: (BuildContext innerContext) {
+      //   return CupertinoAlertDialog(
+      //     content: const Text(muteUserAlertMsg),
+      //     actions: [],
+
+      //   );
+      // }
+      builder: builder);
 }
 
 Future<void> showfluttertoast({required String msg}) async {
   //flashにtoastが定められているので分ける
   await fluttertoast.Fluttertoast.showToast(
-        msg: msg,
-        toastLength: fluttertoast.Toast.LENGTH_SHORT,
-        gravity: fluttertoast.ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red[900],
-        textColor: Colors.white,
-        fontSize: 16.0);
+      msg: msg,
+      toastLength: fluttertoast.Toast.LENGTH_SHORT,
+      gravity: fluttertoast.ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red[900],
+      textColor: Colors.white,
+      fontSize: 16.0);
 }

@@ -21,9 +21,7 @@ class SearchScreen extends ConsumerWidget {
         ref.watch(passiveUserProfileProvider);
     final userDocs = searchModel.userDocs;
 
-    return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      body: FloatingSearchBar(
+    return  FloatingSearchBar(
         backgroundColor: colors.searchBarBackColor,
         onQueryChanged: (text) async {
           searchModel.searchTerm = text;
@@ -59,7 +57,6 @@ class SearchScreen extends ConsumerWidget {
         builder: (context, transition) {
           return Container();
         },
-      ),
     );
   }
 }
