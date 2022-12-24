@@ -36,6 +36,7 @@ class SignUpModel extends ChangeNotifier {
     final FirestoreUser firestoreUser = FirestoreUser(
       userName: 'Alice',
       userImageURL: '',
+      introduction: '',
       followerCount: 0,
       followingCount: 0,
       muteCount: 0,

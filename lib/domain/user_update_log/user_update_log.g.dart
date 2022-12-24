@@ -11,6 +11,7 @@ _$_UserUpdateLog _$$_UserUpdateLogFromJson(Map<String, dynamic> json) =>
       logCreatedAt: json['logCreatedAt'],
       userName: json['userName'] as String,
       userImageURL: json['userImageURL'] as String,
+      introduction: json['introduction'] as String,
       userRef: json['userRef'],
       uid: json['uid'] as String,
     );
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$_UserUpdateLogToJson(_$_UserUpdateLog instance) =>
       'logCreatedAt': instance.logCreatedAt,
       'userName': instance.userName,
       'userImageURL': instance.userImageURL,
+      'introduction': instance.introduction,
       'userRef': instance.userRef,
       'uid': instance.uid,
     };

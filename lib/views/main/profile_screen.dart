@@ -27,12 +27,8 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final ProfileModel profileModel = ref.watch(profileProvider);
-    final EditProfileModel editProfileModel = ref.watch(editProfileProvider);
     final ProfileModel profileModel = ref.watch(profileProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
-    final PostsModel postsModel = ref.watch(postsProvider);
-    final CommentsModel commentsModel = ref.watch(commentsProvider);
-    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final int followerCount = firestoreUser.followerCount;
     final maxWidth = MediaQuery.of(context).size.width;

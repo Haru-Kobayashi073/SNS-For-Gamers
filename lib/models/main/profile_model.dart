@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/routes.dart' as routes;
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
-import 'package:sns_vol2/models/main_model.dart';
 
 final profileProvider = ChangeNotifierProvider((ref) => ProfileModel());
 
@@ -19,15 +18,22 @@ class ProfileModel extends ChangeNotifier {
   late User? currentUser;
   final RefreshController refreshController = RefreshController();
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
+  SortState sortState = SortState.byNewestFirst;
   List<String> muteUids = [];
   Query<Map<String, dynamic>> returnQuery() {
     final User? currentUser = returnAuthUser();
-    return FirebaseFirestore.instance
+    Query<Map<String, dynamic>> query = FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser!.uid)
-        .collection('posts')
-        .orderBy('createdAt', descending: true)
-        .limit(30);
+        .collection('posts');
+    switch (sortState) {
+      case SortState.byLikeUidCount:
+        return query.orderBy("LikeCount", descending: true);
+      case SortState.byNewestFirst:
+        return query.orderBy("createdAt", descending: true);
+      case SortState.byOldestFirst:
+        return query.orderBy("createdAt", descending: false);
+    }
   }
 
   ProfileModel() {

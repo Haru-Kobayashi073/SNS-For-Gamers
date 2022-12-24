@@ -24,7 +24,8 @@ mixin _$UserUpdateLog {
 //userのupdateには使用させない
   dynamic get logCreatedAt => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  String get userImageURL =>
+  String get userImageURL => throw _privateConstructorUsedError;
+  String get introduction =>
       throw _privateConstructorUsedError; //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $UserUpdateLogCopyWith<$Res> {
       {dynamic logCreatedAt,
       String userName,
       String userImageURL,
+      String introduction,
       dynamic userRef,
       String uid});
 }
@@ -65,6 +67,7 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
     Object? logCreatedAt = null,
     Object? userName = null,
     Object? userImageURL = null,
+    Object? introduction = null,
     Object? userRef = null,
     Object? uid = null,
   }) {
@@ -80,6 +83,10 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
       userImageURL: null == userImageURL
           ? _value.userImageURL
           : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      introduction: null == introduction
+          ? _value.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
               as String,
       userRef: null == userRef
           ? _value.userRef
@@ -105,6 +112,7 @@ abstract class _$$_UserUpdateLogCopyWith<$Res>
       {dynamic logCreatedAt,
       String userName,
       String userImageURL,
+      String introduction,
       dynamic userRef,
       String uid});
 }
@@ -123,6 +131,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
     Object? logCreatedAt = null,
     Object? userName = null,
     Object? userImageURL = null,
+    Object? introduction = null,
     Object? userRef = null,
     Object? uid = null,
   }) {
@@ -138,6 +147,10 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
       userImageURL: null == userImageURL
           ? _value.userImageURL
           : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      introduction: null == introduction
+          ? _value.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
               as String,
       userRef: null == userRef
           ? _value.userRef
@@ -158,6 +171,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       {required this.logCreatedAt,
       required this.userName,
       required this.userImageURL,
+      required this.introduction,
       required this.userRef,
       required this.uid});
 
@@ -172,6 +186,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
   final String userName;
   @override
   final String userImageURL;
+  @override
+  final String introduction;
 //どのユーザーをupdateするか判別するのに必要
   @override
   final dynamic userRef;
@@ -180,7 +196,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, userRef: $userRef, uid: $uid)';
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, introduction: $introduction, userRef: $userRef, uid: $uid)';
   }
 
   @override
@@ -191,6 +207,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       ..add(DiagnosticsProperty('logCreatedAt', logCreatedAt))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
+      ..add(DiagnosticsProperty('introduction', introduction))
       ..add(DiagnosticsProperty('userRef', userRef))
       ..add(DiagnosticsProperty('uid', uid));
   }
@@ -206,6 +223,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
                 other.userName == userName) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL) &&
+            (identical(other.introduction, introduction) ||
+                other.introduction == introduction) &&
             const DeepCollectionEquality().equals(other.userRef, userRef) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
@@ -217,6 +236,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       const DeepCollectionEquality().hash(logCreatedAt),
       userName,
       userImageURL,
+      introduction,
       const DeepCollectionEquality().hash(userRef),
       uid);
 
@@ -239,6 +259,7 @@ abstract class _UserUpdateLog implements UserUpdateLog {
       {required final dynamic logCreatedAt,
       required final String userName,
       required final String userImageURL,
+      required final String introduction,
       required final dynamic userRef,
       required final String uid}) = _$_UserUpdateLog;
 
@@ -252,6 +273,8 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   String get userName;
   @override
   String get userImageURL;
+  @override
+  String get introduction;
   @override //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef;
   @override

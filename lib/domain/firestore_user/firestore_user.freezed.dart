@@ -32,6 +32,7 @@ mixin _$FirestoreUser {
   double get userNamePositiveScore => throw _privateConstructorUsedError;
   String get userNameSentiment => throw _privateConstructorUsedError;
   String get userNameLanguageCode => throw _privateConstructorUsedError;
+  String get introduction => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
@@ -61,6 +62,7 @@ abstract class $FirestoreUserCopyWith<$Res> {
       double userNamePositiveScore,
       String userNameSentiment,
       String userNameLanguageCode,
+      String introduction,
       bool isAdmin,
       Map<String, dynamic> searchToken,
       String userName,
@@ -91,6 +93,7 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? userNamePositiveScore = null,
     Object? userNameSentiment = null,
     Object? userNameLanguageCode = null,
+    Object? introduction = null,
     Object? isAdmin = null,
     Object? searchToken = null,
     Object? userName = null,
@@ -138,6 +141,10 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.userNameLanguageCode
           : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
               as String,
+      introduction: null == introduction
+          ? _value.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -181,6 +188,7 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       double userNamePositiveScore,
       String userNameSentiment,
       String userNameLanguageCode,
+      String introduction,
       bool isAdmin,
       Map<String, dynamic> searchToken,
       String userName,
@@ -209,6 +217,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? userNamePositiveScore = null,
     Object? userNameSentiment = null,
     Object? userNameLanguageCode = null,
+    Object? introduction = null,
     Object? isAdmin = null,
     Object? searchToken = null,
     Object? userName = null,
@@ -256,6 +265,10 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.userNameLanguageCode
           : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
               as String,
+      introduction: null == introduction
+          ? _value.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
+              as String,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -294,6 +307,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       required this.userNamePositiveScore,
       required this.userNameSentiment,
       required this.userNameLanguageCode,
+      required this.introduction,
       required this.isAdmin,
       required final Map<String, dynamic> searchToken,
       required this.userName,
@@ -327,6 +341,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
   @override
   final String userNameLanguageCode;
   @override
+  final String introduction;
+  @override
   final bool isAdmin;
   final Map<String, dynamic> _searchToken;
   @override
@@ -344,7 +360,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, muteCount: $muteCount, postCount: $postCount, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userNameLanguageCode: $userNameLanguageCode, isAdmin: $isAdmin, searchToken: $searchToken, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
+    return 'FirestoreUser(createdAt: $createdAt, updatedAt: $updatedAt, followerCount: $followerCount, followingCount: $followingCount, muteCount: $muteCount, postCount: $postCount, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userNameLanguageCode: $userNameLanguageCode, introduction: $introduction, isAdmin: $isAdmin, searchToken: $searchToken, userName: $userName, userImageURL: $userImageURL, uid: $uid)';
   }
 
   @override
@@ -362,6 +378,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       ..add(DiagnosticsProperty('userNamePositiveScore', userNamePositiveScore))
       ..add(DiagnosticsProperty('userNameSentiment', userNameSentiment))
       ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
+      ..add(DiagnosticsProperty('introduction', introduction))
       ..add(DiagnosticsProperty('isAdmin', isAdmin))
       ..add(DiagnosticsProperty('searchToken', searchToken))
       ..add(DiagnosticsProperty('userName', userName))
@@ -392,6 +409,8 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
                 other.userNameSentiment == userNameSentiment) &&
             (identical(other.userNameLanguageCode, userNameLanguageCode) ||
                 other.userNameLanguageCode == userNameLanguageCode) &&
+            (identical(other.introduction, introduction) ||
+                other.introduction == introduction) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             const DeepCollectionEquality()
                 .equals(other._searchToken, _searchToken) &&
@@ -416,6 +435,7 @@ class _$_FirestoreUser with DiagnosticableTreeMixin implements _FirestoreUser {
       userNamePositiveScore,
       userNameSentiment,
       userNameLanguageCode,
+      introduction,
       isAdmin,
       const DeepCollectionEquality().hash(_searchToken),
       userName,
@@ -448,6 +468,7 @@ abstract class _FirestoreUser implements FirestoreUser {
       required final double userNamePositiveScore,
       required final String userNameSentiment,
       required final String userNameLanguageCode,
+      required final String introduction,
       required final bool isAdmin,
       required final Map<String, dynamic> searchToken,
       required final String userName,
@@ -478,6 +499,8 @@ abstract class _FirestoreUser implements FirestoreUser {
   String get userNameSentiment;
   @override
   String get userNameLanguageCode;
+  @override
+  String get introduction;
   @override
   bool get isAdmin;
   @override

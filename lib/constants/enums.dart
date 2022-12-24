@@ -1,5 +1,6 @@
 enum ReauthenticationState {initialValue, updatePassword, updateEmail}
 
+enum SortState{byLikeUidCount, byNewestFirst, byOldestFirst}
 
 //Stringにしたい
 enum TokenType {

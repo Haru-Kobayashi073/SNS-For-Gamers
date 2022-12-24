@@ -18,8 +18,10 @@ class EditProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final EditProfileModel editProfileModel = ref.watch(editProfileProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
-    final TextEditingController textEditingController =
+    final TextEditingController nameEditingController =
         TextEditingController(text: editProfileModel.userName);
+    final TextEditingController textEditingController =
+        TextEditingController(text: editProfileModel.introduction);
     final maxWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -38,8 +40,8 @@ class EditProfilePage extends ConsumerWidget {
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(300.0),
                       child: Container(
-                        width: maxWidth * 0.25,
-                        height: maxWidth * 0.25,
+                          width: maxWidth * 0.25,
+                          height: maxWidth * 0.25,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             shape: BoxShape.circle,
@@ -50,17 +52,25 @@ class EditProfilePage extends ConsumerWidget {
             RoundedTextField(
                 keybordType: TextInputType.name,
                 onChanged: (value) => editProfileModel.userName = value,
-                controller: textEditingController,
+                controller: nameEditingController,
                 color: Colors.white,
                 borderColor: Colors.grey,
                 hintText: firestoreUser.userName),
+            RoundedTextField(
+                keybordType: TextInputType.text,
+                onChanged: (value) => editProfileModel.introduction = value,
+                controller: textEditingController,
+                color: Colors.white,
+                borderColor: Colors.grey,
+                hintText: firestoreUser.introduction),
             RoundedButton(
-                onPressed: () async => await editProfileModel.updateUserInfo(
-                    context: context, mainModel: mainModel),
-                widthRate: 0.3,
-                color: Colors.black,
-                text: updateText,
-                textColor: Colors.white,)
+              onPressed: () async => await editProfileModel.updateUserInfo(
+                  context: context, mainModel: mainModel),
+              widthRate: 0.3,
+              color: Colors.black,
+              text: updateText,
+              textColor: Colors.white,
+            )
           ],
         ),
       ),

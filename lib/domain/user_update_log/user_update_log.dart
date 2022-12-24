@@ -18,6 +18,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     required dynamic logCreatedAt,
     required String userName,
     required String userImageURL,
+    required String introduction,
     //どのユーザーをupdateするか判別するのに必要
     required dynamic userRef,
     required String uid,

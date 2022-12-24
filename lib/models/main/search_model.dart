@@ -25,7 +25,8 @@ class SearchModel extends ChangeNotifier {
       //queryは文字数-1個のwhereが必要
       final Query<Map<String, dynamic>> query =
           returnSearchQuery(searchWords: searchWords);
-      await voids.processBasicDocs(docs: userDocs, query: query, muteUids: muteUids);
+      await voids.processBasicDocs(
+          docs: userDocs, query: query, muteUids: muteUids);
       notifyListeners();
     }
   }

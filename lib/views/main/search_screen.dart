@@ -21,10 +21,13 @@ class SearchScreen extends ConsumerWidget {
         ref.watch(passiveUserProfileProvider);
     final userDocs = searchModel.userDocs;
 
-    return  FloatingSearchBar(
+    return Scaffold(
+      backgroundColor: colors.backScreenColor,
+      body: FloatingSearchBar(
         backgroundColor: colors.searchBarBackColor,
         onQueryChanged: (text) async {
           searchModel.searchTerm = text;
+          print(text);
           await searchModel.operation(muteUids: mainModel.muteUids);
         },
         clearQueryOnClose: true,
@@ -42,6 +45,7 @@ class SearchScreen extends ConsumerWidget {
                         tileColor: colors.backScreenColor,
                         title: Text(
                           firestoreUser.userName,
+                          // '$index',
                           style:
                               const TextStyle(color: colors.listTileTextColor),
                         ),
@@ -57,6 +61,7 @@ class SearchScreen extends ConsumerWidget {
         builder: (context, transition) {
           return Container();
         },
+      ),
     );
   }
 }

@@ -22,6 +22,7 @@ abstract class FirestoreUser with _$FirestoreUser {
     required double userNamePositiveScore,
     required String userNameSentiment,
     required String userNameLanguageCode,
+    required String introduction,
 
     required bool isAdmin,
     required Map<String,dynamic> searchToken,

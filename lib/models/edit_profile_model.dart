@@ -19,6 +19,7 @@ final editProfileProvider = ChangeNotifierProvider((ref) => EditProfileModel());
 class EditProfileModel extends ChangeNotifier {
   File? croppedFile;
   String userName = '';
+  String introduction = '';
 
   Future<void> updateUserInfo(
       {required BuildContext context, required MainModel mainModel}) async {
@@ -26,27 +27,27 @@ class EditProfileModel extends ChangeNotifier {
     if (!(userName.isEmpty && croppedFile == null)) {
       final currentUserDoc = mainModel.currentUserDoc;
       final firestoreUser = mainModel.firestoreUser;
-      if (croppedFile != null) {
+      // if (croppedFile != null) {
         userImageURL = await uploadImageAndGetURL(
             uid: currentUserDoc.id, file: croppedFile!);
-      } else {
-        //croppedFileがnullなら
-        userImageURL = firestoreUser.userImageURL;
-      }
-      if (userName.isEmpty) {
-        userName = firestoreUser.userName;
-      }
+      // } else {
+      //   //croppedFileがnullなら
+      //   userImageURL = firestoreUser.userImageURL;
+      // }
+      // if (userName.isEmpty) {
+      //   userName = firestoreUser.userName;
+      // }
       mainModel.updateFrontUserInfo(
-          newUserName: userName, newUserImageURL: userImageURL);
+          newUserName: userName, newUserImageURL: userImageURL, introduction: introduction);
       Navigator.pop(context);
       //idを指定する必要がない。＝アプリから呼び出すことがなく、消すこともないから
       final UserUpdateLog updateLog = UserUpdateLog(
-        logCreatedAt: Timestamp.now(),
-        userName: userName,
-        userImageURL: userImageURL,
-        userRef: currentUserDoc.reference,
-        uid: currentUserDoc.id
-      );
+          logCreatedAt: Timestamp.now(),
+          userName: userName,
+          userImageURL: userImageURL,
+          introduction: introduction,
+          userRef: currentUserDoc.reference,
+          uid: currentUserDoc.id);
       // doc()とidを指定しないと、勝手に生成してくれる
       await currentUserDoc.reference
           .collection('userUpdateLogs')

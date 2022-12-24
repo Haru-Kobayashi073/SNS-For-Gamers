@@ -42,11 +42,12 @@ DocumentReference<Map<String, dynamic>> userDocToTokenDocRef(
 
 Query<Map<String, dynamic>> returnSearchQuery(
     {required List<String> searchWords}) {
-  Query<Map<String, dynamic>> query =
-      FirebaseFirestore.instance.collection("users").limit(30);
-  // print(query.toString());
-  for (final searchWord in searchWords) {
-    query = query.where("searchToken.$searchWord", isEqualTo: true);
-  }
+  Query<Map<String, dynamic>> users =
+      FirebaseFirestore.instance.collection("users");
+  final mute = users.get();
+  // for (final searchWord in searchWords) {
+    final query = users.where("newMuteUser25", isEqualTo: true);
+    //TODO:検索機能書く
+  // }
   return query;
 }

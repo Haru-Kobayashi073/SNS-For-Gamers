@@ -45,7 +45,8 @@ class AdminModel extends ChangeNotifier {
         // "userNameLanguageCode": "en",
         // "userNameNegativeScore": 0,
         // "userNamePositiveScore": 0,
-        "userNameSentiment": "POSITIVE",
+        // "userNameSentiment": "POSITIVE",
+        "introduction": ''
       });
     }
     await batch.commit();
