@@ -3,14 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_replies_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 //package
 
 class MuteRepliesPage extends ConsumerWidget {
@@ -22,7 +23,8 @@ class MuteRepliesPage extends ConsumerWidget {
     final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     final muteReplyDocs = muteRepliesModel.muteReplyDocs;
     return Scaffold(
-      appBar: AppBar(title: const Text(muteRepliesPageTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: const NormalAppBar(title: muteUsersPageTitle),
       body: muteRepliesModel.showMuteReplies
           ? RefreshScreen(
               onRefresh: () async => await muteRepliesModel.onRefresh(),
@@ -36,8 +38,8 @@ class MuteRepliesPage extends ConsumerWidget {
                         Reply.fromJson(muteReplyDoc.data()!);
                     return ListTile(
                       leading: UserImage(length: 100, userImageURL: muteReply.userImageURL),
-                      title: Text(muteReply.userName),
-                      subtitle: Text(muteReply.reply),
+                      title: Text(muteReply.userName, style: const TextStyle(color: colors.mainTextPrimaryColor),),
+                      subtitle: Text(muteReply.reply, style: const TextStyle(color: colors.mainTextPrimaryColor),),
                       onTap: () => voids.showPopup(
                           context: context,
                           builder: (BuildContext innerContext) =>
@@ -67,6 +69,7 @@ class MuteRepliesPage extends ConsumerWidget {
             )
           : Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoundedButton(
                     onPressed: () async => await muteRepliesModel

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
@@ -11,6 +12,7 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/colors.dart' as colors;
 //package
 
 class MutePostsPage extends ConsumerWidget {
@@ -22,7 +24,8 @@ class MutePostsPage extends ConsumerWidget {
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final mutePostDocs = mutePostsModel.mutePostDocs;
     return Scaffold(
-      appBar: AppBar(title: const Text(mutePostsPageTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: const NormalAppBar(title: mutePostsPageTitle),
       body: mutePostsModel.showMutePosts
           ? RefreshScreen(
               onRefresh: () async => await mutePostsModel.onRefresh(),
@@ -36,8 +39,8 @@ class MutePostsPage extends ConsumerWidget {
                     return ListTile(
                       leading: UserImage(
                           length: 100, userImageURL: mutePost.userImageURL),
-                      title: Text(mutePost.userName),
-                      subtitle: Text(mutePost.text),
+                      title: Text(mutePost.userName, style: const TextStyle(color: colors.mainTextPrimaryColor),),
+                      subtitle: Text(mutePost.text, style: const TextStyle(color: colors.mainTextPrimaryColor),),
                       onTap: () => voids.showPopup(
                           context: context,
                           builder: (BuildContext innerContext) =>
@@ -68,6 +71,7 @@ class MutePostsPage extends ConsumerWidget {
             )
           : Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoundedButton(
                     onPressed: () async =>

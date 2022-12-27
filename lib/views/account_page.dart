@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/models/auth/account_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/routes.dart' as routes;
-
+import 'package:sns_vol2/constants/colors.dart' as colors;
 class AccountPage extends ConsumerWidget {
   const AccountPage({Key? key, required this.mainModel}) : super(key: key);
   final MainModel mainModel;
@@ -17,14 +17,13 @@ class AccountPage extends ConsumerWidget {
     final AccountModel accountModel = ref.watch(accountProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(accountTitle),
-      ),
+      backgroundColor: colors.backScreenColor,
+      appBar: const NormalAppBar(title: muteUsersPageTitle),
       body: ListView(
         children: [
           ListTile(
-            title: const Text(updatePasswordText),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            title: const Text(updatePasswordText, style: TextStyle(color: colors.appBarTextColor),),
+            trailing: const Icon(Icons.arrow_forward_ios, color: colors.appBarTextColor,),
             onTap: () {
               accountModel.reauthenticationState =
                   ReauthenticationState.updatePassword;
@@ -33,8 +32,8 @@ class AccountPage extends ConsumerWidget {
             },
           ),
           ListTile(
-            title: Text('$updateEmailText \n ${accountModel.currentUser!.email!}'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            title: Text('$updateEmailText \n ${accountModel.currentUser!.email!}', style: const TextStyle(color: colors.appBarTextColor),),
+            trailing: const Icon(Icons.arrow_forward_ios, color: colors.appBarTextColor,),
             onTap: () {
               accountModel.reauthenticationState =
                   ReauthenticationState.updateEmail;
@@ -43,7 +42,7 @@ class AccountPage extends ConsumerWidget {
             },
           ),
           ListTile(
-            title: const Text(logoutText),
+            title: const Text(logoutText, style: TextStyle(color: colors.appBarTextColor),),
             onTap: () async =>
                 await mainModel.logout(context: context, mainModel: mainModel),
           ),
