@@ -36,11 +36,11 @@ class ProfileScreen extends ConsumerWidget {
 
     return SingleChildScrollView(
       child: Container(
-        decoration: BoxDecoration(color: colors.backScreenColor),
+        decoration: const BoxDecoration(color: colors.backScreenColor),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, 
           children: [
-          UserHeader(mainModel: mainModel,firestoreUser: firestoreUser,),
+          UserHeader(mainModel: mainModel,firestoreUser: firestoreUser,onPressed: () => profileModel.onMenuPressed(context: context),),
           Container(
             decoration: const BoxDecoration(color: colors.backScreenColor),
             child: postDocs.isEmpty

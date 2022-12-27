@@ -7,9 +7,10 @@ import 'package:sns_vol2/models/main_model.dart';
 
 class UserHeader extends StatelessWidget {
   const UserHeader(
-      {super.key, required this.mainModel, required this.firestoreUser});
+      {super.key, required this.mainModel, required this.firestoreUser, required this.onPressed});
   final MainModel mainModel;
   final FirestoreUser firestoreUser;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +87,18 @@ class UserHeader extends StatelessWidget {
                       ],
                     ),
                   ),
-                  UserButton(mainModel: mainModel, passiveUser: firestoreUser),
+                  UserButton(
+                      mainModel: mainModel,
+                      passiveUser: firestoreUser,
+                      onPressed: onPressed),
                 ],
               ),
             ],
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 40.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 40.0),
               child: firestoreUser.introduction == null
                   ? const Text(
                       "No introduction",

@@ -66,13 +66,14 @@ Future<void> processBasicDocs(
     required List<String> muteUids}) async {
   final qshot = await query.get();
   final basicDocs = qshot.docs;
+    docs.removeWhere((element) => true);
   // print(basicDocs);
   for (final doc in basicDocs) {
     //doc['uid']は投稿主のuid
     //！は否定
     //正しいユーザーかどうかの処理と、重複処理
     if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc)) {
-    docs.add(doc);
+      docs.add(doc);
     }
     // print("$docs 111");
     //addだと上手くいく

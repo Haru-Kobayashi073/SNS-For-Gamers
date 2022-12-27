@@ -1,5 +1,6 @@
 //flutter
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,13 +25,21 @@ class PassiveUserProfileModel extends ChangeNotifier {
   bool isLoading = false;
   late User? currentUser;
   RefreshController refreshController = RefreshController();
+  SortState sortState = SortState.byNewestFirst;
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
   String indexUid = "";
   Query<Map<String, dynamic>> returnQuery(
       {required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
-    return passiveUserDoc.reference
-        .collection('posts')
-        .orderBy('createdAt', descending: true);
+    final Query<Map<String,dynamic>> query = passiveUserDoc.reference
+        .collection('posts');
+    switch (sortState) {
+      case SortState.byLikeUidCount:
+        return query.orderBy("LikeCount", descending: true);
+      case SortState.byNewestFirst:
+        return query.orderBy("createdAt", descending: true);
+      case SortState.byOldestFirst:
+        return query.orderBy("createdAt", descending: false);
+    }
   }
 
   Future<void> onUserIconPressed(
@@ -154,5 +163,50 @@ class PassiveUserProfileModel extends ChangeNotifier {
         .doc(activeUser.uid)
         .delete();
     print('ユーザーのフォローを外しました');
+  }
+
+  void onMenuPressed({
+    required BuildContext context,
+    required List<String> muteUids,
+    required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
+    voids.showPopup(
+        context: context,
+        builder: (innerContext) {
+          return CupertinoActionSheet(
+            message: const Text('操作を選択'),
+            actions: [
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byLikeUidCount) {
+                      sortState = SortState.byLikeUidCount;
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(context);
+                  },
+                  child: const Text("いいね順に並び替え")),
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byNewestFirst) {
+                      sortState = SortState.byNewestFirst;
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(context);
+                  },
+                  child: const Text("新しい順に並び替え")),
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byOldestFirst) {
+                      sortState = SortState.byOldestFirst;
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(context);
+                  },
+                  child: const Text("古い順に並び替え")),
+              CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(innerContext),
+                  child: const Text(backText)),
+            ],
+          );
+        });
   }
 }

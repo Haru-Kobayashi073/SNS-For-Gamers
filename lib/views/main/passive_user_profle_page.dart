@@ -1,6 +1,5 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
@@ -11,14 +10,11 @@ import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/details/user_header.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/passive_user_profile_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/models/posts_model.dart';
 
 class PassiveUserProfilePage extends ConsumerWidget {
   const PassiveUserProfilePage(
@@ -33,9 +29,6 @@ class PassiveUserProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final PassiveUserProfileModel passiveUserProfileModel =
         ref.watch(passiveUserProfileProvider);
-    final PostsModel postsModel = ref.watch(postsProvider);
-    final CommentsModel commentsModel = ref.watch(commentsProvider);
-    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final postDocs = passiveUserProfileModel.postDocs;
     final muteUids = mainModel.muteUids;
@@ -48,11 +41,12 @@ class PassiveUserProfilePage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(color: colors.backScreenColor),
+          decoration: const BoxDecoration(color: colors.backScreenColor),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             UserHeader(
               mainModel: mainModel,
               firestoreUser: passiveUser,
+              onPressed: () => passiveUserProfileModel.onMenuPressed(context: context, muteUids: muteUids, passiveUserDoc: passiveUserDoc),
             ),
             Container(
               decoration: const BoxDecoration(color: colors.backScreenColor),
