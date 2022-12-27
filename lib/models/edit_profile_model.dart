@@ -27,16 +27,16 @@ class EditProfileModel extends ChangeNotifier {
     if (!(userName.isEmpty && croppedFile == null)) {
       final currentUserDoc = mainModel.currentUserDoc;
       final firestoreUser = mainModel.firestoreUser;
-      // if (croppedFile != null) {
+      if (croppedFile != null) {
         userImageURL = await uploadImageAndGetURL(
             uid: currentUserDoc.id, file: croppedFile!);
-      // } else {
-      //   //croppedFileがnullなら
-      //   userImageURL = firestoreUser.userImageURL;
-      // }
-      // if (userName.isEmpty) {
-      //   userName = firestoreUser.userName;
-      // }
+      } else {
+        //croppedFileがnullなら
+        userImageURL = firestoreUser.userImageURL;
+      }
+      if (userName.isEmpty) {
+        userName = firestoreUser.userName;
+      }
       mainModel.updateFrontUserInfo(
           newUserName: userName, newUserImageURL: userImageURL, introduction: introduction);
       Navigator.pop(context);

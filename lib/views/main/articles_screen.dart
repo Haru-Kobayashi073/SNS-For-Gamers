@@ -27,8 +27,8 @@ class ArticleScreen extends ConsumerWidget {
                     length: 64, userImageURL: qiitaUser.profile_image_url),
                 title: qiitaUser.name == ""
                     ? const Text(
-                      "Qiita User",
-                      style: TextStyle(color: colors.listTileTextColor),
+                        "Qiita User",
+                        style: TextStyle(color: colors.listTileTextColor),
                       )
                     : Text(
                         qiitaUser.name,
@@ -37,7 +37,7 @@ class ArticleScreen extends ConsumerWidget {
                 subtitle: Text(
                   article.title,
                   style: const TextStyle(color: colors.listTileTextColor),
-                  ),
+                ),
               );
             }),
       ),

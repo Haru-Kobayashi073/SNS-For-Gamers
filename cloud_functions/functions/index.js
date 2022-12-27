@@ -209,10 +209,12 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
     const uid = newValue.uid;
     const userName = newValue.userName;
     const userImageURL = newValue.userImageURL;
+    const introduction = newValue.introduction;
     const now = admin.firestore.Timestamp.now();
     await newValue.userRef.update({
       'userName': userName,
       'userImageURL': userImageURL,
+      'introduction': introduction,
       //updatedAtは改ざんされないようにcloud Functionsで制限する
       'updatedAt': now,
     });
@@ -226,6 +228,7 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
       postBatch.update(post.ref, {
         'userName': userName,
       'userImageURL': userImageURL,
+      'introduction': introduction,
       'updatedAt': now,
       });
       postCount += 1;
@@ -249,6 +252,7 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
       commentBatch.update(comment.ref, {
         'userName': userName,
       'userImageURL': userImageURL,
+      'introduction': introduction,
       'updatedAt': now,
       });
       commentCount += 1;
@@ -271,6 +275,7 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
       replyBatch.update(reply.ref, {
         'userName': userName,
       'userImageURL': userImageURL,
+      'introduction': introduction,
       'updatedAt': now,
       });
       replyCount += 1;
