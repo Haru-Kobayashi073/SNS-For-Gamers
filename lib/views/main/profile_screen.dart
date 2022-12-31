@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
@@ -34,38 +35,41 @@ class ProfileScreen extends ConsumerWidget {
     final maxWidth = MediaQuery.of(context).size.width;
     final postDocs = profileModel.postDocs;
 
-    return SingleChildScrollView(
-      child: Container(
-        decoration: const BoxDecoration(color: colors.backScreenColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          children: [
-          UserHeader(mainModel: mainModel,firestoreUser: firestoreUser,onPressed: () => profileModel.onMenuPressed(context: context),),
-          Container(
-            decoration: const BoxDecoration(color: colors.backScreenColor),
-            child: postDocs.isEmpty
-                ? ReloadScreen(
-                    onReload: () async => await profileModel.onReload())
-                : RefreshScreen(
-                    onRefresh: () async => await profileModel.onRefresh(),
-                    onLoading: () async => await profileModel.onLoading(),
-                    refreshController: profileModel.refreshController,
-                    child: ListView.builder(
-                        itemCount: profileModel.postDocs.length,
-                        itemBuilder: (context, int index) {
-                          final postDoc = postDocs[index];
-                          final Post post = Post.fromJson(postDoc.data()!);
-                          return PostCard(
-                            mainModel: mainModel,
-                            post: post,
-                            index: index,
-                            postDocs: postDocs,
-                            muteUsersModel: muteUsersModel,
-                          );
-                        }),
-                  ),
-          ),
-        ]),
+    return Scaffold(
+      appBar: const NormalAppBar(title: profileText, boolValue: true),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(color: colors.backScreenColor),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: [
+            UserHeader(mainModel: mainModel,firestoreUser: firestoreUser,onPressed: () => profileModel.onMenuPressed(context: context),),
+            Container(
+              decoration: const BoxDecoration(color: colors.backScreenColor),
+              child: postDocs.isEmpty
+                  ? ReloadScreen(
+                      onReload: () async => await profileModel.onReload())
+                  : RefreshScreen(
+                      onRefresh: () async => await profileModel.onRefresh(),
+                      onLoading: () async => await profileModel.onLoading(),
+                      refreshController: profileModel.refreshController,
+                      child: ListView.builder(
+                          itemCount: profileModel.postDocs.length,
+                          itemBuilder: (context, int index) {
+                            final postDoc = postDocs[index];
+                            final Post post = Post.fromJson(postDoc.data()!);
+                            return PostCard(
+                              mainModel: mainModel,
+                              post: post,
+                              index: index,
+                              postDocs: postDocs,
+                              muteUsersModel: muteUsersModel,
+                            );
+                          }),
+                    ),
+            ),
+          ]),
+        ),
       ),
     );
   }

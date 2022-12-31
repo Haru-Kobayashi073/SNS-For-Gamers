@@ -27,7 +27,7 @@ class SNSBottomNavigationBarModel extends ChangeNotifier {
 
   void onTabTapped({required int index}) {
     pageController.animateToPage(index,
-        duration: Duration(milliseconds: pageAnimationDuration),
+        duration: const Duration(milliseconds: pageAnimationDuration),
         curve: Curves.ease);
   }
 

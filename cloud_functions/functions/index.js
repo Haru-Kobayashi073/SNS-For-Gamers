@@ -1,11 +1,22 @@
-const { firestore } = require('firebase-admin');
+// const { default: algoliasearch } = require('algoliasearch');
+// const { firestore } = require('firebase-admin');
+// const { user } = require('firebase-functions/v1/auth');
+
+
 const admin = require('firebase-admin');
 const functions = require("firebase-functions");
-const { user } = require('firebase-functions/v1/auth');
 const plusOne = 1;
 const minusOne = -1;
 const config = functions.config();
 admin.initializeApp(config.firebase);
+
+const algoliasearch = require("algoliasearch");
+const algoliaConfig = config.algolia;
+const ALGOLIA_APP_ID = algoliaConfig.app_id;
+const ALGOLIA_ADMIN_KEY = algoliaConfig.admin_key;
+const ALGOLIA_POSTS_INDEX_NAME = "posts";
+const client = algoliasearch(ALGOLIA_APP_ID,ALGOLIA_ADMIN_KEY);
+
 
 const fireStore = admin.firestore();
 const batchLimit = 500;
@@ -295,31 +306,44 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
 exports.onPostCreate = functions.firestore.document('users/{uid}/posts/{postId}').onCreate(
   async (snap,_) => {
     const newValue = snap.data();
-    const timeline = {
-      "createdAt": newValue.createdAt,
-      "isRead": false,
-      "postCreatorUid": newValue.uid,
-      "postId": newValue.postId,
-    };
-    // 自分のタイムラインんいも自分の投稿をセットする
-    await fireStore.collection("users").doc(newValue.uid).collection("timelines").doc(newValue.postId).set(timeline);
-    //followersをゲット
-    const followers = await fireStore.collection("users").doc(newValue.uid).collection("followers").get();
-    let count = 0;
-    let batch = fireStore.batch();
-    for (const follower of followers.docs) {
-      const data = follower.data();
-      const ref = fireStore.collection("users").doc(data.followerUid).collection("timelines").doc(newValue.postId);
-      batch.set(ref, timeline);
-      count++;
-      if (count == batchLimit) {
-        await batch.commit();
-        batch = fireStore.batch();
-        count = 0;
-      }
-    }
-    if (count > 0) {
-      await batch.commit();
-    }
+    newValue.objectID = snap.id;//objectIDはalgoliaのID
+    const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
+    index.saveObject(newValue);
   }
-);
+  );
+  
+  exports.onPostDelete = functions.firestore.document('users/{uid}/posts/{postId}').onDelete(
+  async (snap,_) => {
+    const newValue = snap.data();
+    const objectID = snap.id;//objectIDはalgoliaのID
+    const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
+    index.deleteObject(objectID);
+  }
+  );
+  //   const timeline = {
+  //     "createdAt": newValue.createdAt,
+  //     "isRead": false,
+  //     "postCreatorUid": newValue.uid,
+  //     "postId": newValue.postId,
+  //   };
+  //   // 自分のタイムラインんいも自分の投稿をセットする
+  //   await fireStore.collection("users").doc(newValue.uid).collection("timelines").doc(newValue.postId).set(timeline);
+  //   //followersをゲット
+  //   const followers = await fireStore.collection("users").doc(newValue.uid).collection("followers").get();
+  //   let count = 0;
+  //   let batch = fireStore.batch();
+  //   for (const follower of followers.docs) {
+  //     const data = follower.data();
+  //     const ref = fireStore.collection("users").doc(data.followerUid).collection("timelines").doc(newValue.postId);
+  //     batch.set(ref, timeline);
+  //     count++;
+  //     if (count == batchLimit) {
+  //       await batch.commit();
+  //       batch = fireStore.batch();
+  //       count = 0;
+  //     }
+  //   }
+  //   if (count > 0) {
+  //     await batch.commit();
+  //   }
+  // }

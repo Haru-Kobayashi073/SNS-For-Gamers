@@ -102,20 +102,15 @@ class MyHomePage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: colors.backScreenColor,
       // key: scaffoldKey,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: colors.appBarTextColor),
-        elevation: 0,
-        backgroundColor: colors.appBarBackColor,
-        title: Text(
-          title,
-          style: const TextStyle(color: colors.appBarTextColor),
-        ),
-        // leading: IconButton(
-        //     onPressed: () => scaffoldKey.currentState!.openDrawer(),
-        //     icon: const Icon(Icons.notes_rounded),
-        //     iconSize: 30,
-        //     ),
-      ),
+      // appBar: AppBar(
+      //   iconTheme: const IconThemeData(color: colors.appBarTextColor),
+      //   elevation: 0,
+      //   backgroundColor: colors.appBarBackColor,
+      //   title: Text(
+      //     title,
+      //     style: const TextStyle(color: colors.appBarTextColor),
+      //   ),
+      // ),
       drawer: Drawer(
         // backgroundColor: colors.backScreenColor,
         child: SNSDrawer(

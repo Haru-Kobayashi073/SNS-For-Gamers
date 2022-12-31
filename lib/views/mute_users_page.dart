@@ -23,7 +23,7 @@ class MuteUsersPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: const NormalAppBar(title: muteUsersPageTitle),
+      appBar: const NormalAppBar(title: muteUsersPageTitle, boolValue: false,),
       body: muteUsersModel.showMuteUsers
           ?
           // Text(showMuteUsersText)

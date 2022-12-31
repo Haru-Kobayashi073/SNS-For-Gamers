@@ -1,6 +1,8 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/qiita_user/qiita_user.dart';
 import 'package:sns_vol2/models/main/articles_model.dart';
@@ -14,6 +16,7 @@ class ArticleScreen extends ConsumerWidget {
     final ArticlesModel articlesModel = ref.watch(articlesProvider);
     final articles = articlesModel.articles;
     return Scaffold(
+      appBar: NormalAppBar(title: articleText, boolValue: false),
       body: Container(
         decoration: const BoxDecoration(color: colors.backScreenColor),
         alignment: Alignment.center,

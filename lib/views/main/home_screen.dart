@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
@@ -43,9 +44,10 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = homeModel.postDocs;
 
     return Scaffold(
+      appBar: const NormalAppBar(title: homeText, boolValue: true),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(color: colors.backScreenColor),
+        decoration: const BoxDecoration(color: colors.backScreenColor),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             decoration: const BoxDecoration(color: colors.backScreenColor),
