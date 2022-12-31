@@ -20,6 +20,7 @@ import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
+import 'package:sns_vol2/models/themes_model.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key, required this.mainModel}) : super(key: key);
@@ -33,10 +34,11 @@ class ProfileScreen extends ConsumerWidget {
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final int followerCount = firestoreUser.followerCount;
     final maxWidth = MediaQuery.of(context).size.width;
+    final ThemeModel themeModel = ref.watch(themeProvider);
     final postDocs = profileModel.postDocs;
 
     return Scaffold(
-      appBar: const NormalAppBar(title: profileText, boolValue: true),
+      // appBar: NormalAppBar(title: profileText, mainModel: mainModel, themeModel: themeModel),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(color: colors.backScreenColor),

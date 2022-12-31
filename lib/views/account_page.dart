@@ -8,6 +8,7 @@ import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/models/auth/account_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/models/themes_model.dart';
 class AccountPage extends ConsumerWidget {
   const AccountPage({Key? key, required this.mainModel}) : super(key: key);
   final MainModel mainModel;
@@ -15,10 +16,12 @@ class AccountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AccountModel accountModel = ref.watch(accountProvider);
+    final MainModel mainModel = ref.watch(mainProvider);
+    final ThemeModel themeModel = ref.watch(themeProvider);
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: const NormalAppBar(title: muteUsersPageTitle, boolValue: false,),
+      appBar: NormalAppBar(title: accountTitle, mainModel: mainModel),
       body: ListView(
         children: [
           ListTile(

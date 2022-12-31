@@ -11,6 +11,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/models/themes_model.dart';
 
 class MuteUsersPage extends ConsumerWidget {
   const MuteUsersPage({Key? key, required this.mainModel}) : super(key: key);
@@ -20,10 +21,11 @@ class MuteUsersPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final muteUserDocs = muteUsersModel.muteUserDocs;
+    final ThemeModel themeModel = ref.watch(themeProvider);
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: const NormalAppBar(title: muteUsersPageTitle, boolValue: false,),
+      appBar: NormalAppBar(title: muteUsersPageTitle, mainModel: mainModel),
       body: muteUsersModel.showMuteUsers
           ?
           // Text(showMuteUsersText)

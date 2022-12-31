@@ -19,6 +19,7 @@ import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/models/themes_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen(
@@ -38,13 +39,12 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final HomeModel homeModel = ref.watch(homeProvider);
-    final PostsModel postsModel = ref.watch(postsProvider);
-    final CommentsModel commentsModel = ref.watch(commentsProvider);
-    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
+    final MainModel mainModel = ref.watch(mainProvider);
+    final ThemeModel themeModel = ref.watch(themeProvider);
     final postDocs = homeModel.postDocs;
 
     return Scaffold(
-      appBar: const NormalAppBar(title: homeText, boolValue: true),
+      // appBar: NormalAppBar(title: homeText, mainModel: mainModel, themeModel: themeModel),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(color: colors.backScreenColor),

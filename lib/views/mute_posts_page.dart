@@ -13,6 +13,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/models/themes_model.dart';
 //package
 
 class MutePostsPage extends ConsumerWidget {
@@ -23,9 +24,10 @@ class MutePostsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final mutePostDocs = mutePostsModel.mutePostDocs;
+    final ThemeModel themeModel = ref.watch(themeProvider);
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: const NormalAppBar(title: mutePostsPageTitle, boolValue: false,),
+      appBar: NormalAppBar(title: mutePostsPageTitle, mainModel: mainModel),
       body: mutePostsModel.showMutePosts
           ? RefreshScreen(
               onRefresh: () async => await mutePostsModel.onRefresh(),

@@ -12,6 +12,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_comments_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/models/themes_model.dart';
 //package
 
 class MuteCommentsPage extends ConsumerWidget {
@@ -22,9 +23,12 @@ class MuteCommentsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MuteCommentsModel muteCommentsModel = ref.watch(muteCommentsProvider);
     final muteCommentDocs = muteCommentsModel.muteCommentDocs;
+    final MainModel mainModel = ref.watch(mainProvider);
+    final ThemeModel themeModel = ref.watch(themeProvider);
+    
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: const NormalAppBar(title: muteUsersPageTitle, boolValue: false,),
+      appBar: NormalAppBar(title: muteCommentsPageTitle, mainModel: mainModel),
       body: muteCommentsModel.showMuteComments
           ? RefreshScreen(
               onRefresh: () async => await muteCommentsModel.onRefresh(),

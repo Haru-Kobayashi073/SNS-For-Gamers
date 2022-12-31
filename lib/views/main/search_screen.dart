@@ -28,12 +28,12 @@ class SearchScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: colors.backScreenColor,
       // appBar: const NormalAppBar(title: searchText, boolValue: false),
-      appBar: AppBar(
-        title: const Text(searchText),
-      ),
-      drawer: Drawer(
-        child: SNSDrawer(mainModel: mainModel, themeModel: themeModel),
-      ),
+      // appBar: AppBar(
+      //   title: const Text(searchText),
+      // ),
+      // drawer: Drawer(
+      //   child: SNSDrawer(mainModel: mainModel, themeModel: themeModel),
+      // ),
       body:
           // ListView.builder(
           //     itemCount: userDocs.length,
