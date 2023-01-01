@@ -8,6 +8,7 @@ import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
+import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
@@ -44,7 +45,13 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = homeModel.postDocs;
 
     return Scaffold(
-      // appBar: NormalAppBar(title: homeText, mainModel: mainModel, themeModel: themeModel),
+      appBar: NormalAppBar(title: homeText, mainModel: mainModel),
+      drawer: Drawer(
+        child: SNSDrawer(
+          mainModel: mainModel,
+          themeModel: themeModel,
+        ),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(color: colors.backScreenColor),

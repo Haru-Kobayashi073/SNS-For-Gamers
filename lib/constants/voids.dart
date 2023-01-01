@@ -45,16 +45,17 @@ void showFlashBar({
 Future<void> processNewDocs(
     {required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query,
-    required List<String> muteUids}) async {
+    required List<String> muteUids,
+    required List<String> mutePostIds}) async {
   if (docs.isNotEmpty) {
     final qshot = await query.endBeforeDocument(docs.first).get();
     final reversed = qshot.docs.reversed.toList();
     for (final doc in reversed) {
       //正しいユーザーかどうかの処理と、重複処理
-      if (isValidUser(muteUids: muteUids, doc: doc) &&
-          !reversed.contains(doc)) {
-        docs.insert(0, doc);
-      }
+      final map = doc.data();
+      if (isValidUser(muteUids: muteUids, map: doc.data()) &&
+          !reversed.contains(doc) &&
+          isValidPost(mutePostIds: mutePostIds, map: map)) docs.insert(0, doc);
     }
   }
 }
@@ -63,18 +64,20 @@ Future<void> processNewDocs(
 Future<void> processBasicDocs(
     {required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query,
-    required List<String> muteUids}) async {
+    required List<String> muteUids,
+    required List<String> mutePostIds}) async {
   final qshot = await query.get();
   final basicDocs = qshot.docs;
-    docs.removeWhere((element) => true);
+  docs.removeWhere((element) => true);
   // print(basicDocs);
   for (final doc in basicDocs) {
     //doc['uid']は投稿主のuid
     //！は否定
     //正しいユーザーかどうかの処理と、重複処理
-    if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc)) {
-      docs.add(doc);
-    }
+    final map = doc.data();
+      if (isValidUser(muteUids: muteUids, map: doc.data()) &&
+          !docs.contains(doc) &&
+          isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
     // print("$docs 111");
     //addだと上手くいく
   }
@@ -84,13 +87,16 @@ Future<void> processBasicDocs(
 Future<void> processOldDocs(
     {required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query,
-    required List<String> muteUids}) async {
+    required List<String> muteUids,
+    required List<String> mutePostIds}) async {
   if (docs.isNotEmpty) {
     final qshot = await query.startAfterDocument(docs.last).get();
     final oldDocs = qshot.docs;
     for (final doc in oldDocs) {
-      if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc))
-        docs.add(doc);
+      final map = doc.data();
+      if (isValidUser(muteUids: muteUids, map: doc.data()) &&
+          !docs.contains(doc) &&
+          isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
     }
   }
 }

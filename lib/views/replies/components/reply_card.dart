@@ -37,7 +37,7 @@ class ReplyCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
 
-    return isValidUser(muteUids: mainModel.muteUids, doc: replyDoc) &&
+    return isValidUser(muteUids: mainModel.muteUids, map: replyDoc.data() as Map<String,dynamic>) &&
             isValidReply(muteReplyIds: mainModel.muteReplyIds, reply: reply)
         ? Padding(
           padding: const EdgeInsets.all(16.0),

@@ -22,6 +22,7 @@ class ProfileModel extends ChangeNotifier {
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
   SortState sortState = SortState.byNewestFirst;
   List<String> muteUids = [];
+  List<String> mutePostIds = [];
   Query<Map<String, dynamic>> returnQuery() {
     final User? currentUser = returnAuthUser();
     final Query<Map<String, dynamic>> query = FirebaseFirestore.instance
@@ -43,7 +44,9 @@ class ProfileModel extends ChangeNotifier {
   }
 
   Future<void> init() async {
-    muteUids = await returnMuteUids();
+    final muteUidsAndMutePostIds = await returnMuteUidsAndMutePostIds();
+    muteUids = muteUidsAndMutePostIds.first;
+    mutePostIds = muteUidsAndMutePostIds.last;
     await onReload();
   }
 
@@ -60,20 +63,20 @@ class ProfileModel extends ChangeNotifier {
   Future<void> onRefresh() async {
     refreshController.refreshCompleted();
     await voids.processNewDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids);
+        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
     notifyListeners();
   }
 
   Future<void> onReload() async {
     await voids.processBasicDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids);
+        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
     notifyListeners();
   }
 
   Future<void> onLoading() async {
     refreshController.loadComplete();
     await voids.processOldDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids);
+        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
     notifyListeners();
   }
 

@@ -14,20 +14,22 @@ import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/views/main/articles_screen.dart';
 import 'package:sns_vol2/views/main/home_screen.dart';
 import 'package:sns_vol2/views/main/profile_screen.dart';
-import 'package:sns_vol2/views/main/search_screen.dart';
+import 'package:sns_vol2/views/main/search_page.dart';
 //options
 import 'firebase_options.dart';
 //constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -72,7 +74,8 @@ class MyApp extends ConsumerWidget {
         // ),
         home: onceUser == null //ユーザーが存在していないなら
             ? const LoginPage() //ログインページへ
-            : onceUser.emailVerified?
+            : onceUser.emailVerified
+                ?
                 //ユーザーが存在し、メールが認証されている
                 MyHomePage(
                     title: appTitle,
@@ -102,22 +105,22 @@ class MyHomePage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: colors.backScreenColor,
       // key: scaffoldKey,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: colors.appBarTextColor),
-        elevation: 0,
-        backgroundColor: colors.appBarBackColor,
-        title: Text(
-          title,
-          style: const TextStyle(color: colors.appBarTextColor),
-        ),
-      ),
-      drawer: Drawer(
-        // backgroundColor: colors.backScreenColor,
-        child: SNSDrawer(
-          mainModel: mainModel,
-          themeModel: themeModel,
-        ),
-      ),
+      // appBar: AppBar(
+      //   iconTheme: const IconThemeData(color: colors.appBarTextColor),
+      //   elevation: 0,
+      //   backgroundColor: colors.appBarBackColor,
+      //   title: Text(
+      //     title,
+      //     style: const TextStyle(color: colors.appBarTextColor),
+      //   ),
+      // ),
+      // drawer: Drawer(
+      //   // backgroundColor: colors.backScreenColor,
+      //   child: SNSDrawer(
+      //     mainModel: mainModel,
+      //     themeModel: themeModel,
+      //   ),
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => createPostModel.showPostDialog(
             context: context, mainModel: mainModel),
@@ -145,10 +148,10 @@ class MyHomePage extends ConsumerWidget {
                   muteUsersModel: muteUserModel,
                   createPostModel: createPostModel,
                 ),
-                SearchScreen(
+                SearchPage(
                   mainModel: mainModel,
                 ),
-                ArticleScreen(),
+                const ArticleScreen(),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),

@@ -42,7 +42,7 @@ class CommentCard extends ConsumerWidget {
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final bool isMyComment = comment.uid == firestoreUser.uid;
 
-    return isValidUser(muteUids: mainModel.muteUids, doc: commentDoc) &&
+    return isValidUser(muteUids: mainModel.muteUids, map: commentDoc.data()!) &&
             isValidComment(muteCommentIds: mainModel.muteCommentIds, comment: comment)
         ? Padding(
             padding: const EdgeInsets.all(16.0),

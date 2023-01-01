@@ -15,6 +15,7 @@ import 'package:sns_vol2/constants/routes.dart' as routes;
 //domain
 import 'package:sns_vol2/domain/follower/follower.dart';
 import 'package:sns_vol2/domain/following_token/following_token.dart';
+import 'package:sns_vol2/main.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
 
@@ -51,7 +52,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
         context: context, mainModel: mainModel);
     final String passiveUid = passiveUserDoc.id;
     if (indexUid != passiveUid) {
-      await onReload(muteUids: mainModel.muteUids, passiveUserDoc: passiveUserDoc);
+      await onReload(muteUids: mainModel.muteUids, passiveUserDoc: passiveUserDoc, mutePostIds: mainModel.mutePostIds);
     }
     indexUid = passiveUid;
   }
@@ -68,32 +69,38 @@ class PassiveUserProfileModel extends ChangeNotifier {
 
   Future<void> onRefresh(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     refreshController.refreshCompleted();
     await voids.processNewDocs(
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc),
+        mutePostIds: mutePostIds,
         muteUids: muteUids);
     notifyListeners();
   }
 
   Future<void> onReload(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     await voids.processBasicDocs(
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc),
+        mutePostIds: mutePostIds,
         muteUids: muteUids);
     notifyListeners();
   }
 
   Future<void> onLoading(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     refreshController.loadComplete();
     await voids.processOldDocs(
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc),
+        mutePostIds: mutePostIds,
         muteUids: muteUids);
     notifyListeners();
   }
@@ -168,6 +175,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
   void onMenuPressed({
     required BuildContext context,
     required List<String> muteUids,
+    required List<String> mutePostIds,
     required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
     voids.showPopup(
         context: context,
@@ -179,7 +187,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
                   onPressed: () async {
                     if (sortState != SortState.byLikeUidCount) {
                       sortState = SortState.byLikeUidCount;
-                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc, mutePostIds: mutePostIds);
                     }
                     Navigator.pop(context);
                   },
@@ -188,7 +196,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
                   onPressed: () async {
                     if (sortState != SortState.byNewestFirst) {
                       sortState = SortState.byNewestFirst;
-                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc, mutePostIds: mutePostIds);
                     }
                     Navigator.pop(context);
                   },
@@ -197,7 +205,7 @@ class PassiveUserProfileModel extends ChangeNotifier {
                   onPressed: () async {
                     if (sortState != SortState.byOldestFirst) {
                       sortState = SortState.byOldestFirst;
-                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc);
+                      await onReload(muteUids: muteUids, passiveUserDoc: passiveUserDoc, mutePostIds: mutePostIds);
                     }
                     Navigator.pop(context);
                   },

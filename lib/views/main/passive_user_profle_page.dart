@@ -46,7 +46,7 @@ class PassiveUserProfilePage extends ConsumerWidget {
             UserHeader(
               mainModel: mainModel,
               firestoreUser: passiveUser,
-              onPressed: () => passiveUserProfileModel.onMenuPressed(context: context, muteUids: muteUids, passiveUserDoc: passiveUserDoc),
+              onPressed: () => passiveUserProfileModel.onMenuPressed(context: context, muteUids: muteUids, mutePostIds: mainModel.mutePostIds, passiveUserDoc: passiveUserDoc),
             ),
             Container(
               decoration: const BoxDecoration(color: colors.backScreenColor),
@@ -55,15 +55,18 @@ class PassiveUserProfilePage extends ConsumerWidget {
                       onReload: () async =>
                           await passiveUserProfileModel.onReload(
                               muteUids: muteUids,
+                              mutePostIds: mainModel.mutePostIds,
                               passiveUserDoc: passiveUserDoc))
                   : RefreshScreen(
                       onRefresh: () async =>
                           await passiveUserProfileModel.onRefresh(
                               muteUids: muteUids,
+                              mutePostIds: mainModel.mutePostIds,
                               passiveUserDoc: passiveUserDoc),
                       onLoading: () async =>
                           await passiveUserProfileModel.onLoading(
                               muteUids: muteUids,
+                              mutePostIds: mainModel.mutePostIds,
                               passiveUserDoc: passiveUserDoc),
                       refreshController:
                           passiveUserProfileModel.refreshController,

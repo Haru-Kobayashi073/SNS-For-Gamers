@@ -21,6 +21,7 @@ class HomeModel extends ChangeNotifier {
   User currentUser = returnAuthUser()!;
   final RefreshController refreshController = RefreshController();
   List<String> muteUids = [];
+  List<String> mutePostIds = [];
   // Query<Map<String, dynamic>> returnQuery() {
   //   final User? currentUser = returnAuthUser();
   //   return FirebaseFirestore.instance
@@ -50,7 +51,9 @@ class HomeModel extends ChangeNotifier {
   }
 
   Future<void> init() async {
-    muteUids = await returnMuteUids();
+    final muteUidsAndMutePostIds = await returnMuteUidsAndMutePostIds();
+    muteUids = muteUidsAndMutePostIds.first;
+    mutePostIds = muteUidsAndMutePostIds.last;
     await onReload();
   }
 
@@ -70,6 +73,7 @@ class HomeModel extends ChangeNotifier {
     await voids.processNewDocs(
         docs: postDocs,
         query: returnQuery(timelineQshot: timelineQshot),
+        mutePostIds: mutePostIds,
         muteUids: muteUids);
     notifyListeners();
   }
@@ -87,6 +91,7 @@ class HomeModel extends ChangeNotifier {
       await voids.processBasicDocs(
           docs: postDocs,
           query: returnQuery(timelineQshot: timelineQshot),
+          mutePostIds: mutePostIds,
           muteUids: muteUids);
     }
     notifyListeners();
@@ -108,6 +113,7 @@ class HomeModel extends ChangeNotifier {
     await voids.processOldDocs(
         docs: postDocs,
         query: returnQuery(timelineQshot: timelineQshot),
+        mutePostIds: mutePostIds,
         muteUids: muteUids);
     notifyListeners();
   }

@@ -3,10 +3,16 @@ import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
 
 bool isValidUser(
-        {required List<String> muteUids, required DocumentSnapshot doc}) =>
-    !muteUids.contains(doc['uid']);
+        {required List<String> muteUids, required Map<String, dynamic> map}) =>
+    !muteUids.contains(map['uid']);
 
-bool isValidComment({required List<String> muteCommentIds, required Comment comment}) =>
+bool isValidPost(
+        {required List<String> mutePostIds,
+        required Map<String, dynamic> map}) =>
+    !mutePostIds.contains(map["postId"]);
+
+bool isValidComment(
+        {required List<String> muteCommentIds, required Comment comment}) =>
     !muteCommentIds.contains(comment.postCommentId);
 
 //ミュートしているreplyIdたちにReplyのidが含まれていなければ正しいリプライ

@@ -12,26 +12,19 @@ class NormalAppBar extends StatelessWidget with PreferredSizeWidget {
     required this.title,
     // required this.boolValue,
     required this.mainModel,
-    // required this.themeModel,
   });
   final String title;
   // final bool boolValue;
   final MainModel mainModel;
-  // final ThemeModel themeModel;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // drawer: Drawer(
-      //     child: SNSDrawer(mainModel: mainModel, themeModel: themeModel)),
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: colors.appBarTextColor),
-        elevation: 0,
-        backgroundColor: colors.appBarBackColor,
-        title: Text(
-          title,
-          style: const TextStyle(color: colors.appBarTextColor),
-        ),
+    return AppBar(
+      elevation: 0,
+      backgroundColor: colors.appBarBackColor,
+      title: Text(
+        title,
+        style: const TextStyle(color: colors.appBarTextColor),
       ),
     );
   }

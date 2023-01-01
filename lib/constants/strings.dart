@@ -100,6 +100,8 @@ const String homeText = "Home";
 const String searchText = "Search";
 const String profileText = "Profile";
 const String articleText = "Article";
+const String usersText = "ユーザー";
+const String postsText = "投稿";
 
 String returnUuidV4() {
   const Uuid uuid = Uuid();
