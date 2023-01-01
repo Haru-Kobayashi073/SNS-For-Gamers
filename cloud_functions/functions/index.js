@@ -10,7 +10,7 @@ const minusOne = -1;
 const config = functions.config();
 admin.initializeApp(config.firebase);
 
-const algoliasearch = require("algoliasearch");
+const algoliasearch = require("algoliasearch");//algoliaとデータ同期
 const algoliaConfig = config.algolia;
 const ALGOLIA_APP_ID = algoliaConfig.app_id;
 const ALGOLIA_ADMIN_KEY = algoliaConfig.admin_key;
