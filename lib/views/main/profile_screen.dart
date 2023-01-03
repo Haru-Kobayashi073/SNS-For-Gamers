@@ -7,6 +7,7 @@ import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
+import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/details/user_header.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
@@ -38,7 +39,11 @@ class ProfileScreen extends ConsumerWidget {
     final postDocs = profileModel.postDocs;
 
     return Scaffold(
-      // appBar: NormalAppBar(title: profileText, mainModel: mainModel, themeModel: themeModel),
+      appBar: NormalAppBar(title: profileText, mainModel: mainModel),
+      drawer: SNSDrawer(
+          mainModel: mainModel,
+          themeModel: themeModel,
+      ),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(color: colors.backScreenColor),

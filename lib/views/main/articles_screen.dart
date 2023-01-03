@@ -20,8 +20,8 @@ class ArticleScreen extends ConsumerWidget {
     final ThemeModel themeModel = ref.watch(themeProvider);
     final articles = articlesModel.articles;
     return Scaffold(
-      // appBar: NormalAppBar(
-      //     title: articleText, mainModel: mainModel, themeModel: themeModel),
+      appBar: NormalAppBar(
+          title: articleText, mainModel: mainModel),
       body: Container(
         decoration: const BoxDecoration(color: colors.backScreenColor),
         alignment: Alignment.center,

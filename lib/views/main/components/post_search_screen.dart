@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/details/user_image.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/post_search_model.dart';
@@ -36,16 +35,30 @@ class PostSearchScreen extends ConsumerWidget {
                           height: maxHeight * 0.06,
                         ),
                         ListTile(
-                          title: Text(post.userName),
-                          subtitle: Text(post.text),
+                          title: Text(
+                            post.userName,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
+                          subtitle: Text(
+                            post.text,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
                           leading: UserImage(
                               length: 48.0, userImageURL: post.userImageURL),
                         ),
                       ],
                     )
                   : ListTile(
-                      title: Text(post.userName),
-                      subtitle: Text(post.text),
+                      title: Text(
+                        post.userName,
+                        style: const TextStyle(color: colors.listTileTextColor),
+                      ),
+                      subtitle: Text(
+                        post.text,
+                        style: const TextStyle(color: colors.listTileTextColor),
+                      ),
                       leading: UserImage(
                           length: 48.0, userImageURL: post.userImageURL),
                     );

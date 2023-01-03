@@ -10,6 +10,7 @@ import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
+import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
@@ -38,6 +39,7 @@ class PostCard extends ConsumerWidget {
     final maxHeight = MediaQuery.of(context).size.height;
     final PostsModel postsModel = ref.watch(postsProvider);
     final CommentsModel commentsModel = ref.watch(commentsProvider);
+    // final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyComment = post.uid == firestoreUser.uid;
@@ -150,10 +152,12 @@ class PostCard extends ConsumerWidget {
                 Container(
                   width: maxWidth * 0.7,
                   height: maxHeight * 0.23,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       image: DecorationImage(
                     image: NetworkImage(
-                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'),
+                      // post.imageURL
+                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
+                        ),
                   )),
                 ),
               ],

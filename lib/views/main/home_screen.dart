@@ -46,11 +46,9 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: NormalAppBar(title: homeText, mainModel: mainModel),
-      drawer: Drawer(
-        child: SNSDrawer(
+      drawer: SNSDrawer(
           mainModel: mainModel,
           themeModel: themeModel,
-        ),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
