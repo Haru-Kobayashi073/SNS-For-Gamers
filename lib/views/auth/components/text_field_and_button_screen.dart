@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class TextFieldAndButtonScreen extends StatelessWidget {
   const TextFieldAndButtonScreen({
@@ -26,7 +27,12 @@ class TextFieldAndButtonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(appbarTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: AppBar(
+        title: Text(appbarTitle),
+        backgroundColor: colors.appBarBackColor,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

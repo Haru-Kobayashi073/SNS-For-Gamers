@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class PasswordFieldAndButtonScreen extends StatelessWidget {
-  const PasswordFieldAndButtonScreen(
-      {super.key,
-      required this.appbarTitle,
-      required this.buttonText,
-      required this.obscureText,
-      required this.toggleObscureText,
-      required this.textEditingController,
-      required this.onPressed,
-      required this.onChanged,
-      });
+  const PasswordFieldAndButtonScreen({
+    super.key,
+    required this.appbarTitle,
+    required this.buttonText,
+    required this.obscureText,
+    required this.toggleObscureText,
+    required this.textEditingController,
+    required this.onPressed,
+    required this.onChanged,
+  });
   final String appbarTitle;
   final String buttonText;
   final bool obscureText;
@@ -25,7 +25,12 @@ class PasswordFieldAndButtonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(appbarTitle)),
+      backgroundColor: colors.backScreenColor,
+      appBar: AppBar(
+        title: Text(appbarTitle),
+        backgroundColor: colors.appBarBackColor,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
