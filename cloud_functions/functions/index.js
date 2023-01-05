@@ -75,10 +75,10 @@ exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
                   console.log(dSerr);
                 } else {
                   await userRef.update({
-                    "userNameNegativeScore": lCode,
-                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Negative),
-                    "userNameSentiment": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
-                    "userNameLanguageCode": dSdata.Sentiment,
+                    "userNameLanguageCode": lCode,
+                    "userNameNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "userNameSentiment": dSdata.Sentiment,
                   });
                 }
               }

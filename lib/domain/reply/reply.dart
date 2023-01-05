@@ -14,13 +14,19 @@ abstract class Reply with _$Reply {
     //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
     //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
     required String reply,
+    required String replyLanguageCode,
+    required double replyNegativeScore,
+    required double replyPositiveScore,
+    required String replySentiment,
     required dynamic postRef,
     required dynamic postCommentRef,
     required String postCommentReplyId,
     required int likeCount,
-    // required int postCommentReplyCount,
     required String userName,
-    //resource.data.uid
+    required String userNameLanguageCode,
+    required double userNameNegativeScore,
+    required double userNamePositiveScore,
+    required String userNameSentiment,
     required String uid,
     required String userImageURL,
   }) = _Reply;

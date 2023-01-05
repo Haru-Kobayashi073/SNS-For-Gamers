@@ -1,0 +1,4 @@
+    required String replyLanguageCode,
+    required double replyNegativeScore,
+    required double replyPositiveScore,
+    required String replySentiment,

@@ -25,12 +25,19 @@ mixin _$Reply {
       throw _privateConstructorUsedError; //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   String get reply => throw _privateConstructorUsedError;
+  String get replyLanguageCode => throw _privateConstructorUsedError;
+  double get replyNegativeScore => throw _privateConstructorUsedError;
+  double get replyPositiveScore => throw _privateConstructorUsedError;
+  String get replySentiment => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
   dynamic get postCommentRef => throw _privateConstructorUsedError;
   String get postCommentReplyId => throw _privateConstructorUsedError;
-  int get likeCount =>
-      throw _privateConstructorUsedError; // required int postCommentReplyCount,
-  String get userName => throw _privateConstructorUsedError; //resource.data.uid
+  int get likeCount => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get userNameLanguageCode => throw _privateConstructorUsedError;
+  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  double get userNamePositiveScore => throw _privateConstructorUsedError;
+  String get userNameSentiment => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
 
@@ -48,11 +55,19 @@ abstract class $ReplyCopyWith<$Res> {
       {dynamic createdAt,
       dynamic updatedAt,
       String reply,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       dynamic postRef,
       dynamic postCommentRef,
       String postCommentReplyId,
       int likeCount,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String uid,
       String userImageURL});
 }
@@ -73,11 +88,19 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? reply = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? postRef = null,
     Object? postCommentRef = null,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? uid = null,
     Object? userImageURL = null,
   }) {
@@ -93,6 +116,22 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
       reply: null == reply
           ? _value.reply
           : reply // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
       postRef: null == postRef
           ? _value.postRef
@@ -113,6 +152,22 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       uid: null == uid
           ? _value.uid
@@ -136,11 +191,19 @@ abstract class _$$_ReplyCopyWith<$Res> implements $ReplyCopyWith<$Res> {
       {dynamic createdAt,
       dynamic updatedAt,
       String reply,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       dynamic postRef,
       dynamic postCommentRef,
       String postCommentReplyId,
       int likeCount,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String uid,
       String userImageURL});
 }
@@ -157,11 +220,19 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? reply = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? postRef = null,
     Object? postCommentRef = null,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? uid = null,
     Object? userImageURL = null,
   }) {
@@ -177,6 +248,22 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
       reply: null == reply
           ? _value.reply
           : reply // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
       postRef: null == postRef
           ? _value.postRef
@@ -198,6 +285,22 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -217,11 +320,19 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
       {required this.createdAt,
       required this.updatedAt,
       required this.reply,
+      required this.replyLanguageCode,
+      required this.replyNegativeScore,
+      required this.replyPositiveScore,
+      required this.replySentiment,
       required this.postRef,
       required this.postCommentRef,
       required this.postCommentReplyId,
       required this.likeCount,
       required this.userName,
+      required this.userNameLanguageCode,
+      required this.userNameNegativeScore,
+      required this.userNamePositiveScore,
+      required this.userNameSentiment,
       required this.uid,
       required this.userImageURL});
 
@@ -237,6 +348,14 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
   @override
   final String reply;
   @override
+  final String replyLanguageCode;
+  @override
+  final double replyNegativeScore;
+  @override
+  final double replyPositiveScore;
+  @override
+  final String replySentiment;
+  @override
   final dynamic postRef;
   @override
   final dynamic postCommentRef;
@@ -244,10 +363,16 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
   final String postCommentReplyId;
   @override
   final int likeCount;
-// required int postCommentReplyCount,
   @override
   final String userName;
-//resource.data.uid
+  @override
+  final String userNameLanguageCode;
+  @override
+  final double userNameNegativeScore;
+  @override
+  final double userNamePositiveScore;
+  @override
+  final String userNameSentiment;
   @override
   final String uid;
   @override
@@ -255,7 +380,7 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Reply(createdAt: $createdAt, updatedAt: $updatedAt, reply: $reply, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, likeCount: $likeCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
+    return 'Reply(createdAt: $createdAt, updatedAt: $updatedAt, reply: $reply, replyLanguageCode: $replyLanguageCode, replyNegativeScore: $replyNegativeScore, replyPositiveScore: $replyPositiveScore, replySentiment: $replySentiment, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, likeCount: $likeCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -266,11 +391,19 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('reply', reply))
+      ..add(DiagnosticsProperty('replyLanguageCode', replyLanguageCode))
+      ..add(DiagnosticsProperty('replyNegativeScore', replyNegativeScore))
+      ..add(DiagnosticsProperty('replyPositiveScore', replyPositiveScore))
+      ..add(DiagnosticsProperty('replySentiment', replySentiment))
       ..add(DiagnosticsProperty('postRef', postRef))
       ..add(DiagnosticsProperty('postCommentRef', postCommentRef))
       ..add(DiagnosticsProperty('postCommentReplyId', postCommentReplyId))
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
+      ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
+      ..add(DiagnosticsProperty('userNamePositiveScore', userNamePositiveScore))
+      ..add(DiagnosticsProperty('userNameSentiment', userNameSentiment))
       ..add(DiagnosticsProperty('uid', uid))
       ..add(DiagnosticsProperty('userImageURL', userImageURL));
   }
@@ -283,6 +416,14 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             (identical(other.reply, reply) || other.reply == reply) &&
+            (identical(other.replyLanguageCode, replyLanguageCode) ||
+                other.replyLanguageCode == replyLanguageCode) &&
+            (identical(other.replyNegativeScore, replyNegativeScore) ||
+                other.replyNegativeScore == replyNegativeScore) &&
+            (identical(other.replyPositiveScore, replyPositiveScore) ||
+                other.replyPositiveScore == replyPositiveScore) &&
+            (identical(other.replySentiment, replySentiment) ||
+                other.replySentiment == replySentiment) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
             const DeepCollectionEquality()
                 .equals(other.postCommentRef, postCommentRef) &&
@@ -292,6 +433,14 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
                 other.likeCount == likeCount) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
+                other.userNameLanguageCode == userNameLanguageCode) &&
+            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
+                other.userNameNegativeScore == userNameNegativeScore) &&
+            (identical(other.userNamePositiveScore, userNamePositiveScore) ||
+                other.userNamePositiveScore == userNamePositiveScore) &&
+            (identical(other.userNameSentiment, userNameSentiment) ||
+                other.userNameSentiment == userNameSentiment) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL));
@@ -304,11 +453,19 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
       reply,
+      replyLanguageCode,
+      replyNegativeScore,
+      replyPositiveScore,
+      replySentiment,
       const DeepCollectionEquality().hash(postRef),
       const DeepCollectionEquality().hash(postCommentRef),
       postCommentReplyId,
       likeCount,
       userName,
+      userNameLanguageCode,
+      userNameNegativeScore,
+      userNamePositiveScore,
+      userNameSentiment,
       uid,
       userImageURL);
 
@@ -331,11 +488,19 @@ abstract class _Reply implements Reply {
       {required final dynamic createdAt,
       required final dynamic updatedAt,
       required final String reply,
+      required final String replyLanguageCode,
+      required final double replyNegativeScore,
+      required final double replyPositiveScore,
+      required final String replySentiment,
       required final dynamic postRef,
       required final dynamic postCommentRef,
       required final String postCommentReplyId,
       required final int likeCount,
       required final String userName,
+      required final String userNameLanguageCode,
+      required final double userNameNegativeScore,
+      required final double userNamePositiveScore,
+      required final String userNameSentiment,
       required final String uid,
       required final String userImageURL}) = _$_Reply;
 
@@ -349,6 +514,14 @@ abstract class _Reply implements Reply {
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   String get reply;
   @override
+  String get replyLanguageCode;
+  @override
+  double get replyNegativeScore;
+  @override
+  double get replyPositiveScore;
+  @override
+  String get replySentiment;
+  @override
   dynamic get postRef;
   @override
   dynamic get postCommentRef;
@@ -356,9 +529,17 @@ abstract class _Reply implements Reply {
   String get postCommentReplyId;
   @override
   int get likeCount;
-  @override // required int postCommentReplyCount,
+  @override
   String get userName;
-  @override //resource.data.uid
+  @override
+  String get userNameLanguageCode;
+  @override
+  double get userNameNegativeScore;
+  @override
+  double get userNamePositiveScore;
+  @override
+  String get userNameSentiment;
+  @override
   String get uid;
   @override
   String get userImageURL;

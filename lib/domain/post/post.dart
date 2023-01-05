@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
@@ -20,11 +17,19 @@ abstract class Post with _$Post {
     required int likeCount,
     required int muteCount,
     required String text,
+    required String textLanguageCode,
+    required double textNegativeScore,
+    required double textPositiveScore,
+    required String textSentiment,
     required dynamic video,
     required int postCommentCount,
     required String postId,
     required String uid,
     required String userName,
+    required String userNameLanguageCode,
+    required double userNameNegativeScore,
+    required double userNamePositiveScore,
+    required String userNameSentiment,
     required String userImageURL,
   }) =  _Post;
 

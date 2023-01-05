@@ -30,27 +30,75 @@ class AdminModel extends ChangeNotifier {
       required MainModel mainModel}) async {
     // 管理者だけにできる処理
 
-    //followerを作成
-    //adminでs作成した70人を取得
-    final usersDocs =
-        await FirebaseFirestore.instance.collection("users").get();
+    //postにuserNameの解析フィールドを入れる
     final WriteBatch batch = FirebaseFirestore.instance.batch();
-    final User currentUser = returnAuthUser()!;
-    final String currentUid = currentUser.uid;
-    for (final userDoc in usersDocs.docs) {
-      batch.update(userDoc.reference, {
-        // "searchToken": returnSearchToken(
-        //     searchWords: returnSearchWords(searchTerm: userDoc["userName"])),
-        // "postCount": 0,
-        // "userNameLanguageCode": "en",
-        // "userNameNegativeScore": 0,
-        // "userNamePositiveScore": 0,
-        // "userNameSentiment": "POSITIVE",
-        "introduction": ''
+    final postsQshot =
+        await FirebaseFirestore.instance.collectionGroup("posts").get();
+    for (final post in postsQshot.docs) {
+      batch.update(post.reference, {
+        //userName
+        "userNameLanguageCode": firestoreUser.userNameLanguageCode,
+        "userNameNegativeScore": firestoreUser.userNameNegativeScore,
+        "userNamePositiveScore": firestoreUser.userNamePositiveScore,
+        "userNameSentiment": firestoreUser.userNameSentiment,
+
+        //text
+        "textLanguageCode": "",
+        "textNegativeScore": 0,
+        "textPositiveScore": 0,
+        "textSentiment": "",
       });
     }
+
+    final commentsQshot =
+        await FirebaseFirestore.instance.collectionGroup("postComments").get();
+    for (final comment in commentsQshot.docs) {
+      batch.delete(comment.reference);
+      // batch.update(comment.reference, {
+      //   //userName
+      //   "userNameLanguageCode": firestoreUser.userNameLanguageCode,
+      //   "userNameNegativeScore": firestoreUser.userNameNegativeScore,
+      //   "userNamePositiveScore": firestoreUser.userNamePositiveScore,
+      //   "userNameSentiment": firestoreUser.userNameSentiment,
+
+      //   //comment
+      //   "commentLanguageCode": "",
+      //   "commentNegativeScore": "",
+      //   "commentPositiveScore": "",
+      //   "commentSentiment": "",
+      // });
+
+      final repliesQshot = await FirebaseFirestore.instance
+          .collectionGroup("postCommentReplies")
+          .get();
+      for (final reply in repliesQshot.docs) {
+        batch.delete(reply.reference);
+      }
+    }
     await batch.commit();
-    await voids.showfluttertoast(msg: "処理が終わりました");
+    await voids.showfluttertoast(msg: "操作が完了");
+
+    // //followerを作成
+    // //adminでs作成した70人を取得
+    // final usersDocs =
+    //     await FirebaseFirestore.instance.collection("users").get();
+    // final WriteBatch batch = FirebaseFirestore.instance.batch();
+    // final User currentUser = returnAuthUser()!;
+    // final String currentUid = currentUser.uid;
+    // for (final userDoc in usersDocs.docs) {
+    //   batch.update(userDoc.reference, {
+    //     // "searchToken": returnSearchToken(
+    //     //     searchWords: returnSearchWords(searchTerm: userDoc["userName"])),
+    //     // "postCount": 0,
+    //     // "userNameLanguageCode": "en",
+    //     // "userNameNegativeScore": 0,
+    //     // "userNamePositiveScore": 0,
+    //     // "userNameSentiment": "POSITIVE",
+    //     "introduction": ''
+    //   });
+    // }
+    // await batch.commit();
+    // await voids.showfluttertoast(msg: "処理が終わりました");
 
     // final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
     // final String activeUid = returnAuthUser()!.uid;

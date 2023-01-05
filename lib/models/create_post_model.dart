@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
@@ -115,6 +116,7 @@ class CreatePostModel extends ChangeNotifier {
   }
 
   Future<void> createPost({required MainModel mainModel}) async {
+    final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final Timestamp now = Timestamp.now();
     final String activeUid = mainModel.currentUserDoc.id;
     final String postId = returnUuidV4();
@@ -128,7 +130,15 @@ class CreatePostModel extends ChangeNotifier {
         postCommentCount: 0,
         userName: mainModel.firestoreUser.userName,
         userImageURL: mainModel.firestoreUser.userImageURL,
+        userNameLanguageCode: firestoreUser.userNameLanguageCode,
+        userNameNegativeScore: firestoreUser.userNameNegativeScore,
+        userNamePositiveScore: firestoreUser.userNamePositiveScore,
+        userNameSentiment: firestoreUser.userNameSentiment,
         text: text,
+        textLanguageCode: "",
+        textNegativeScore: 0,
+        textPositiveScore: 0,
+        textSentiment: "",
         video: video,
         postId: postId,
         uid: activeUid);

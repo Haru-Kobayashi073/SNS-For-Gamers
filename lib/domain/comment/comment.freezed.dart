@@ -26,11 +26,19 @@ mixin _$Comment {
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   dynamic get postRef => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
+  String get commentLanguageCode => throw _privateConstructorUsedError;
+  double get commentNegativeScore => throw _privateConstructorUsedError;
+  double get commentPositiveScore => throw _privateConstructorUsedError;
+  String get commentSentiment => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   String get postCommentId => throw _privateConstructorUsedError;
   int get postCommentReplyCount => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get userNameLanguageCode => throw _privateConstructorUsedError;
+  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  double get userNamePositiveScore => throw _privateConstructorUsedError;
+  String get userNameSentiment => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
 
@@ -49,11 +57,19 @@ abstract class $CommentCopyWith<$Res> {
       dynamic updatedAt,
       dynamic postRef,
       String comment,
+      String commentLanguageCode,
+      double commentNegativeScore,
+      double commentPositiveScore,
+      String commentSentiment,
       int likeCount,
       String postCommentId,
       int postCommentReplyCount,
       int muteCount,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String uid,
       String userImageURL});
 }
@@ -75,11 +91,19 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? updatedAt = null,
     Object? postRef = null,
     Object? comment = null,
+    Object? commentLanguageCode = null,
+    Object? commentNegativeScore = null,
+    Object? commentPositiveScore = null,
+    Object? commentSentiment = null,
     Object? likeCount = null,
     Object? postCommentId = null,
     Object? postCommentReplyCount = null,
     Object? muteCount = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? uid = null,
     Object? userImageURL = null,
   }) {
@@ -100,6 +124,22 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String,
+      commentLanguageCode: null == commentLanguageCode
+          ? _value.commentLanguageCode
+          : commentLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      commentNegativeScore: null == commentNegativeScore
+          ? _value.commentNegativeScore
+          : commentNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      commentPositiveScore: null == commentPositiveScore
+          ? _value.commentPositiveScore
+          : commentPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      commentSentiment: null == commentSentiment
+          ? _value.commentSentiment
+          : commentSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
@@ -119,6 +159,22 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       uid: null == uid
           ? _value.uid
@@ -144,11 +200,19 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       dynamic updatedAt,
       dynamic postRef,
       String comment,
+      String commentLanguageCode,
+      double commentNegativeScore,
+      double commentPositiveScore,
+      String commentSentiment,
       int likeCount,
       String postCommentId,
       int postCommentReplyCount,
       int muteCount,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String uid,
       String userImageURL});
 }
@@ -167,11 +231,19 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? postRef = null,
     Object? comment = null,
+    Object? commentLanguageCode = null,
+    Object? commentNegativeScore = null,
+    Object? commentPositiveScore = null,
+    Object? commentSentiment = null,
     Object? likeCount = null,
     Object? postCommentId = null,
     Object? postCommentReplyCount = null,
     Object? muteCount = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? uid = null,
     Object? userImageURL = null,
   }) {
@@ -191,6 +263,22 @@ class __$$_CommentCopyWithImpl<$Res>
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
+              as String,
+      commentLanguageCode: null == commentLanguageCode
+          ? _value.commentLanguageCode
+          : commentLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      commentNegativeScore: null == commentNegativeScore
+          ? _value.commentNegativeScore
+          : commentNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      commentPositiveScore: null == commentPositiveScore
+          ? _value.commentPositiveScore
+          : commentPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      commentSentiment: null == commentSentiment
+          ? _value.commentSentiment
+          : commentSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       likeCount: null == likeCount
           ? _value.likeCount
@@ -212,6 +300,22 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -232,11 +336,19 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       required this.updatedAt,
       required this.postRef,
       required this.comment,
+      required this.commentLanguageCode,
+      required this.commentNegativeScore,
+      required this.commentPositiveScore,
+      required this.commentSentiment,
       required this.likeCount,
       required this.postCommentId,
       required this.postCommentReplyCount,
       required this.muteCount,
       required this.userName,
+      required this.userNameLanguageCode,
+      required this.userNameNegativeScore,
+      required this.userNamePositiveScore,
+      required this.userNameSentiment,
       required this.uid,
       required this.userImageURL});
 
@@ -254,6 +366,14 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   final String comment;
   @override
+  final String commentLanguageCode;
+  @override
+  final double commentNegativeScore;
+  @override
+  final double commentPositiveScore;
+  @override
+  final String commentSentiment;
+  @override
   final int likeCount;
   @override
   final String postCommentId;
@@ -264,13 +384,21 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   final String userName;
   @override
+  final String userNameLanguageCode;
+  @override
+  final double userNameNegativeScore;
+  @override
+  final double userNamePositiveScore;
+  @override
+  final String userNameSentiment;
+  @override
   final String uid;
   @override
   final String userImageURL;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, userName: $userName, uid: $uid, userImageURL: $userImageURL)';
+    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, commentLanguageCode: $commentLanguageCode, commentNegativeScore: $commentNegativeScore, commentPositiveScore: $commentPositiveScore, commentSentiment: $commentSentiment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -282,11 +410,19 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('postRef', postRef))
       ..add(DiagnosticsProperty('comment', comment))
+      ..add(DiagnosticsProperty('commentLanguageCode', commentLanguageCode))
+      ..add(DiagnosticsProperty('commentNegativeScore', commentNegativeScore))
+      ..add(DiagnosticsProperty('commentPositiveScore', commentPositiveScore))
+      ..add(DiagnosticsProperty('commentSentiment', commentSentiment))
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('postCommentId', postCommentId))
       ..add(DiagnosticsProperty('postCommentReplyCount', postCommentReplyCount))
       ..add(DiagnosticsProperty('muteCount', muteCount))
       ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
+      ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
+      ..add(DiagnosticsProperty('userNamePositiveScore', userNamePositiveScore))
+      ..add(DiagnosticsProperty('userNameSentiment', userNameSentiment))
       ..add(DiagnosticsProperty('uid', uid))
       ..add(DiagnosticsProperty('userImageURL', userImageURL));
   }
@@ -300,6 +436,14 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
             (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.commentLanguageCode, commentLanguageCode) ||
+                other.commentLanguageCode == commentLanguageCode) &&
+            (identical(other.commentNegativeScore, commentNegativeScore) ||
+                other.commentNegativeScore == commentNegativeScore) &&
+            (identical(other.commentPositiveScore, commentPositiveScore) ||
+                other.commentPositiveScore == commentPositiveScore) &&
+            (identical(other.commentSentiment, commentSentiment) ||
+                other.commentSentiment == commentSentiment) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.postCommentId, postCommentId) ||
@@ -310,6 +454,14 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
                 other.muteCount == muteCount) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
+                other.userNameLanguageCode == userNameLanguageCode) &&
+            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
+                other.userNameNegativeScore == userNameNegativeScore) &&
+            (identical(other.userNamePositiveScore, userNamePositiveScore) ||
+                other.userNamePositiveScore == userNamePositiveScore) &&
+            (identical(other.userNameSentiment, userNameSentiment) ||
+                other.userNameSentiment == userNameSentiment) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL));
@@ -317,19 +469,28 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(postRef),
-      comment,
-      likeCount,
-      postCommentId,
-      postCommentReplyCount,
-      muteCount,
-      userName,
-      uid,
-      userImageURL);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(updatedAt),
+        const DeepCollectionEquality().hash(postRef),
+        comment,
+        commentLanguageCode,
+        commentNegativeScore,
+        commentPositiveScore,
+        commentSentiment,
+        likeCount,
+        postCommentId,
+        postCommentReplyCount,
+        muteCount,
+        userName,
+        userNameLanguageCode,
+        userNameNegativeScore,
+        userNamePositiveScore,
+        userNameSentiment,
+        uid,
+        userImageURL
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -351,11 +512,19 @@ abstract class _Comment implements Comment {
       required final dynamic updatedAt,
       required final dynamic postRef,
       required final String comment,
+      required final String commentLanguageCode,
+      required final double commentNegativeScore,
+      required final double commentPositiveScore,
+      required final String commentSentiment,
       required final int likeCount,
       required final String postCommentId,
       required final int postCommentReplyCount,
       required final int muteCount,
       required final String userName,
+      required final String userNameLanguageCode,
+      required final double userNameNegativeScore,
+      required final double userNamePositiveScore,
+      required final String userNameSentiment,
       required final String uid,
       required final String userImageURL}) = _$_Comment;
 
@@ -371,6 +540,14 @@ abstract class _Comment implements Comment {
   @override
   String get comment;
   @override
+  String get commentLanguageCode;
+  @override
+  double get commentNegativeScore;
+  @override
+  double get commentPositiveScore;
+  @override
+  String get commentSentiment;
+  @override
   int get likeCount;
   @override
   String get postCommentId;
@@ -380,6 +557,14 @@ abstract class _Comment implements Comment {
   int get muteCount;
   @override
   String get userName;
+  @override
+  String get userNameLanguageCode;
+  @override
+  double get userNameNegativeScore;
+  @override
+  double get userNamePositiveScore;
+  @override
+  String get userNameSentiment;
   @override
   String get uid;
   @override
