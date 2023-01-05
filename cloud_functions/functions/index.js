@@ -10,6 +10,7 @@ const minusOne = -1;
 const config = functions.config();
 admin.initializeApp(config.firebase);
 
+//algolia
 const algoliasearch = require("algoliasearch");//algoliaとデータ同期
 const algoliaConfig = config.algolia;
 const ALGOLIA_APP_ID = algoliaConfig.app_id;
@@ -17,10 +18,77 @@ const ALGOLIA_ADMIN_KEY = algoliaConfig.admin_key;
 const ALGOLIA_POSTS_INDEX_NAME = "posts";
 const client = algoliasearch(ALGOLIA_APP_ID,ALGOLIA_ADMIN_KEY);
 
+//AWS
+const AWS = require("aws-sdk")
+const aws_config = config.aws;
+const AWS_ACCESS_KEY = aws_config.access_key;
+const AWS_SECRET_ACCESS_KEY = aws_config.secret_access_key;
+const AWS_REGION = "ap-southeast-1";
+
+//IAM
+AWS.config.update({
+  accessKeyId: AWS_ACCESS_KEY,
+  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  region: AWS_REGION
+});
+
+//comprehend
+const comprehend = new AWS.Comprehend({apiVersion: "2017-11-27"});
 
 const fireStore = admin.firestore();
 const batchLimit = 500;
 //cloudfunctionsはrulesを無視することができる
+
+function mul100AndRoundingDown(num) {
+  const mul100 = num * 100;
+  const result = Math.floor(mul100);
+  return result;
+}
+
+exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
+  async (snap,_) => {
+    const newValue = snap.data();
+    const userRef = snap.ref
+    const text = newValue.userName; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await userRef.update({
+                    "userNameNegativeScore": lCode,
+                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "userNameSentiment": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "userNameLanguageCode": dSdata.Sentiment,
+                  });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
+  }
+);
 
 exports.onFollowerCreate = functions.firestore.document('users/{uid}/followers/{followerUid}').onCreate(
   async (snap,_) => {
