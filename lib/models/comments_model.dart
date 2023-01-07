@@ -256,4 +256,6 @@ class CommentsModel extends ChangeNotifier {
         deleteLikeCommentToken.postCommentRef;
     await postCommentRef.collection('postCommentLikes').doc(activeUid).delete();
   }
+
+  void reportComment() {}
 }

@@ -226,4 +226,6 @@ class RepliesModel extends ChangeNotifier {
         .doc(activeUid)
         .delete();
   }
+
+  void reportReply() {}
 }

@@ -91,4 +91,6 @@ class PostsModel extends ChangeNotifier {
     //投稿がいいねされた印を削除
     await postDoc.reference.collection("postLikes").doc(activeUid).delete();
   }
+
+  void reportPost() {}
 }
