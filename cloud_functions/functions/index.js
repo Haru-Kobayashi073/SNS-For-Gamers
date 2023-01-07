@@ -35,6 +35,10 @@ AWS.config.update({
 //comprehend
 const comprehend = new AWS.Comprehend({apiVersion: "2017-11-27"});
 
+//sendgrid
+const sgMail = require("@sendgrid/mail");
+const SENDGRID_API_KEY = config.sendgrid.api_key;
+
 const fireStore = admin.firestore();
 const batchLimit = 500;
 //cloudfunctionsはrulesを無視することができる
@@ -45,10 +49,27 @@ function mul100AndRoundingDown(num) {
   return result;
 }
 
+function sendMail(text, subject) {
+  //関数を呼び出すたびにAPIKEYをセットする必要がある
+  sgMail.setApiKey(SENDGRID_API_KEY);
+  const msg = {
+    to: 'haru.03002@gmail.com',
+    from: 'haru.03002@gmail.com',
+    subject: subject,
+    text: text,
+  };
+  sgMail.send(msg).then(
+    (ref) => {
+      console.log(ref);
+    }).catch(e => {
+      console.log(e);
+    });
+}
+
 exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
   async (snap,_) => {
     const newValue = snap.data();
-    const userRef = snap.ref
+    const ref = snap.ref
     const text = newValue.userName; //解析したい値
     const dDparams = {
       Text: text,
@@ -74,7 +95,7 @@ exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
                 if (dSerr) {
                   console.log(dSerr);
                 } else {
-                  await userRef.update({
+                  await ref.update({
                     "userNameLanguageCode": lCode,
                     "userNameNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
                     "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
@@ -170,7 +191,45 @@ exports.onPostCommentLikeDelete = functions.firestore.document('users/{uid}/post
 
 exports.onPostCommentCreate = functions.firestore.document('users/{uid}/posts/{postId}/postComments/{id}').onCreate(
   async (snap,_) => {
-    const newValue = snap.data();
+    const newValue = snap.data();const ref = snap.ref
+    const text = newValue.comment; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await ref.update({
+                    "commentLanguageCode": lCode,
+                    "commentNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "commentPositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "commentSentiment": dSdata.Sentiment,
+                  });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
     await newValue.postRef.update({
       "postCommentCount": admin.firestore.FieldValue.increment(plusOne),
     });
@@ -264,6 +323,45 @@ exports.onPostCommentReplyCreate = functions.firestore.document('users/{uid}/pos
   async (snap,_) => {
     //コメントのpostCommentReplyCountを増やしたい
     const newValue = snap.data();
+    const ref = snap.ref
+    const text = newValue.reply; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await ref.update({
+                    "replyLanguageCode": lCode,
+                    "replyNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "replyPositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "replySentiment": dSdata.Sentiment,
+                  });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
     await newValue.postCommentRef.update({
       "postCommentReplyCount": admin.firestore.FieldValue.increment(plusOne),
     });
@@ -286,17 +384,55 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
     const newValue = snap.data();
     const userRef = newValue.userRef;
     const uid = newValue.uid;
+    const searchToken = newValue.searchToken;
     const userName = newValue.userName;
     const userImageURL = newValue.userImageURL;
     const introduction = newValue.introduction;
     const now = admin.firestore.Timestamp.now();
-    await newValue.userRef.update({
-      'userName': userName,
-      'userImageURL': userImageURL,
-      'introduction': introduction,
-      //updatedAtは改ざんされないようにcloud Functionsで制限する
-      'updatedAt': now,
-    });
+    const text = newValue.userName; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await newValue.userRef.update({
+                    "searchToken": searchToken,
+                    'userName': userName,
+                    "userNameLanguageCode": lCode,
+                    "userNameNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "userNameSentiment": dSdata.Sentiment,
+                    'userImageURL': userImageURL,
+                    'introduction': introduction,
+                    //updatedAtは改ざんされないようにcloud Functionsで制限する
+                    'updatedAt': now,
+                    });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
     // const commentsQshot = await fireStore.collectionGroup('comments').where('uid', '==' uid)
     //複数の投稿をupdateするのでbatchが必要
     const postQshot = await fireStore.collection('users').doc(uid).collection('posts').get();
@@ -374,6 +510,47 @@ exports.onUserUpdateLogCreate = functions.firestore.document('users/{uid}/userUp
 exports.onPostCreate = functions.firestore.document('users/{uid}/posts/{postId}').onCreate(
   async (snap,_) => {
     const newValue = snap.data();
+    //detectSentiment
+    const ref = snap.ref
+    const text = newValue.text; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await ref.update({
+                    "textLanguageCode": lCode,
+                    "textNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "textPositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "textSentiment": dSdata.Sentiment,
+                  });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
+    //algolia
     newValue.objectID = snap.id;//objectIDはalgoliaのID
     const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
     index.saveObject(newValue);

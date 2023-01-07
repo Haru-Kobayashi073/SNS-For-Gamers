@@ -24,6 +24,7 @@ class PostSearchScreen extends ConsumerWidget {
           await postSearchModel.operation(
               muteUids: mainModel.muteUids, mutePostIds: mainModel.mutePostIds);
         },
+        // child: Container(child: Text("aaaa"),),
         child: ListView.builder(
             itemCount: postMaps.length,
             itemBuilder: (context, index) {

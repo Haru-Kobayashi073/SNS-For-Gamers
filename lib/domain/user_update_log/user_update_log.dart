@@ -21,6 +21,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     required String introduction,
     //どのユーザーをupdateするか判別するのに必要
     required dynamic userRef,
+    required Map<String,dynamic> searchToken,
     required String uid,
   }) = _UserUpdateLog;
 

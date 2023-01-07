@@ -28,6 +28,7 @@ mixin _$UserUpdateLog {
   String get introduction =>
       throw _privateConstructorUsedError; //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef => throw _privateConstructorUsedError;
+  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $UserUpdateLogCopyWith<$Res> {
       String userImageURL,
       String introduction,
       dynamic userRef,
+      Map<String, dynamic> searchToken,
       String uid});
 }
 
@@ -69,6 +71,7 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
     Object? userImageURL = null,
     Object? introduction = null,
     Object? userRef = null,
+    Object? searchToken = null,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
@@ -92,6 +95,10 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      searchToken: null == searchToken
+          ? _value.searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$_UserUpdateLogCopyWith<$Res>
       String userImageURL,
       String introduction,
       dynamic userRef,
+      Map<String, dynamic> searchToken,
       String uid});
 }
 
@@ -133,6 +141,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
     Object? userImageURL = null,
     Object? introduction = null,
     Object? userRef = null,
+    Object? searchToken = null,
     Object? uid = null,
   }) {
     return _then(_$_UserUpdateLog(
@@ -156,6 +165,10 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      searchToken: null == searchToken
+          ? _value._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -173,7 +186,9 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       required this.userImageURL,
       required this.introduction,
       required this.userRef,
-      required this.uid});
+      required final Map<String, dynamic> searchToken,
+      required this.uid})
+      : _searchToken = searchToken;
 
   factory _$_UserUpdateLog.fromJson(Map<String, dynamic> json) =>
       _$$_UserUpdateLogFromJson(json);
@@ -191,12 +206,19 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
 //どのユーザーをupdateするか判別するのに必要
   @override
   final dynamic userRef;
+  final Map<String, dynamic> _searchToken;
+  @override
+  Map<String, dynamic> get searchToken {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_searchToken);
+  }
+
   @override
   final String uid;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, introduction: $introduction, userRef: $userRef, uid: $uid)';
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, userName: $userName, userImageURL: $userImageURL, introduction: $introduction, userRef: $userRef, searchToken: $searchToken, uid: $uid)';
   }
 
   @override
@@ -209,6 +231,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       ..add(DiagnosticsProperty('userImageURL', userImageURL))
       ..add(DiagnosticsProperty('introduction', introduction))
       ..add(DiagnosticsProperty('userRef', userRef))
+      ..add(DiagnosticsProperty('searchToken', searchToken))
       ..add(DiagnosticsProperty('uid', uid));
   }
 
@@ -226,6 +249,8 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
             (identical(other.introduction, introduction) ||
                 other.introduction == introduction) &&
             const DeepCollectionEquality().equals(other.userRef, userRef) &&
+            const DeepCollectionEquality()
+                .equals(other._searchToken, _searchToken) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
@@ -238,6 +263,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
       userImageURL,
       introduction,
       const DeepCollectionEquality().hash(userRef),
+      const DeepCollectionEquality().hash(_searchToken),
       uid);
 
   @JsonKey(ignore: true)
@@ -261,6 +287,7 @@ abstract class _UserUpdateLog implements UserUpdateLog {
       required final String userImageURL,
       required final String introduction,
       required final dynamic userRef,
+      required final Map<String, dynamic> searchToken,
       required final String uid}) = _$_UserUpdateLog;
 
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
@@ -277,6 +304,8 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   String get introduction;
   @override //どのユーザーをupdateするか判別するのに必要
   dynamic get userRef;
+  @override
+  Map<String, dynamic> get searchToken;
   @override
   String get uid;
   @override

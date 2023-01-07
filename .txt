@@ -1,4 +1,47 @@
-    required String replyLanguageCode,
-    required double replyNegativeScore,
-    required double replyPositiveScore,
-    required String replySentiment,
+.onCreate(
+    async (snap,_) => {
+    const text = newValue.userName; //解析したい値
+    const dDparams = {
+      Text: text,
+    };
+    //主要な言語のコードを取得
+    let lCode = "";
+    comprehend.detectDominantLanguage(
+      dDparams,
+      async (dDerr, dDdata) => {
+        if (dDerr) {
+          console.log(dDerr);
+        } else {
+          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
+          lCode = dDdata.Languages[0]["LanguageCode"];
+          if (lCode) {
+            const dSparams = {
+              LanguageCode: lCode,
+              Text: text,
+            };
+            comprehend.detectSentiment(
+              dSparams,
+              async (dSerr, dSdata) => {
+                if (dSerr) {
+                  console.log(dSerr);
+                } else {
+                  await newValue.userRef.update({
+                    'userName': userName,
+                    "userNameLanguageCode": lCode,
+                    "userNameNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                    "userNameSentiment": dSdata.Sentiment,
+                    'userImageURL': userImageURL,
+                    'introduction': introduction,
+                    //updatedAtは改ざんされないようにcloud Functionsで制限する
+                    'updatedAt': now,
+                    });
+                }
+              }
+              );
+          }
+        }
+      }
+      );
+  }
+)

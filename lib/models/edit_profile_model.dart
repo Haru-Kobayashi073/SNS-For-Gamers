@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sns_vol2/constants/lists.dart';
+import 'package:sns_vol2/constants/maps.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
@@ -47,6 +49,7 @@ class EditProfileModel extends ChangeNotifier {
           userImageURL: userImageURL,
           introduction: introduction,
           userRef: currentUserDoc.reference,
+          searchToken: returnSearchToken(searchWords: returnSearchWords(searchTerm: userName)),
           uid: currentUserDoc.id);
       // doc()とidを指定しないと、勝手に生成してくれる
       await currentUserDoc.reference

@@ -17,10 +17,8 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final UserSearchModel searchModel = ref.watch(userSearchProvider);
     final PassiveUserProfileModel passiveUserProfileModel =
         ref.watch(passiveUserProfileProvider);
-    final userDocs = searchModel.userDocs;
 
     return DefaultTabController(
       length: searchTabBarElements.length,
