@@ -1,16 +1,17 @@
 //flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:sns_vol2/details/report_contents_listview.dart';
 import 'package:sns_vol2/domain/like_post_token/like_post_token.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/domain/post_like/post_like.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/views/login_page.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final postsProvider = ChangeNotifierProvider((ref) => PostsModel());
 
@@ -92,5 +93,20 @@ class PostsModel extends ChangeNotifier {
     await postDoc.reference.collection("postLikes").doc(activeUid).delete();
   }
 
-  void reportPost() {}
+  void reportPost({
+    required BuildContext context,
+  }) {
+    final selectedReportContentsNotifier = ValueNotifier<List<String>>([]);//変更をすぐに検知する
+    voids.showFlashDialog(
+        context: context,
+        content: ReportContentsListView(selectedReportContentsNotifier: selectedReportContentsNotifier,),
+        positiveActionBuilder: (_, controller, __) {
+          return TextButton(
+              onPressed: () async {},
+              child: const Text(
+                "送信",
+                style: TextStyle(color: Colors.red),
+              ));
+        });
+  }
 }

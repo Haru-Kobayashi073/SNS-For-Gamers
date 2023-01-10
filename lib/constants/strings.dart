@@ -50,6 +50,7 @@ const String muteReplyButtonText = 'リプライをミュート';
 const String unMutePostText = '投稿のミュートを解除する';
 const String showMutePostsText = 'ミュートしている投稿を表示';
 const String mutePostText = '投稿をミュートする';
+const String reportPostText = '投稿を報告';
 const String showMuteRepliesText = 'ミュートしているリプライを表示';
 const String muteReplyText = 'リプライをミュート';
 const String unMuteReplyText = 'リプライのミュートを解除';

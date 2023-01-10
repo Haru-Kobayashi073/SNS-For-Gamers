@@ -75,9 +75,9 @@ Future<void> processBasicDocs(
     //！は否定
     //正しいユーザーかどうかの処理と、重複処理
     final map = doc.data();
-      if (isValidUser(muteUids: muteUids, map: doc.data()) &&
-          !docs.contains(doc) &&
-          isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
+    if (isValidUser(muteUids: muteUids, map: doc.data()) &&
+        !docs.contains(doc) &&
+        isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
     // print("$docs 111");
     //addだと上手くいく
   }
@@ -128,4 +128,21 @@ Future<void> showfluttertoast({required String msg}) async {
       backgroundColor: Colors.red[900],
       textColor: Colors.white,
       fontSize: 16.0);
+}
+
+void showFlashDialog(
+    {required BuildContext context,
+    required Widget content,
+    required Widget Function(BuildContext, FlashController<Object?>,
+            void Function(void Function()))?
+        positiveActionBuilder}) {
+  context.showFlashDialog(
+    content: content,
+    negativeActionBuilder: (_, controller, __) {
+      return TextButton(
+          onPressed: () async => await controller.dismiss(),
+          child: const Text(backText));
+    },
+    positiveActionBuilder: positiveActionBuilder,
+  );
 }

@@ -32,7 +32,7 @@ void toMyAppPage({required BuildContext context}) =>
 void toSignUpPage({required BuildContext context}) => Navigator.push(
     context, MaterialPageRoute(builder: (context) => const SignUpPage()));
 
-void toLoginpPage({required BuildContext context}) => Navigator.push(
+void toLoginPage({required BuildContext context}) => Navigator.push(
     context, MaterialPageRoute(builder: (context) => const LoginPage()));
 
 void toAccountPage(

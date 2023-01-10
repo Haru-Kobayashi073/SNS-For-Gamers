@@ -130,6 +130,14 @@ class PostCard extends ConsumerWidget {
                                     child: const Text(mutePostText),
                                   ),
                                   CupertinoDialogAction(
+                                    isDestructiveAction: true,
+                                    onPressed: () async {
+                                      Navigator.pop(innerContext);
+                                      postsModel.reportPost(context: context);
+                                    },
+                                    child: const Text(reportPostText),
+                                  ),
+                                  CupertinoDialogAction(
                                     isDefaultAction: true,
                                     onPressed: () =>
                                         Navigator.pop(innerContext),
@@ -155,9 +163,8 @@ class PostCard extends ConsumerWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     image: NetworkImage(
-                      // post.imageURL
-                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
-                        ),
+                        // post.imageURL
+                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'),
                   )),
                 ),
               ],
