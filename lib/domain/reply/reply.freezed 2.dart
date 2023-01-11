@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'comment.dart';
+part of 'reply.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,27 +14,25 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Comment _$CommentFromJson(Map<String, dynamic> json) {
-  return _Comment.fromJson(json);
+Reply _$ReplyFromJson(Map<String, dynamic> json) {
+  return _Reply.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Comment {
+mixin _$Reply {
   dynamic get createdAt => throw _privateConstructorUsedError;
   dynamic get updatedAt =>
       throw _privateConstructorUsedError; //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  String get reply => throw _privateConstructorUsedError;
+  String get replyLanguageCode => throw _privateConstructorUsedError;
+  double get replyNegativeScore => throw _privateConstructorUsedError;
+  double get replyPositiveScore => throw _privateConstructorUsedError;
+  String get replySentiment => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
-  String get commentLanguageCode => throw _privateConstructorUsedError;
-  double get commentNegativeScore => throw _privateConstructorUsedError;
-  double get commentPositiveScore => throw _privateConstructorUsedError;
-  String get commentSentiment => throw _privateConstructorUsedError;
+  dynamic get postCommentRef => throw _privateConstructorUsedError;
+  String get postCommentReplyId => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
-  int get postCommentReplyCount => throw _privateConstructorUsedError;
-  int get muteCount => throw _privateConstructorUsedError;
-  int get reportCount => throw _privateConstructorUsedError;
-  String get postCommentId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userNameLanguageCode => throw _privateConstructorUsedError;
   double get userNameNegativeScore => throw _privateConstructorUsedError;
@@ -45,28 +43,26 @@ mixin _$Comment {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
+  $ReplyCopyWith<Reply> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CommentCopyWith<$Res> {
-  factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
-      _$CommentCopyWithImpl<$Res, Comment>;
+abstract class $ReplyCopyWith<$Res> {
+  factory $ReplyCopyWith(Reply value, $Res Function(Reply) then) =
+      _$ReplyCopyWithImpl<$Res, Reply>;
   @useResult
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      String reply,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       dynamic postRef,
-      String comment,
-      String commentLanguageCode,
-      double commentNegativeScore,
-      double commentPositiveScore,
-      String commentSentiment,
+      dynamic postCommentRef,
+      String postCommentReplyId,
       int likeCount,
-      int postCommentReplyCount,
-      int muteCount,
-      int reportCount,
-      String postCommentId,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -77,9 +73,9 @@ abstract class $CommentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CommentCopyWithImpl<$Res, $Val extends Comment>
-    implements $CommentCopyWith<$Res> {
-  _$CommentCopyWithImpl(this._value, this._then);
+class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
+    implements $ReplyCopyWith<$Res> {
+  _$ReplyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,17 +87,15 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? reply = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? postRef = null,
-    Object? comment = null,
-    Object? commentLanguageCode = null,
-    Object? commentNegativeScore = null,
-    Object? commentPositiveScore = null,
-    Object? commentSentiment = null,
+    Object? postCommentRef = null,
+    Object? postCommentReplyId = null,
     Object? likeCount = null,
-    Object? postCommentReplyCount = null,
-    Object? muteCount = null,
-    Object? reportCount = null,
-    Object? postCommentId = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -119,50 +113,42 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      reply: null == reply
+          ? _value.reply
+          : reply // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       postRef: null == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentLanguageCode: null == commentLanguageCode
-          ? _value.commentLanguageCode
-          : commentLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentNegativeScore: null == commentNegativeScore
-          ? _value.commentNegativeScore
-          : commentNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
-      commentPositiveScore: null == commentPositiveScore
-          ? _value.commentPositiveScore
-          : commentPositiveScore // ignore: cast_nullable_to_non_nullable
-              as double,
-      commentSentiment: null == commentSentiment
-          ? _value.commentSentiment
-          : commentSentiment // ignore: cast_nullable_to_non_nullable
+      postCommentRef: null == postCommentRef
+          ? _value.postCommentRef
+          : postCommentRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postCommentReplyId: null == postCommentReplyId
+          ? _value.postCommentReplyId
+          : postCommentReplyId // ignore: cast_nullable_to_non_nullable
               as String,
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
-      postCommentReplyCount: null == postCommentReplyCount
-          ? _value.postCommentReplyCount
-          : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      muteCount: null == muteCount
-          ? _value.muteCount
-          : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postCommentId: null == postCommentId
-          ? _value.postCommentId
-          : postCommentId // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -196,26 +182,23 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
 }
 
 /// @nodoc
-abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
-  factory _$$_CommentCopyWith(
-          _$_Comment value, $Res Function(_$_Comment) then) =
-      __$$_CommentCopyWithImpl<$Res>;
+abstract class _$$_ReplyCopyWith<$Res> implements $ReplyCopyWith<$Res> {
+  factory _$$_ReplyCopyWith(_$_Reply value, $Res Function(_$_Reply) then) =
+      __$$_ReplyCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {dynamic createdAt,
       dynamic updatedAt,
+      String reply,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       dynamic postRef,
-      String comment,
-      String commentLanguageCode,
-      double commentNegativeScore,
-      double commentPositiveScore,
-      String commentSentiment,
+      dynamic postCommentRef,
+      String postCommentReplyId,
       int likeCount,
-      int postCommentReplyCount,
-      int muteCount,
-      int reportCount,
-      String postCommentId,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -226,10 +209,9 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CommentCopyWithImpl<$Res>
-    extends _$CommentCopyWithImpl<$Res, _$_Comment>
-    implements _$$_CommentCopyWith<$Res> {
-  __$$_CommentCopyWithImpl(_$_Comment _value, $Res Function(_$_Comment) _then)
+class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
+    implements _$$_ReplyCopyWith<$Res> {
+  __$$_ReplyCopyWithImpl(_$_Reply _value, $Res Function(_$_Reply) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -237,17 +219,15 @@ class __$$_CommentCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? reply = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? postRef = null,
-    Object? comment = null,
-    Object? commentLanguageCode = null,
-    Object? commentNegativeScore = null,
-    Object? commentPositiveScore = null,
-    Object? commentSentiment = null,
+    Object? postCommentRef = null,
+    Object? postCommentReplyId = null,
     Object? likeCount = null,
-    Object? postCommentReplyCount = null,
-    Object? muteCount = null,
-    Object? reportCount = null,
-    Object? postCommentId = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -256,7 +236,7 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? uid = null,
     Object? userImageURL = null,
   }) {
-    return _then(_$_Comment(
+    return _then(_$_Reply(
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -265,50 +245,42 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      reply: null == reply
+          ? _value.reply
+          : reply // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       postRef: null == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentLanguageCode: null == commentLanguageCode
-          ? _value.commentLanguageCode
-          : commentLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentNegativeScore: null == commentNegativeScore
-          ? _value.commentNegativeScore
-          : commentNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
-      commentPositiveScore: null == commentPositiveScore
-          ? _value.commentPositiveScore
-          : commentPositiveScore // ignore: cast_nullable_to_non_nullable
-              as double,
-      commentSentiment: null == commentSentiment
-          ? _value.commentSentiment
-          : commentSentiment // ignore: cast_nullable_to_non_nullable
+      postCommentRef: null == postCommentRef
+          ? _value.postCommentRef
+          : postCommentRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postCommentReplyId: null == postCommentReplyId
+          ? _value.postCommentReplyId
+          : postCommentReplyId // ignore: cast_nullable_to_non_nullable
               as String,
       likeCount: null == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
-      postCommentReplyCount: null == postCommentReplyCount
-          ? _value.postCommentReplyCount
-          : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      muteCount: null == muteCount
-          ? _value.muteCount
-          : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postCommentId: null == postCommentId
-          ? _value.postCommentId
-          : postCommentId // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -343,21 +315,19 @@ class __$$_CommentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Comment with DiagnosticableTreeMixin implements _Comment {
-  const _$_Comment(
+class _$_Reply with DiagnosticableTreeMixin implements _Reply {
+  const _$_Reply(
       {required this.createdAt,
       required this.updatedAt,
+      required this.reply,
+      required this.replyLanguageCode,
+      required this.replyNegativeScore,
+      required this.replyPositiveScore,
+      required this.replySentiment,
       required this.postRef,
-      required this.comment,
-      required this.commentLanguageCode,
-      required this.commentNegativeScore,
-      required this.commentPositiveScore,
-      required this.commentSentiment,
+      required this.postCommentRef,
+      required this.postCommentReplyId,
       required this.likeCount,
-      required this.postCommentReplyCount,
-      required this.muteCount,
-      required this.reportCount,
-      required this.postCommentId,
       required this.userName,
       required this.userNameLanguageCode,
       required this.userNameNegativeScore,
@@ -366,8 +336,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       required this.uid,
       required this.userImageURL});
 
-  factory _$_Comment.fromJson(Map<String, dynamic> json) =>
-      _$$_CommentFromJson(json);
+  factory _$_Reply.fromJson(Map<String, dynamic> json) =>
+      _$$_ReplyFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -376,27 +346,23 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
   @override
+  final String reply;
+  @override
+  final String replyLanguageCode;
+  @override
+  final double replyNegativeScore;
+  @override
+  final double replyPositiveScore;
+  @override
+  final String replySentiment;
+  @override
   final dynamic postRef;
   @override
-  final String comment;
+  final dynamic postCommentRef;
   @override
-  final String commentLanguageCode;
-  @override
-  final double commentNegativeScore;
-  @override
-  final double commentPositiveScore;
-  @override
-  final String commentSentiment;
+  final String postCommentReplyId;
   @override
   final int likeCount;
-  @override
-  final int postCommentReplyCount;
-  @override
-  final int muteCount;
-  @override
-  final int reportCount;
-  @override
-  final String postCommentId;
   @override
   final String userName;
   @override
@@ -414,27 +380,25 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, commentLanguageCode: $commentLanguageCode, commentNegativeScore: $commentNegativeScore, commentPositiveScore: $commentPositiveScore, commentSentiment: $commentSentiment, likeCount: $likeCount, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, reportCount: $reportCount, postCommentId: $postCommentId, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
+    return 'Reply(createdAt: $createdAt, updatedAt: $updatedAt, reply: $reply, replyLanguageCode: $replyLanguageCode, replyNegativeScore: $replyNegativeScore, replyPositiveScore: $replyPositiveScore, replySentiment: $replySentiment, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, likeCount: $likeCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Comment'))
+      ..add(DiagnosticsProperty('type', 'Reply'))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('reply', reply))
+      ..add(DiagnosticsProperty('replyLanguageCode', replyLanguageCode))
+      ..add(DiagnosticsProperty('replyNegativeScore', replyNegativeScore))
+      ..add(DiagnosticsProperty('replyPositiveScore', replyPositiveScore))
+      ..add(DiagnosticsProperty('replySentiment', replySentiment))
       ..add(DiagnosticsProperty('postRef', postRef))
-      ..add(DiagnosticsProperty('comment', comment))
-      ..add(DiagnosticsProperty('commentLanguageCode', commentLanguageCode))
-      ..add(DiagnosticsProperty('commentNegativeScore', commentNegativeScore))
-      ..add(DiagnosticsProperty('commentPositiveScore', commentPositiveScore))
-      ..add(DiagnosticsProperty('commentSentiment', commentSentiment))
+      ..add(DiagnosticsProperty('postCommentRef', postCommentRef))
+      ..add(DiagnosticsProperty('postCommentReplyId', postCommentReplyId))
       ..add(DiagnosticsProperty('likeCount', likeCount))
-      ..add(DiagnosticsProperty('postCommentReplyCount', postCommentReplyCount))
-      ..add(DiagnosticsProperty('muteCount', muteCount))
-      ..add(DiagnosticsProperty('reportCount', reportCount))
-      ..add(DiagnosticsProperty('postCommentId', postCommentId))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
       ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
@@ -448,29 +412,25 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Comment &&
+            other is _$_Reply &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            (identical(other.reply, reply) || other.reply == reply) &&
+            (identical(other.replyLanguageCode, replyLanguageCode) ||
+                other.replyLanguageCode == replyLanguageCode) &&
+            (identical(other.replyNegativeScore, replyNegativeScore) ||
+                other.replyNegativeScore == replyNegativeScore) &&
+            (identical(other.replyPositiveScore, replyPositiveScore) ||
+                other.replyPositiveScore == replyPositiveScore) &&
+            (identical(other.replySentiment, replySentiment) ||
+                other.replySentiment == replySentiment) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
-            (identical(other.comment, comment) || other.comment == comment) &&
-            (identical(other.commentLanguageCode, commentLanguageCode) ||
-                other.commentLanguageCode == commentLanguageCode) &&
-            (identical(other.commentNegativeScore, commentNegativeScore) ||
-                other.commentNegativeScore == commentNegativeScore) &&
-            (identical(other.commentPositiveScore, commentPositiveScore) ||
-                other.commentPositiveScore == commentPositiveScore) &&
-            (identical(other.commentSentiment, commentSentiment) ||
-                other.commentSentiment == commentSentiment) &&
+            const DeepCollectionEquality()
+                .equals(other.postCommentRef, postCommentRef) &&
+            (identical(other.postCommentReplyId, postCommentReplyId) ||
+                other.postCommentReplyId == postCommentReplyId) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
-            (identical(other.postCommentReplyCount, postCommentReplyCount) ||
-                other.postCommentReplyCount == postCommentReplyCount) &&
-            (identical(other.muteCount, muteCount) ||
-                other.muteCount == muteCount) &&
-            (identical(other.reportCount, reportCount) ||
-                other.reportCount == reportCount) &&
-            (identical(other.postCommentId, postCommentId) ||
-                other.postCommentId == postCommentId) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userNameLanguageCode, userNameLanguageCode) ||
@@ -488,68 +448,63 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        const DeepCollectionEquality().hash(createdAt),
-        const DeepCollectionEquality().hash(updatedAt),
-        const DeepCollectionEquality().hash(postRef),
-        comment,
-        commentLanguageCode,
-        commentNegativeScore,
-        commentPositiveScore,
-        commentSentiment,
-        likeCount,
-        postCommentReplyCount,
-        muteCount,
-        reportCount,
-        postCommentId,
-        userName,
-        userNameLanguageCode,
-        userNameNegativeScore,
-        userNamePositiveScore,
-        userNameSentiment,
-        uid,
-        userImageURL
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt),
+      reply,
+      replyLanguageCode,
+      replyNegativeScore,
+      replyPositiveScore,
+      replySentiment,
+      const DeepCollectionEquality().hash(postRef),
+      const DeepCollectionEquality().hash(postCommentRef),
+      postCommentReplyId,
+      likeCount,
+      userName,
+      userNameLanguageCode,
+      userNameNegativeScore,
+      userNamePositiveScore,
+      userNameSentiment,
+      uid,
+      userImageURL);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CommentCopyWith<_$_Comment> get copyWith =>
-      __$$_CommentCopyWithImpl<_$_Comment>(this, _$identity);
+  _$$_ReplyCopyWith<_$_Reply> get copyWith =>
+      __$$_ReplyCopyWithImpl<_$_Reply>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommentToJson(
+    return _$$_ReplyToJson(
       this,
     );
   }
 }
 
-abstract class _Comment implements Comment {
-  const factory _Comment(
+abstract class _Reply implements Reply {
+  const factory _Reply(
       {required final dynamic createdAt,
       required final dynamic updatedAt,
+      required final String reply,
+      required final String replyLanguageCode,
+      required final double replyNegativeScore,
+      required final double replyPositiveScore,
+      required final String replySentiment,
       required final dynamic postRef,
-      required final String comment,
-      required final String commentLanguageCode,
-      required final double commentNegativeScore,
-      required final double commentPositiveScore,
-      required final String commentSentiment,
+      required final dynamic postCommentRef,
+      required final String postCommentReplyId,
       required final int likeCount,
-      required final int postCommentReplyCount,
-      required final int muteCount,
-      required final int reportCount,
-      required final String postCommentId,
       required final String userName,
       required final String userNameLanguageCode,
       required final double userNameNegativeScore,
       required final double userNamePositiveScore,
       required final String userNameSentiment,
       required final String uid,
-      required final String userImageURL}) = _$_Comment;
+      required final String userImageURL}) = _$_Reply;
 
-  factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
+  factory _Reply.fromJson(Map<String, dynamic> json) = _$_Reply.fromJson;
 
   @override
   dynamic get createdAt;
@@ -557,27 +512,23 @@ abstract class _Comment implements Comment {
   dynamic get updatedAt;
   @override //Freezedではパッケージの型が使えない＝FirestoreのTimestampなど。
 //dynamicで代用するが、エラーを吐いてくれない型だから、特殊な場面以外は非推奨
+  String get reply;
+  @override
+  String get replyLanguageCode;
+  @override
+  double get replyNegativeScore;
+  @override
+  double get replyPositiveScore;
+  @override
+  String get replySentiment;
+  @override
   dynamic get postRef;
   @override
-  String get comment;
+  dynamic get postCommentRef;
   @override
-  String get commentLanguageCode;
-  @override
-  double get commentNegativeScore;
-  @override
-  double get commentPositiveScore;
-  @override
-  String get commentSentiment;
+  String get postCommentReplyId;
   @override
   int get likeCount;
-  @override
-  int get postCommentReplyCount;
-  @override
-  int get muteCount;
-  @override
-  int get reportCount;
-  @override
-  String get postCommentId;
   @override
   String get userName;
   @override
@@ -594,6 +545,6 @@ abstract class _Comment implements Comment {
   String get userImageURL;
   @override
   @JsonKey(ignore: true)
-  _$$_CommentCopyWith<_$_Comment> get copyWith =>
+  _$$_ReplyCopyWith<_$_Reply> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -101,7 +101,7 @@ class RepliesModel extends ChangeNotifier {
         positiveActionColor: Colors.black,
         primaryActionBuilder: (_, controller, __) {
           return InkWell(
-            child: Icon(Icons.send),
+            child: const Icon(Icons.send),
             onTap: () async {
               if (textEditingController.text.isNotEmpty) {
                 //メインの動作
@@ -142,6 +142,7 @@ class RepliesModel extends ChangeNotifier {
         postCommentRef: commentDoc.reference,
         postCommentReplyId: postCommentReplyId,
         likeCount: 0,
+        reportCount: 0,
         userName: firestoreUser.userName,
         userNameLanguageCode: firestoreUser.userNameLanguageCode,
         userNameNegativeScore: firestoreUser.userNameNegativeScore,

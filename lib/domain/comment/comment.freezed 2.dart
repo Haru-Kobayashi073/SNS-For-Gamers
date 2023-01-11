@@ -31,10 +31,9 @@ mixin _$Comment {
   double get commentPositiveScore => throw _privateConstructorUsedError;
   String get commentSentiment => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
+  String get postCommentId => throw _privateConstructorUsedError;
   int get postCommentReplyCount => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
-  int get reportCount => throw _privateConstructorUsedError;
-  String get postCommentId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userNameLanguageCode => throw _privateConstructorUsedError;
   double get userNameNegativeScore => throw _privateConstructorUsedError;
@@ -63,10 +62,9 @@ abstract class $CommentCopyWith<$Res> {
       double commentPositiveScore,
       String commentSentiment,
       int likeCount,
+      String postCommentId,
       int postCommentReplyCount,
       int muteCount,
-      int reportCount,
-      String postCommentId,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -98,10 +96,9 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? commentPositiveScore = null,
     Object? commentSentiment = null,
     Object? likeCount = null,
+    Object? postCommentId = null,
     Object? postCommentReplyCount = null,
     Object? muteCount = null,
-    Object? reportCount = null,
-    Object? postCommentId = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -147,6 +144,10 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      postCommentId: null == postCommentId
+          ? _value.postCommentId
+          : postCommentId // ignore: cast_nullable_to_non_nullable
+              as String,
       postCommentReplyCount: null == postCommentReplyCount
           ? _value.postCommentReplyCount
           : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
@@ -155,14 +156,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postCommentId: null == postCommentId
-          ? _value.postCommentId
-          : postCommentId // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -212,10 +205,9 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       double commentPositiveScore,
       String commentSentiment,
       int likeCount,
+      String postCommentId,
       int postCommentReplyCount,
       int muteCount,
-      int reportCount,
-      String postCommentId,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -244,10 +236,9 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? commentPositiveScore = null,
     Object? commentSentiment = null,
     Object? likeCount = null,
+    Object? postCommentId = null,
     Object? postCommentReplyCount = null,
     Object? muteCount = null,
-    Object? reportCount = null,
-    Object? postCommentId = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -293,6 +284,10 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      postCommentId: null == postCommentId
+          ? _value.postCommentId
+          : postCommentId // ignore: cast_nullable_to_non_nullable
+              as String,
       postCommentReplyCount: null == postCommentReplyCount
           ? _value.postCommentReplyCount
           : postCommentReplyCount // ignore: cast_nullable_to_non_nullable
@@ -301,14 +296,6 @@ class __$$_CommentCopyWithImpl<$Res>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postCommentId: null == postCommentId
-          ? _value.postCommentId
-          : postCommentId // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -354,10 +341,9 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       required this.commentPositiveScore,
       required this.commentSentiment,
       required this.likeCount,
+      required this.postCommentId,
       required this.postCommentReplyCount,
       required this.muteCount,
-      required this.reportCount,
-      required this.postCommentId,
       required this.userName,
       required this.userNameLanguageCode,
       required this.userNameNegativeScore,
@@ -390,13 +376,11 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   final int likeCount;
   @override
+  final String postCommentId;
+  @override
   final int postCommentReplyCount;
   @override
   final int muteCount;
-  @override
-  final int reportCount;
-  @override
-  final String postCommentId;
   @override
   final String userName;
   @override
@@ -414,7 +398,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, commentLanguageCode: $commentLanguageCode, commentNegativeScore: $commentNegativeScore, commentPositiveScore: $commentPositiveScore, commentSentiment: $commentSentiment, likeCount: $likeCount, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, reportCount: $reportCount, postCommentId: $postCommentId, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
+    return 'Comment(createdAt: $createdAt, updatedAt: $updatedAt, postRef: $postRef, comment: $comment, commentLanguageCode: $commentLanguageCode, commentNegativeScore: $commentNegativeScore, commentPositiveScore: $commentPositiveScore, commentSentiment: $commentSentiment, likeCount: $likeCount, postCommentId: $postCommentId, postCommentReplyCount: $postCommentReplyCount, muteCount: $muteCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -431,10 +415,9 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('commentPositiveScore', commentPositiveScore))
       ..add(DiagnosticsProperty('commentSentiment', commentSentiment))
       ..add(DiagnosticsProperty('likeCount', likeCount))
+      ..add(DiagnosticsProperty('postCommentId', postCommentId))
       ..add(DiagnosticsProperty('postCommentReplyCount', postCommentReplyCount))
       ..add(DiagnosticsProperty('muteCount', muteCount))
-      ..add(DiagnosticsProperty('reportCount', reportCount))
-      ..add(DiagnosticsProperty('postCommentId', postCommentId))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
       ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
@@ -463,14 +446,12 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
                 other.commentSentiment == commentSentiment) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
+            (identical(other.postCommentId, postCommentId) ||
+                other.postCommentId == postCommentId) &&
             (identical(other.postCommentReplyCount, postCommentReplyCount) ||
                 other.postCommentReplyCount == postCommentReplyCount) &&
             (identical(other.muteCount, muteCount) ||
                 other.muteCount == muteCount) &&
-            (identical(other.reportCount, reportCount) ||
-                other.reportCount == reportCount) &&
-            (identical(other.postCommentId, postCommentId) ||
-                other.postCommentId == postCommentId) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userNameLanguageCode, userNameLanguageCode) ||
@@ -499,10 +480,9 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
         commentPositiveScore,
         commentSentiment,
         likeCount,
+        postCommentId,
         postCommentReplyCount,
         muteCount,
-        reportCount,
-        postCommentId,
         userName,
         userNameLanguageCode,
         userNameNegativeScore,
@@ -537,10 +517,9 @@ abstract class _Comment implements Comment {
       required final double commentPositiveScore,
       required final String commentSentiment,
       required final int likeCount,
+      required final String postCommentId,
       required final int postCommentReplyCount,
       required final int muteCount,
-      required final int reportCount,
-      required final String postCommentId,
       required final String userName,
       required final String userNameLanguageCode,
       required final double userNameNegativeScore,
@@ -571,13 +550,11 @@ abstract class _Comment implements Comment {
   @override
   int get likeCount;
   @override
+  String get postCommentId;
+  @override
   int get postCommentReplyCount;
   @override
   int get muteCount;
-  @override
-  int get reportCount;
-  @override
-  String get postCommentId;
   @override
   String get userName;
   @override

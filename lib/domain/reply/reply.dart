@@ -22,6 +22,7 @@ abstract class Reply with _$Reply {
     required dynamic postCommentRef,
     required String postCommentReplyId,
     required int likeCount,
+    required int reportCount,
     required String userName,
     required String userNameLanguageCode,
     required double userNameNegativeScore,

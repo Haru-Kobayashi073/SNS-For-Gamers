@@ -175,6 +175,7 @@ class CommentsModel extends ChangeNotifier {
         commentSentiment: "",
         likeCount: 0,
         muteCount: 0,
+        reportCount: 0,
         postRef: postDoc.reference,
         postCommentId: postCommentId,
         postCommentReplyCount: 0,

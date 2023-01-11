@@ -26,7 +26,6 @@ mixin _$Post {
   String get imageURL => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
-  int get reportCount => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get textLanguageCode => throw _privateConstructorUsedError;
   double get textNegativeScore => throw _privateConstructorUsedError;
@@ -60,7 +59,6 @@ abstract class $PostCopyWith<$Res> {
       String imageURL,
       int likeCount,
       int muteCount,
-      int reportCount,
       String text,
       String textLanguageCode,
       double textNegativeScore,
@@ -97,7 +95,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? imageURL = null,
     Object? likeCount = null,
     Object? muteCount = null,
-    Object? reportCount = null,
     Object? text = null,
     Object? textLanguageCode = null,
     Object? textNegativeScore = null,
@@ -138,10 +135,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
               as int,
       text: null == text
           ? _value.text
@@ -220,7 +213,6 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String imageURL,
       int likeCount,
       int muteCount,
-      int reportCount,
       String text,
       String textLanguageCode,
       double textNegativeScore,
@@ -253,7 +245,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? imageURL = null,
     Object? likeCount = null,
     Object? muteCount = null,
-    Object? reportCount = null,
     Object? text = null,
     Object? textLanguageCode = null,
     Object? textNegativeScore = null,
@@ -294,10 +285,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
               as int,
       text: null == text
           ? _value.text
@@ -373,7 +360,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.imageURL,
       required this.likeCount,
       required this.muteCount,
-      required this.reportCount,
       required this.text,
       required this.textLanguageCode,
       required this.textNegativeScore,
@@ -411,8 +397,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
   final int muteCount;
   @override
-  final int reportCount;
-  @override
   final String text;
   @override
   final String textLanguageCode;
@@ -445,7 +429,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, muteCount: $muteCount, reportCount: $reportCount, text: $text, textLanguageCode: $textLanguageCode, textNegativeScore: $textNegativeScore, textPositiveScore: $textPositiveScore, textSentiment: $textSentiment, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userImageURL: $userImageURL)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, muteCount: $muteCount, text: $text, textLanguageCode: $textLanguageCode, textNegativeScore: $textNegativeScore, textPositiveScore: $textPositiveScore, textSentiment: $textSentiment, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userImageURL: $userImageURL)';
   }
 
   @override
@@ -459,7 +443,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('imageURL', imageURL))
       ..add(DiagnosticsProperty('likeCount', likeCount))
       ..add(DiagnosticsProperty('muteCount', muteCount))
-      ..add(DiagnosticsProperty('reportCount', reportCount))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('textLanguageCode', textLanguageCode))
       ..add(DiagnosticsProperty('textNegativeScore', textNegativeScore))
@@ -491,8 +474,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
                 other.likeCount == likeCount) &&
             (identical(other.muteCount, muteCount) ||
                 other.muteCount == muteCount) &&
-            (identical(other.reportCount, reportCount) ||
-                other.reportCount == reportCount) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.textLanguageCode, textLanguageCode) ||
                 other.textLanguageCode == textLanguageCode) &&
@@ -531,7 +512,6 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
         imageURL,
         likeCount,
         muteCount,
-        reportCount,
         text,
         textLanguageCode,
         textNegativeScore,
@@ -571,7 +551,6 @@ abstract class _Post implements Post {
       required final String imageURL,
       required final int likeCount,
       required final int muteCount,
-      required final int reportCount,
       required final String text,
       required final String textLanguageCode,
       required final double textNegativeScore,
@@ -602,8 +581,6 @@ abstract class _Post implements Post {
   int get likeCount;
   @override
   int get muteCount;
-  @override
-  int get reportCount;
   @override
   String get text;
   @override

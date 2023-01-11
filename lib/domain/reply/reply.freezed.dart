@@ -33,6 +33,7 @@ mixin _$Reply {
   dynamic get postCommentRef => throw _privateConstructorUsedError;
   String get postCommentReplyId => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
+  int get reportCount => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userNameLanguageCode => throw _privateConstructorUsedError;
   double get userNameNegativeScore => throw _privateConstructorUsedError;
@@ -63,6 +64,7 @@ abstract class $ReplyCopyWith<$Res> {
       dynamic postCommentRef,
       String postCommentReplyId,
       int likeCount,
+      int reportCount,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -96,6 +98,7 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
     Object? postCommentRef = null,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
+    Object? reportCount = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -149,6 +152,10 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reportCount: null == reportCount
+          ? _value.reportCount
+          : reportCount // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -199,6 +206,7 @@ abstract class _$$_ReplyCopyWith<$Res> implements $ReplyCopyWith<$Res> {
       dynamic postCommentRef,
       String postCommentReplyId,
       int likeCount,
+      int reportCount,
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
@@ -228,6 +236,7 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
     Object? postCommentRef = null,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
+    Object? reportCount = null,
     Object? userName = null,
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
@@ -281,6 +290,10 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
+      reportCount: null == reportCount
+          ? _value.reportCount
+          : reportCount // ignore: cast_nullable_to_non_nullable
+              as int,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -328,6 +341,7 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
       required this.postCommentRef,
       required this.postCommentReplyId,
       required this.likeCount,
+      required this.reportCount,
       required this.userName,
       required this.userNameLanguageCode,
       required this.userNameNegativeScore,
@@ -364,6 +378,8 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
   @override
   final int likeCount;
   @override
+  final int reportCount;
+  @override
   final String userName;
   @override
   final String userNameLanguageCode;
@@ -380,7 +396,7 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Reply(createdAt: $createdAt, updatedAt: $updatedAt, reply: $reply, replyLanguageCode: $replyLanguageCode, replyNegativeScore: $replyNegativeScore, replyPositiveScore: $replyPositiveScore, replySentiment: $replySentiment, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, likeCount: $likeCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
+    return 'Reply(createdAt: $createdAt, updatedAt: $updatedAt, reply: $reply, replyLanguageCode: $replyLanguageCode, replyNegativeScore: $replyNegativeScore, replyPositiveScore: $replyPositiveScore, replySentiment: $replySentiment, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, likeCount: $likeCount, reportCount: $reportCount, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, uid: $uid, userImageURL: $userImageURL)';
   }
 
   @override
@@ -399,6 +415,7 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
       ..add(DiagnosticsProperty('postCommentRef', postCommentRef))
       ..add(DiagnosticsProperty('postCommentReplyId', postCommentReplyId))
       ..add(DiagnosticsProperty('likeCount', likeCount))
+      ..add(DiagnosticsProperty('reportCount', reportCount))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('userNameLanguageCode', userNameLanguageCode))
       ..add(DiagnosticsProperty('userNameNegativeScore', userNameNegativeScore))
@@ -431,6 +448,8 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
                 other.postCommentReplyId == postCommentReplyId) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
+            (identical(other.reportCount, reportCount) ||
+                other.reportCount == reportCount) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userNameLanguageCode, userNameLanguageCode) ||
@@ -448,26 +467,28 @@ class _$_Reply with DiagnosticableTreeMixin implements _Reply {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
-      reply,
-      replyLanguageCode,
-      replyNegativeScore,
-      replyPositiveScore,
-      replySentiment,
-      const DeepCollectionEquality().hash(postRef),
-      const DeepCollectionEquality().hash(postCommentRef),
-      postCommentReplyId,
-      likeCount,
-      userName,
-      userNameLanguageCode,
-      userNameNegativeScore,
-      userNamePositiveScore,
-      userNameSentiment,
-      uid,
-      userImageURL);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(updatedAt),
+        reply,
+        replyLanguageCode,
+        replyNegativeScore,
+        replyPositiveScore,
+        replySentiment,
+        const DeepCollectionEquality().hash(postRef),
+        const DeepCollectionEquality().hash(postCommentRef),
+        postCommentReplyId,
+        likeCount,
+        reportCount,
+        userName,
+        userNameLanguageCode,
+        userNameNegativeScore,
+        userNamePositiveScore,
+        userNameSentiment,
+        uid,
+        userImageURL
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -496,6 +517,7 @@ abstract class _Reply implements Reply {
       required final dynamic postCommentRef,
       required final String postCommentReplyId,
       required final int likeCount,
+      required final int reportCount,
       required final String userName,
       required final String userNameLanguageCode,
       required final double userNameNegativeScore,
@@ -529,6 +551,8 @@ abstract class _Reply implements Reply {
   String get postCommentReplyId;
   @override
   int get likeCount;
+  @override
+  int get reportCount;
   @override
   String get userName;
   @override

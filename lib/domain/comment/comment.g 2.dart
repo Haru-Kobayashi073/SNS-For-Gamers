@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'reply.dart';
+part of 'comment.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Reply _$$_ReplyFromJson(Map<String, dynamic> json) => _$_Reply(
+_$_Comment _$$_CommentFromJson(Map<String, dynamic> json) => _$_Comment(
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
-      reply: json['reply'] as String,
-      replyLanguageCode: json['replyLanguageCode'] as String,
-      replyNegativeScore: (json['replyNegativeScore'] as num).toDouble(),
-      replyPositiveScore: (json['replyPositiveScore'] as num).toDouble(),
-      replySentiment: json['replySentiment'] as String,
       postRef: json['postRef'],
-      postCommentRef: json['postCommentRef'],
-      postCommentReplyId: json['postCommentReplyId'] as String,
+      comment: json['comment'] as String,
+      commentLanguageCode: json['commentLanguageCode'] as String,
+      commentNegativeScore: (json['commentNegativeScore'] as num).toDouble(),
+      commentPositiveScore: (json['commentPositiveScore'] as num).toDouble(),
+      commentSentiment: json['commentSentiment'] as String,
       likeCount: json['likeCount'] as int,
-      reportCount: json['reportCount'] as int,
+      postCommentId: json['postCommentId'] as String,
+      postCommentReplyCount: json['postCommentReplyCount'] as int,
+      muteCount: json['muteCount'] as int,
       userName: json['userName'] as String,
       userNameLanguageCode: json['userNameLanguageCode'] as String,
       userNameNegativeScore: (json['userNameNegativeScore'] as num).toDouble(),
@@ -28,19 +28,20 @@ _$_Reply _$$_ReplyFromJson(Map<String, dynamic> json) => _$_Reply(
       userImageURL: json['userImageURL'] as String,
     );
 
-Map<String, dynamic> _$$_ReplyToJson(_$_Reply instance) => <String, dynamic>{
+Map<String, dynamic> _$$_CommentToJson(_$_Comment instance) =>
+    <String, dynamic>{
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'reply': instance.reply,
-      'replyLanguageCode': instance.replyLanguageCode,
-      'replyNegativeScore': instance.replyNegativeScore,
-      'replyPositiveScore': instance.replyPositiveScore,
-      'replySentiment': instance.replySentiment,
       'postRef': instance.postRef,
-      'postCommentRef': instance.postCommentRef,
-      'postCommentReplyId': instance.postCommentReplyId,
+      'comment': instance.comment,
+      'commentLanguageCode': instance.commentLanguageCode,
+      'commentNegativeScore': instance.commentNegativeScore,
+      'commentPositiveScore': instance.commentPositiveScore,
+      'commentSentiment': instance.commentSentiment,
       'likeCount': instance.likeCount,
-      'reportCount': instance.reportCount,
+      'postCommentId': instance.postCommentId,
+      'postCommentReplyCount': instance.postCommentReplyCount,
+      'muteCount': instance.muteCount,
       'userName': instance.userName,
       'userNameLanguageCode': instance.userNameLanguageCode,
       'userNameNegativeScore': instance.userNameNegativeScore,

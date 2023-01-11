@@ -66,6 +66,12 @@ function sendMail(text, subject) {
     });
 }
 
+function sendReport(data, contentType) {
+  const stringData = JSON.stringify(data); // Map<String,dynamic> map.toString();
+  const result = stringData.replace(/,/g, ",\n"); //,を,改行コードに置き換えしている
+  sendMail(result, `${contentType}を報告`);
+}
+
 exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
   async (snap,_) => {
     const newValue = snap.data();
@@ -168,6 +174,16 @@ exports.onPostLikeDelete = functions.firestore.document('users/{uid}/posts/{post
     await newValue.postRef.update({
       "likeCount": admin.firestore.FieldValue.increment(minusOne),
     });
+  }
+);
+
+exports.onPostReportCreate = functions.firestore.document('users/{uid}/posts/{postId}/postReports/{postReport}').onCreate(
+  async (snap,_) => {
+    const newValue = snap.data();
+    await newValue.postDocRef.update({
+      "reportCount": admin.firestore.FieldValue.increment(plusOne),
+    });
+    sendReport(newValue, "投稿");
   }
 );
 

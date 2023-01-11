@@ -7,9 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/report_contents_listview.dart';
+import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/like_post_token/like_post_token.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/domain/post_like/post_like.dart';
+import 'package:sns_vol2/domain/post_report/post_report.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 
@@ -95,14 +97,46 @@ class PostsModel extends ChangeNotifier {
 
   void reportPost({
     required BuildContext context,
+    required FirestoreUser firestoreUser,
+    required Post post,
+    required DocumentSnapshot<Map<String, dynamic>> postDoc,
   }) {
-    final selectedReportContentsNotifier = ValueNotifier<List<String>>([]);//変更をすぐに検知する
+    final selectedReportContentsNotifier =
+        ValueNotifier<List<String>>([]); //変更をすぐに検知する
+    final String postReportId = returnUuidV4();
     voids.showFlashDialog(
         context: context,
-        content: ReportContentsListView(selectedReportContentsNotifier: selectedReportContentsNotifier,),
+        content: ReportContentsListView(
+          selectedReportContentsNotifier: selectedReportContentsNotifier,
+        ),
         positiveActionBuilder: (_, controller, __) {
+          final postDocRef = postDoc.reference;
           return TextButton(
-              onPressed: () async {},
+              onPressed: () async {
+                final PostReport postReport = PostReport(
+                    activeUid: firestoreUser.uid,
+                    createdAt: Timestamp.now(),
+                    others: "",
+                    reportContent: returnReportContentsString(
+                        selectedReportContents:
+                            selectedReportContentsNotifier.value),
+                    postCreatorUid: post.uid,
+                    passiveUserName: post.userName,
+                    postDocRef: postDocRef,
+                    postId: post.postId,
+                    postReportId: postReportId,
+                    text: post.text,
+                    postTextLanguageCode: post.textLanguageCode,
+                    postTextNegativeScore: post.textNegativeScore,
+                    postTextPositiveScore: post.textPositiveScore,
+                    postTextSentiment: post.textSentiment);
+                await controller.dismiss();
+                await voids.showfluttertoast(msg: "投稿を報告しました");
+                await postDocRef
+                    .collection("postReports")
+                    .doc(postReportId)
+                    .set(postReport.toJson());
+              },
               child: const Text(
                 "送信",
                 style: TextStyle(color: Colors.red),

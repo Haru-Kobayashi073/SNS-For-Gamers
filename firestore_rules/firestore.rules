@@ -12,7 +12,7 @@ service cloud.firestore {
       allow read: if isAdmin();
     }
     match /users/{uid} {
-      allow read: if isAuthenticated();
+      allow read: if isAuthenticatedAndVerified();
       allow update: if isAdmin();
       allow create, delete: if isTheSameUserAndVerifiedOrAdmin(uid);
       match /timelines/{postId} {
@@ -34,9 +34,12 @@ service cloud.firestore {
         allow create, delete: if isTheSameUserAndVerifiedOrAdmin(followerUid);
       }
       match /posts/{postId} {
-        allow read: if isAuthenticated();
+        allow read: if isAuthenticatedAndVerified();
         allow update: if isAdmin();
         allow create, delete: if isTheSameUserAndVerifiedOrAdmin(uid);
+        match /postReports/{postReportId} {
+          allow create: if isAuthenticatedAndVerified();
+        }
         match /postLikes/{activeUid} {
           allow create, delete: if isTheSameUserAndVerifiedOrAdmin(activeUid);
         }
@@ -44,9 +47,9 @@ service cloud.firestore {
           allow create, delete: if isTheSameUserAndVerifiedOrAdmin(activeUid);
         }
         match /postComments/{postCommentId} {
-          allow read: if isAuthenticated();
+          allow read: if isAuthenticatedAndVerified();
           // allow create, delete: if isTheSameUserAndVerifiedOrAdmin(uid);
-          allow create: if isAuthenticated();
+          allow create: if isAuthenticatedAndVerified();
           // postCommentReplyのdataのuidが現在ログインしているう人と同じであれば消去できる
           allow delete: if isTheSameUserAndVerifiedOrAdmin(resource.data.uid);
           match /postCommentMutes/{activeUid} {
@@ -57,9 +60,9 @@ service cloud.firestore {
             allow create, delete: if isTheSameUserAndVerifiedOrAdmin(activeUid);
           }
           match /postCommentReplies/{postCommentReplyId} {
-            allow read: if isAuthenticated();
+            allow read: if isAuthenticatedAndVerified();
             // allow create, delete: if isTheSameUserAndVerifiedOrAdmin(uid);
-            allow create: if isAuthenticated();
+            allow create: if isAuthenticatedAndVerified();
             // postCommentReplyのdataのuidが現在ログインしているう人と同じであれば消去できる
             allow delete: if isTheSameUserAndVerifiedOrAdmin(resource.data.uid);
             match /postCommentReplyMutes/{activeUid} {
@@ -73,8 +76,8 @@ service cloud.firestore {
       }
     }
   }
-  function isAuthenticated() {
-  return request.auth != null;
+  function isAuthenticatedAndVerified() {
+    return request.auth != null && isEmailVerified();
   }
   function isTheSameUserAndVerifiedOrAdmin(uid) {
     return (request.auth.uid == uid && isEmailVerified()) || isAdmin();

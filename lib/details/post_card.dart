@@ -133,7 +133,12 @@ class PostCard extends ConsumerWidget {
                                     isDestructiveAction: true,
                                     onPressed: () async {
                                       Navigator.pop(innerContext);
-                                      postsModel.reportPost(context: context);
+                                      postsModel.reportPost(
+                                        context: context,
+                                        firestoreUser: firestoreUser,
+                                        post: post,
+                                        postDoc: postDoc
+                                        );
                                     },
                                     child: const Text(reportPostText),
                                   ),

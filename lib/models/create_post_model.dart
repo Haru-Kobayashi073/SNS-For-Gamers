@@ -128,6 +128,7 @@ class CreatePostModel extends ChangeNotifier {
         likeCount: 0,
         muteCount: 0,
         postCommentCount: 0,
+        reportCount: 0,
         userName: mainModel.firestoreUser.userName,
         userImageURL: mainModel.firestoreUser.userImageURL,
         userNameLanguageCode: firestoreUser.userNameLanguageCode,

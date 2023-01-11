@@ -1,4 +1,5 @@
 // titles
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 const String appTitle = "SNS";
@@ -110,3 +111,12 @@ String returnUuidV4() {
 }
 
 String returnJpgFileName() => '${returnUuidV4()}.jpg';
+
+String returnReportContentsString(
+    {required List<String> selectedReportContents}) {
+  String reportContentString = '';
+  for (final content in selectedReportContents) {
+    reportContentString += '.$content,'; //メールで見た時見やすいように加工
+  }
+  return reportContentString;
+}

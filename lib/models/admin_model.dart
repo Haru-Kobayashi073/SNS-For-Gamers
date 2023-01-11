@@ -36,17 +36,7 @@ class AdminModel extends ChangeNotifier {
         await FirebaseFirestore.instance.collectionGroup("posts").get();
     for (final post in postsQshot.docs) {
       batch.update(post.reference, {
-        //userName
-        "userNameLanguageCode": firestoreUser.userNameLanguageCode,
-        "userNameNegativeScore": firestoreUser.userNameNegativeScore,
-        "userNamePositiveScore": firestoreUser.userNamePositiveScore,
-        "userNameSentiment": firestoreUser.userNameSentiment,
-
-        //text
-        "textLanguageCode": "",
-        "textNegativeScore": 0,
-        "textPositiveScore": 0,
-        "textSentiment": "",
+        "reportCount": 0,
       });
     }
 

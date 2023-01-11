@@ -16,6 +16,7 @@ abstract class Post with _$Post {
     required String imageURL,
     required int likeCount,
     required int muteCount,
+    required int reportCount,
     required String text,
     required String textLanguageCode,
     required double textNegativeScore,
