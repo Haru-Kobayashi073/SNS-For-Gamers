@@ -154,10 +154,14 @@ class MainModel extends ChangeNotifier {
   }
 
   void updateFrontUserInfo(
-      {required String newUserName, required String newUserImageURL, required String introduction}) {
+      {required String newUserName,
+      required String newUserImageURL,
+      required String introduction}) {
     //firestoreUserの中身を現在の現在のfirestoreUserをほぼコピーしてuserNameだけ変更したものに更新
     firestoreUser = firestoreUser.copyWith(
-        userName: newUserName, userImageURL: newUserImageURL, introduction: introduction);
+        userName: newUserName,
+        userImageURL: newUserImageURL,
+        introduction: introduction);
     notifyListeners();
   }
 

@@ -1,9 +1,13 @@
 //flutter
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 //packages
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/themes.dart';
 import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
@@ -15,6 +19,7 @@ import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //model
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/views/main/articles_screen.dart';
@@ -30,10 +35,17 @@ import 'package:sns_vol2/constants/routes.dart' as routes;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const ProviderScope(child: MyApp()));
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+    runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -63,6 +75,8 @@ class MyApp extends ConsumerWidget {
     final ThemeModel themeModel = ref.watch(themeProvider);
 
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
         title: appTitle,
         theme: themeModel.isDarkTheme
@@ -133,6 +147,7 @@ class MyHomePage extends ConsumerWidget {
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: mainModel.isLoading
+      // body: 1 == 1
           ? const Center(
               child: Text(loadingText),
             )

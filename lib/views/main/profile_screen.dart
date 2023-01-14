@@ -1,5 +1,4 @@
 //flutter
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
@@ -11,16 +10,11 @@ import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/details/user_header.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/models/comments_model.dart';
-import 'package:sns_vol2/models/edit_profile_model.dart';
 import 'package:sns_vol2/models/main/profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
-import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -39,6 +33,7 @@ class ProfileScreen extends ConsumerWidget {
     final postDocs = profileModel.postDocs;
 
     return Scaffold(
+      backgroundColor: colors.backScreenColor,
       appBar: NormalAppBar(title: profileText, mainModel: mainModel),
       drawer: SNSDrawer(
           mainModel: mainModel,

@@ -50,6 +50,20 @@ class CreatePostModel extends ChangeNotifier {
               maxLength: 30,
             ),
           ),
+          GestureDetector(
+            child: 
+            video == null ? 
+            Container(
+              height: 270,
+              width: 360,
+              color: Colors.grey,
+              child: const Icon(
+                Icons.add_photo_alternate_outlined,
+                size: 68,
+                ),
+            ) : Container(),
+            onTap: () {},
+          ),
           // GestureDetector(
           //   onTap: () async {
           //     var result = await others.returnXFile();

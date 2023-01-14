@@ -8,6 +8,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //なぜFutureを使うかというと、画像ファイルの取得には時間がかかるから非同期処理をする必要がある
 Future<dynamic> returnXFile() async {
@@ -46,8 +47,11 @@ Query<Map<String, dynamic>> returnSearchQuery(
       FirebaseFirestore.instance.collection("users");
   final mute = users.get();
   // for (final searchWord in searchWords) {
-    final query = users.where("newMuteUser25", isEqualTo: true);
-    //TODO:検索機能書く
+  final query = users.where("newMuteUser25", isEqualTo: true);
+  //TODO:検索機能書く
   // }
   return query;
 }
+
+AppLocalizations returnL10n({required BuildContext context}) =>
+    AppLocalizations.of(context);
