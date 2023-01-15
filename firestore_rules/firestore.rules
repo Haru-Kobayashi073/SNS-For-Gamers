@@ -3,18 +3,21 @@ service cloud.firestore {
   match /databases/{database}/documents {
     //collectionGroupのルール
     match /{path=**}/posts/{postCommentId} {
-      allow read: if isAdmin();
+      allow read: if isAuthenticatedAndVerified();
     }
     match /{path=**}/postComments/{postCommentId} {
-      allow read: if isAdmin();
+      allow read: if isAuthenticatedAndVerified();
     }
     match /{path=**}/postCommentReplies/{postCommentId} {
-      allow read: if isAdmin();
+      allow read: if isAuthenticatedAndVerified();
+    }
+    match /deleteUsers/{uid} {
+      allow create: if isTheSameUserAndVerified(uid) && isValidUser(request.resource.data, uid);
     }
     match /users/{uid} {
       allow read: if isAuthenticatedAndVerified();
       allow update: if isAdmin();
-      allow create: if isTheSameUserAndVerified(uid) && isValidUser(request.resource.data, uid);
+      allow create: if isTheSameUser(uid) && isValidUser(request.resource.data, uid);
       allow delete: if isTheSameUserAndVerified(uid);
       match /timelines/{postId} {
         allow read: if isTheSameUserAndVerified(uid);
@@ -81,6 +84,11 @@ service cloud.firestore {
   function isAuthenticatedAndVerified() {
     return request.auth != null && isEmailVerified();
   }
+
+  function isTheSameUser(uid) {
+    return request.auth.uid == uid;
+  }
+
   function isTheSameUserAndVerified(uid) {
     return request.auth.uid == uid && isEmailVerified();
   }

@@ -24,7 +24,8 @@ class AccountModel extends ChangeNotifier {
       ReauthenticationState.initialValue;
 
   Future<void> reauthenticateWithCredential(
-      {required BuildContext context, required FirestoreUser firestoreUser}) async {
+      {required BuildContext context,
+      required FirestoreUser firestoreUser}) async {
     currentUser = returnAuthUser();
     final String email = currentUser!.email!;
     //FirebaseAuthの大事な作業に必要
@@ -119,11 +120,17 @@ class AccountModel extends ChangeNotifier {
     final String msg = returnL10n(context: context).userDeletedMsg;
     final User currentUser = returnAuthUser()!;
     //deleteUserを作成する
-    // await FirebaseFirestore.instance
-    //     .collection("deleteUsers")
-    //     .doc(currentUser.uid)
-    //     .set(firestoreUser.toJson())
-    //     .then((_) => returnAuthUser()!.delete());
-    routes.toFinishedPage(context: context, msg: msg);
+    try {
+      await FirebaseFirestore.instance
+          .collection("deleteUsers")
+          .doc(currentUser.uid)
+          .set(firestoreUser.toJson())
+          .then((_) => currentUser.delete());
+    } on FirebaseException catch (e) {
+      if (e.code == "requires-recent-login") {
+        voids.showfluttertoast(msg: requiresRecentLoginMsg);
+      }
+    }
+    // routes.toFinishedPage(context: context, msg: msg);
   }
 }

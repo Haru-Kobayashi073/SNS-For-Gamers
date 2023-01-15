@@ -37,6 +37,7 @@ const comprehend = new AWS.Comprehend({apiVersion: "2017-11-27"});
 
 //sendgrid
 const sgMail = require("@sendgrid/mail");
+const { firestore } = require('firebase-admin');
 const SENDGRID_API_KEY = config.sendgrid.api_key;
 
 const fireStore = admin.firestore();
@@ -114,6 +115,95 @@ exports.onUserCreate = functions.firestore.document('users/{uid}').onCreate(
         }
       }
       );
+  }
+);
+
+exports.onDeleteUserCreate = functions.firestore.document('deleteUsers/{uid}').onCreate(
+  async (snap,_) => {
+    const uid = snap.id;
+    const myRef = fireStore.collection('users').doc(uid);
+
+    const replies = await fireStore.collectionGroup("postCommentReplies").where('uid', "==", uid).get();
+    let replyCount = 0;
+    let replyBatch = fireStore.batch();
+    for (const reply of replies.docs) {
+      replyBatch.delete(reply.ref);
+      replyCount++;
+      if (replyCount == batchLimit) {
+        await replyBatch.commit();
+        replyBatch = fireStore.batch();
+        replyCount = 0;
+      }
+    }
+    if (replyCount > 0) {
+      await replyBatch.commit();
+    }
+
+    const comments = await fireStore.collectionGroup("postComments").where('uid', "==", uid).get();
+    let commentCount = 0;
+    let commentBatch = fireStore.batch();
+    for (const comment of comments.docs) {
+      commentBatch.delete(comment.ref);
+      commentCount++;
+      if (commentCount == batchLimit) {
+        await commentBatch.commit();
+        commentBatch = fireStore.batch();
+        commentCount = 0;
+      }
+    }
+    if (commentCount > 0) {
+      await commentBatch.commit();
+    }
+
+    const posts = await myRef.collection("posts").get();
+    let postCount = 0;
+    let postBatch = fireStore.batch();
+    for (const post of posts.docs) {
+      postBatch.delete(post.ref);
+      postCount++;
+      if (postCount == batchLimit) {
+        await postBatch.commit();
+        postBatch = fireStore.batch();
+        postCount = 0;
+      }
+    }
+    if (postCount > 0) {
+      await postBatch.commit();
+    }
+
+    const timelines = await myRef.collection("timeline").get();
+    let timelineCount = 0;
+    let timelineBatch = fireStore.batch();
+    for (const timeline of timelines.docs) {
+      timelineBatch.delete(timeline.ref);
+      timelineCount++;
+      if (timelineCount == batchLimit) {
+        await timelineBatch.commit();
+        timelineBatch = fireStore.batch();
+        timelineCount = 0;
+      }
+    }
+    if (timelineCount > 0) {
+      await timelineBatch.commit();
+    }
+
+    const tokens = await myRef.collection('tokens').get();
+    let tokenCount = 0;
+    let tokenBatch = fireStore.batch();
+    for (const token of tokens.docs) {
+      tokenBatch.delete(token.ref);
+      tokenCount++;
+      if (tokenCount == batchLimit) {
+        await tokenBatch.commit();
+        tokenBatch = fireStore.batch();
+        tokenCount = 0;
+      }
+    }
+    if (tokenCount > 0) {
+      await tokenBatch.commit();
+    }
+
+    await myRef.delete();//一番最後に削除(カウントのドキュメントが不具合を起こすため)
   }
 );
 
