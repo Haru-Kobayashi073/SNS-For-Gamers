@@ -71,6 +71,8 @@ const String unMutePostAlertMsg = '本当にこの投稿のミュートを解除
 const String muteReplyAlertMsg = 'このリプライを本当にミュートしますか？';
 const String unMuteReplyAlertMsg = '本当にこのリプライのミュートを解除しますか？';
 const String maxSearchLengthMsg = "検索できるのは100文字までです";
+const String deleteUserAlertMsg = "アカウントを削除しますが本当によろしいですか？";
+
 // FieldKey
 const String usersFieldKey = "users";
 // message

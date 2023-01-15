@@ -140,8 +140,8 @@ void toMuteRepliesPage(
                   mainModel: mainModel,
                 )));
 
-void toReauthenticationPage({required BuildContext context}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => const ReauthenticationPage()));
+void toReauthenticationPage({required BuildContext context, required FirestoreUser firestoreUser}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => ReauthenticationPage(firestoreUser: firestoreUser,)));
 
 void toUpdatePasswordPage({required BuildContext context}) => Navigator.push(
     context,

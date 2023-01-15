@@ -2,5 +2,7 @@
     "@@locale": "en",
     "signup": "signup",
     "loading": "Loading",
-    "logoutedMsg": "logout completed"
+    "logoutedMsg": "logout completed",
+    "userDeletedMsg": "User deleted",
+    "deleteUser": "delete Account"
 }

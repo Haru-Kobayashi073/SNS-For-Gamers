@@ -2,5 +2,7 @@
     "@@locale": "ja",
     "signup": "サインアップ",
     "loading": "ローディング",
-    "logoutedMsg": "ログアウトが完了しました"
+    "logoutedMsg": "ログアウトが完了しました",
+    "userDeletedMsg": "アカウントの削除が完了しました",
+    "deleteUser": "ユーザーの削除"
 }
