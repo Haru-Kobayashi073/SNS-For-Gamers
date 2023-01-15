@@ -47,7 +47,7 @@ class AccountPage extends ConsumerWidget {
           ListTile(
             title: const Text(logoutText, style: TextStyle(color: colors.appBarTextColor),),
             onTap: () async =>
-                await mainModel.logout(context: context, mainModel: mainModel),
+                await accountModel.logout(context: context, mainModel: mainModel),
           ),
         ],
       ),

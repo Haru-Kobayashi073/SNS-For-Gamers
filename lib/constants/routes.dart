@@ -17,6 +17,7 @@ import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/auth/verify_password_reset_page.dart';
 import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
+import 'package:sns_vol2/views/finished_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
 import 'package:sns_vol2/views/mute_comments_page.dart';
 import 'package:sns_vol2/views/mute_posts_page.dart';
@@ -157,3 +158,7 @@ void toVerifyPasswordResetPage({required BuildContext context}) => Navigator.pus
 void toVerifyEmailPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const VerifyEmailPage()));
+
+void toFinishedPage({required BuildContext context, required String msg}) => Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => FinishedPage(msg: msg)));

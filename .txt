@@ -1,47 +1,23 @@
-.onCreate(
-    async (snap,_) => {
-    const text = newValue.userName; //解析したい値
-    const dDparams = {
-      Text: text,
-    };
-    //主要な言語のコードを取得
-    let lCode = "";
-    comprehend.detectDominantLanguage(
-      dDparams,
-      async (dDerr, dDdata) => {
-        if (dDerr) {
-          console.log(dDerr);
-        } else {
-          //dDDataは複数のLanguageCodeを返すため、一番割合の高い値のみを返す
-          lCode = dDdata.Languages[0]["LanguageCode"];
-          if (lCode) {
-            const dSparams = {
-              LanguageCode: lCode,
-              Text: text,
-            };
-            comprehend.detectSentiment(
-              dSparams,
-              async (dSerr, dSdata) => {
-                if (dSerr) {
-                  console.log(dSerr);
-                } else {
-                  await newValue.userRef.update({
-                    'userName': userName,
-                    "userNameLanguageCode": lCode,
-                    "userNameNegativeScore":mul100AndRoundingDown(dSdata.SentimentScore.Negative),
-                    "userNamePositiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
-                    "userNameSentiment": dSdata.Sentiment,
-                    'userImageURL': userImageURL,
-                    'introduction': introduction,
-                    //updatedAtは改ざんされないようにcloud Functionsで制限する
-                    'updatedAt': now,
-                    });
-                }
-              }
-              );
-          }
-        }
-      }
-      );
-  }
-)
+return post.size() == 22 &&
+    "createdAt" in post && post.createdAt is timestamp &&
+    "updatedAt" in post && post.updatedAt is timestamp &&
+    "hashTags" in post && post.hashTags is List &&
+    "imageURL" in post && post.imageURL is string &&
+    "likeCount" in post && post.likeCount is int &&
+    "postCommentCount" in post && post.postCommentCount is int &&
+    "muteCount" in post && post.muteCount is int &&
+    "reportCount" in post && post.reportCount is int &&
+    "text" in post && post.text is string &&
+    "textLanguageCode" in post && post.textLanguageCode is string &&
+    "textNegativeScore" in post && post.textNegativeScore is num &&
+    "textPositiveScore" in post && post.textPositiveScore is num &&
+    "textSentiment" in post && post.textSentiment is string &&
+    "video" in post &&
+    "postId" in post && post.postId is string &&
+    "userName" in post && post.userName is string &&
+    "uid" in post && post.uid is string &&
+    "userImageURL" in post && post.userImageURL is string &&
+    "userNameNegativeScore" in post && post.userNameNegativeScore is num &&
+    "userNamePositiveScore" in post && post.userNamePositiveScore is num &&
+    "userNameSentiment" in post && post.userNameSentiment is string &&
+    "userNameLanguageCode" in post && post.userNameLanguageCode is string;

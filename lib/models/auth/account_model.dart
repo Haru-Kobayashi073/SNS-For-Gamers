@@ -8,6 +8,7 @@ import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/models/main_model.dart';
 
 final accountProvider = ChangeNotifierProvider((ref) => AccountModel());
 
@@ -40,6 +41,9 @@ class AccountModel extends ChangeNotifier {
           // updateEmailPageに飛ばす
           routes.toUpdateEmailPage(context: context);
           break;
+        case ReauthenticationState.deleteUser:
+          //ユーザーを削除するDialogを表示する
+          break;
       }
     } on FirebaseAuthException catch (e) {
       String msg = "";
@@ -68,5 +72,18 @@ class AccountModel extends ChangeNotifier {
     isObscure = !isObscure;
     //！でboolを反転
     notifyListeners();
+  }
+
+  Future<void> logout(
+      {required BuildContext context, required MainModel mainModel}) async {
+    // await FirebaseAuth.instance.signOut();
+    final String msg = returnL10n(context: context).logoutedMsg;
+    routes.toFinishedPage(context: context, msg: msg);
+  }
+
+  Future<void> deleteUser() async {
+    //ユーザーの削除にはReAuthenticationが必要
+    //ユーザーの削除にはfirebase Authのトークンがないといけない
+    //Documentの方を削除 ->　FirebaseAuthのユーザーを削除(厳密にいうと違う)
   }
 }

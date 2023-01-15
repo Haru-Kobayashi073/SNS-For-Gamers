@@ -1,5 +1,6 @@
 {
     "@@locale": "ja",
     "signup": "サインアップ",
-    "loading": "ローディング"
+    "loading": "ローディング",
+    "logoutedMsg": "ログアウトが完了しました"
 }

@@ -164,10 +164,4 @@ class MainModel extends ChangeNotifier {
         introduction: introduction);
     notifyListeners();
   }
-
-  Future<void> logout(
-      {required BuildContext context, required MainModel mainModel}) async {
-    await FirebaseAuth.instance.signOut();
-    routes.toLoginPage(context: context);
-  }
 }
