@@ -113,20 +113,9 @@ class MyHomePage extends ConsumerWidget {
         ref.watch(snsBottomNavigationBarProvider);
     final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
-    // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      // key: scaffoldKey,
-      // appBar: AppBar(
-      //   iconTheme: const IconThemeData(color: colors.appBarTextColor),
-      //   elevation: 0,
-      //   backgroundColor: colors.appBarBackColor,
-      //   title: Text(
-      //     title,
-      //     style: const TextStyle(color: colors.appBarTextColor),
-      //   ),
-      // ),
       // drawer: Drawer(
       //   // backgroundColor: colors.backScreenColor,
       //   child: SNSDrawer(
@@ -135,9 +124,9 @@ class MyHomePage extends ConsumerWidget {
       //   ),
       // ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => createPostModel.showPostDialog(
-            context: context, mainModel: mainModel),
-        // backgroundColor: const Color(0xffD6A34A),
+        onPressed: () => routes.toPostPage(context: context, mainModel: mainModel),
+        // createPostModel.showPostDialog(
+        //     context: context, mainModel: mainModel),
         backgroundColor: colors.floatingButtonBackColor,
         child: const Icon(
           Icons.new_label,

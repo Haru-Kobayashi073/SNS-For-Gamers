@@ -17,13 +17,14 @@ class SNSBottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: colors.bottomNaviBarTextColor,
-      unselectedIconTheme: IconThemeData(color: colors.bottomNaviUnselectedColor),
+      unselectedIconTheme: const IconThemeData(color: colors.bottomNaviUnselectedColor),
       unselectedItemColor: colors.bottomNaviUnselectedColor,
       backgroundColor: colors.bottomNaviBarBackColor,
       elevation: 0,
       items: bottomNavigationBarElements,
       currentIndex: snsBottomNavigationBarModel.currentIndex,
       onTap: ((index) => snsBottomNavigationBarModel.onTabTapped(index: index)),
+      // onTap: ((index) => snsBottomNavigationBarModel.onPageChanged(index: index)),
     );
     // return BottomAppBar(
     //   color: colors.bottomNaviBarBackColor,

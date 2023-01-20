@@ -19,6 +19,7 @@ import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
 import 'package:sns_vol2/views/finished_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
+import 'package:sns_vol2/views/main/post/post_page.dart';
 import 'package:sns_vol2/views/mute_comments_page.dart';
 import 'package:sns_vol2/views/mute_posts_page.dart';
 import 'package:sns_vol2/views/mute_replies_page.dart';
@@ -27,8 +28,8 @@ import 'package:sns_vol2/views/replies/replies_page.dart';
 import 'package:sns_vol2/views/signup_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 
-void toMyAppPage({required BuildContext context}) =>
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const MyApp()));
+void toMyAppPage({required BuildContext context}) => Navigator.push(
+    context, MaterialPageRoute(builder: (context) => const MyApp()));
 
 void toSignUpPage({required BuildContext context}) => Navigator.push(
     context, MaterialPageRoute(builder: (context) => const SignUpPage()));
@@ -48,7 +49,7 @@ void toAccountPage(
 void toPassiveUserProfilePage(
         {required BuildContext context,
         required MainModel mainModel,
-        required DocumentSnapshot<Map<String,dynamic>> passiveUserDoc}) =>
+        required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) =>
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -140,25 +141,40 @@ void toMuteRepliesPage(
                   mainModel: mainModel,
                 )));
 
-void toReauthenticationPage({required BuildContext context, required FirestoreUser firestoreUser}) => Navigator.push(
-    context, MaterialPageRoute(builder: (context) => ReauthenticationPage(firestoreUser: firestoreUser,)));
+void toReauthenticationPage(
+        {required BuildContext context,
+        required FirestoreUser firestoreUser}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ReauthenticationPage(
+                  firestoreUser: firestoreUser,
+                )));
 
 void toUpdatePasswordPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const UpdatePasswordPage()));
 
 void toUpdateEmailPage({required BuildContext context}) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const UpdateEmailPage()));
+    context, MaterialPageRoute(builder: (context) => const UpdateEmailPage()));
 
-void toVerifyPasswordResetPage({required BuildContext context}) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const VerifyPasswordResetPage()));
+void toVerifyPasswordResetPage(
+        {required BuildContext context}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const VerifyPasswordResetPage()));
 
 void toVerifyEmailPage({required BuildContext context}) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const VerifyEmailPage()));
+    context, MaterialPageRoute(builder: (context) => const VerifyEmailPage()));
 
-void toFinishedPage({required BuildContext context, required String msg}) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => FinishedPage(msg: msg)));
+void toFinishedPage({required BuildContext context, required String msg}) =>
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => FinishedPage(msg: msg)));
+
+void toPostPage({required BuildContext context, required MainModel mainModel}) => Navigator.push(
+    context, MaterialPageRoute(
+      builder: (context) => PostPage(mainModel: mainModel,),
+      fullscreenDialog: true,
+    )
+  );

@@ -15,12 +15,15 @@ class SearchScreen extends StatelessWidget {
       backgroundColor: colors.searchBarBackColor,
       onQueryChanged: onQueryChanged,
       clearQueryOnClose: true,
-      body: IndexedStack(
-        children: [
-          FloatingSearchBarScrollNotifier(
-            child: child
-          ),
-        ],
+      // body: IndexedStack(
+      //   children: [
+      //     FloatingSearchBarScrollNotifier(
+      //       child: child
+      //     ),
+      //   ],
+      // ),
+      body: FloatingSearchBarScrollNotifier(
+        child: child
       ),
       builder: (context, transition) {
         return Container();

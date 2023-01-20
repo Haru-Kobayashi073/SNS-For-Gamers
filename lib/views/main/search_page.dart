@@ -29,7 +29,7 @@ class SearchPage extends ConsumerWidget {
             elevation: 0,
             title: const Text(searchText),
             bottom: TabBar(
-              indicatorColor: colors.appBarTextColor,
+                indicatorColor: colors.appBarTextColor,
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: searchTabBarElements
                     .map((e) => Tab(
@@ -37,13 +37,14 @@ class SearchPage extends ConsumerWidget {
                         ))
                     .toList()),
           ),
-          body:
-              TabBarView(
+          body: TabBarView(
             children: [
               UserSearchScreen(
                   passiveUserProfileModel: passiveUserProfileModel,
                   mainModel: mainModel),
-              PostSearchScreen(mainModel: mainModel,)
+              PostSearchScreen(
+                mainModel: mainModel,
+              )
             ],
           )),
     );
