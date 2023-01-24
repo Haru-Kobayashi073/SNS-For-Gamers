@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flash/flash.dart';
@@ -12,6 +13,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/others.dart' as others;
 
 final createPostModelProvider =
     ChangeNotifierProvider((ref) => CreatePostModel());
@@ -21,19 +23,19 @@ class CreatePostModel extends ChangeNotifier {
   String text = '';
   File? video;
 
-  // Future<String> uploadImageAndGetURL(
-  //     {required String uid, required File file}) async {
-  //   final String fileName = returnJpgFileName();
-  //   final Reference storageRef = FirebaseStorage.instance
-  //       .ref()
-  //       .child('users')
-  //       .child(uid)
-  //       .child(fileName);
-  //   // users/uid/ファイル名 にアップロード
-  //   await storageRef.putFile(file);
-  //   // users/uid/ファイル名 のURLを取得している
-  //   return await storageRef.getDownloadURL();
-  // }
+  Future<String> uploadImageAndGetURL(
+      {required String uid, required File file}) async {
+    final String fileName = returnJpgFileName();
+    final Reference storageRef = FirebaseStorage.instance
+        .ref()
+        .child('users')
+        .child(uid)
+        .child(fileName);
+    // users/uid/ファイル名 にアップロード
+    await storageRef.putFile(file);
+    // users/uid/ファイル名 のURLを取得している
+    return await storageRef.getDownloadURL();
+  }
 
   void showPostDialog(
       {required BuildContext context, required MainModel mainModel}) {
@@ -51,17 +53,17 @@ class CreatePostModel extends ChangeNotifier {
             ),
           ),
           GestureDetector(
-            child: 
-            video == null ? 
-            Container(
-              height: 270,
-              width: 360,
-              color: Colors.grey,
-              child: const Icon(
-                Icons.add_photo_alternate_outlined,
-                size: 68,
-                ),
-            ) : Container(),
+            child: video == null
+                ? Container(
+                    height: 270,
+                    width: 360,
+                    color: Colors.grey,
+                    child: const Icon(
+                      Icons.add_photo_alternate_outlined,
+                      size: 68,
+                    ),
+                  )
+                : Container(),
             onTap: () {},
           ),
           // GestureDetector(
@@ -163,5 +165,15 @@ class CreatePostModel extends ChangeNotifier {
         .doc(postId)
         .set(post.toJson());
     await voids.showfluttertoast(msg: createdPostMsg);
+  }
+
+  Future<void> pickVideo({required MainModel mainModel}) async {
+    var result = await others.returnXFile();
+    if (result != null) {
+      await uploadImageAndGetURL(
+          uid: mainModel.currentUserDoc.id, file: result);
+      video = result;
+    }
+    notifyListeners();
   }
 }

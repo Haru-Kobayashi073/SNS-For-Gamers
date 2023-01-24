@@ -27,7 +27,7 @@ class PostSearchScreen extends ConsumerWidget {
           width: maxWidth * 0.9,
           decoration: BoxDecoration(
               color: colors.cardBackColor,
-              borderRadius: BorderRadius.circular(16.0)),
+              borderRadius: BorderRadius.circular(8.0)),
           child: TextFormField(
             decoration: const InputDecoration(
               enabledBorder: InputBorder.none,

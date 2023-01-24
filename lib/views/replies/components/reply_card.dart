@@ -15,6 +15,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/views/replies/components/reply_like_button.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class ReplyCard extends ConsumerWidget {
   const ReplyCard(
@@ -63,15 +64,18 @@ class ReplyCard extends ConsumerWidget {
                             children: [
                               Text(
                                 reply.userName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
+                                  color: colors.cardTextPrimaryColor
                                 ),
                               ),
                               Text(
                                 reply.reply,
                                 style: const TextStyle(
-                                    overflow: TextOverflow.ellipsis),
+                                    overflow: TextOverflow.ellipsis,
+                                    color: colors.cardTextPrimaryColor
+                                  ),
                               ),
                             ],
                           ),

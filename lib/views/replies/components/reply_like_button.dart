@@ -5,6 +5,7 @@ import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class ReplyLikeButton extends StatelessWidget {
   const ReplyLikeButton({
@@ -44,7 +45,10 @@ class ReplyLikeButton extends StatelessWidget {
                       replyDoc: replyDoc),
                 )
               : InkWell(
-                  child: const Icon(Icons.favorite_border),
+                  child: const Icon(
+                    Icons.favorite_border,
+                    color: colors.cardTextPrimaryColor,
+                    ),
                   onTap: () async => await repliesModel.like(
                       reply: reply,
                       mainModel: mainModel,
@@ -55,7 +59,9 @@ class ReplyLikeButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
               // isLike ? plusOneCount.toString() : 
-              reply.likeCount.toString()),
+              reply.likeCount.toString(),
+              style: const TextStyle(color: colors.cardTextPrimaryColor),
+            ),
         ),
       ],
     );

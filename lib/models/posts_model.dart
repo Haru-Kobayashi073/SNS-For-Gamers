@@ -1,4 +1,6 @@
 //flutter
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ import 'package:sns_vol2/constants/voids.dart' as voids;
 final postsProvider = ChangeNotifierProvider((ref) => PostsModel());
 
 class PostsModel extends ChangeNotifier {
+  File? video;
+
   Future<void> like(
       {required Post post,
       required DocumentSnapshot<Map<String, dynamic>> postDoc,

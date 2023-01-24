@@ -6,6 +6,7 @@ import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CommentLikeButton extends StatelessWidget {
   const CommentLikeButton(
@@ -43,7 +44,10 @@ class CommentLikeButton extends StatelessWidget {
                       commentDoc: commentDoc),
                 )
               : InkWell(
-                  child: const Icon(Icons.favorite_border),
+                  child: const Icon(
+                    Icons.favorite_border,
+                    color: colors.cardTextPrimaryColor,
+                    ),
                   onTap: () async => await commentsModel.like(
                       comment: comment,
                       mainModel: mainModel,
@@ -52,9 +56,11 @@ class CommentLikeButton extends StatelessWidget {
                 ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
-              isLike ? plusOneCount.toString() : comment.likeCount.toString()),
+              isLike ? plusOneCount.toString() : comment.likeCount.toString(),
+              style: const TextStyle(color: colors.cardTextPrimaryColor),
+              ),
         ),
       ],
     );

@@ -15,6 +15,7 @@ import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
 import 'package:sns_vol2/views/comments/comment_like_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CommentCard extends ConsumerWidget {
   const CommentCard(
@@ -75,11 +76,15 @@ class CommentCard extends ConsumerWidget {
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
+                                      color: colors.cardTextPrimaryColor
                                     ),
                                   ),
                                 ],
                               ),
-                              Text(comment.comment),
+                              Text(
+                                comment.comment,
+                                style: const TextStyle(color: colors.cardTextPrimaryColor),
+                                ),
                             ],
                           ),
                         ],
@@ -99,6 +104,7 @@ class CommentCard extends ConsumerWidget {
                           InkWell(
                             child: const Icon(
                               Icons.reply,
+                              color: colors.cardTextPrimaryColor,
                             ),
                             onTap: () async => await repliesModel.init(
                                 context: context,

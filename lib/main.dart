@@ -78,13 +78,13 @@ class MyApp extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
         title: appTitle,
-        theme: themeModel.isDarkTheme
-            ? darkThemeData(context: context)
-            : lightThemeData(context: context),
-
-        // ThemeData(
-        //   primarySwatch: customSwatch,
-        // ),
+        // theme: themeModel.isDarkTheme
+        //     ? darkThemeData(context: context)
+        //     : lightThemeData(context: context),
+        theme: 
+        ThemeData(
+          primarySwatch: customSwatch,
+        ),
         home: onceUser == null //ユーザーが存在していないなら
             ? const LoginPage() //ログインページへ
             : onceUser.emailVerified
