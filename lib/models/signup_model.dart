@@ -44,7 +44,7 @@ class SignUpModel extends ChangeNotifier {
       userNameLanguageCode: "en",
       userNameNegativeScore: 0,
       userNamePositiveScore: 0,
-      userNameSentiment: "POSItIVE",
+      userNameSentiment: "POSITIVE",
       isAdmin: false,
       searchToken: returnSearchToken(searchWords: returnSearchWords(searchTerm: "alice")),
       uid: uid,

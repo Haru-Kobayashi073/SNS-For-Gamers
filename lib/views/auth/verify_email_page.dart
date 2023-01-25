@@ -13,10 +13,21 @@ class VerifyEmailPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: AppBar(backgroundColor: colors.appBarBackColor),
-      body: Container(
-        alignment: Alignment.center,
-        child: const Text("メールアドレスを認証するメールを送信しました。"),
+      appBar: AppBar(
+        backgroundColor: colors.appBarBackColor,
+      ),
+      body: Column(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            child: const Text("メールアドレスを認証するメールを送信しました。"),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('戻る'))
+        ],
       ),
     );
   }

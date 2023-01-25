@@ -12,9 +12,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //なぜFutureを使うかというと、画像ファイルの取得には時間がかかるから非同期処理をする必要がある
 Future<dynamic> returnXFile() async {
-  final ImagePicker picker = ImagePicker();
-  final image = await picker.pickImage(source: ImageSource.gallery);
-  return image!;
+  ImagePicker picker = ImagePicker();
+  // Image? image;
+  File? file;
+  XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  if (pickedFile != null) {
+    file = File(pickedFile.path);
+    // image = Image.file(file);
+  } else {
+    print('No image selected.');
+  }
+  return file;
 }
 
 Future<File?> returnCroppedFile({required XFile? xFile}) async {

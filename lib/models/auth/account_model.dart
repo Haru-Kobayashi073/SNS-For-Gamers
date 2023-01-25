@@ -84,6 +84,9 @@ class AccountModel extends ChangeNotifier {
     await FirebaseAuth.instance.signOut();
     final String msg = returnL10n(context: context).logoutedMsg;
     routes.toFinishedPage(context: context, msg: msg);
+    Future.delayed(const Duration(seconds: 5), () {
+      routes.toLoginPage(context: context);
+    });
   }
 
   void showDeleteUserDialog(

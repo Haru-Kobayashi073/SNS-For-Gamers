@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 //packages
 import 'package:flash/flash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
@@ -22,6 +23,7 @@ class CreatePostModel extends ChangeNotifier {
   final TextEditingController textEditingController = TextEditingController();
   String text = '';
   File? video;
+  // File? video = File(XFile.path);
 
   Future<String> uploadImageAndGetURL(
       {required String uid, required File file}) async {
@@ -135,6 +137,7 @@ class CreatePostModel extends ChangeNotifier {
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final Timestamp now = Timestamp.now();
     final String activeUid = mainModel.currentUserDoc.id;
+    final pickedVideo = await uploadImageAndGetURL(uid: activeUid, file: video!);
     final String postId = returnUuidV4();
     final Post post = Post(
         updatedAt: now,
@@ -156,7 +159,7 @@ class CreatePostModel extends ChangeNotifier {
         textNegativeScore: 0,
         textPositiveScore: 0,
         textSentiment: "",
-        video: video,
+        video: pickedVideo,
         postId: postId,
         uid: activeUid);
 //currentUserDoc.reference = FirebaseFirestore.instance.collection('users').doc(firestoreUser.uid)
@@ -167,7 +170,7 @@ class CreatePostModel extends ChangeNotifier {
     await voids.showfluttertoast(msg: createdPostMsg);
   }
 
-  Future<void> pickVideo({required MainModel mainModel}) async {
+  Future<dynamic> pickVideo({required MainModel mainModel}) async {
     var result = await others.returnXFile();
     if (result != null) {
       await uploadImageAndGetURL(
@@ -175,5 +178,6 @@ class CreatePostModel extends ChangeNotifier {
       video = result;
     }
     notifyListeners();
+    return video;
   }
 }

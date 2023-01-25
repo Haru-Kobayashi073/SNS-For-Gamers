@@ -10,7 +10,6 @@ import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
 import 'package:sns_vol2/models/comments_model.dart';
-import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
@@ -39,7 +38,6 @@ class PostCard extends ConsumerWidget {
     final maxHeight = MediaQuery.of(context).size.height;
     final PostsModel postsModel = ref.watch(postsProvider);
     final CommentsModel commentsModel = ref.watch(commentsProvider);
-    // final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyComment = post.uid == firestoreUser.uid;
@@ -49,8 +47,7 @@ class PostCard extends ConsumerWidget {
       padding: const EdgeInsets.all(16.0),
       child: Material(
         elevation: 20,
-        // color: Color.fromARGB(255, 58, 58, 58),
-        color: Color.fromARGB(255, 216, 218, 216),
+        color: const Color.fromARGB(255, 216, 218, 216),
         borderRadius: BorderRadius.circular(30),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -134,11 +131,10 @@ class PostCard extends ConsumerWidget {
                                     onPressed: () async {
                                       Navigator.pop(innerContext);
                                       postsModel.reportPost(
-                                        context: context,
-                                        firestoreUser: firestoreUser,
-                                        post: post,
-                                        postDoc: postDoc
-                                        );
+                                          context: context,
+                                          firestoreUser: firestoreUser,
+                                          post: post,
+                                          postDoc: postDoc);
                                     },
                                     child: const Text(reportPostText),
                                   ),
@@ -155,25 +151,40 @@ class PostCard extends ConsumerWidget {
                 ),
               ],
             ),
-            // createPostModel.video == null ?
-            // Container() :
-            Row(
-              children: [
-                SizedBox(
-                  width: maxWidth * 0.15,
-                ),
-                Container(
-                  width: maxWidth * 0.7,
-                  height: maxHeight * 0.23,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: NetworkImage(
-                        // post.imageURL
-                        'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'),
-                  )),
-                ),
-              ],
-            ),
+            post.video == null
+                ? Row(
+                    children: [
+                      SizedBox(
+                        width: maxWidth * 0.15,
+                      ),
+                      Container(
+                        width: maxWidth * 0.7,
+                        height: maxHeight * 0.23,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                          image: NetworkImage(
+                              'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'),
+                        )),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      SizedBox(
+                        width: maxWidth * 0.15,
+                      ),
+                      Container(
+                        width: maxWidth * 0.7,
+                        height: maxHeight * 0.23,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: NetworkImage(post.video
+                              // 'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
+                              ),
+                        )),
+                      ),
+                    ],
+                  ),
             const SizedBox(
               height: 7,
             ),
