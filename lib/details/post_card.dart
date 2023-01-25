@@ -94,7 +94,7 @@ class PostCard extends ConsumerWidget {
                 ),
                 CardPopupMenuButton(
                   muteUsersModel: muteUsersModel,
-                  text: mutePostButtonText,
+                  text: "option",
                   onSelected: (result) {
                     if (result == '0') {
                       voids.showPopup(

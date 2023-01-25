@@ -83,7 +83,7 @@ class ReplyCard extends ConsumerWidget {
                       ),
                       CardPopupMenuButton(
                         onSelected: onSelected,
-                        text: muteReplyButtonText,
+                        text: "option",
                         muteUsersModel: muteUsersModel,
                       )
                     ],
