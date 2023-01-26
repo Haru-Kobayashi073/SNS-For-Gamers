@@ -18,7 +18,6 @@ class PostPage extends ConsumerWidget {
     final CreatePostModel createPostModel = ref.watch(createPostModelProvider);
     final TextEditingController textEditingController =
         TextEditingController(text: createPostModel.text);
-    final PostsModel postsModel = ref.watch(postsProvider);
     final maxHeight = MediaQuery.of(context).size.height;
     final maxWidth = MediaQuery.of(context).size.width;
     final firestoreUser = mainModel.firestoreUser;
@@ -81,7 +80,7 @@ class PostPage extends ConsumerWidget {
                                   child: TextFormField(
                                     controller: textEditingController,
                                     onChanged: (value) =>
-                                        textEditingController.text = value,
+                                        createPostModel.text = value,
                                     autofocus: true,
                                     maxLines: 6,
                                     minLines: 1,
@@ -112,11 +111,11 @@ class PostPage extends ConsumerWidget {
                                   onTap: () async {
                                     // postsModel.video = await createPostModel.pickVideo(
                                     //     mainModel: mainModel);
-                                    postsModel.video =
+                                    createPostModel.video =
                                         await others.returnXFile();
-                                    print(postsModel.video);
+                                    print(createPostModel.video);
                                   },
-                                  child: postsModel.video == null
+                                  child: createPostModel.video == null
                                       ? Container(
                                           width: maxWidth * 0.68,
                                           height: maxHeight * 0.23,
@@ -131,7 +130,7 @@ class PostPage extends ConsumerWidget {
                                       : Container(
                                           width: maxWidth * 0.68,
                                           height: maxHeight * 0.23,
-                                          child: Image.file(postsModel.video!,
+                                          child: Image.file(createPostModel.video!,
                                               fit: BoxFit.cover),
                                         ),
                                 ),

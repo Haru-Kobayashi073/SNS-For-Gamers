@@ -26,10 +26,19 @@ class PostSearchScreen extends ConsumerWidget {
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           width: maxWidth * 0.9,
           decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  spreadRadius: 1.0,
+                  blurRadius: 10.0,
+                  offset: Offset(5, 5),
+                ),
+              ],
               color: colors.cardBackColor,
               borderRadius: BorderRadius.circular(8.0)),
           child: TextFormField(
             decoration: const InputDecoration(
+              
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
               hoverColor: colors.listTileTextColor,

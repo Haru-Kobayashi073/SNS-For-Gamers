@@ -20,7 +20,6 @@ import 'package:sns_vol2/constants/voids.dart' as voids;
 final postsProvider = ChangeNotifierProvider((ref) => PostsModel());
 
 class PostsModel extends ChangeNotifier {
-  File? video;
 
   Future<void> like(
       {required Post post,

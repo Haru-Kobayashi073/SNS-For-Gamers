@@ -137,7 +137,9 @@ class CreatePostModel extends ChangeNotifier {
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final Timestamp now = Timestamp.now();
     final String activeUid = mainModel.currentUserDoc.id;
-    final pickedVideo = await uploadImageAndGetURL(uid: activeUid, file: video!);
+    print(video);
+    final pickedVideo =
+        await uploadImageAndGetURL(uid: activeUid, file: video!);
     final String postId = returnUuidV4();
     final Post post = Post(
         updatedAt: now,
