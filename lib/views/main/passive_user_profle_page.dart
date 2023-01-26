@@ -34,6 +34,7 @@ class PassiveUserProfilePage extends ConsumerWidget {
     final muteUids = mainModel.muteUids;
     final FirestoreUser passiveUser =
         FirestoreUser.fromJson(passiveUserDoc.data()!);
+        
     return Scaffold(
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(

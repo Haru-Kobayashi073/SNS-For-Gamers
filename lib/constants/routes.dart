@@ -19,6 +19,7 @@ import 'package:sns_vol2/views/comments/comments_page.dart';
 import 'package:sns_vol2/views/edit_profile_page.dart';
 import 'package:sns_vol2/views/finished_page.dart';
 import 'package:sns_vol2/views/main/passive_user_profle_page.dart';
+import 'package:sns_vol2/views/main/post/focus_post_page.dart';
 import 'package:sns_vol2/views/main/post/post_page.dart';
 import 'package:sns_vol2/views/mute_comments_page.dart';
 import 'package:sns_vol2/views/mute_posts_page.dart';
@@ -172,9 +173,29 @@ void toFinishedPage({required BuildContext context, required String msg}) =>
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => FinishedPage(msg: msg)));
 
-void toPostPage({required BuildContext context, required MainModel mainModel}) => Navigator.push(
-    context, MaterialPageRoute(
-      builder: (context) => PostPage(mainModel: mainModel,),
-      fullscreenDialog: true,
-    )
-  );
+void toPostPage(
+        {required BuildContext context, required MainModel mainModel}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PostPage(
+            mainModel: mainModel,
+          ),
+          fullscreenDialog: true,
+        ));
+
+void toFocusPostPage({
+  required BuildContext context,
+  required MainModel mainModel,
+  required Post post,
+  // required Comment comment,
+  // required DocumentSnapshot<Map<String, dynamic>> commentDoc,
+}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FocusPostPage(
+            mainModel: mainModel,
+            post: post,
+          ),
+        ));

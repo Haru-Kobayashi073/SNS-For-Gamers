@@ -1,6 +1,5 @@
 //flutter
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
@@ -10,13 +9,10 @@ import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
-import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
@@ -32,10 +28,6 @@ class HomeScreen extends ConsumerWidget {
   final MainModel mainModel;
   final MuteUsersModel muteUsersModel;
   final CreatePostModel createPostModel;
-
-  Future<void> logout() async {
-    await FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

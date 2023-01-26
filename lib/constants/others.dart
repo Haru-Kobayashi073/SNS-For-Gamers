@@ -15,7 +15,8 @@ Future<dynamic> returnXFile() async {
   ImagePicker picker = ImagePicker();
   // Image? image;
   File? file;
-  XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  // XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  XFile? pickedFile = await picker.pickVideo(source: ImageSource.gallery);
   if (pickedFile != null) {
     file = File(pickedFile.path);
     // image = Image.file(file);
