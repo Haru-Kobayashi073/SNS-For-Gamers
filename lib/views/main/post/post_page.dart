@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/details/animated_toggle_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
@@ -21,6 +22,7 @@ class PostPage extends ConsumerWidget {
     final maxHeight = MediaQuery.of(context).size.height;
     final maxWidth = MediaQuery.of(context).size.width;
     final firestoreUser = mainModel.firestoreUser;
+    bool postModeToggle = true;
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
@@ -112,7 +114,7 @@ class PostPage extends ConsumerWidget {
                                     // postsModel.video = await createPostModel.pickVideo(
                                     //     mainModel: mainModel);
                                     createPostModel.video =
-                                        await others.returnXFile();
+                                        await others.returnXFile(postModeToggle: postModeToggle);
                                     print(createPostModel.video);
                                   },
                                   child: createPostModel.video == null
@@ -121,7 +123,11 @@ class PostPage extends ConsumerWidget {
                                           height: maxHeight * 0.23,
                                           color: const Color.fromARGB(
                                               255, 213, 210, 210),
-                                          child: const Icon(
+                                          child: postModeToggle == true ? const Icon(
+                                            Icons.add_photo_alternate_outlined,
+                                            color: Colors.white,
+                                            size: 100,
+                                          ): const Icon(
                                             // Icons.add_photo_alternate_outlined,
                                             Icons.video_file_outlined,
                                             color: Colors.white,
@@ -130,10 +136,22 @@ class PostPage extends ConsumerWidget {
                                       : Container(
                                           width: maxWidth * 0.68,
                                           height: maxHeight * 0.23,
-                                          child: Image.file(createPostModel.video!,
+                                          child: Image.file(
+                                              createPostModel.video!,
                                               fit: BoxFit.cover),
                                         ),
                                 ),
+                                AnimatedToggle(
+                                    values: const ['photo', 'video'],
+                                    onToggleCallback: (value) {
+                                      if (value == 1) {
+                                        postModeToggle = false;
+                                        print(postModeToggle);
+                                      } else {
+                                        postModeToggle = true;
+                                        print(postModeToggle);
+                                      }
+                                    })
                               ],
                             ),
                           ),

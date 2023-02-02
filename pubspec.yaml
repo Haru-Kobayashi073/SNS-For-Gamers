@@ -61,6 +61,8 @@ dependencies:
   flutter_dotenv: ^5.0.2
   algolia: ^1.1.1
   video_player: ^2.5.1
+  chewie: ^1.4.0
+  get: ^4.6.5
 
   flutter_localizations:
     sdk: flutter

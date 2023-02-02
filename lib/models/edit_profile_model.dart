@@ -22,6 +22,7 @@ class EditProfileModel extends ChangeNotifier {
   File? croppedFile;
   String userName = '';
   String introduction = '';
+  bool postModeToggle = true;
 
   Future<void> updateUserInfo(
       {required BuildContext context, required MainModel mainModel}) async {
@@ -40,7 +41,9 @@ class EditProfileModel extends ChangeNotifier {
         userName = firestoreUser.userName;
       }
       mainModel.updateFrontUserInfo(
-          newUserName: userName, newUserImageURL: userImageURL, introduction: introduction);
+          newUserName: userName,
+          newUserImageURL: userImageURL,
+          introduction: introduction);
       Navigator.pop(context);
       //idを指定する必要がない。＝アプリから呼び出すことがなく、消すこともないから
       final UserUpdateLog updateLog = UserUpdateLog(
@@ -49,7 +52,8 @@ class EditProfileModel extends ChangeNotifier {
           userImageURL: userImageURL,
           introduction: introduction,
           userRef: currentUserDoc.reference,
-          searchToken: returnSearchToken(searchWords: returnSearchWords(searchTerm: userName)),
+          searchToken: returnSearchToken(
+              searchWords: returnSearchWords(searchTerm: userName)),
           uid: currentUserDoc.id);
       // doc()とidを指定しないと、勝手に生成してくれる
       await currentUserDoc.reference
@@ -64,7 +68,7 @@ class EditProfileModel extends ChangeNotifier {
   // }
 
   Future<void> onImageTapped() async {
-    final XFile xFile = await returnXFile();
+    final XFile xFile = await returnXFile(postModeToggle: postModeToggle);
     croppedFile = await returnCroppedFile(xFile: xFile);
     notifyListeners();
   }

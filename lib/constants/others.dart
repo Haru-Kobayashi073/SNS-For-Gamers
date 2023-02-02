@@ -11,17 +11,26 @@ import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //なぜFutureを使うかというと、画像ファイルの取得には時間がかかるから非同期処理をする必要がある
-Future<dynamic> returnXFile() async {
+Future<dynamic> returnXFile({required bool postModeToggle}) async {
   ImagePicker picker = ImagePicker();
   // Image? image;
   File? file;
-  // XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  if (postModeToggle == false) {
   XFile? pickedFile = await picker.pickVideo(source: ImageSource.gallery);
-  if (pickedFile != null) {
-    file = File(pickedFile.path);
-    // image = Image.file(file);
+    if (pickedFile != null) {
+      file = File(pickedFile.path);
+      // image = Image.file(file);
+    } else {
+      print('No Video selected.');
+    }
   } else {
-    print('No image selected.');
+  XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      file = File(pickedFile.path);
+      // image = Image.file(file);
+    } else {
+      print('No image selected.');
+    }
   }
   return file;
 }

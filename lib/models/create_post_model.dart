@@ -15,6 +15,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/others.dart' as others;
+import 'package:video_player/video_player.dart';
 
 final createPostModelProvider =
     ChangeNotifierProvider((ref) => CreatePostModel());
@@ -172,14 +173,14 @@ class CreatePostModel extends ChangeNotifier {
     await voids.showfluttertoast(msg: createdPostMsg);
   }
 
-  Future<dynamic> pickVideo({required MainModel mainModel}) async {
-    var result = await others.returnXFile();
-    if (result != null) {
-      await uploadImageAndGetURL(
-          uid: mainModel.currentUserDoc.id, file: result);
-      video = result;
-    }
-    notifyListeners();
-    return video;
-  }
+  // Future<dynamic> pickVideo({required MainModel mainModel}) async {
+  //   var result = await others.returnXFile();
+  //   if (result != null) {
+  //     await uploadImageAndGetURL(
+  //         uid: mainModel.currentUserDoc.id, file: result);
+  //     video = result;
+  //   }
+  //   notifyListeners();
+  //   return video;
+  // }
 }
