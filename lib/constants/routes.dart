@@ -199,3 +199,19 @@ void toFocusPostPage({
             post: post,
           ),
         ));
+
+void toVideoWatchPage({
+  required BuildContext context,
+  required MainModel mainModel,
+  required Post post,
+  // required Comment comment,
+  // required DocumentSnapshot<Map<String, dynamic>> commentDoc,
+}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FocusPostPage(
+            mainModel: mainModel,
+            post: post,
+          ),
+        ));

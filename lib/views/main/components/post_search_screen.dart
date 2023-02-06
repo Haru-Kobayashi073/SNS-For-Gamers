@@ -20,88 +20,82 @@ class PostSearchScreen extends ConsumerWidget {
     final maxHeight = MediaQuery.of(context).size.height;
     final maxWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
-          width: maxWidth * 0.9,
-          decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  spreadRadius: 1.0,
-                  blurRadius: 10.0,
-                  offset: Offset(5, 5),
-                ),
-              ],
-              color: colors.cardBackColor,
-              borderRadius: BorderRadius.circular(8.0)),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              hoverColor: colors.listTileTextColor,
-              prefixIcon: Icon(
-                Icons.search,
-              ),
-              prefixStyle: TextStyle(color: colors.cardTextPrimaryColor),
-              border: OutlineInputBorder(),
-              hintText: "Search..."
+    return Scaffold(
+      backgroundColor: colors.backScreenColor,
+      body: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            width: 360,
+            decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    spreadRadius: 1.0,
+                    blurRadius: 10.0,
+                    offset: Offset(5, 5),
+                  ),
+                ],
+                color: colors.cardBackColor,
+                borderRadius: BorderRadius.circular(8.0)),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  hoverColor: colors.listTileTextColor,
+                  prefixIcon: Icon(
+                    Icons.search,
+                  ),
+                  prefixStyle: TextStyle(color: colors.cardTextPrimaryColor),
+                  border: OutlineInputBorder(),
+                  hintText: "Search..."),
+              onChanged: (text) async {
+                postSearchModel.searchTerm = text;
+                print(text);
+                await postSearchModel.operation(
+                    muteUids: mainModel.muteUids,
+                    mutePostIds: mainModel.mutePostIds);
+              },
             ),
-            onChanged: (text) async {
-              postSearchModel.searchTerm = text;
-              print(text);
-              await postSearchModel.operation(
-                  muteUids: mainModel.muteUids,
-                  mutePostIds: mainModel.mutePostIds);
-            },
           ),
-        ),
-        Flexible(
-          child: ListView.builder(
-              itemCount: postMaps.length,
-              itemBuilder: (context, index) {
-                final post = Post.fromJson(postMaps[index]);
-                return 
-                // index == 0? Column(
-                //         children: [
-                //           SizedBox(
-                //             height: maxHeight * 0.06,
-                //           ),
-                //           ListTile(
-                //             title: Text(
-                //               post.userName,
-                //               style: const TextStyle(
-                //                   color: colors.listTileTextColor),
-                //             ),
-                //             subtitle: Text(
-                //               post.text,
-                //               style: const TextStyle(
-                //                   color: colors.listTileTextColor),
-                //             ),
-                //             leading: UserImage(
-                //                 length: 48.0, userImageURL: post.userImageURL),
-                //           ),
-                //         ],
-                //       ): 
-                      ListTile(
-                        title: Text(
-                          post.userName,
-                          style:
-                              const TextStyle(color: colors.listTileTextColor),
-                        ),
-                        subtitle: Text(
-                          post.text,
-                          style:
-                              const TextStyle(color: colors.listTileTextColor),
-                        ),
-                        leading: UserImage(
-                            length: 48.0, userImageURL: post.userImageURL),
-                      );
-              }),
-        ),
-      ],
+          Flexible(
+            child: ListView.builder(
+                itemCount: postMaps.length,
+                itemBuilder: (context, index) {
+                  final post = Post.fromJson(postMaps[index]);
+                  return postMaps == null
+                      ? ListTile(
+                          title: Text(
+                            post.userName,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
+                          subtitle: Text(
+                            post.text,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
+                          leading: UserImage(
+                              length: 48.0, userImageURL: post.userImageURL),
+                        )
+                      : ListTile(
+                          title: Text(
+                            post.userName,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
+                          subtitle: Text(
+                            post.text,
+                            style: const TextStyle(
+                                color: colors.listTileTextColor),
+                          ),
+                          leading: UserImage(
+                              length: 48.0, userImageURL: post.userImageURL),
+                        );
+                }),
+          ),
+        ],
+      ),
     );
   }
 }

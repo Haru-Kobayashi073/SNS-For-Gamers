@@ -8,6 +8,7 @@ import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/others.dart' as others;
+import 'package:sns_vol2/views/main/components/video_watch_page.dart';
 //package
 
 class PostPage extends ConsumerWidget {
@@ -106,15 +107,14 @@ class PostPage extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: maxHeight * 0.02,
-                                ),
                                 GestureDetector(
                                   onTap: () async {
                                     // postsModel.video = await createPostModel.pickVideo(
                                     //     mainModel: mainModel);
                                     createPostModel.video =
-                                        await others.returnXFile(postModeToggle: postModeToggle);
+                                        // await others.returnXFile(postModeToggle: postModeToggle);
+                                        await createPostModel.getVideo(
+                                            context, mainModel);
                                     print(createPostModel.video);
                                   },
                                   child: createPostModel.video == null
@@ -123,23 +123,33 @@ class PostPage extends ConsumerWidget {
                                           height: maxHeight * 0.23,
                                           color: const Color.fromARGB(
                                               255, 213, 210, 210),
-                                          child: postModeToggle == true ? const Icon(
-                                            Icons.add_photo_alternate_outlined,
-                                            color: Colors.white,
-                                            size: 100,
-                                          ): const Icon(
-                                            // Icons.add_photo_alternate_outlined,
-                                            Icons.video_file_outlined,
-                                            color: Colors.white,
-                                            size: 100,
-                                          ))
-                                      : Container(
-                                          width: maxWidth * 0.68,
-                                          height: maxHeight * 0.23,
-                                          child: Image.file(
-                                              createPostModel.video!,
-                                              fit: BoxFit.cover),
-                                        ),
+                                          child: postModeToggle == true
+                                              ? const Icon(
+                                                  Icons
+                                                      .add_photo_alternate_outlined,
+                                                  color: Colors.white,
+                                                  size: 100,
+                                                )
+                                              : const Icon(
+                                                  // Icons.add_photo_alternate_outlined,
+                                                  Icons.video_file_outlined,
+                                                  color: Colors.white,
+                                                  size: 100,
+                                                ))
+                                      : Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: VideoWatchPage(createPostModel.video!),
+                                      )
+                                      // Container(
+                                      //     width: maxWidth * 0.68,
+                                      //     height: maxHeight * 0.23,
+                                      //     child: Image.file(
+                                      //         createPostModel.video!,
+                                      //         fit: BoxFit.cover),
+                                      //   ),
+                                ),
+                                SizedBox(
+                                  height: maxHeight * 0.02,
                                 ),
                                 AnimatedToggle(
                                     values: const ['photo', 'video'],
@@ -161,6 +171,7 @@ class PostPage extends ConsumerWidget {
                   ),
                 ),
               ),
+              
             ],
           ),
         ),

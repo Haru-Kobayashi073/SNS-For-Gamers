@@ -15,6 +15,7 @@ import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
 import 'package:sns_vol2/models/themes_model.dart';
+import 'package:sns_vol2/views/main/components/video_pick_page.dart';
 import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -154,7 +155,8 @@ class MyHomePage extends ConsumerWidget {
                 SearchPage(
                   mainModel: mainModel,
                 ),
-                const ArticleScreen(),
+                // const ArticleScreen(),
+                const VideoPickPage(),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),
