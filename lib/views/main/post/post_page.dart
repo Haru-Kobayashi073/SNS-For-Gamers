@@ -107,6 +107,9 @@ class PostPage extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: maxHeight * 0.02,
+                                ),
                                 GestureDetector(
                                   onTap: () async {
                                     // postsModel.video = await createPostModel.pickVideo(
@@ -136,10 +139,7 @@ class PostPage extends ConsumerWidget {
                                                   color: Colors.white,
                                                   size: 100,
                                                 ))
-                                      : Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: VideoWatchPage(createPostModel.video!),
-                                      )
+                                      : VideoWatchPage(createPostModel.video!)
                                       // Container(
                                       //     width: maxWidth * 0.68,
                                       //     height: maxHeight * 0.23,
@@ -147,9 +147,6 @@ class PostPage extends ConsumerWidget {
                                       //         createPostModel.video!,
                                       //         fit: BoxFit.cover),
                                       //   ),
-                                ),
-                                SizedBox(
-                                  height: maxHeight * 0.02,
                                 ),
                                 AnimatedToggle(
                                     values: const ['photo', 'video'],
@@ -171,7 +168,6 @@ class PostPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),

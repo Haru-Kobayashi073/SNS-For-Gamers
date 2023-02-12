@@ -32,7 +32,7 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
         //動画表示画面の比率
         aspectRatio: _videoPlayerController.value.aspectRatio,
         //自動再生
-        // autoPlay: true,
+        autoPlay: true,
         //自動ループ再生
         looping: true,
         //もし、Chewieでエラーが出ていたら表示。
@@ -45,6 +45,7 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
         },
       );
     });
+    print(_videoPlayerController.value.aspectRatio);
   }
 
   @override
@@ -95,12 +96,18 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
   // }
 
   Widget build(BuildContext context) {
+    final maxWidth = MediaQuery.of(context).size.width;
+    final maxHeight = MediaQuery.of(context).size.height;
+    
     return SafeArea(
       child: FutureBuilder(
         //_future = initVideoPlayer()
         future: _future,
         builder: (context, snapshot) {
-          return Center(
+          return Container(
+            // width: 124 * _videoPlayerController.value.aspectRatio,
+            width: maxWidth * 0.68,
+            // height: 124,
             //initializedされていたらtrueになって、動画が再生される。
             child: _videoPlayerController.value.isInitialized
                 //動画再生表示画面の比率をオリジナルのまま表示してくれる
