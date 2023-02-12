@@ -32,13 +32,25 @@ class CreatePostModel extends ChangeNotifier {
   // File? video = File(XFile.path);
 
   Future<String> uploadImageAndGetURL(
-      {required String uid, required File file}) async {
-    final String fileName = returnJpgFileName();
-    final Reference storageRef = FirebaseStorage.instance
-        .ref()
-        .child('users')
-        .child(uid)
-        .child(fileName);
+      {required String uid,
+      required File file,
+      required bool postModetoggle}) async {
+    final String jpgFileName = returnJpgFileName();
+    final String mp4FileName = returnMp4FileName();
+    Reference storageRef;
+    if (postModetoggle == false) {
+      storageRef = FirebaseStorage.instance
+          .ref()
+          .child('users')
+          .child(uid)
+          .child(jpgFileName);
+    } else {
+      storageRef = FirebaseStorage.instance
+          .ref()
+          .child('users')
+          .child(uid)
+          .child(mp4FileName);
+    }
     // users/uid/ファイル名 にアップロード
     await storageRef.putFile(file);
     // users/uid/ファイル名 のURLを取得している
@@ -112,7 +124,7 @@ class CreatePostModel extends ChangeNotifier {
           onTap: () async {
             if (textEditingController.text.isNotEmpty) {
               //メインの動作
-              await createPost(mainModel: mainModel);
+              // await createPost(mainModel: mainModel);
               // await uploadImageAndGetURL(
               //     uid: mainModel.currentUserDoc.id, file: video!);
 
@@ -139,13 +151,14 @@ class CreatePostModel extends ChangeNotifier {
     );
   }
 
-  Future<void> createPost({required MainModel mainModel}) async {
+  Future<void> createPost(
+      {required MainModel mainModel, required bool postModeToggle}) async {
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final Timestamp now = Timestamp.now();
     final String activeUid = mainModel.currentUserDoc.id;
     print(video);
-    final pickedVideo =
-        await uploadImageAndGetURL(uid: activeUid, file: video!);
+    final pickedVideo = await uploadImageAndGetURL(
+        uid: activeUid, file: video!, postModetoggle: postModeToggle);
     final String postId = returnUuidV4();
     final Post post = Post(
         updatedAt: now,
@@ -168,6 +181,7 @@ class CreatePostModel extends ChangeNotifier {
         textPositiveScore: 0,
         textSentiment: "",
         video: pickedVideo,
+        isVideo: postModeToggle,
         postId: postId,
         uid: activeUid);
 //currentUserDoc.reference = FirebaseFirestore.instance.collection('users').doc(firestoreUser.uid)
@@ -185,28 +199,47 @@ class CreatePostModel extends ChangeNotifier {
     return path;
   }
 
-  Future getVideo(context, mainModel) async {
+  Future<dynamic> getVideo({required bool postModeToggle}) async {
     //image pickerを用いて動画を選択する。
-    final picker = ImagePicker();
-    final pickVideo = await picker.pickVideo(source: ImageSource.gallery);
-    if (pickVideo == null) return;
+    ImagePicker picker = ImagePicker();
+    File? pickedFile;
+    if (postModeToggle == false) {
+      XFile? pickVideoOrImage =
+          await picker.pickVideo(source: ImageSource.gallery);
+      if (pickVideoOrImage != null) {
+        pickedFile = File(pickVideoOrImage.path);
+        notifyListeners();
+        print(pickVideoOrImage.path);
+      } else {
+        print('No Video selected.');
+      }
+    } else {
+      XFile? pickVideoOrImage =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (pickVideoOrImage != null) {
+        pickedFile = File(pickVideoOrImage.path);
+        notifyListeners();
+        print(pickVideoOrImage.path);
+      } else {
+        print('No image selected.');
+      }
+    }
+    return pickedFile;
 
     //データの型をPickedFileからFileに変更する。
-    final pickFile = File(pickVideo.path);
+    // final pickFile = File(pickVideoOrImage.path);
 
-    //localPathを呼び出して、アプリ内のストレージ領域を確保。
-    final path = await localPath;
+    // //localPathを呼び出して、アプリ内のストレージ領域を確保。
+    // final path = await localPath;
 
-    //拡張子を取得
-    final String fileName = basename(pickVideo.path);
+    // //拡張子を取得
+    // final String fileName = basename(pickVideoOrImage.path);
 
-    //pickした動画をコピーする場所を作成。
-    final videoPath = '$path/$fileName';
+    // //pickした動画をコピーする場所を作成。
+    // final videoPath = '$path/$fileName';
 
-    //pickした動画をvideoPathにコピー。※ .copyはデータの型がFileの必要あり。
-    final File saveVideo = await pickFile.copy(videoPath);
-
-    return saveVideo;
+    // //pickした動画をvideoPathにコピー。※ .copyはデータの型がFileの必要あり。
+    // final File saveVideo = await pickFile.copy(videoPath);
 
     //saveVideoを引数に、VideoItemページに移動。
     // Navigator.of(context).push(

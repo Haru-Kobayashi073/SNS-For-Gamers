@@ -114,6 +114,8 @@ String returnUuidV4() {
 
 String returnJpgFileName() => '${returnUuidV4()}.jpg';
 
+String returnMp4FileName() => '${returnUuidV4()}.mp4';
+
 String returnReportContentsString(
     {required List<String> selectedReportContents}) {
   String reportContentString = '';
