@@ -36,14 +36,14 @@ class AdminModel extends ChangeNotifier {
         await FirebaseFirestore.instance.collectionGroup("posts").get();
     for (final post in postsQshot.docs) {
       batch.update(post.reference, {
-        "reportCount": 0,
+        "isVideo": false,
       });
     }
 
-    final commentsQshot =
-        await FirebaseFirestore.instance.collectionGroup("postComments").get();
-    for (final comment in commentsQshot.docs) {
-      batch.delete(comment.reference);
+    // final commentsQshot =
+    //     await FirebaseFirestore.instance.collectionGroup("postComments").get();
+    // for (final comment in commentsQshot.docs) {
+    //   batch.delete(comment.reference);
       // batch.update(comment.reference, {
       //   //userName
       //   "userNameLanguageCode": firestoreUser.userNameLanguageCode,
@@ -58,13 +58,13 @@ class AdminModel extends ChangeNotifier {
       //   "commentSentiment": "",
       // });
 
-      final repliesQshot = await FirebaseFirestore.instance
-          .collectionGroup("postCommentReplies")
-          .get();
-      for (final reply in repliesQshot.docs) {
-        batch.delete(reply.reference);
-      }
-    }
+    //   final repliesQshot = await FirebaseFirestore.instance
+    //       .collectionGroup("postCommentReplies")
+    //       .get();
+    //   for (final reply in repliesQshot.docs) {
+    //     batch.delete(reply.reference);
+    //   }
+    // }
     await batch.commit();
     await voids.showfluttertoast(msg: "操作が完了");
 
