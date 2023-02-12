@@ -23,6 +23,7 @@ abstract class Post with _$Post {
     required double textPositiveScore,
     required String textSentiment,
     required dynamic video,
+    required bool isVideo,
     required int postCommentCount,
     required String postId,
     required String uid,
