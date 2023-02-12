@@ -124,7 +124,7 @@ service cloud.firestore {
   }
 
   function isValidPost(post, uid) {
-    return post.size() == 22 &&
+    return post.size() == 23 &&
     "createdAt" in post && post.createdAt is timestamp &&
     "updatedAt" in post && post.updatedAt is timestamp &&
     "hashTags" in post && post.hashTags is list &&
@@ -139,6 +139,7 @@ service cloud.firestore {
     "textPositiveScore" in post && post.textPositiveScore is number &&
     "textSentiment" in post && post.textSentiment is string &&
     "video" in post &&
+    "isVideo" in post && post.isVideo is bool &&
     "postId" in post && post.postId is string &&
     "userName" in post && post.userName is string &&
     "uid" in post && post.uid is string &&
