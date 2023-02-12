@@ -17,6 +17,7 @@ import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/constants/routes.dart' as routes;
+import 'package:sns_vol2/views/main/components/video_watch_page.dart';
 
 class PostCard extends ConsumerWidget {
   const PostCard({
@@ -47,7 +48,8 @@ class PostCard extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: GestureDetector(
-        onTap: () => routes.toFocusPostPage(context: context, mainModel: mainModel, post: post),
+        onTap: () => routes.toFocusPostPage(
+            context: context, mainModel: mainModel, post: post),
         child: Material(
           elevation: 20,
           color: const Color.fromARGB(255, 216, 218, 216),
@@ -65,9 +67,10 @@ class PostCard extends ConsumerWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: UserImage(
                             length: 48,
-                            userImageURL: post.uid == mainModel.firestoreUser.uid
-                                ? mainModel.firestoreUser.userImageURL
-                                : post.imageURL),
+                            userImageURL:
+                                post.uid == mainModel.firestoreUser.uid
+                                    ? mainModel.firestoreUser.userImageURL
+                                    : post.imageURL),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 9.0),
@@ -176,16 +179,19 @@ class PostCard extends ConsumerWidget {
                         SizedBox(
                           width: maxWidth * 0.15,
                         ),
-                        Container(
-                          width: maxWidth * 0.7,
-                          height: maxHeight * 0.23,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                            image: NetworkImage(post.video
-                                // 'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
-                                ),
-                          )),
-                        ),
+                        post.isVideo
+                            ? Text(post.text)
+                            // VideoWatchPage(post.video)
+                            : Container(
+                                width: maxWidth * 0.7,
+                                height: maxHeight * 0.23,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  image: NetworkImage(post.video
+                                      // 'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
+                                      ),
+                                )),
+                              )
                       ],
                     ),
               const SizedBox(
@@ -213,8 +219,8 @@ class PostCard extends ConsumerWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           post.postCommentCount.toString(),
-                          style:
-                              const TextStyle(color: colors.cardTextPrimaryColor),
+                          style: const TextStyle(
+                              color: colors.cardTextPrimaryColor),
                         ),
                       ),
                     ],

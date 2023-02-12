@@ -33,6 +33,7 @@ mixin _$Post {
   double get textPositiveScore => throw _privateConstructorUsedError;
   String get textSentiment => throw _privateConstructorUsedError;
   dynamic get video => throw _privateConstructorUsedError;
+  bool get isVideo => throw _privateConstructorUsedError;
   int get postCommentCount => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -67,6 +68,7 @@ abstract class $PostCopyWith<$Res> {
       double textPositiveScore,
       String textSentiment,
       dynamic video,
+      bool isVideo,
       int postCommentCount,
       String postId,
       String uid,
@@ -104,6 +106,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? textPositiveScore = null,
     Object? textSentiment = null,
     Object? video = null,
+    Object? isVideo = null,
     Object? postCommentCount = null,
     Object? postId = null,
     Object? uid = null,
@@ -167,6 +170,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      isVideo: null == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool,
       postCommentCount: null == postCommentCount
           ? _value.postCommentCount
           : postCommentCount // ignore: cast_nullable_to_non_nullable
@@ -227,6 +234,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       double textPositiveScore,
       String textSentiment,
       dynamic video,
+      bool isVideo,
       int postCommentCount,
       String postId,
       String uid,
@@ -260,6 +268,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? textPositiveScore = null,
     Object? textSentiment = null,
     Object? video = null,
+    Object? isVideo = null,
     Object? postCommentCount = null,
     Object? postId = null,
     Object? uid = null,
@@ -323,6 +332,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      isVideo: null == isVideo
+          ? _value.isVideo
+          : isVideo // ignore: cast_nullable_to_non_nullable
+              as bool,
       postCommentCount: null == postCommentCount
           ? _value.postCommentCount
           : postCommentCount // ignore: cast_nullable_to_non_nullable
@@ -380,6 +393,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.textPositiveScore,
       required this.textSentiment,
       required this.video,
+      required this.isVideo,
       required this.postCommentCount,
       required this.postId,
       required this.uid,
@@ -425,6 +439,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   @override
   final dynamic video;
   @override
+  final bool isVideo;
+  @override
   final int postCommentCount;
   @override
   final String postId;
@@ -445,7 +461,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, muteCount: $muteCount, reportCount: $reportCount, text: $text, textLanguageCode: $textLanguageCode, textNegativeScore: $textNegativeScore, textPositiveScore: $textPositiveScore, textSentiment: $textSentiment, video: $video, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userImageURL: $userImageURL)';
+    return 'Post(updatedAt: $updatedAt, createdAt: $createdAt, hashTags: $hashTags, imageURL: $imageURL, likeCount: $likeCount, muteCount: $muteCount, reportCount: $reportCount, text: $text, textLanguageCode: $textLanguageCode, textNegativeScore: $textNegativeScore, textPositiveScore: $textPositiveScore, textSentiment: $textSentiment, video: $video, isVideo: $isVideo, postCommentCount: $postCommentCount, postId: $postId, uid: $uid, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userImageURL: $userImageURL)';
   }
 
   @override
@@ -466,6 +482,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('textPositiveScore', textPositiveScore))
       ..add(DiagnosticsProperty('textSentiment', textSentiment))
       ..add(DiagnosticsProperty('video', video))
+      ..add(DiagnosticsProperty('isVideo', isVideo))
       ..add(DiagnosticsProperty('postCommentCount', postCommentCount))
       ..add(DiagnosticsProperty('postId', postId))
       ..add(DiagnosticsProperty('uid', uid))
@@ -503,6 +520,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
             (identical(other.textSentiment, textSentiment) ||
                 other.textSentiment == textSentiment) &&
             const DeepCollectionEquality().equals(other.video, video) &&
+            (identical(other.isVideo, isVideo) || other.isVideo == isVideo) &&
             (identical(other.postCommentCount, postCommentCount) ||
                 other.postCommentCount == postCommentCount) &&
             (identical(other.postId, postId) || other.postId == postId) &&
@@ -538,6 +556,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
         textPositiveScore,
         textSentiment,
         const DeepCollectionEquality().hash(video),
+        isVideo,
         postCommentCount,
         postId,
         uid,
@@ -578,6 +597,7 @@ abstract class _Post implements Post {
       required final double textPositiveScore,
       required final String textSentiment,
       required final dynamic video,
+      required final bool isVideo,
       required final int postCommentCount,
       required final String postId,
       required final String uid,
@@ -616,6 +636,8 @@ abstract class _Post implements Post {
   String get textSentiment;
   @override
   dynamic get video;
+  @override
+  bool get isVideo;
   @override
   int get postCommentCount;
   @override

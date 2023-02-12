@@ -1,6 +1,7 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/details/animated_toggle_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
@@ -33,7 +34,7 @@ class PostPage extends ConsumerWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                await createPostModel.createPost(mainModel: mainModel);
+                await createPostModel.createPost(mainModel: mainModel, postModeToggle: postModeToggle);
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.send)),
@@ -115,9 +116,8 @@ class PostPage extends ConsumerWidget {
                                     // postsModel.video = await createPostModel.pickVideo(
                                     //     mainModel: mainModel);
                                     createPostModel.video =
-                                        // await others.returnXFile(postModeToggle: postModeToggle);
-                                        await createPostModel.getVideo(
-                                            context, mainModel);
+                                        await others.returnXFile(postModeToggle: postModeToggle);
+                                        // await createPostModel.getVideo(postModeToggle: postModeToggle);
                                     print(createPostModel.video);
                                   },
                                   child: createPostModel.video == null
