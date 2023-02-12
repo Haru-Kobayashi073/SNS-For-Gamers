@@ -1,5 +1,4 @@
-# sns_vol2
-
+# SNS For Gamers
 A new Flutter project.
 
 ## Getting Started
