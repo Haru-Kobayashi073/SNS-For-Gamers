@@ -8,6 +8,7 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/post_search_model.dart';
 import 'package:sns_vol2/views/main/components/search_screen.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/routes.dart' as routes;
 
 class PostSearchScreen extends ConsumerWidget {
   const PostSearchScreen({Key? key, required this.mainModel}) : super(key: key);
@@ -63,35 +64,22 @@ class PostSearchScreen extends ConsumerWidget {
                 itemCount: postMaps.length,
                 itemBuilder: (context, index) {
                   final post = Post.fromJson(postMaps[index]);
-                  return postMaps == null
-                      ? ListTile(
-                          title: Text(
-                            post.userName,
-                            style: const TextStyle(
-                                color: colors.listTileTextColor),
-                          ),
-                          subtitle: Text(
-                            post.text,
-                            style: const TextStyle(
-                                color: colors.listTileTextColor),
-                          ),
-                          leading: UserImage(
-                              length: 48.0, userImageURL: post.userImageURL),
-                        )
-                      : ListTile(
-                          title: Text(
-                            post.userName,
-                            style: const TextStyle(
-                                color: colors.listTileTextColor),
-                          ),
-                          subtitle: Text(
-                            post.text,
-                            style: const TextStyle(
-                                color: colors.listTileTextColor),
-                          ),
-                          leading: UserImage(
-                              length: 48.0, userImageURL: post.userImageURL),
-                        );
+                  return ListTile(
+                    title: Text(
+                      post.userName,
+                      style: const TextStyle(color: colors.listTileTextColor),
+                    ),
+                    subtitle: Text(
+                      post.text,
+                      style: const TextStyle(color: colors.listTileTextColor),
+                    ),
+                    leading: UserImage(
+                        length: 48.0, userImageURL: post.userImageURL),
+                    onTap: () {
+                      routes.toFocusPostPage(
+                          context: context, mainModel: mainModel, post: post);
+                    },
+                  );
                 }),
           ),
         ],
