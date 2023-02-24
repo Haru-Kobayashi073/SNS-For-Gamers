@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
@@ -37,9 +38,7 @@ class PassiveUserProfilePage extends ConsumerWidget {
         
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      appBar: AppBar(
-        title: const Text(passiveUserProfileTitle),
-      ),
+      appBar: NormalAppBar(title: passiveUserProfileTitle, mainModel: mainModel),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(color: colors.backScreenColor),
