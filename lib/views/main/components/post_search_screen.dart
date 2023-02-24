@@ -73,8 +73,11 @@ class PostSearchScreen extends ConsumerWidget {
                       post.text,
                       style: const TextStyle(color: colors.listTileTextColor),
                     ),
-                    leading: UserImage(
-                        length: 48.0, userImageURL: post.userImageURL),
+                    leading: GestureDetector(
+                      onTap: () => postSearchModel.routesToUsersProf(passiveUid: post.uid, context: context, mainModel: mainModel),
+                      child: UserImage(
+                          length: 48.0, userImageURL: post.userImageURL),
+                    ),
                     onTap: () {
                       routes.toFocusPostPage(
                           context: context, mainModel: mainModel, post: post);
