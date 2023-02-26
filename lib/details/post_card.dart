@@ -180,8 +180,8 @@ class PostCard extends ConsumerWidget {
                           width: maxWidth * 0.15,
                         ),
                         post.isVideo
-                            ? Text(post.text)
-                            // VideoWatchPage(post.video)
+                            // ? Text(post.text)
+                            ? VideoWatchPage(post.video)
                             : Container(
                                 width: maxWidth * 0.7,
                                 height: maxHeight * 0.23,
