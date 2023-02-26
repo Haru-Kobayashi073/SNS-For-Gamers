@@ -29,6 +29,7 @@ class CreatePostModel extends ChangeNotifier {
   final TextEditingController textEditingController = TextEditingController();
   String text = '';
   File? video;
+  String? videoPath;
   // File? video = File(XFile.path);
 
   Future<String> uploadImageAndGetURL(
@@ -53,6 +54,7 @@ class CreatePostModel extends ChangeNotifier {
     }
     // users/uid/ファイル名 にアップロード
     await storageRef.putFile(file);
+    // await storageRef.putString(mp4FileName);
     // users/uid/ファイル名 のURLを取得している
     return await storageRef.getDownloadURL();
   }
@@ -157,7 +159,7 @@ class CreatePostModel extends ChangeNotifier {
     final Timestamp now = Timestamp.now();
     final String activeUid = mainModel.currentUserDoc.id;
     print(video);
-    final pickedVideo = await uploadImageAndGetURL(
+    videoPath = await uploadImageAndGetURL(
         uid: activeUid, file: video!, postModetoggle: postModeToggle);
     final String postId = returnUuidV4();
     final Post post = Post(
@@ -180,7 +182,7 @@ class CreatePostModel extends ChangeNotifier {
         textNegativeScore: 0,
         textPositiveScore: 0,
         textSentiment: "",
-        video: pickedVideo,
+        video: videoPath,
         isVideo: postModeToggle,
         postId: postId,
         uid: activeUid);

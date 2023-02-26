@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
@@ -7,8 +5,14 @@ import 'package:flutter/material.dart';
 
 class VideoWatchPage extends ConsumerStatefulWidget {
   //VideoItemを実行した時の引数を取得するのに必要。
-  final File saveVideo;
-  const VideoWatchPage(this.saveVideo, {super.key});
+  // final dynamic saveVideo;
+  final String videoPath;
+  // final bool isPreviewPage;
+  const VideoWatchPage(
+    // this.saveVideo,
+    this.videoPath,
+      // this.isPreviewPage,
+      {super.key});
 
   @override
   _VideoWatchPageState createState() => _VideoWatchPageState();
@@ -52,7 +56,11 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
   void initState() {
     super.initState();
     //_videoPlayerControllerに動画のパスを示す。widget.’変数’で引数を用いれる。
-    _videoPlayerController = VideoPlayerController.file(widget.saveVideo);
+    // _videoPlayerController = VideoPlayerController.file(widget.saveVideo);
+    _videoPlayerController = VideoPlayerController.network(widget.videoPath);
+
+    // _videoPlayerController = VideoPlayerController.network(
+    //     'https://firebasestorage.googleapis.com/v0/b/sns-volume2.appspot.com/o/users%2F3xaiU7NZGRTgSpbnYyLKGhEQmQM2%2Fabe0cfa0-56d1-4a15-be33-40c0c60bc281.mp4?alt=media&token=095683d5-809d-4e44-a5c5-f2f4f044aa42');
     _future = initVideoPlayer();
   }
 
@@ -98,7 +106,7 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
     final maxHeight = MediaQuery.of(context).size.height;
-    
+
     return SafeArea(
       child: FutureBuilder(
         //_future = initVideoPlayer()
@@ -118,7 +126,8 @@ class _VideoWatchPageState extends ConsumerState<VideoWatchPage> {
                       controller: _chewieController,
                     ),
                   )
-                : const CircularProgressIndicator(),
+                // : const SizedBox(child: CircularProgressIndicator()),
+                : const Text('wait a minute')
           );
         },
       ),
