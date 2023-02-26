@@ -120,8 +120,10 @@ class PostPage extends ConsumerWidget {
                                         // await createPostModel.getVideo(postModeToggle: postModeToggle);
                                     print(createPostModel.video);
                                   },
-                                  child: createPostModel.video == null
-                                      ? Container(
+                                  child: 
+                                  // createPostModel.video == null
+                                  //     ? 
+                                      Container(
                                           width: maxWidth * 0.68,
                                           height: maxHeight * 0.23,
                                           color: const Color.fromARGB(
@@ -139,7 +141,8 @@ class PostPage extends ConsumerWidget {
                                                   color: Colors.white,
                                                   size: 100,
                                                 ))
-                                      : VideoWatchPage(createPostModel.video!)
+                                      // : VideoWatchPage(createPostModel.video!)
+                                      // : VideoWatchPage(createPostModel.video.toString())
                                       // Container(
                                       //     width: maxWidth * 0.68,
                                       //     height: maxHeight * 0.23,
