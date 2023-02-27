@@ -1,10 +1,12 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/domain/qiita_user/qiita_user.dart';
+import 'package:sns_vol2/domain/steam_api/steam_api.dart';
 import 'package:sns_vol2/models/main/articles_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/models/main_model.dart';
@@ -19,33 +21,23 @@ class ArticleScreen extends ConsumerWidget {
     final MainModel mainModel = ref.watch(mainProvider);
     final ThemeModel themeModel = ref.watch(themeProvider);
     final articles = articlesModel.articles;
+    final newsLists = articlesModel.newsList;
     return Scaffold(
-      appBar: NormalAppBar(
-          title: articleText, mainModel: mainModel),
+      appBar: NormalAppBar(title: articleText, mainModel: mainModel),
       body: Container(
         decoration: const BoxDecoration(color: colors.backScreenColor),
         alignment: Alignment.center,
         child: ListView.builder(
-            itemCount: articles.length,
+            itemCount: newsLists.length,
             itemBuilder: (context, index) {
-              final article = articles[index];
-              final QiitaUser qiitaUser = QiitaUser.fromJson(article.user);
+              final newsList = newsLists[index];
               return ListTile(
-                leading: UserImage(
-                    length: 64, userImageURL: qiitaUser.profile_image_url),
-                title: qiitaUser.name == ""
-                    ? const Text(
-                        "Qiita User",
-                        style: TextStyle(color: colors.listTileTextColor),
-                      )
-                    : Text(
-                        qiitaUser.name,
-                        style: const TextStyle(color: colors.listTileTextColor),
-                      ),
-                subtitle: Text(
-                  article.title,
+                title: Text(
+                  newsList['title'],
                   style: const TextStyle(color: colors.listTileTextColor),
+                  overflow: TextOverflow.ellipsis,
                 ),
+                onTap: () {},
               );
             }),
       ),
