@@ -6,9 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
 import 'package:sns_vol2/domain/article/article.dart';
-import 'package:sns_vol2/domain/steam_api/steam_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:html/parser.dart' as parser;
 
@@ -16,11 +16,12 @@ final articlesProvider = ChangeNotifierProvider((ref) => ArticlesModel());
 
 class ArticlesModel extends ChangeNotifier {
   Map<String, dynamic> jsons = {};
-  List<dynamic> newsList = [];
+  List<dynamic> newsLists = [];
   List<Article> articles = [];
   List<Article> news = [];
   String gmtTime = '';
   String? articleImgUrl = '';
+  RefreshController refreshController = RefreshController();
 
   ArticlesModel() {
     init();
@@ -29,7 +30,7 @@ class ArticlesModel extends ChangeNotifier {
   String apiKey = dotenv.env["STEAM_API_KEY"]!;
   String baseUrl = 'https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/';
   // String optionUrl = '?appid=990080&count=3&maxlength=100&format=json';
-  String optionUrl = '?appid=1172470&count=2&maxlength=100&format=json';
+  String optionUrl = '?appid=1172470&count=8&maxlength=100&format=json';
 
   Future<void> init() async {
     // パラメータを設定（アプリIDとAPIキー）
@@ -40,8 +41,20 @@ class ArticlesModel extends ChangeNotifier {
       // レスポンスボディをJSONに変換
       jsons = jsonDecode(response.body);
       // JSONからニュース記事のデータを抽出
-      newsList = jsons['appnews']['newsitems'];
-      print(newsList[0]);
+      newsLists = jsons['appnews']['newsitems'];
+      print(newsLists[0]);
+
+      for (int i = 0; i < newsLists.length; i++) {
+        await Future.delayed(const Duration(seconds: 2));
+        articleImgUrl = await fetchImgToUrl(index: i);
+        newsLists[i]["image_url"] = articleImgUrl;
+        notifyListeners();
+      }
+      for (int i = 0; i < newsLists.length; i++) {
+        newsLists[i]["date"] = convertTime(newsLists[i]["date"]);
+        notifyListeners();
+      }
+      print(newsLists[0]);
       // ニュース記事のデータからNewsオブジェクトのリストに変換
       // articles = newsList.map((item) => Article.fromJson(item)).toList();
       // Newsオブジェクトのリストを返す
@@ -69,7 +82,7 @@ class ArticlesModel extends ChangeNotifier {
   }
 
   Future<String> fetchImgToUrl({required int index}) async {
-    final url = newsList[index]['url'];
+    final url = newsLists[index]['url'];
     final response = await http.get(Uri.parse(url));
     // レスポンスをDOMに変換
     final document = parser.parse(response.body);
@@ -84,12 +97,26 @@ class ArticlesModel extends ChangeNotifier {
     // }
     if (image != null) {
       articleImgUrl = '${image.attributes['content']}';
-      print(articleImgUrl);
-      print(image.attributes['content']);
+      // print(articleImgUrl);
+      // notifyListeners();
     } else {
       // レスポンスが失敗した場合
       print('Request failed with status: ${response.statusCode}.');
     }
     return articleImgUrl!;
+  }
+
+  Future<void> onRefresh() async {
+    refreshController.refreshCompleted();
+    notifyListeners();
+  }
+
+  Future<void> onReload() async {
+    notifyListeners();
+  }
+
+  Future<void> onLoading() async {
+    refreshController.loadComplete();
+    notifyListeners();
   }
 }
