@@ -30,11 +30,12 @@ class PostPage extends ConsumerWidget {
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: colors.appBarBackColor,
+        backgroundColor: colors.green,
         actions: [
           IconButton(
               onPressed: () async {
-                await createPostModel.createPost(mainModel: mainModel, postModeToggle: postModeToggle);
+                await createPostModel.createPost(
+                    mainModel: mainModel, postModeToggle: postModeToggle);
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.send)),
@@ -76,7 +77,7 @@ class PostPage extends ConsumerWidget {
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
-                                      color: colors.cardTextPrimaryColor),
+                                      color: colors.green),
                                 ),
                                 SizedBox(
                                   width: maxWidth * 0.68,
@@ -90,19 +91,19 @@ class PostPage extends ConsumerWidget {
                                     minLines: 1,
                                     keyboardType: TextInputType.multiline,
                                     decoration: InputDecoration(
-                                      hoverColor: colors.cardTextPrimaryColor,
+                                      hoverColor: colors.green,
                                       hintText: "detail...",
                                       enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           width: 2,
-                                          color: colors.cardTextPrimaryColor,
+                                          color: colors.green,
                                         ),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                         borderSide: const BorderSide(
                                           width: 2,
-                                          color: colors.cardTextPrimaryColor,
+                                          color: colors.green,
                                         ),
                                       ),
                                     ),
@@ -112,45 +113,46 @@ class PostPage extends ConsumerWidget {
                                   height: maxHeight * 0.02,
                                 ),
                                 GestureDetector(
-                                  onTap: () async {
-                                    // postsModel.video = await createPostModel.pickVideo(
-                                    //     mainModel: mainModel);
-                                    createPostModel.video =
-                                        await others.returnXFile(postModeToggle: postModeToggle);
-                                        // await createPostModel.getVideo(postModeToggle: postModeToggle);
-                                    print(createPostModel.video);
-                                  },
-                                  child: 
-                                  // createPostModel.video == null
-                                  //     ? 
-                                      Container(
-                                          width: maxWidth * 0.68,
-                                          height: maxHeight * 0.23,
-                                          color: const Color.fromARGB(
-                                              255, 213, 210, 210),
-                                          child: postModeToggle == true
-                                              ? const Icon(
-                                                  Icons
-                                                      .add_photo_alternate_outlined,
-                                                  color: Colors.white,
-                                                  size: 100,
-                                                )
-                                              : const Icon(
-                                                  // Icons.add_photo_alternate_outlined,
-                                                  Icons.video_file_outlined,
-                                                  color: Colors.white,
-                                                  size: 100,
-                                                ))
-                                      // : VideoWatchPage(createPostModel.video!)
-                                      // : VideoWatchPage(createPostModel.video.toString())
-                                      // Container(
-                                      //     width: maxWidth * 0.68,
-                                      //     height: maxHeight * 0.23,
-                                      //     child: Image.file(
-                                      //         createPostModel.video!,
-                                      //         fit: BoxFit.cover),
-                                      //   ),
-                                ),
+                                    onTap: () async {
+                                      // postsModel.video = await createPostModel.pickVideo(
+                                      //     mainModel: mainModel);
+                                      createPostModel.video =
+                                          await others.returnXFile(
+                                              postModeToggle: postModeToggle);
+                                      // await createPostModel.getVideo(postModeToggle: postModeToggle);
+                                      print(createPostModel.video);
+                                    },
+                                    child:
+                                        // createPostModel.video == null
+                                        //     ?
+                                        Container(
+                                            width: maxWidth * 0.68,
+                                            height: maxHeight * 0.23,
+                                            color: const Color.fromARGB(
+                                                255, 213, 210, 210),
+                                            child: postModeToggle == true
+                                                ? const Icon(
+                                                    Icons
+                                                        .add_photo_alternate_outlined,
+                                                    color: Colors.white,
+                                                    size: 100,
+                                                  )
+                                                : const Icon(
+                                                    // Icons.add_photo_alternate_outlined,
+                                                    Icons.video_file_outlined,
+                                                    color: Colors.white,
+                                                    size: 100,
+                                                  ))
+                                    // : VideoWatchPage(createPostModel.video!)
+                                    // : VideoWatchPage(createPostModel.video.toString())
+                                    // Container(
+                                    //     width: maxWidth * 0.68,
+                                    //     height: maxHeight * 0.23,
+                                    //     child: Image.file(
+                                    //         createPostModel.video!,
+                                    //         fit: BoxFit.cover),
+                                    //   ),
+                                    ),
                                 AnimatedToggle(
                                     values: const ['photo', 'video'],
                                     onToggleCallback: (value) {

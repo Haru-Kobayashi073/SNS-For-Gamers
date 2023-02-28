@@ -38,7 +38,7 @@ class RepliesPage extends ConsumerWidget {
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: colors.appBarBackColor,
+        backgroundColor: colors.green,
         title: const Text(replyTitle)
       ),
       floatingActionButton: FloatingActionButton(

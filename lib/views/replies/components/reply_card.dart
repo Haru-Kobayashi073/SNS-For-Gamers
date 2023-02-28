@@ -38,16 +38,19 @@ class ReplyCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
 
-    return isValidUser(muteUids: mainModel.muteUids, map: replyDoc.data() as Map<String,dynamic>) &&
+    return isValidUser(
+                muteUids: mainModel.muteUids,
+                map: replyDoc.data() as Map<String, dynamic>) &&
             isValidReply(muteReplyIds: mainModel.muteReplyIds, reply: reply)
         ? Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Material(
-            elevation: 20,
-                color: const Color.fromARGB(255, 225, 231, 225),
-                borderRadius: BorderRadius.circular(30),
-            child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.all(16.0),
+            child: Material(
+              elevation: 20,
+              color: const Color.fromARGB(255, 225, 231, 225),
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,17 +68,15 @@ class ReplyCard extends ConsumerWidget {
                               Text(
                                 reply.userName,
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                  color: colors.cardTextPrimaryColor
-                                ),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: colors.green),
                               ),
                               Text(
                                 reply.reply,
                                 style: const TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: colors.cardTextPrimaryColor
-                                  ),
+                                    color: colors.green),
                               ),
                             ],
                           ),
@@ -101,10 +102,10 @@ class ReplyCard extends ConsumerWidget {
                   ),
                 ]),
               ),
-          ),
-        )
+            ),
+          )
         : const Center(
-          child: Text('リプライが取得できませんでした'),
-        );
+            child: Text('リプライが取得できませんでした'),
+          );
   }
 }

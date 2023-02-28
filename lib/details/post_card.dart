@@ -84,14 +84,13 @@ class PostCard extends ConsumerWidget {
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
-                                      color: colors.cardTextPrimaryColor),
+                                      color: colors.green),
                                 ),
                               ],
                             ),
                             Text(
                               post.text,
-                              style: const TextStyle(
-                                  color: colors.cardTextPrimaryColor),
+                              style: const TextStyle(color: colors.green),
                             ),
                           ],
                         ),
@@ -205,7 +204,7 @@ class PostCard extends ConsumerWidget {
                       InkWell(
                         child: const Icon(
                           Icons.messenger_outline_rounded,
-                          color: colors.cardTextPrimaryColor,
+                          color: colors.green,
                         ),
                         onTap: () async =>
                             await commentsModel.onCommentButtonPressed(
@@ -219,8 +218,7 @@ class PostCard extends ConsumerWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           post.postCommentCount.toString(),
-                          style: const TextStyle(
-                              color: colors.cardTextPrimaryColor),
+                          style: const TextStyle(color: colors.green),
                         ),
                       ),
                     ],

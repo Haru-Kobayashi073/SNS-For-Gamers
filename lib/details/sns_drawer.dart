@@ -16,7 +16,7 @@ class SNSDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: colors.appBarBackColor,
+      backgroundColor: colors.green,
       child: ListView(
         children: [
           ListTile(

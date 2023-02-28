@@ -28,7 +28,7 @@ class PasswordFieldAndButtonScreen extends StatelessWidget {
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         title: Text(appbarTitle),
-        backgroundColor: colors.appBarBackColor,
+        backgroundColor: colors.green,
         elevation: 0,
       ),
       body: Center(

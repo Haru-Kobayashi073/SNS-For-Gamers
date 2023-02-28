@@ -6,7 +6,6 @@ import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 
-
 class PostLikeButton extends StatelessWidget {
   const PostLikeButton(
       {Key? key,
@@ -41,9 +40,9 @@ class PostLikeButton extends StatelessWidget {
                   )
                 : InkWell(
                     child: const Icon(
-                      Icons.favorite_border, 
-                      color: colors.cardTextPrimaryColor,
-                      ),
+                      Icons.favorite_border,
+                      color: colors.green,
+                    ),
                     onTap: () async => await postsModel.like(
                         post: post,
                         postDoc: postDoc,
@@ -53,8 +52,9 @@ class PostLikeButton extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
-              isLike ? plusOneCount.toString() : post.likeCount.toString(),
-              style: const TextStyle(color: colors.cardTextPrimaryColor),),
+            isLike ? plusOneCount.toString() : post.likeCount.toString(),
+            style: const TextStyle(color: colors.green),
+          ),
         ),
       ],
     );

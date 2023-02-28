@@ -21,7 +21,7 @@ class NormalAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: colors.appBarBackColor,
+      backgroundColor: colors.green,
       title: Text(
         title,
         style: const TextStyle(color: colors.appBarTextColor),

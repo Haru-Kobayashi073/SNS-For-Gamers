@@ -38,7 +38,7 @@ class CardPopupMenuButton extends ConsumerWidget {
       ),
       icon: const Icon(
         Icons.more_horiz,
-        color: colors.cardTextPrimaryColor,
+        color: colors.green,
       ),
       // color: colors.cardTextPrimaryColor,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[

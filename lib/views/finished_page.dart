@@ -11,7 +11,7 @@ class FinishedPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(
-        backgroundColor: colors.appBarBackColor,
+        backgroundColor: colors.green,
         automaticallyImplyLeading: false,
         elevation: 0,
       ),

@@ -19,7 +19,7 @@ class SNSBottomNavigationBar extends StatelessWidget {
       selectedItemColor: colors.bottomNaviBarTextColor,
       unselectedIconTheme: const IconThemeData(color: colors.bottomNaviUnselectedColor),
       unselectedItemColor: colors.bottomNaviUnselectedColor,
-      backgroundColor: colors.bottomNaviBarBackColor,
+      backgroundColor: colors.green,
       elevation: 0,
       items: bottomNavigationBarElements,
       currentIndex: snsBottomNavigationBarModel.currentIndex,

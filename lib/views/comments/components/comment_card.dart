@@ -44,7 +44,8 @@ class CommentCard extends ConsumerWidget {
     final bool isMyComment = comment.uid == firestoreUser.uid;
 
     return isValidUser(muteUids: mainModel.muteUids, map: commentDoc.data()!) &&
-            isValidComment(muteCommentIds: mainModel.muteCommentIds, comment: comment)
+            isValidComment(
+                muteCommentIds: mainModel.muteCommentIds, comment: comment)
         ? Padding(
             padding: const EdgeInsets.all(16.0),
             child: Material(
@@ -74,17 +75,16 @@ class CommentCard extends ConsumerWidget {
                                   Text(
                                     firestoreUser.userName,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: colors.cardTextPrimaryColor
-                                    ),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: colors.green),
                                   ),
                                 ],
                               ),
                               Text(
                                 comment.comment,
-                                style: const TextStyle(color: colors.cardTextPrimaryColor),
-                                ),
+                                style: const TextStyle(color: colors.green),
+                              ),
                             ],
                           ),
                         ],
@@ -104,7 +104,7 @@ class CommentCard extends ConsumerWidget {
                           InkWell(
                             child: const Icon(
                               Icons.reply,
-                              color: colors.cardTextPrimaryColor,
+                              color: colors.green,
                             ),
                             onTap: () async => await repliesModel.init(
                                 context: context,

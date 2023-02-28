@@ -47,7 +47,7 @@ class CommentsPage extends ConsumerWidget {
       backgroundColor: colors.backScreenColor,
       appBar: AppBar(
         title: Text(commentTitle),
-        backgroundColor: colors.appBarBackColor,
+        backgroundColor: colors.green,
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(

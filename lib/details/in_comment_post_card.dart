@@ -14,16 +14,15 @@ import 'package:sns_vol2/models/posts_model.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class InCommentPostCard extends StatelessWidget {
-  const InCommentPostCard(
-      {Key? key,
-      required this.mainModel,
-      required this.post,
-      required this.postDoc,
-      required this.commentsModel,
-      required this.postsModel,
-      required this.muteUserModel,
-      })
-      : super(key: key);
+  const InCommentPostCard({
+    Key? key,
+    required this.mainModel,
+    required this.post,
+    required this.postDoc,
+    required this.commentsModel,
+    required this.postsModel,
+    required this.muteUserModel,
+  }) : super(key: key);
   final MainModel mainModel;
   final CommentsModel commentsModel;
   final PostsModel postsModel;
@@ -75,14 +74,13 @@ class InCommentPostCard extends StatelessWidget {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
-                                    color: colors.cardTextPrimaryColor),
+                                    color: colors.green),
                               ),
                             ],
                           ),
                           Text(
                             post.text,
-                            style: const TextStyle(
-                                color: colors.cardTextPrimaryColor),
+                            style: const TextStyle(color: colors.green),
                           ),
                         ],
                       ),
@@ -100,19 +98,22 @@ class InCommentPostCard extends StatelessWidget {
             // Container() :
             Row(
               children: [
-                SizedBox(width: maxWidth * 0.15,),
+                SizedBox(
+                  width: maxWidth * 0.15,
+                ),
                 Container(
                   width: maxWidth * 0.7,
                   height: maxHeight * 0.23,
                   child: const Image(
                       image: NetworkImage(
-                          'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480')
-                          ),
+                          'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480')),
                   // child: Image.file(createPostModel.video!, fit: BoxFit.cover),
                 ),
               ],
             ),
-            const SizedBox(height: 7,),
+            const SizedBox(
+              height: 7,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -121,16 +122,18 @@ class InCommentPostCard extends StatelessWidget {
                     InkWell(
                       child: const Icon(
                         Icons.messenger_outline_rounded,
-                        color: colors.cardTextPrimaryColor,
+                        color: colors.green,
                       ),
-                      onTap: () => commentsModel.showCommentFlashBar(context: context, mainModel: mainModel, postDoc: postDoc),
+                      onTap: () => commentsModel.showCommentFlashBar(
+                          context: context,
+                          mainModel: mainModel,
+                          postDoc: postDoc),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         post.postCommentCount.toString(),
-                        style:
-                            const TextStyle(color: colors.cardTextPrimaryColor),
+                        style: const TextStyle(color: colors.green),
                       ),
                     ),
                   ],

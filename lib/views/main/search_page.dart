@@ -25,7 +25,7 @@ class SearchPage extends ConsumerWidget {
       child: Scaffold(
           backgroundColor: colors.backScreenColor,
           appBar: AppBar(
-            backgroundColor: colors.appBarBackColor,
+            backgroundColor: colors.green,
             elevation: 0,
             title: const Text(searchText),
             bottom: TabBar(

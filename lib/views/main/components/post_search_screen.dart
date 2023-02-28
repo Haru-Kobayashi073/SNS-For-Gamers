@@ -47,7 +47,7 @@ class PostSearchScreen extends ConsumerWidget {
                   prefixIcon: Icon(
                     Icons.search,
                   ),
-                  prefixStyle: TextStyle(color: colors.cardTextPrimaryColor),
+                  prefixStyle: TextStyle(color: colors.green),
                   border: OutlineInputBorder(),
                   hintText: "Search..."),
               onChanged: (text) async {
@@ -74,7 +74,10 @@ class PostSearchScreen extends ConsumerWidget {
                       style: const TextStyle(color: colors.listTileTextColor),
                     ),
                     leading: GestureDetector(
-                      onTap: () => postSearchModel.routesToUsersProf(passiveUid: post.uid, context: context, mainModel: mainModel),
+                      onTap: () => postSearchModel.routesToUsersProf(
+                          passiveUid: post.uid,
+                          context: context,
+                          mainModel: mainModel),
                       child: UserImage(
                           length: 48.0, userImageURL: post.userImageURL),
                     ),

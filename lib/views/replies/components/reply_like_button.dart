@@ -47,8 +47,8 @@ class ReplyLikeButton extends StatelessWidget {
               : InkWell(
                   child: const Icon(
                     Icons.favorite_border,
-                    color: colors.cardTextPrimaryColor,
-                    ),
+                    color: colors.green,
+                  ),
                   onTap: () async => await repliesModel.like(
                       reply: reply,
                       mainModel: mainModel,
@@ -58,10 +58,10 @@ class ReplyLikeButton extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
-              // isLike ? plusOneCount.toString() : 
-              reply.likeCount.toString(),
-              style: const TextStyle(color: colors.cardTextPrimaryColor),
-            ),
+            // isLike ? plusOneCount.toString() :
+            reply.likeCount.toString(),
+            style: const TextStyle(color: colors.green),
+          ),
         ),
       ],
     );
