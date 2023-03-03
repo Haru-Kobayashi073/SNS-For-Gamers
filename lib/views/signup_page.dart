@@ -11,6 +11,7 @@ import 'package:sns_vol2/models/signup_model.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
 //constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
@@ -24,35 +25,43 @@ class SignUpPage extends ConsumerWidget {
         TextEditingController(text: signUpModel.password);
 
     return Scaffold(
+      backgroundColor: colors.backScreenColor,
       appBar: AppBar(
-        title: Text(signupTitle),
+        title: const Text(signupTitle),
+        backgroundColor: colors.green,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          RoundedTextField(
-            keybordType: TextInputType.emailAddress,
-            onChanged: (text) => signUpModel.email = text,
-            controller: emailEditingCntoroller,
-            color: Colors.grey.shade200,
-            borderColor: Colors.black,
-            hintText: mailAddressText,
-          ),
-          RoundedPasswordField(
-              onChanged: (text) => signUpModel.password = text,
-              obscureText: signUpModel.isObscure,
-              passwordEditingController: passwordEditingCntoroller,
-              toggleObscureText: () => signUpModel.toggleIsObscure(),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 160, 0, 0),
+        child: Column(
+          children: [
+            RoundedTextField(
+              keybordType: TextInputType.emailAddress,
+              onChanged: (text) => signUpModel.email = text,
+              controller: emailEditingCntoroller,
               color: Colors.grey.shade200,
-              borderColor: Colors.black),
-          RoundedButton(
-            onPressed: () async =>
-                await signUpModel.createUser(context: context),
-            widthRate: 0.35,
-            color: Colors.black,
-            text: signupTitle,
-            textColor: Colors.white,
-          ),
-        ],
+              borderColor: Colors.black,
+              hintText: mailAddressText,
+            ),
+            const SizedBox(height: 20,),
+            RoundedPasswordField(
+                onChanged: (text) => signUpModel.password = text,
+                obscureText: signUpModel.isObscure,
+                passwordEditingController: passwordEditingCntoroller,
+                toggleObscureText: () => signUpModel.toggleIsObscure(),
+                color: Colors.grey.shade200,
+                borderColor: Colors.black),
+            const SizedBox(height: 20,),
+            RoundedButton(
+              onPressed: () async =>
+                  await signUpModel.createUser(context: context),
+              widthRate: 0.35,
+              color: Colors.black,
+              text: signupTitle,
+              textColor: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }
