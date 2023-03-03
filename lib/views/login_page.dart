@@ -8,6 +8,7 @@ import 'package:sns_vol2/details/forget_password_text.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
 //model
 import 'package:sns_vol2/models/login_model.dart';
 
@@ -22,39 +23,51 @@ class LoginPage extends ConsumerWidget {
         TextEditingController(text: loginModel.password);
 
     return Scaffold(
+      backgroundColor: colors.green,
       appBar: AppBar(
         title: const Text('Login'),
         automaticallyImplyLeading: false,
+        backgroundColor: colors.green,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          RoundedTextField(
-            keybordType: TextInputType.emailAddress,
-            onChanged: (text) => loginModel.email = text,
-            controller: emailEditingCntoroller,
-            color: Colors.grey.shade200,
-            borderColor: Colors.black,
-            hintText: mailAddressText,
-          ),
-          RoundedPasswordField(
-              onChanged: (text) => loginModel.password = text,
-              obscureText: loginModel.isObscure,
-              passwordEditingController: passwordEditingCntoroller,
-              toggleObscureText: () => loginModel.toggleIsObscure(),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+        child: Column(
+          children: [
+            RoundedTextField(
+              keybordType: TextInputType.emailAddress,
+              onChanged: (text) => loginModel.email = text,
+              controller: emailEditingCntoroller,
               color: Colors.grey.shade200,
-              borderColor: Colors.black),
-          RoundedButton(
-            onPressed: () async => await loginModel.login(context: context),
-            widthRate: 0.35,
-            color: Colors.black,
-            text: loginTitle,
-            textColor: Colors.white,
-          ),
-          TextButton(
-              onPressed: () => routes.toSignUpPage(context: context),
-              child: const Text(noAccountMsg)),
-          const ForgetPasswordText()
-        ],
+              borderColor: Colors.black,
+              hintText: mailAddressText,
+            ),
+            const SizedBox(height: 20,),
+            RoundedPasswordField(
+                onChanged: (text) => loginModel.password = text,
+                obscureText: loginModel.isObscure,
+                passwordEditingController: passwordEditingCntoroller,
+                toggleObscureText: () => loginModel.toggleIsObscure(),
+                color: Colors.grey.shade200,
+                borderColor: Colors.black),
+            const SizedBox(height: 40,),
+            RoundedButton(
+              onPressed: () async => await loginModel.login(context: context),
+              widthRate: 0.35,
+              color: Colors.black,
+              text: loginTitle,
+              textColor: Colors.white,
+            ),
+            TextButton(
+                onPressed: () => routes.toSignUpPage(context: context),
+                child: const Text(
+                  noAccountMsg,
+                  style: TextStyle(color: colors.cardBackColor),
+                  ),
+              ),
+            const ForgetPasswordText()
+          ],
+        ),
       ),
     );
   }
