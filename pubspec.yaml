@@ -70,15 +70,16 @@ dependencies:
   http: ^0.13.5
   algolia: ^1.1.1
   get: ^4.6.5
+  html: ^0.15.1
 
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  build_runner: ^2.3.2
-  freezed: ^2.2.1
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
   freezed_annotation: ^2.2.0
-  json_serializable: ^6.5.4
+  json_serializable: ^6.6.1
   flutter_launcher_icons: ^0.11.0
 
   flutter_test:
@@ -137,5 +138,5 @@ flutter:
 flutter_icons: 
   android: true
   ios: true
-  image_path: "assets/images/launchIcon1.png"
-  adaptive_icon_background: "#FF0000"
+  image_path: "assets/images/Gamer.png"
+  adaptive_icon_background: "#388D5D"
