@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'follower.dart';
 
@@ -52,7 +52,7 @@ class _$FollowerCopyWithImpl<$Res, $Val extends Follower>
   @override
   $Res call({
     Object? followedUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? followerUid = null,
   }) {
     return _then(_value.copyWith(
@@ -60,7 +60,7 @@ class _$FollowerCopyWithImpl<$Res, $Val extends Follower>
           ? _value.followedUid
           : followedUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -94,7 +94,7 @@ class __$$_FollowerCopyWithImpl<$Res>
   @override
   $Res call({
     Object? followedUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? followerUid = null,
   }) {
     return _then(_$_Follower(
@@ -102,7 +102,7 @@ class __$$_FollowerCopyWithImpl<$Res>
           ? _value.followedUid
           : followedUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,

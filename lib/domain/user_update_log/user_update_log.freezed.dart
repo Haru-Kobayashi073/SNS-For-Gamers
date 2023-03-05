@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_update_log.dart';
 
@@ -66,16 +66,16 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? logCreatedAt = null,
+    Object? logCreatedAt = freezed,
     Object? userName = null,
     Object? userImageURL = null,
     Object? introduction = null,
-    Object? userRef = null,
+    Object? userRef = freezed,
     Object? searchToken = null,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
-      logCreatedAt: null == logCreatedAt
+      logCreatedAt: freezed == logCreatedAt
           ? _value.logCreatedAt
           : logCreatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -91,7 +91,7 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
           ? _value.introduction
           : introduction // ignore: cast_nullable_to_non_nullable
               as String,
-      userRef: null == userRef
+      userRef: freezed == userRef
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -136,16 +136,16 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? logCreatedAt = null,
+    Object? logCreatedAt = freezed,
     Object? userName = null,
     Object? userImageURL = null,
     Object? introduction = null,
-    Object? userRef = null,
+    Object? userRef = freezed,
     Object? searchToken = null,
     Object? uid = null,
   }) {
     return _then(_$_UserUpdateLog(
-      logCreatedAt: null == logCreatedAt
+      logCreatedAt: freezed == logCreatedAt
           ? _value.logCreatedAt
           : logCreatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -161,7 +161,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
           ? _value.introduction
           : introduction // ignore: cast_nullable_to_non_nullable
               as String,
-      userRef: null == userRef
+      userRef: freezed == userRef
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -209,6 +209,7 @@ class _$_UserUpdateLog with DiagnosticableTreeMixin implements _UserUpdateLog {
   final Map<String, dynamic> _searchToken;
   @override
   Map<String, dynamic> get searchToken {
+    if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_searchToken);
   }

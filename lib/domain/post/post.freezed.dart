@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'post.dart';
 
@@ -93,8 +93,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updatedAt = null,
-    Object? createdAt = null,
+    Object? updatedAt = freezed,
+    Object? createdAt = freezed,
     Object? hashTags = null,
     Object? imageURL = null,
     Object? likeCount = null,
@@ -105,7 +105,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? textNegativeScore = null,
     Object? textPositiveScore = null,
     Object? textSentiment = null,
-    Object? video = null,
+    Object? video = freezed,
     Object? isVideo = null,
     Object? postCommentCount = null,
     Object? postId = null,
@@ -118,11 +118,11 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? userImageURL = null,
   }) {
     return _then(_value.copyWith(
-      updatedAt: null == updatedAt
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -166,7 +166,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.textSentiment
           : textSentiment // ignore: cast_nullable_to_non_nullable
               as String,
-      video: null == video
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -255,8 +255,8 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updatedAt = null,
-    Object? createdAt = null,
+    Object? updatedAt = freezed,
+    Object? createdAt = freezed,
     Object? hashTags = null,
     Object? imageURL = null,
     Object? likeCount = null,
@@ -267,7 +267,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? textNegativeScore = null,
     Object? textPositiveScore = null,
     Object? textSentiment = null,
-    Object? video = null,
+    Object? video = freezed,
     Object? isVideo = null,
     Object? postCommentCount = null,
     Object? postId = null,
@@ -280,11 +280,11 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? userImageURL = null,
   }) {
     return _then(_$_Post(
-      updatedAt: null == updatedAt
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -328,7 +328,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.textSentiment
           : textSentiment // ignore: cast_nullable_to_non_nullable
               as String,
-      video: null == video
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -414,6 +414,7 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   final List<String> _hashTags;
   @override
   List<String> get hashTags {
+    if (_hashTags is EqualUnmodifiableListView) return _hashTags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_hashTags);
   }

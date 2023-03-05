@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'post_comment_reply_report.dart';
 
@@ -80,12 +80,12 @@ class _$PostCommentReplyReportCopyWithImpl<$Res,
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? others = null,
     Object? reportContent = null,
     Object? postCommentReplyCreatorUid = null,
     Object? passiveUserName = null,
-    Object? postCommentReplyDocRef = null,
+    Object? postCommentReplyDocRef = freezed,
     Object? postCommentReplyId = null,
     Object? postCommentReplyReportId = null,
     Object? reply = null,
@@ -99,7 +99,7 @@ class _$PostCommentReplyReportCopyWithImpl<$Res,
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -119,7 +119,7 @@ class _$PostCommentReplyReportCopyWithImpl<$Res,
           ? _value.passiveUserName
           : passiveUserName // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyDocRef: null == postCommentReplyDocRef
+      postCommentReplyDocRef: freezed == postCommentReplyDocRef
           ? _value.postCommentReplyDocRef
           : postCommentReplyDocRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -193,12 +193,12 @@ class __$$_PostCommentReplyReportCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? others = null,
     Object? reportContent = null,
     Object? postCommentReplyCreatorUid = null,
     Object? passiveUserName = null,
-    Object? postCommentReplyDocRef = null,
+    Object? postCommentReplyDocRef = freezed,
     Object? postCommentReplyId = null,
     Object? postCommentReplyReportId = null,
     Object? reply = null,
@@ -212,7 +212,7 @@ class __$$_PostCommentReplyReportCopyWithImpl<$Res>
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -232,7 +232,7 @@ class __$$_PostCommentReplyReportCopyWithImpl<$Res>
           ? _value.passiveUserName
           : passiveUserName // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyDocRef: null == postCommentReplyDocRef
+      postCommentReplyDocRef: freezed == postCommentReplyDocRef
           ? _value.postCommentReplyDocRef
           : postCommentReplyDocRef // ignore: cast_nullable_to_non_nullable
               as dynamic,

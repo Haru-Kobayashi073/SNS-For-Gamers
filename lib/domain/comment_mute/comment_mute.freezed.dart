@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'comment_mute.dart';
 
@@ -58,16 +58,16 @@ class _$CommentMuteCopyWithImpl<$Res, $Val extends CommentMute>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentId = null,
-    Object? postCommentRef = null,
+    Object? postCommentRef = freezed,
   }) {
     return _then(_value.copyWith(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -75,7 +75,7 @@ class _$CommentMuteCopyWithImpl<$Res, $Val extends CommentMute>
           ? _value.postCommentId
           : postCommentId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentRef: null == postCommentRef
+      postCommentRef: freezed == postCommentRef
           ? _value.postCommentRef
           : postCommentRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -110,16 +110,16 @@ class __$$_CommentMuteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentId = null,
-    Object? postCommentRef = null,
+    Object? postCommentRef = freezed,
   }) {
     return _then(_$_CommentMute(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -127,7 +127,7 @@ class __$$_CommentMuteCopyWithImpl<$Res>
           ? _value.postCommentId
           : postCommentId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentRef: null == postCommentRef
+      postCommentRef: freezed == postCommentRef
           ? _value.postCommentRef
           : postCommentRef // ignore: cast_nullable_to_non_nullable
               as dynamic,

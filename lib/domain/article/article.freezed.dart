@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'article.dart';
 
@@ -70,7 +70,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     Object? reactions_count = null,
     Object? title = null,
     Object? url = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -101,7 +101,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -144,7 +144,7 @@ class __$$_ArticleCopyWithImpl<$Res>
     Object? reactions_count = null,
     Object? title = null,
     Object? url = null,
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_$_Article(
       id: null == id
@@ -175,7 +175,7 @@ class __$$_ArticleCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as dynamic,

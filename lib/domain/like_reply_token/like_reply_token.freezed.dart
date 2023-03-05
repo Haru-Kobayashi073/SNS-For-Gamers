@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'like_reply_token.dart';
 
@@ -65,10 +65,10 @@ class _$LikeReplyTokenCopyWithImpl<$Res, $Val extends LikeReplyToken>
   $Res call({
     Object? activeUid = null,
     Object? passiveUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentReplyId = null,
     Object? tokenId = null,
-    Object? postCommentReplyRef = null,
+    Object? postCommentReplyRef = freezed,
     Object? tokenType = null,
   }) {
     return _then(_value.copyWith(
@@ -80,7 +80,7 @@ class _$LikeReplyTokenCopyWithImpl<$Res, $Val extends LikeReplyToken>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -92,7 +92,7 @@ class _$LikeReplyTokenCopyWithImpl<$Res, $Val extends LikeReplyToken>
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyRef: null == postCommentReplyRef
+      postCommentReplyRef: freezed == postCommentReplyRef
           ? _value.postCommentReplyRef
           : postCommentReplyRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -135,10 +135,10 @@ class __$$_LikeReplyTokenCopyWithImpl<$Res>
   $Res call({
     Object? activeUid = null,
     Object? passiveUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentReplyId = null,
     Object? tokenId = null,
-    Object? postCommentReplyRef = null,
+    Object? postCommentReplyRef = freezed,
     Object? tokenType = null,
   }) {
     return _then(_$_LikeReplyToken(
@@ -150,7 +150,7 @@ class __$$_LikeReplyTokenCopyWithImpl<$Res>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -162,7 +162,7 @@ class __$$_LikeReplyTokenCopyWithImpl<$Res>
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyRef: null == postCommentReplyRef
+      postCommentReplyRef: freezed == postCommentReplyRef
           ? _value.postCommentReplyRef
           : postCommentReplyRef // ignore: cast_nullable_to_non_nullable
               as dynamic,

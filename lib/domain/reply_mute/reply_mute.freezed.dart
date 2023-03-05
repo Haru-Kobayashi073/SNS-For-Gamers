@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'reply_mute.dart';
 
@@ -57,16 +57,16 @@ class _$ReplyMuteCopyWithImpl<$Res, $Val extends ReplyMute>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentReplyId = null,
-    Object? postCommentReplyRef = null,
+    Object? postCommentReplyRef = freezed,
   }) {
     return _then(_value.copyWith(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -74,7 +74,7 @@ class _$ReplyMuteCopyWithImpl<$Res, $Val extends ReplyMute>
           ? _value.postCommentReplyId
           : postCommentReplyId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyRef: null == postCommentReplyRef
+      postCommentReplyRef: freezed == postCommentReplyRef
           ? _value.postCommentReplyRef
           : postCommentReplyRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -108,16 +108,16 @@ class __$$_ReplyMuteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postCommentReplyId = null,
-    Object? postCommentReplyRef = null,
+    Object? postCommentReplyRef = freezed,
   }) {
     return _then(_$_ReplyMute(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -125,7 +125,7 @@ class __$$_ReplyMuteCopyWithImpl<$Res>
           ? _value.postCommentReplyId
           : postCommentReplyId // ignore: cast_nullable_to_non_nullable
               as String,
-      postCommentReplyRef: null == postCommentReplyRef
+      postCommentReplyRef: freezed == postCommentReplyRef
           ? _value.postCommentReplyRef
           : postCommentReplyRef // ignore: cast_nullable_to_non_nullable
               as dynamic,

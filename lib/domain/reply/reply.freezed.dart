@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'reply.dart';
 
@@ -87,15 +87,15 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? reply = null,
     Object? replyLanguageCode = null,
     Object? replyNegativeScore = null,
     Object? replyPositiveScore = null,
     Object? replySentiment = null,
-    Object? postRef = null,
-    Object? postCommentRef = null,
+    Object? postRef = freezed,
+    Object? postCommentRef = freezed,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
     Object? reportCount = null,
@@ -108,11 +108,11 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
     Object? userImageURL = null,
   }) {
     return _then(_value.copyWith(
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedAt: null == updatedAt
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -136,11 +136,11 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
           ? _value.replySentiment
           : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
-      postRef: null == postRef
+      postRef: freezed == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      postCommentRef: null == postCommentRef
+      postCommentRef: freezed == postCommentRef
           ? _value.postCommentRef
           : postCommentRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -225,15 +225,15 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? reply = null,
     Object? replyLanguageCode = null,
     Object? replyNegativeScore = null,
     Object? replyPositiveScore = null,
     Object? replySentiment = null,
-    Object? postRef = null,
-    Object? postCommentRef = null,
+    Object? postRef = freezed,
+    Object? postCommentRef = freezed,
     Object? postCommentReplyId = null,
     Object? likeCount = null,
     Object? reportCount = null,
@@ -246,11 +246,11 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
     Object? userImageURL = null,
   }) {
     return _then(_$_Reply(
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedAt: null == updatedAt
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -274,11 +274,11 @@ class __$$_ReplyCopyWithImpl<$Res> extends _$ReplyCopyWithImpl<$Res, _$_Reply>
           ? _value.replySentiment
           : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
-      postRef: null == postRef
+      postRef: freezed == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      postCommentRef: null == postCommentRef
+      postCommentRef: freezed == postCommentRef
           ? _value.postCommentRef
           : postCommentRef // ignore: cast_nullable_to_non_nullable
               as dynamic,

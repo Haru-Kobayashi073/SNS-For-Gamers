@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'post_mute.dart';
 
@@ -54,16 +54,16 @@ class _$PostMuteCopyWithImpl<$Res, $Val extends PostMute>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postId = null,
-    Object? postRef = null,
+    Object? postRef = freezed,
   }) {
     return _then(_value.copyWith(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -71,7 +71,7 @@ class _$PostMuteCopyWithImpl<$Res, $Val extends PostMute>
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      postRef: null == postRef
+      postRef: freezed == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -102,16 +102,16 @@ class __$$_PostMuteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? postId = null,
-    Object? postRef = null,
+    Object? postRef = freezed,
   }) {
     return _then(_$_PostMute(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -119,7 +119,7 @@ class __$$_PostMuteCopyWithImpl<$Res>
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      postRef: null == postRef
+      postRef: freezed == postRef
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
