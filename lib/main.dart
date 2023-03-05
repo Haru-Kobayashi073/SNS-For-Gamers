@@ -1,51 +1,50 @@
 //flutter
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 //packages
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/constants/themes.dart';
-import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
-import 'package:sns_vol2/details/sns_drawer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+//model
+import 'package:sns_vol2/models/main_model.dart';
+import 'package:sns_vol2/models/themes_model.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/sns_bottom_navigation_bar_model.dart';
-import 'package:sns_vol2/models/themes_model.dart';
-import 'package:sns_vol2/views/main/components/video_pick_page.dart';
+//views
 import 'package:sns_vol2/views/auth/verify_email_page.dart';
 import 'package:sns_vol2/views/login_page.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-//model
-import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/views/main/articles_screen.dart';
 import 'package:sns_vol2/views/main/home_screen.dart';
 import 'package:sns_vol2/views/main/profile_screen.dart';
 import 'package:sns_vol2/views/main/search_page.dart';
+//details
+import 'package:sns_vol2/details/sns_bottom_navigation_bar.dart';
 //options
 import 'firebase_options.dart';
 //constants
+import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    FlutterError.onError = (errorDetails) {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
-    runApp(const ProviderScope(child: MyApp()));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -53,16 +52,16 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const int _mcgpalette2PrimaryValue = 0xFF388D5D;
+    const int mcgpalette2PrimaryValue = 0xFF388D5D;
     const MaterialColor customSwatch = MaterialColor(
-      _mcgpalette2PrimaryValue,
+      mcgpalette2PrimaryValue,
       <int, Color>{
         50: Color(0xFFE7F1EC),
         100: Color(0xFFC3DDCE),
         200: Color(0xFF9CC6AE),
         300: Color(0xFF74AF8E),
         400: Color(0xFF569E75),
-        500: Color(_mcgpalette2PrimaryValue),
+        500: Color(mcgpalette2PrimaryValue),
         600: Color(0xFF328555),
         700: Color(0xFF2B7A4B),
         800: Color(0xFF247041),
@@ -75,15 +74,11 @@ class MyApp extends ConsumerWidget {
     final ThemeModel themeModel = ref.watch(themeProvider);
 
     return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
         title: appTitle,
-        // theme: themeModel.isDarkTheme
-        //     ? darkThemeData(context: context)
-        //     : lightThemeData(context: context),
-        theme: 
-        ThemeData(
+        theme: ThemeData(
           primarySwatch: customSwatch,
         ),
         home: onceUser == null //ユーザーが存在していないなら
@@ -97,6 +92,7 @@ class MyApp extends ConsumerWidget {
                   )
                 : const VerifyEmailPage()
         //ユーザーは存在するけれど、メールが認証されていない
+        // home: const LoginPage(),
         );
   }
 }
@@ -117,26 +113,16 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.backScreenColor,
-      // drawer: Drawer(
-      //   // backgroundColor: colors.backScreenColor,
-      //   child: SNSDrawer(
-      //     mainModel: mainModel,
-      //     themeModel: themeModel,
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => routes.toPostPage(context: context, mainModel: mainModel),
-        // createPostModel.showPostDialog(
-        //     context: context, mainModel: mainModel),
+        onPressed: () =>
+            routes.toPostPage(context: context, mainModel: mainModel),
         backgroundColor: colors.floatingButtonBackColor,
         child: const Icon(
           Icons.new_label,
           color: colors.floatingButtonIconColor,
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: mainModel.isLoading
-      // body: 1 == 1
           ? const Center(
               child: Text(loadingText),
             )
@@ -144,7 +130,6 @@ class MyHomePage extends ConsumerWidget {
               controller: snsBottomNavigationBarModel.pageController,
               onPageChanged: (index) =>
                   snsBottomNavigationBarModel.onPageChanged(index: index),
-              //childrenの数はElementsの数
               children: [
                 //注意：ページじゃないのでScaffold
                 HomeScreen(
@@ -155,8 +140,7 @@ class MyHomePage extends ConsumerWidget {
                 SearchPage(
                   mainModel: mainModel,
                 ),
-                // const ArticleScreen(),
-                const VideoPickPage(),
+                const ArticleScreen(),
                 ProfileScreen(
                   mainModel: mainModel,
                 ),
