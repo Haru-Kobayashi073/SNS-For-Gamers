@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sns_vol2">
    <application
-        android:label="sns_vol2"
+        android:label="PofGamers"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
