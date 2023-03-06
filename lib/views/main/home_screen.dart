@@ -1,22 +1,23 @@
 //flutter
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
+//domain
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main/home_model.dart';
+import 'package:sns_vol2/models/main/profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
-import 'package:sns_vol2/constants/routes.dart' as routes;
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/models/themes_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen(
@@ -33,31 +34,30 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final HomeModel homeModel = ref.watch(homeProvider);
     final MainModel mainModel = ref.watch(mainProvider);
-    final ThemeModel themeModel = ref.watch(themeProvider);
-    final postDocs = homeModel.postDocs;
+    final ProfileModel profileModel = ref.watch(profileProvider);
+    final postDocs = profileModel.postDocs;
 
     return Scaffold(
       appBar: NormalAppBar(title: homeText, mainModel: mainModel),
       drawer: SNSDrawer(
-          mainModel: mainModel,
-          themeModel: themeModel,
+        mainModel: mainModel,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(color: colors.backScreenColor),
+        decoration: const BoxDecoration(color: colors.green),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
-            decoration: const BoxDecoration(color: colors.backScreenColor),
+            decoration: const BoxDecoration(color: colors.green),
             child: postDocs.isEmpty
                 ? ReloadScreen(
-                    onReload: () async => await homeModel.onReload())
+                    onReload: () async => await profileModel.onReload())
                 : RefreshScreen(
-                    onRefresh: () async => await homeModel.onRefresh(),
-                    onLoading: () async => await homeModel.onLoading(),
-                    refreshController: homeModel.refreshController,
+                    onRefresh: () async => await profileModel.onRefresh(),
+                    onLoading: () async => await profileModel.onLoading(),
+                    refreshController: profileModel.refreshController,
                     child: ListView.builder(
-                        itemCount: homeModel.postDocs.length,
-                        itemBuilder: (context, int index) {
+                        itemCount: postDocs.length,
+                        itemBuilder: (context, index) {
                           final postDoc = postDocs[index];
                           final Post post = Post.fromJson(postDoc.data()!);
                           return PostCard(

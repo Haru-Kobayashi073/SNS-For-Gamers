@@ -1,14 +1,16 @@
 //flutter
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-//packages
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+//dmain
 import 'package:sns_vol2/domain/timeline/timeline.dart';
 
 final homeProvider = ChangeNotifierProvider((ref) => HomeModel());
@@ -43,7 +45,7 @@ class HomeModel extends ChangeNotifier {
     return FirebaseFirestore.instance
         .collectionGroup("posts")
         .where("postId", whereIn: max10TimelinePostIds)
-        .limit(tenCount);
+        .limit(thirtyCount);
   }
 
   HomeModel() {
@@ -65,7 +67,7 @@ class HomeModel extends ChangeNotifier {
         .collection("timelines")
         .orderBy("createdAt", descending: true)
         .endAtDocument(timelineDocs.first)
-        .limit(tenCount)
+        .limit(thirtyCount)
         .get();
     for (final doc in timelineQshot.docs.reversed.toList()) {
       timelineDocs.insert(0, doc);
@@ -84,7 +86,7 @@ class HomeModel extends ChangeNotifier {
         .doc(currentUser.uid)
         .collection("timelines")
         .orderBy("createdAt", descending: true)
-        .limit(tenCount)
+        .limit(thirtyCount)
         .get();
     timelineDocs = timelineQshot.docs;
     if (timelineDocs.isNotEmpty) {
@@ -105,7 +107,7 @@ class HomeModel extends ChangeNotifier {
         .collection("timelines")
         .orderBy("createdAt", descending: true)
         .startAfterDocument(timelineDocs.last)
-        .limit(tenCount)
+        .limit(thirtyCount)
         .get();
     for (final doc in timelineQshot.docs) {
       timelineDocs.add(doc);
