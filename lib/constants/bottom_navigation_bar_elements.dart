@@ -1,5 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
 
 final List<BottomNavigationBarItem> bottomNavigationBarElements = [
