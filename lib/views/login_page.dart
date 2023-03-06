@@ -56,7 +56,7 @@ class LoginPage extends ConsumerWidget {
               widthRate: 0.35,
               color: colors.black,
               text: loginTitle,
-              textColor: colors.black,
+              textColor: colors.white,
             ),
             TextButton(
                 onPressed: () => routes.toSignUpPage(context: context),
