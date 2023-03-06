@@ -1,14 +1,13 @@
 //flutter
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//details
+import 'package:sns_vol2/details/rounded_text_field.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
-//model
+//models
 import 'package:sns_vol2/models/signup_model.dart';
-//components
-import 'package:sns_vol2/details/rounded_text_field.dart';
 //constants
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/colors.dart' as colors;
@@ -25,7 +24,7 @@ class SignUpPage extends ConsumerWidget {
         TextEditingController(text: signUpModel.password);
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: AppBar(
         title: const Text(signupTitle),
         backgroundColor: colors.green,
@@ -39,26 +38,30 @@ class SignUpPage extends ConsumerWidget {
               keybordType: TextInputType.emailAddress,
               onChanged: (text) => signUpModel.email = text,
               controller: emailEditingCntoroller,
-              color: Colors.grey.shade200,
+              color: colors.shadeGrey,
               borderColor: Colors.black,
               hintText: mailAddressText,
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             RoundedPasswordField(
                 onChanged: (text) => signUpModel.password = text,
                 obscureText: signUpModel.isObscure,
                 passwordEditingController: passwordEditingCntoroller,
                 toggleObscureText: () => signUpModel.toggleIsObscure(),
-                color: Colors.grey.shade200,
-                borderColor: Colors.black),
-            const SizedBox(height: 20,),
+                color: colors.shadeGrey,
+                borderColor: colors.black),
+            const SizedBox(
+              height: 20,
+            ),
             RoundedButton(
               onPressed: () async =>
                   await signUpModel.createUser(context: context),
               widthRate: 0.35,
-              color: Colors.black,
+              color: colors.black,
               text: signupTitle,
-              textColor: Colors.white,
+              textColor: colors.white,
             ),
           ],
         ),

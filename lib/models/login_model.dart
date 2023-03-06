@@ -1,16 +1,14 @@
 //flutter
 import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
 import 'package:firebase_auth/firebase_auth.dart';
+//constants
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
-//model
-import 'package:sns_vol2/models/main_model.dart';
 
 final loginProvider = ChangeNotifierProvider((ref) => LoginModel());
-
 class LoginModel extends ChangeNotifier {
   //auth
   String email = '';

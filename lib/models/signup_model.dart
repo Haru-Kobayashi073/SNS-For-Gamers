@@ -1,16 +1,15 @@
 //flutter
 import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//constants
 import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/maps.dart';
 import 'package:sns_vol2/constants/strings.dart';
-//constants
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/voids.dart' as voids;
-
 //domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 
@@ -30,11 +29,10 @@ class SignUpModel extends ChangeNotifier {
 
   Future<void> createFirestoreUser(
       {required BuildContext context, required String uid}) async {
-    //引数でmain.dartからcontextを受け取る
     counter++;
     final Timestamp now = Timestamp.now();
     final FirestoreUser firestoreUser = FirestoreUser(
-      userName: 'Alice',
+      userName: 'stranger',
       userImageURL: '',
       introduction: '',
       followerCount: 0,
@@ -46,17 +44,16 @@ class SignUpModel extends ChangeNotifier {
       userNamePositiveScore: 0,
       userNameSentiment: "POSITIVE",
       isAdmin: false,
-      searchToken: returnSearchToken(searchWords: returnSearchWords(searchTerm: "alice")),
+      searchToken: returnSearchToken(
+          searchWords: returnSearchWords(searchTerm: "alice")),
       uid: uid,
       createdAt: now,
       updatedAt: now,
     );
     final Map<String, dynamic> userData = firestoreUser.toJson();
     await FirebaseFirestore.instance.collection('users').doc(uid).set(userData);
+    print(userData);
     //usersコレクションの中にfirstUserを作る処理
-
-    // ScaffoldMessenger.of(context)
-    //     .showSnackBar(SnackBar(content: Text(userCreatedMsg)));
     notifyListeners();
     await voids.showfluttertoast(msg: userCreatedMsg);
   }

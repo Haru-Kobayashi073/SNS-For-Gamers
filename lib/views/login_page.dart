@@ -1,17 +1,17 @@
 //flutter
 import 'package:flutter/material.dart';
-//package
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/routes.dart' as routes;
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/forget_password_text.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
-//model
+//models
 import 'package:sns_vol2/models/login_model.dart';
-
 class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
@@ -38,8 +38,8 @@ class LoginPage extends ConsumerWidget {
               keybordType: TextInputType.emailAddress,
               onChanged: (text) => loginModel.email = text,
               controller: emailEditingCntoroller,
-              color: Colors.grey.shade200,
-              borderColor: Colors.black,
+              color: colors.shadeGrey,
+              borderColor: colors.black,
               hintText: mailAddressText,
             ),
             const SizedBox(height: 20,),
@@ -48,21 +48,21 @@ class LoginPage extends ConsumerWidget {
                 obscureText: loginModel.isObscure,
                 passwordEditingController: passwordEditingCntoroller,
                 toggleObscureText: () => loginModel.toggleIsObscure(),
-                color: Colors.grey.shade200,
-                borderColor: Colors.black),
+                color: colors.shadeGrey,
+                borderColor: colors.black),
             const SizedBox(height: 40,),
             RoundedButton(
               onPressed: () async => await loginModel.login(context: context),
               widthRate: 0.35,
-              color: Colors.black,
+              color: colors.black,
               text: loginTitle,
-              textColor: Colors.white,
+              textColor: colors.black,
             ),
             TextButton(
                 onPressed: () => routes.toSignUpPage(context: context),
                 child: const Text(
                   noAccountMsg,
-                  style: TextStyle(color: colors.cardBackColor),
+                  style: TextStyle(color: colors.greenishWhite),
                   ),
               ),
             const ForgetPasswordText()
