@@ -1,11 +1,11 @@
 //flutter
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/ints.dart';
 
 final snsBottomNavigationBarProvider =
     ChangeNotifierProvider((ref) => SNSBottomNavigationBarModel());
-
 class SNSBottomNavigationBarModel extends ChangeNotifier {
   int currentIndex = 0;
   late PageController pageController;
