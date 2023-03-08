@@ -1,19 +1,20 @@
 //flutter
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/domain/article/article.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:html/parser.dart' as parser;
+//constants
+import 'package:sns_vol2/constants/voids.dart' as voids;
+//domain
+import 'package:sns_vol2/domain/article/article.dart';
 
 final articlesProvider = ChangeNotifierProvider((ref) => ArticlesModel());
-
 class ArticlesModel extends ChangeNotifier {
   Map<String, dynamic> jsons = {};
   List<dynamic> newsLists = [];
@@ -31,6 +32,7 @@ class ArticlesModel extends ChangeNotifier {
   String baseUrl = 'https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/';
   // String optionUrl = '?appid=990080&count=3&maxlength=100&format=json';
   String optionUrl = '?appid=1172470&count=8&maxlength=100&format=json';
+  // String optionUrl = '?appid=1449850&count=8&maxlength=100&format=json';
 
   Future<void> init() async {
     // パラメータを設定（アプリIDとAPIキー）
@@ -38,11 +40,9 @@ class ArticlesModel extends ChangeNotifier {
     var response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
-      // レスポンスボディをJSONに変換
       jsons = jsonDecode(response.body);
       // JSONからニュース記事のデータを抽出
       newsLists = jsons['appnews']['newsitems'];
-      print(newsLists[0]);
 
       for (int i = 0; i < newsLists.length; i++) {
         await Future.delayed(const Duration(seconds: 2));
@@ -56,9 +56,6 @@ class ArticlesModel extends ChangeNotifier {
       }
       print(newsLists[0]);
       // ニュース記事のデータからNewsオブジェクトのリストに変換
-      // articles = newsList.map((item) => Article.fromJson(item)).toList();
-      // Newsオブジェクトのリストを返す
-      // og:image
     } else {
       voids.showfluttertoast(msg: "記事の取得に失敗しました");
     }
@@ -86,21 +83,11 @@ class ArticlesModel extends ChangeNotifier {
     final response = await http.get(Uri.parse(url));
     // レスポンスをDOMに変換
     final document = parser.parse(response.body);
-    // metaタグの要素を取得
     // metaタグのプロパティog:imageの値を検索する
     var image = document.querySelector('meta[property="og:image"]');
-    // プロパティ名と値を表示
-    // for (var tag in metaTags) {
-    //   print('${tag.attributes['property']!}: ${tag.attributes['content']!}');
-    //   articleImgUrl =
-    //       '${tag.attributes['og:image']!}: ${tag.attributes['content']!}';
-    // }
     if (image != null) {
       articleImgUrl = '${image.attributes['content']}';
-      // print(articleImgUrl);
-      // notifyListeners();
     } else {
-      // レスポンスが失敗した場合
       print('Request failed with status: ${response.statusCode}.');
     }
     return articleImgUrl!;
