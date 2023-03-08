@@ -1,19 +1,16 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/details/card_popup_menu_button.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
-import 'package:sns_vol2/details/user_image.dart';
-import 'package:sns_vol2/domain/qiita_user/qiita_user.dart';
-import 'package:sns_vol2/domain/steam_api/steam_api.dart';
+//models
 import 'package:sns_vol2/models/main/articles_model.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/themes_model.dart';
 
 class ArticleScreen extends ConsumerWidget {
   const ArticleScreen({Key? key}) : super(key: key);
@@ -22,13 +19,9 @@ class ArticleScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ArticlesModel articlesModel = ref.watch(articlesProvider);
     final MainModel mainModel = ref.watch(mainProvider);
-    final ThemeModel themeModel = ref.watch(themeProvider);
-    final articles = articlesModel.articles;
     final newsLists = articlesModel.newsLists;
-    final maxWidth = MediaQuery.of(context).size.width;
-    final maxHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: colors.backScreenColor,
+        backgroundColor: colors.green,
         appBar: NormalAppBar(title: articleText, mainModel: mainModel),
         body: Container(
             child: newsLists.isEmpty
@@ -46,7 +39,7 @@ class ArticleScreen extends ConsumerWidget {
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
                               decoration: const BoxDecoration(
-                                color: colors.cardBackColor,
+                                color: colors.greenishWhite,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                               ),
@@ -73,15 +66,6 @@ class ArticleScreen extends ConsumerWidget {
                                   newsList['contents'],
                                   style: const TextStyle(color: colors.green),
                                 ),
-                                // subtitle: newsList['is_external_url'] == true
-                                //     ? const Text(
-                                //         'Steamコミュニティ外の記事です',
-                                //         style: TextStyle(color: colors.green),
-                                //       )
-                                //     : const Text(
-                                //         'Steamの記事です',
-                                //         style: TextStyle(color: colors.green),
-                                //       ),
                                 onTap: () async => await articlesModel
                                     .launchToBrawser(url: newsList['url']),
                               ),
