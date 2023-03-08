@@ -1,12 +1,14 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sns_vol2/details/rounded_text_field.dart';
+//details
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/post_search_model.dart';
-import 'package:sns_vol2/views/main/components/search_screen.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
@@ -18,11 +20,9 @@ class PostSearchScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final PostSearchModel postSearchModel = ref.watch(postSearchProvider);
     final postMaps = postSearchModel.postMaps;
-    final maxHeight = MediaQuery.of(context).size.height;
-    final maxWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       body: Column(
         children: [
           Container(
@@ -43,7 +43,7 @@ class PostSearchScreen extends ConsumerWidget {
               decoration: const InputDecoration(
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
-                  hoverColor: colors.listTileTextColor,
+                  hoverColor: colors.white,
                   prefixIcon: Icon(
                     Icons.search,
                   ),
@@ -67,11 +67,11 @@ class PostSearchScreen extends ConsumerWidget {
                   return ListTile(
                     title: Text(
                       post.userName,
-                      style: const TextStyle(color: colors.listTileTextColor),
+                      style: const TextStyle(color: colors.white),
                     ),
                     subtitle: Text(
                       post.text,
-                      style: const TextStyle(color: colors.listTileTextColor),
+                      style: const TextStyle(color: colors.white),
                     ),
                     leading: GestureDetector(
                       onTap: () => postSearchModel.routesToUsersProf(

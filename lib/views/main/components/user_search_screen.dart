@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//models
 import 'package:sns_vol2/models/main/user_search_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/passive_user_profile_model.dart';
+//views
 import 'package:sns_vol2/views/main/components/search_screen.dart';
 
 class UserSearchScreen extends ConsumerWidget {
@@ -36,11 +39,10 @@ class UserSearchScreen extends ConsumerWidget {
               final FirestoreUser firestoreUser =
                   FirestoreUser.fromJson(userDoc.data()!);
               return ListTile(
-                  tileColor: colors.backScreenColor,
+                  tileColor: colors.green,
                   title: Text(
                     firestoreUser.userName,
-                    // '$index',
-                    style: const TextStyle(color: colors.listTileTextColor),
+                    style: const TextStyle(color: colors.white),
                   ),
                   onTap: () async =>
                       await passiveUserProfileModel.onUserIconPressed(
