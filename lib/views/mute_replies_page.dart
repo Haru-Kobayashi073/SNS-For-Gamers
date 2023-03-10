@@ -1,19 +1,21 @@
 //flutter
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/reply/reply.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_replies_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/models/themes_model.dart';
-//package
 
 class MuteRepliesPage extends ConsumerWidget {
   const MuteRepliesPage({Key? key, required this.mainModel}) : super(key: key);
@@ -23,10 +25,9 @@ class MuteRepliesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     final muteReplyDocs = muteRepliesModel.muteReplyDocs;
-    final ThemeModel themeModel = ref.watch(themeProvider);
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: NormalAppBar(title: muteRepliesPageTitle, mainModel: mainModel),
       body: muteRepliesModel.showMuteReplies
           ? RefreshScreen(
@@ -40,9 +41,16 @@ class MuteRepliesPage extends ConsumerWidget {
                     final Reply muteReply =
                         Reply.fromJson(muteReplyDoc.data()!);
                     return ListTile(
-                      leading: UserImage(length: 100, userImageURL: muteReply.userImageURL),
-                      title: Text(muteReply.userName, style: const TextStyle(color: colors.mainTextPrimaryColor),),
-                      subtitle: Text(muteReply.reply, style: const TextStyle(color: colors.mainTextPrimaryColor),),
+                      leading: UserImage(
+                          length: 100, userImageURL: muteReply.userImageURL),
+                      title: Text(
+                        muteReply.userName,
+                        style: const TextStyle(color: colors.white),
+                      ),
+                      subtitle: Text(
+                        muteReply.reply,
+                        style: const TextStyle(color: colors.white),
+                      ),
                       onTap: () => voids.showPopup(
                           context: context,
                           builder: (BuildContext innerContext) =>

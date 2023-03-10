@@ -1,22 +1,19 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
+//domain
 import 'package:sns_vol2/domain/reply_mute/reply_mute.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
-import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
-import 'package:sns_vol2/domain/user_mute/user_mute.dart';
-import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
-
 import '../domain/mute_reply_token/mute_reply_token.dart';
+//models
+import 'package:sns_vol2/models/main_model.dart';
 
 final muteRepliesProvider = ChangeNotifierProvider((ref) => MuteRepliesModel());
 
@@ -24,10 +21,10 @@ class MuteRepliesModel extends ChangeNotifier {
   bool showMuteReplies = false;
   List<DocumentSnapshot<Map<String, dynamic>>> muteReplyDocs = [];
   final RefreshController refreshController = RefreshController();
-  //新しくミュートするユーザー
+  //新しくミュートするリプライ
   List<MuteReplyToken> newMuteReplyTokens = [];
   List<String> mutePostCommentReplyIds = [];
-  //ミュートしているコメントのDocumentを取得する
+  //ミュートしているリプライのDocumentを取得する
   Query<Map<String, dynamic>> returnQuery(
           {required List<String> max10MutePostCommentReplyIds}) =>
       FirebaseFirestore.instance
@@ -66,10 +63,11 @@ class MuteRepliesModel extends ChangeNotifier {
     final List<String> newMutePostCommentReplyIds =
         newMuteReplyTokens.map((e) => e.postCommentReplyId).toList();
     //新しくミュートしたコメントが10以上の場合
-    final List<String> max10MutePostCommentReplyIds =
-        newMutePostCommentReplyIds.length > 10
-            ? newMutePostCommentReplyIds.sublist(0, tenCount) //10より大きかったら取り出す
-            : newMutePostCommentReplyIds; //10より大きかったらそのまま適用
+    final List<String> max10MutePostCommentReplyIds = newMutePostCommentReplyIds
+                .length >
+            10
+        ? newMutePostCommentReplyIds.sublist(0, thirtyCount) //10より大きかったら取り出す
+        : newMutePostCommentReplyIds; //10より大きかったらそのまま適用
     if (max10MutePostCommentReplyIds.isNotEmpty) {
       final qshot = await returnQuery(
               max10MutePostCommentReplyIds: max10MutePostCommentReplyIds)
@@ -100,7 +98,7 @@ class MuteRepliesModel extends ChangeNotifier {
       List<String> max10MutePostCommentReplyIds =
           (mutePostCommentReplyIds.length - muteReplyDocs.length) >= 10
               ? mutePostCommentReplyIds.sublist(mutePostCommentReplyDocsLength,
-                  mutePostCommentReplyDocsLength + tenCount)
+                  mutePostCommentReplyDocsLength + thirtyCount)
               : mutePostCommentReplyIds.sublist(mutePostCommentReplyDocsLength,
                   mutePostCommentReplyIds.length);
       if (max10MutePostCommentReplyIds.isNotEmpty) {
