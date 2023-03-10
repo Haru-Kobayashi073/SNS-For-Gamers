@@ -1,20 +1,21 @@
 //flutter
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/models/themes_model.dart';
-//package
 
 class MutePostsPage extends ConsumerWidget {
   const MutePostsPage({Key? key, required this.mainModel}) : super(key: key);
@@ -24,9 +25,8 @@ class MutePostsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final mutePostDocs = mutePostsModel.mutePostDocs;
-    final ThemeModel themeModel = ref.watch(themeProvider);
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: NormalAppBar(title: mutePostsPageTitle, mainModel: mainModel),
       body: mutePostsModel.showMutePosts
           ? RefreshScreen(
@@ -41,8 +41,14 @@ class MutePostsPage extends ConsumerWidget {
                     return ListTile(
                       leading: UserImage(
                           length: 100, userImageURL: mutePost.userImageURL),
-                      title: Text(mutePost.userName, style: const TextStyle(color: colors.mainTextPrimaryColor),),
-                      subtitle: Text(mutePost.text, style: const TextStyle(color: colors.mainTextPrimaryColor),),
+                      title: Text(
+                        mutePost.userName,
+                        style: const TextStyle(color: colors.white),
+                      ),
+                      subtitle: Text(
+                        mutePost.text,
+                        style: const TextStyle(color: colors.white),
+                      ),
                       onTap: () => voids.showPopup(
                           context: context,
                           builder: (BuildContext innerContext) =>

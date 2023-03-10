@@ -1,21 +1,19 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//domain
 import 'package:sns_vol2/domain/mute_post_token/mute_post_token.dart';
-import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
 import 'package:sns_vol2/domain/post_mute/post_mute.dart';
-import 'package:sns_vol2/domain/user_mute/user_mute.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final mutePostsProvider = ChangeNotifierProvider((ref) => MutePostsModel());
 
@@ -23,7 +21,7 @@ class MutePostsModel extends ChangeNotifier {
   bool showMutePosts = false;
   List<DocumentSnapshot<Map<String, dynamic>>> mutePostDocs = [];
   final RefreshController refreshController = RefreshController();
-  //新しくミュートするユーザー
+  //新しくミュートする投稿
   List<MutePostToken> newMutePostTokens = [];
   List<String> mutePostIds = [];
   //ミュートしているコメントのDocumentを取得する
@@ -64,9 +62,9 @@ class MutePostsModel extends ChangeNotifier {
     //newMuteUserTokensをfor文で回し、PostIdだけをまとめている
     final List<String> newMutePostIds =
         newMutePostTokens.map((e) => e.postId).toList();
-    //新しくミュートしたコメントが10以上の場合
+    //新しくミュートした投稿が10以上の場合
     final List<String> max10MutePostIds = newMutePostIds.length > 10
-        ? newMutePostIds.sublist(0, tenCount) //10より大きかったら取り出す
+        ? newMutePostIds.sublist(0, thirtyCount) //10より大きかったら取り出す
         : newMutePostIds; //10より大きかったらそのまま適用
     if (max10MutePostIds.isNotEmpty) {
       final qshot = await returnQuery(max10MutePostIds: max10MutePostIds).get();
@@ -95,7 +93,7 @@ class MutePostsModel extends ChangeNotifier {
       List<String> max10MutePostIds =
           (mutePostIds.length - mutePostDocs.length) >= 10
               ? mutePostIds.sublist(
-                  mutePostDocsLength, mutePostDocsLength + tenCount)
+                  mutePostDocsLength, mutePostDocsLength + thirtyCount)
               : mutePostIds.sublist(mutePostDocsLength, mutePostIds.length);
       if (max10MutePostIds.isNotEmpty) {
         final qshot =
@@ -126,11 +124,11 @@ class MutePostsModel extends ChangeNotifier {
         createdAt: now,
         tokenId: tokenId,
         tokenType: mutePostTokenTypeString);
-    //新しくミュートしたコメント
+    //新しくミュートした投稿
     newMutePostTokens.add(mutePostToken);
     mainModel.mutePostTokens.add(mutePostToken);
     mainModel.mutePostIds.add(postId);
-    //muteしたいユーザーが作成したコメントを除外
+    //muteしたい投稿が作成したコメントを除外
     postDocs.remove(postDoc);
     notifyListeners();
     //currentUserDoc.ref ...
