@@ -1,9 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//flutter
 import 'package:flutter/material.dart';
+//package
+import 'package:firebase_auth/firebase_auth.dart';
+//constants
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/views/auth/components/text_field_and_button_screen.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
+//views
+import 'package:sns_vol2/views/auth/components/text_field_and_button_screen.dart';
 
 class UpdateEmailPage extends StatelessWidget {
   const UpdateEmailPage({super.key});
