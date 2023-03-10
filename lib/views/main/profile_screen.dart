@@ -1,53 +1,51 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/post_card.dart';
 import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
 import 'package:sns_vol2/details/sns_drawer.dart';
 import 'package:sns_vol2/details/user_header.dart';
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/main/profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/routes.dart' as routes;
-import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/models/mute_users_model.dart';
-import 'package:sns_vol2/models/themes_model.dart';
-
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key, required this.mainModel}) : super(key: key);
   final MainModel mainModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final ProfileModel profileModel = ref.watch(profileProvider);
     final ProfileModel profileModel = ref.watch(profileProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
-    final int followerCount = firestoreUser.followerCount;
-    final maxWidth = MediaQuery.of(context).size.width;
-    final ThemeModel themeModel = ref.watch(themeProvider);
     final postDocs = profileModel.postDocs;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: NormalAppBar(title: profileText, mainModel: mainModel),
       drawer: SNSDrawer(
-          mainModel: mainModel,
-          themeModel: themeModel,
+        mainModel: mainModel,
       ),
       body: SingleChildScrollView(
         child: Container(
-          decoration: const BoxDecoration(color: colors.backScreenColor),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: [
-            UserHeader(mainModel: mainModel,firestoreUser: firestoreUser,onPressed: () => profileModel.onMenuPressed(context: context),),
+          decoration: const BoxDecoration(color: colors.green),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            UserHeader(
+              mainModel: mainModel,
+              firestoreUser: firestoreUser,
+              onPressed: () => profileModel.onMenuPressed(context: context),
+            ),
             Container(
-              decoration: const BoxDecoration(color: colors.backScreenColor),
+              decoration: const BoxDecoration(color: colors.green),
               child: postDocs.isEmpty
                   ? ReloadScreen(
                       onReload: () async => await profileModel.onReload())

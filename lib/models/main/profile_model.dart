@@ -1,17 +1,17 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//packages
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/lists.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/constants/routes.dart' as routes;
 
 final profileProvider = ChangeNotifierProvider((ref) => ProfileModel());
 
@@ -63,20 +63,29 @@ class ProfileModel extends ChangeNotifier {
   Future<void> onRefresh() async {
     refreshController.refreshCompleted();
     await voids.processNewDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
+        docs: postDocs,
+        query: returnQuery(),
+        muteUids: muteUids,
+        mutePostIds: mutePostIds);
     notifyListeners();
   }
 
   Future<void> onReload() async {
     await voids.processBasicDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
+        docs: postDocs,
+        query: returnQuery(),
+        muteUids: muteUids,
+        mutePostIds: mutePostIds);
     notifyListeners();
   }
 
   Future<void> onLoading() async {
     refreshController.loadComplete();
     await voids.processOldDocs(
-        docs: postDocs, query: returnQuery(), muteUids: muteUids, mutePostIds: mutePostIds);
+        docs: postDocs,
+        query: returnQuery(),
+        muteUids: muteUids,
+        mutePostIds: mutePostIds);
     notifyListeners();
   }
 
