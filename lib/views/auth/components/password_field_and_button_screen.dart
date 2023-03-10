@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+//details
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_password_field.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
-
 class PasswordFieldAndButtonScreen extends StatelessWidget {
   const PasswordFieldAndButtonScreen({
     super.key,
@@ -25,7 +26,7 @@ class PasswordFieldAndButtonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: AppBar(
         title: Text(appbarTitle),
         backgroundColor: colors.green,
@@ -42,6 +43,7 @@ class PasswordFieldAndButtonScreen extends StatelessWidget {
                 toggleObscureText: toggleObscureText,
                 color: Colors.white,
                 borderColor: Colors.grey),
+            const SizedBox(height: 20,),
             RoundedButton(
                 onPressed: onPressed,
                 widthRate: 0.5,
