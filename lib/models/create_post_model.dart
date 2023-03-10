@@ -1,26 +1,20 @@
 //flutter
-// ignore_for_file: depend_on_referenced_packages
-
+import 'package:flutter/material.dart';
 import 'dart:io';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-//packages
-import 'package:flash/flash.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/voids.dart' as voids;
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/constants/others.dart' as others;
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sns_vol2/views/main/components/video_watch_page.dart';
-import 'package:sns_vol2/views/main/post/post_page.dart';
 
 final createPostModelProvider =
     ChangeNotifierProvider((ref) => CreatePostModel());
@@ -30,7 +24,6 @@ class CreatePostModel extends ChangeNotifier {
   String text = '';
   File? video;
   String? videoPath;
-  // File? video = File(XFile.path);
 
   Future<String> uploadImageAndGetURL(
       {required String uid,
@@ -54,103 +47,8 @@ class CreatePostModel extends ChangeNotifier {
     }
     // users/uid/ファイル名 にアップロード
     await storageRef.putFile(file);
-    // await storageRef.putString(mp4FileName);
     // users/uid/ファイル名 のURLを取得している
     return await storageRef.getDownloadURL();
-  }
-
-  void showPostDialog(
-      {required BuildContext context, required MainModel mainModel}) {
-    // File? video;
-    context.showFlashBar(
-      persistent: true,
-      content: Column(
-        children: [
-          Form(
-            child: TextFormField(
-              controller: textEditingController,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              onChanged: (value) => text = value,
-              maxLength: 30,
-            ),
-          ),
-          GestureDetector(
-            child: video == null
-                ? Container(
-                    height: 270,
-                    width: 360,
-                    color: Colors.grey,
-                    child: const Icon(
-                      Icons.add_photo_alternate_outlined,
-                      size: 68,
-                    ),
-                  )
-                : Container(),
-            onTap: () {},
-          ),
-          // GestureDetector(
-          //   onTap: () async {
-          //     var result = await others.returnXFile();
-          //     if (result != null) {
-          //       // await uploadImageAndGetURL(
-          //       //     uid: mainModel.currentUserDoc.id, file: result);
-          //       video = result;
-          //     }
-          //     notifyListeners();
-          //   },
-          //   child: video == null
-          //       ? Container(
-          //           height: 270,
-          //           width: 360,
-          //           color: Color.fromARGB(255, 213, 210, 210),
-          //           child: Icon(
-          //             Icons.add_photo_alternate_outlined,
-          //             color: Colors.white,
-          //             size: 100,
-          //           ))
-          //       : Container(
-          //           height: 270,
-          //           width: 360,
-          //           child: Image.file(video!, fit: BoxFit.cover),
-          //         ),
-          // ),
-        ],
-      ),
-      title: const Text(createPostText),
-      primaryActionBuilder: (context, controller, _) {
-        return InkWell(
-          child: const Icon(
-            Icons.send,
-            color: colors.postDialogIconColor,
-          ),
-          onTap: () async {
-            if (textEditingController.text.isNotEmpty) {
-              //メインの動作
-              // await createPost(mainModel: mainModel);
-              // await uploadImageAndGetURL(
-              //     uid: mainModel.currentUserDoc.id, file: video!);
-
-              await controller.dismiss();
-              text = "";
-            } else {
-              //何もしない
-              await controller.dismiss();
-            }
-          },
-        );
-      },
-      negativeActionBuilder: (context, controller, _) {
-        return InkWell(
-          child: const Icon(
-            Icons.close,
-            color: colors.postDialogIconColor,
-          ),
-          onTap: () async {
-            await controller.dismiss();
-          },
-        );
-      },
-    );
   }
 
   Future<void> createPost(
@@ -186,7 +84,6 @@ class CreatePostModel extends ChangeNotifier {
         isVideo: postModeToggle,
         postId: postId,
         uid: activeUid);
-//currentUserDoc.reference = FirebaseFirestore.instance.collection('users').doc(firestoreUser.uid)
     await mainModel.currentUserDoc.reference
         .collection('posts')
         .doc(postId)
@@ -227,38 +124,5 @@ class CreatePostModel extends ChangeNotifier {
       }
     }
     return pickedFile;
-
-    //データの型をPickedFileからFileに変更する。
-    // final pickFile = File(pickVideoOrImage.path);
-
-    // //localPathを呼び出して、アプリ内のストレージ領域を確保。
-    // final path = await localPath;
-
-    // //拡張子を取得
-    // final String fileName = basename(pickVideoOrImage.path);
-
-    // //pickした動画をコピーする場所を作成。
-    // final videoPath = '$path/$fileName';
-
-    // //pickした動画をvideoPathにコピー。※ .copyはデータの型がFileの必要あり。
-    // final File saveVideo = await pickFile.copy(videoPath);
-
-    //saveVideoを引数に、VideoItemページに移動。
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => PostPage(mainModel: mainModel),
-    //   ),
-    // );
   }
-
-  // Future<dynamic> pickVideo({required MainModel mainModel}) async {
-  //   var result = await others.returnXFile();
-  //   if (result != null) {
-  //     await uploadImageAndGetURL(
-  //         uid: mainModel.currentUserDoc.id, file: result);
-  //     video = result;
-  //   }
-  //   notifyListeners();
-  //   return video;
-  // }
 }
