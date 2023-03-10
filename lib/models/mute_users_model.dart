@@ -1,19 +1,19 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//domain
 import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
 import 'package:sns_vol2/domain/user_mute/user_mute.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
 
 final muteUsersProvider = ChangeNotifierProvider((ref) => MuteUsersModel());
 
@@ -66,7 +66,7 @@ class MuteUsersModel extends ChangeNotifier {
         newMuteUserTokens.map((e) => e.passiveUid).toList();
     //新しくミュートしたユーザーが10以上の場合
     final List<String> max10MuteUids = newMuteUids.length > 10
-        ? newMuteUids.sublist(0, tenCount) //10より大きかったら取り出す
+        ? newMuteUids.sublist(0, thirtyCount) //10より大きかったら取り出す
         : newMuteUids; //10より大きかったらそのまま適用
     if (max10MuteUids.isNotEmpty) {
       final qshot = await returnQuery(max10MuteUids: max10MuteUids).get();
@@ -93,7 +93,7 @@ class MuteUsersModel extends ChangeNotifier {
       final userDocsLength = muteUserDocs.length;
       //max10MuteUidsには10個までしかUidを入れない。＝>なぜならWhereInで検索にかけるから
       List<String> max10MuteUids = (muteUids.length - muteUserDocs.length) > 10
-          ? muteUids.sublist(userDocsLength, userDocsLength + tenCount)
+          ? muteUids.sublist(userDocsLength, userDocsLength + thirtyCount)
           : muteUids.sublist(userDocsLength, muteUids.length);
       if (max10MuteUids.isNotEmpty) {
         final qshot = await returnQuery(max10MuteUids: max10MuteUids).get();
