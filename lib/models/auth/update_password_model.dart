@@ -1,8 +1,9 @@
 //flutter
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:firebase_auth/firebase_auth.dart';
+//constants
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/constants/voids.dart' as voids;
@@ -16,7 +17,6 @@ class UpdatePasswordModel extends ChangeNotifier {
 
   void toggleIsObscure() {
     isObscure = !isObscure;
-    //！でboolを反転
     notifyListeners();
   }
 
@@ -26,7 +26,6 @@ class UpdatePasswordModel extends ChangeNotifier {
       await user.updatePassword(newPassword);
       await voids.showfluttertoast(msg: updatedPasswordMsg);
       //reauthenticationPageへ
-      Navigator.pop(context);
       //AccountPageへ
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
