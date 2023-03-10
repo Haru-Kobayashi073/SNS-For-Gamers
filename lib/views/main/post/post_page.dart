@@ -1,16 +1,14 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/others.dart' as others;
+//details
 import 'package:sns_vol2/details/animated_toggle_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 import 'package:sns_vol2/models/create_post_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/models/posts_model.dart';
-import 'package:sns_vol2/constants/others.dart' as others;
-import 'package:sns_vol2/views/main/components/video_watch_page.dart';
-//package
 
 class PostPage extends ConsumerWidget {
   const PostPage({super.key, required this.mainModel});
@@ -27,7 +25,7 @@ class PostPage extends ConsumerWidget {
     bool postModeToggle = true;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: colors.green,
@@ -81,7 +79,6 @@ class PostPage extends ConsumerWidget {
                                 ),
                                 SizedBox(
                                   width: maxWidth * 0.68,
-                                  // height: 70,
                                   child: TextFormField(
                                     controller: textEditingController,
                                     onChanged: (value) =>
@@ -114,45 +111,28 @@ class PostPage extends ConsumerWidget {
                                 ),
                                 GestureDetector(
                                     onTap: () async {
-                                      // postsModel.video = await createPostModel.pickVideo(
-                                      //     mainModel: mainModel);
                                       createPostModel.video =
                                           await others.returnXFile(
                                               postModeToggle: postModeToggle);
-                                      // await createPostModel.getVideo(postModeToggle: postModeToggle);
                                       print(createPostModel.video);
                                     },
-                                    child:
-                                        // createPostModel.video == null
-                                        //     ?
-                                        Container(
-                                            width: maxWidth * 0.68,
-                                            height: maxHeight * 0.23,
-                                            color: const Color.fromARGB(
-                                                255, 213, 210, 210),
-                                            child: postModeToggle == true
-                                                ? const Icon(
-                                                    Icons
-                                                        .add_photo_alternate_outlined,
-                                                    color: Colors.white,
-                                                    size: 100,
-                                                  )
-                                                : const Icon(
-                                                    // Icons.add_photo_alternate_outlined,
-                                                    Icons.video_file_outlined,
-                                                    color: Colors.white,
-                                                    size: 100,
-                                                  ))
-                                    // : VideoWatchPage(createPostModel.video!)
-                                    // : VideoWatchPage(createPostModel.video.toString())
-                                    // Container(
-                                    //     width: maxWidth * 0.68,
-                                    //     height: maxHeight * 0.23,
-                                    //     child: Image.file(
-                                    //         createPostModel.video!,
-                                    //         fit: BoxFit.cover),
-                                    //   ),
-                                    ),
+                                    child: Container(
+                                        width: maxWidth * 0.68,
+                                        height: maxHeight * 0.1,
+                                        color: const Color.fromARGB(
+                                            255, 213, 210, 210),
+                                        child: postModeToggle == true
+                                            ? const Icon(
+                                                Icons
+                                                    .add_photo_alternate_outlined,
+                                                color: Colors.white,
+                                                size: 40,
+                                              )
+                                            : const Icon(
+                                                Icons.video_file_outlined,
+                                                color: Colors.white,
+                                                size: 40,
+                                              ))),
                                 AnimatedToggle(
                                     values: const ['photo', 'video'],
                                     onToggleCallback: (value) {
