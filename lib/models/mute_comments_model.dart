@@ -1,22 +1,19 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-//packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+//constants
 import 'package:sns_vol2/constants/enums.dart';
 import 'package:sns_vol2/constants/ints.dart';
 import 'package:sns_vol2/constants/others.dart';
 import 'package:sns_vol2/constants/strings.dart';
+//domain
 import 'package:sns_vol2/domain/comment_mute/comment_mute.dart';
-import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
-import 'package:sns_vol2/domain/mute_user_token/mute_user_token.dart';
-import 'package:sns_vol2/domain/user_mute/user_mute.dart';
-import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/voids.dart' as voids;
-
 import '../domain/mute_comment_token/mute_comment_token.dart';
+//models
+import 'package:sns_vol2/models/main_model.dart';
 
 final muteCommentsProvider =
     ChangeNotifierProvider((ref) => MuteCommentsModel());
@@ -25,7 +22,7 @@ class MuteCommentsModel extends ChangeNotifier {
   bool showMuteComments = false;
   List<DocumentSnapshot<Map<String, dynamic>>> muteCommentDocs = [];
   final RefreshController refreshController = RefreshController();
-  //新しくミュートするユーザー
+  //新しくミュートするコメント
   List<MuteCommentToken> newMuteCommentTokens = [];
   List<String> mutePostCommentIds = [];
   //ミュートしているコメントのDocumentを取得する
@@ -38,7 +35,7 @@ class MuteCommentsModel extends ChangeNotifier {
   Future<void> getMuteComments({required MainModel mainModel}) async {
     showMuteComments = true;
     mutePostCommentIds = mainModel.muteCommentIds;
-    //PostCommentIdがmutePostCommentIdsに含まれているユーザーを全取得
+    //PostCommentIdがmutePostCommentIdsに含まれているコメントを全取得
     //processBasicDocsはmuteしているユーザーを弾くので使用できない
     await process();
     notifyListeners();
@@ -69,7 +66,7 @@ class MuteCommentsModel extends ChangeNotifier {
     //新しくミュートしたコメントが10以上の場合
     final List<String> max10MutePostCommentIds =
         newMutePostCommentIds.length > 10
-            ? newMutePostCommentIds.sublist(0, tenCount) //10より大きかったら取り出す
+            ? newMutePostCommentIds.sublist(0, thirtyCount) //10より大きかったら取り出す
             : newMutePostCommentIds; //10より大きかったらそのまま適用
     if (max10MutePostCommentIds.isNotEmpty) {
       final qshot =
@@ -100,7 +97,7 @@ class MuteCommentsModel extends ChangeNotifier {
       List<String> max10MutePostCommentIds =
           (mutePostCommentIds.length - muteCommentDocs.length) >= 10
               ? mutePostCommentIds.sublist(mutePostCommentDocsLength,
-                  mutePostCommentDocsLength + tenCount)
+                  mutePostCommentDocsLength + thirtyCount)
               : mutePostCommentIds.sublist(
                   mutePostCommentDocsLength, mutePostCommentIds.length);
       if (max10MutePostCommentIds.isNotEmpty) {
