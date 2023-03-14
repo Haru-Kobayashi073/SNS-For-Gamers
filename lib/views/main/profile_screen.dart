@@ -31,7 +31,7 @@ class ProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.green,
-      appBar: NormalAppBar(title: profileText, mainModel: mainModel),
+      appBar: const NormalAppBar(title: profileText),
       drawer: SNSDrawer(
         mainModel: mainModel,
       ),
