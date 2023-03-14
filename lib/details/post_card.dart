@@ -1,22 +1,28 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/constants/routes.dart' as routes;
+//details
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/post_like_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_posts_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/posts_model.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/constants/voids.dart' as voids;
-import 'package:sns_vol2/constants/routes.dart' as routes;
+//views
 import 'package:sns_vol2/views/main/components/video_watch_page.dart';
 
 class PostCard extends ConsumerWidget {
@@ -42,7 +48,6 @@ class PostCard extends ConsumerWidget {
     final CommentsModel commentsModel = ref.watch(commentsProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
-    final bool isMyComment = post.uid == firestoreUser.uid;
     final postDoc = postDocs[index];
 
     return Padding(
@@ -179,16 +184,13 @@ class PostCard extends ConsumerWidget {
                           width: maxWidth * 0.15,
                         ),
                         post.isVideo
-                            // ? Text(post.text)
                             ? VideoWatchPage(post.video)
                             : Container(
                                 width: maxWidth * 0.7,
                                 height: maxHeight * 0.23,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                  image: NetworkImage(post.video
-                                      // 'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e746d8e946fd6dfc9f17bc343e94500a?h=270&resize=1&w=480'
-                                      ),
+                                  image: NetworkImage(post.video),
                                 )),
                               )
                       ],
