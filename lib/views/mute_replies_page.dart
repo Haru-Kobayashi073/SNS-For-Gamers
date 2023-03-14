@@ -28,7 +28,7 @@ class MuteRepliesPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.green,
-      appBar: NormalAppBar(title: muteRepliesPageTitle, mainModel: mainModel),
+      appBar: const NormalAppBar(title: muteRepliesPageTitle),
       body: muteRepliesModel.showMuteReplies
           ? RefreshScreen(
               onRefresh: () async => await muteRepliesModel.onRefresh(),

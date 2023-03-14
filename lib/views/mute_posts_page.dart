@@ -27,7 +27,7 @@ class MutePostsPage extends ConsumerWidget {
     final mutePostDocs = mutePostsModel.mutePostDocs;
     return Scaffold(
       backgroundColor: colors.green,
-      appBar: NormalAppBar(title: mutePostsPageTitle, mainModel: mainModel),
+      appBar: const NormalAppBar(title: mutePostsPageTitle),
       body: mutePostsModel.showMutePosts
           ? RefreshScreen(
               onRefresh: () async => await mutePostsModel.onRefresh(),

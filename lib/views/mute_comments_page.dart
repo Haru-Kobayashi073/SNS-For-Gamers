@@ -29,7 +29,7 @@ class MuteCommentsPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colors.green,
-      appBar: NormalAppBar(title: muteCommentsPageTitle, mainModel: mainModel),
+      appBar: const NormalAppBar(title: muteCommentsPageTitle),
       body: muteCommentsModel.showMuteComments
           ? RefreshScreen(
               onRefresh: () async => await muteCommentsModel.onRefresh(),
