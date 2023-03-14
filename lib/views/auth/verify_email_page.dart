@@ -1,7 +1,9 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//models
 import 'package:sns_vol2/models/auth/verify_email_model.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
 import 'package:sns_vol2/constants/routes.dart' as routes;
 
@@ -13,7 +15,7 @@ class VerifyEmailPage extends ConsumerWidget {
     ref.watch(verifyEmailProvider);
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: AppBar(
         backgroundColor: colors.green,
       ),
