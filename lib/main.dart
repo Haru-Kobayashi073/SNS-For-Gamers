@@ -112,14 +112,14 @@ class MyHomePage extends ConsumerWidget {
     final MuteUsersModel muteUserModel = ref.watch(muteUsersProvider);
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
             routes.toPostPage(context: context, mainModel: mainModel),
-        backgroundColor: colors.floatingButtonBackColor,
+        backgroundColor: colors.black,
         child: const Icon(
           Icons.new_label,
-          color: colors.floatingButtonIconColor,
+          color: colors.greenishWhite,
         ),
       ),
       body: mainModel.isLoading
