@@ -1,21 +1,25 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
+//constants
 import 'package:sns_vol2/constants/bools.dart';
-import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
 //domain
 import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
 import 'package:sns_vol2/domain/post/post.dart';
+//models
 import 'package:sns_vol2/models/comments_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
+//views
 import 'package:sns_vol2/views/comments/comment_like_button.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class CommentCard extends ConsumerWidget {
   const CommentCard(
@@ -41,7 +45,6 @@ class CommentCard extends ConsumerWidget {
     //updateされた瞬間にmainModelのfirestoreUserは更新されている
     final RepliesModel repliesModel = ref.watch(repliesProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
-    final bool isMyComment = comment.uid == firestoreUser.uid;
 
     return isValidUser(muteUids: mainModel.muteUids, map: commentDoc.data()!) &&
             isValidComment(
@@ -50,7 +53,7 @@ class CommentCard extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: Material(
               elevation: 20,
-              color: const Color.fromARGB(255, 225, 231, 225),
+              color: colors.greenishWhite,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 padding:
