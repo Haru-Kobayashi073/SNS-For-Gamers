@@ -1,21 +1,23 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//packages
+import 'package:cloud_firestore/cloud_firestore.dart';
+//constants
 import 'package:sns_vol2/constants/bools.dart';
-import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/card_popup_menu_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
-import 'package:sns_vol2/domain/comment/comment.dart';
 //domain
+import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
-import 'package:sns_vol2/domain/post/post.dart';
-import 'package:sns_vol2/domain/reply/reply.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+//views
 import 'package:sns_vol2/views/replies/components/reply_like_button.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class ReplyCard extends ConsumerWidget {
   const ReplyCard(
@@ -46,7 +48,7 @@ class ReplyCard extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: Material(
               elevation: 20,
-              color: const Color.fromARGB(255, 225, 231, 225),
+              color: colors.greenishWhite,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 padding:
