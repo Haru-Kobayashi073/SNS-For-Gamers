@@ -1,22 +1,24 @@
 //flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
-import 'package:riverpod/riverpod.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+//constants
 import 'package:sns_vol2/constants/strings.dart';
-import 'package:sns_vol2/details/refresh_screen.dart';
-import 'package:sns_vol2/details/reload_screen.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+import 'package:sns_vol2/constants/voids.dart' as voids;
+import 'package:sns_vol2/details/normal_appbar.dart';
+//domain
 import 'package:sns_vol2/domain/comment/comment.dart';
 import 'package:sns_vol2/domain/reply/reply.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 import 'package:sns_vol2/models/mute_replies_model.dart';
 import 'package:sns_vol2/models/mute_users_model.dart';
 import 'package:sns_vol2/models/replies_model.dart';
+//views
 import 'package:sns_vol2/views/replies/components/reply_card.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
-import 'package:sns_vol2/constants/voids.dart' as voids;
 
 class RepliesPage extends ConsumerWidget {
   const RepliesPage(
@@ -35,20 +37,16 @@ class RepliesPage extends ConsumerWidget {
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final MuteRepliesModel muteRepliesModel = ref.watch(muteRepliesProvider);
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: colors.green,
-        title: const Text(replyTitle)
-      ),
+      backgroundColor: colors.green,
+      appBar: const NormalAppBar(title: replyTitle),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: colors.floatingButtonBackColor,
+        backgroundColor: colors.black,
         onPressed: () => repliesModel.showReplyFlashBar(
             context: context,
             mainModel: mainModel,
             commentDoc: commentDoc,
             comment: comment),
-        child: const Icon(Icons.new_label),
+        child: const Icon(Icons.add_comment_rounded),
       ),
       body: StreamBuilder<QuerySnapshot>(
         //streamにQueryのようなものを入れる
