@@ -10,7 +10,6 @@ import 'package:sns_vol2/details/refresh_screen.dart';
 import 'package:sns_vol2/details/reload_screen.dart';
 //models
 import 'package:sns_vol2/models/main/articles_model.dart';
-import 'package:sns_vol2/models/main_model.dart';
 
 class ArticleScreen extends ConsumerWidget {
   const ArticleScreen({Key? key}) : super(key: key);
@@ -18,11 +17,10 @@ class ArticleScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ArticlesModel articlesModel = ref.watch(articlesProvider);
-    final MainModel mainModel = ref.watch(mainProvider);
     final newsLists = articlesModel.newsLists;
     return Scaffold(
         backgroundColor: colors.green,
-        appBar: NormalAppBar(title: articleText, mainModel: mainModel),
+        appBar: const NormalAppBar(title: articleText),
         body: Container(
             child: newsLists.isEmpty
                 ? ReloadScreen(
