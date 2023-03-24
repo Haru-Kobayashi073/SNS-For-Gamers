@@ -1,16 +1,19 @@
 //flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//package
+//constants
 import 'package:sns_vol2/constants/strings.dart';
+import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/normal_appbar.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//models
 import 'package:sns_vol2/models/edit_profile_model.dart';
 import 'package:sns_vol2/models/main_model.dart';
-import 'package:sns_vol2/constants/colors.dart' as colors;
 
 class EditProfilePage extends ConsumerWidget {
   const EditProfilePage({Key? key, required this.mainModel}) : super(key: key);
@@ -28,8 +31,8 @@ class EditProfilePage extends ConsumerWidget {
     final maxHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      appBar: NormalAppBar(title: editProfileTitle, mainModel: mainModel),
+      backgroundColor: colors.green,
+      appBar: const NormalAppBar(title: editProfileTitle),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: maxWidth * 0.05),
@@ -65,7 +68,7 @@ class EditProfilePage extends ConsumerWidget {
                     padding: EdgeInsets.symmetric(horizontal: maxWidth * 0.04),
                     child: const Text(
                       'Name',
-                      style: TextStyle(color: colors.mainTextPrimaryColor),
+                      style: TextStyle(color: colors.white),
                     ),
                   ),
                   RoundedTextField(
@@ -87,7 +90,7 @@ class EditProfilePage extends ConsumerWidget {
                     padding: EdgeInsets.symmetric(horizontal: maxWidth * 0.04),
                     child: const Text(
                       'Introduction',
-                      style: TextStyle(color: colors.mainTextPrimaryColor),
+                      style: TextStyle(color: colors.white),
                     ),
                   ),
                   RoundedTextField(
