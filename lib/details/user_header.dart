@@ -1,20 +1,27 @@
+//flutter
 import 'package:flutter/material.dart';
+//constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
+//details
 import 'package:sns_vol2/details/user_button.dart';
 import 'package:sns_vol2/details/user_image.dart';
+//domain
 import 'package:sns_vol2/domain/firestore_user/firestore_user.dart';
+//models
 import 'package:sns_vol2/models/main_model.dart';
 
 class UserHeader extends StatelessWidget {
   const UserHeader(
-      {super.key, required this.mainModel, required this.firestoreUser, required this.onPressed});
+      {super.key,
+      required this.mainModel,
+      required this.firestoreUser,
+      required this.onPressed});
   final MainModel mainModel;
   final FirestoreUser firestoreUser;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    // final EditProfileModel editProfileModel =
     final maxHeight = MediaQuery.of(context).size.height;
 
     return SizedBox(
@@ -38,8 +45,7 @@ class UserHeader extends StatelessWidget {
                   ),
                   Text(
                     firestoreUser.userName,
-                    style: const TextStyle(
-                        fontSize: 24, color: colors.profileTextColor),
+                    style: const TextStyle(fontSize: 24, color: colors.white),
                   ),
                 ],
               ),
@@ -58,12 +64,12 @@ class UserHeader extends StatelessWidget {
                             Text(
                               firestoreUser.followingCount.toString(),
                               style: const TextStyle(
-                                  fontSize: 20, color: colors.profileTextColor),
+                                  fontSize: 20, color: colors.white),
                             ),
                             const Text(
                               'following',
-                              style: TextStyle(
-                                  fontSize: 16, color: colors.profileTextColor),
+                              style:
+                                  TextStyle(fontSize: 16, color: colors.white),
                             ),
                           ],
                         ),
@@ -75,12 +81,12 @@ class UserHeader extends StatelessWidget {
                             Text(
                               firestoreUser.followerCount.toString(),
                               style: const TextStyle(
-                                  fontSize: 20, color: colors.profileTextColor),
+                                  fontSize: 20, color: colors.white),
                             ),
                             const Text(
                               'follower',
-                              style: TextStyle(
-                                  fontSize: 16, color: colors.profileTextColor),
+                              style:
+                                  TextStyle(fontSize: 16, color: colors.white),
                             ),
                           ],
                         ),
@@ -99,17 +105,15 @@ class UserHeader extends StatelessWidget {
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 5.0, horizontal: 40.0),
+              // ignore: unnecessary_null_comparison
               child: firestoreUser.introduction == null
                   ? const Text(
                       "No introduction",
-                      style: TextStyle(
-                          color: colors.profileTextColor, fontSize: 16),
+                      style: TextStyle(color: colors.white, fontSize: 16),
                     )
                   : Text(
-                      // "Anyone wanna play a game with me? play/valorant/Apex/OW2...",
                       firestoreUser.introduction,
-                      style: const TextStyle(
-                          color: colors.profileTextColor, fontSize: 16),
+                      style: const TextStyle(color: colors.white, fontSize: 16),
                     ),
             ),
           )
