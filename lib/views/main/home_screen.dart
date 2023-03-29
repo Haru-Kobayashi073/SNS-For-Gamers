@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
     final postDocs = profileModel.postDocs;
 
     return Scaffold(
-      appBar: NormalAppBar(title: homeText, mainModel: mainModel),
+      appBar: const NormalAppBar(title: homeText),
       drawer: SNSDrawer(
         mainModel: mainModel,
       ),
