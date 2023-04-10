@@ -5,6 +5,7 @@ import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/details/rounded_text_field.dart';
 //constants
 import 'package:sns_vol2/constants/colors.dart' as colors;
+
 class TextFieldAndButtonScreen extends StatelessWidget {
   const TextFieldAndButtonScreen({
     super.key,
@@ -39,7 +40,10 @@ class TextFieldAndButtonScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(explainText),
+            Text(
+              explainText,
+              style: const TextStyle(color: colors.white),
+            ),
             RoundedTextField(
                 keybordType: keybordType,
                 onChanged: onChanged,
@@ -47,7 +51,9 @@ class TextFieldAndButtonScreen extends StatelessWidget {
                 color: Colors.white,
                 borderColor: Colors.grey,
                 hintText: hintText),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             RoundedButton(
                 onPressed: onPressed,
                 widthRate: 0.5,

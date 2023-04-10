@@ -15,8 +15,8 @@ class VerifyPasswordResetPage extends ConsumerWidget {
     return TextFieldAndButtonScreen(
         appbarTitle: "パスワードを忘れた場合",
         buttonText: "送信",
-        hintText: "メールアドレス",
-        explainText: "ログインに利用したいメールアドレス",
+        hintText: "ログインに利用したいメールアドレス",
+        explainText: "",
         keybordType: TextInputType.emailAddress,
         controller: controller,
         onPressed: () async => await verifyPasswordResetModel.sendPasswordResetEmail(context: context),

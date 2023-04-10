@@ -9,8 +9,7 @@ class RoundedTextField extends StatelessWidget {
       required this.controller,
       required this.color,
       required this.borderColor,
-      required this.hintText
-      })
+      required this.hintText})
       : super(key: key);
   final TextInputType keybordType;
   final void Function(String)? onChanged;
@@ -27,13 +26,14 @@ class RoundedTextField extends StatelessWidget {
           keyboardType: keybordType,
           onChanged: onChanged,
           decoration: InputDecoration(
-            hintText: hintText,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 20,)
-            ),
+              hintText: hintText,
+              hintStyle: const TextStyle(fontSize: 16),
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              )),
           controller: controller,
         ));
   }
