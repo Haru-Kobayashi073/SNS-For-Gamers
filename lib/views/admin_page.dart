@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //package
-import 'package:riverpod/riverpod.dart';
 import 'package:sns_vol2/constants/strings.dart';
 import 'package:sns_vol2/details/rounded_button.dart';
 import 'package:sns_vol2/models/admin_model.dart';
