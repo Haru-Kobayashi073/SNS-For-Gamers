@@ -13,7 +13,6 @@ class ForgetPasswordText extends StatelessWidget {
       child: Center(
           child: RichText(
               text: TextSpan(
-                  // style: TextStyle(fontWeight: FontWeight.bold),
                   children: [
             TextSpan(
               text: "パスワードを忘れた場合",
