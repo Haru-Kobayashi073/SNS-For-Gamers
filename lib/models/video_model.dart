@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sns_vol2/views/main/components/video_watch_page.dart';
 
 final videoProvider = ChangeNotifierProvider((ref) => VideoModel());
 
@@ -44,10 +43,10 @@ class VideoModel extends ChangeNotifier {
     final File saveVideo = await pickFile.copy(videoPath);
 
     //saveVideoを引数に、VideoItemページに移動。
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => VideoWatchPage(saveVideo),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => VideoWatchPage(saveVideo),
+    //   ),
+    // );
   }
 }

@@ -59,6 +59,7 @@ class MainModel extends ChangeNotifier {
 
   //initの中でcurrentUserを更新すればいい
   Future<void> init() async {
+    // await FirebaseAuth.instance.signOut();
     startLoading();
     //modelを跨がないでcurrentUserの更新
     currentUser = FirebaseAuth.instance.currentUser;
@@ -69,6 +70,7 @@ class MainModel extends ChangeNotifier {
     await distributeTokens();
     firestoreUser = FirestoreUser.fromJson(currentUserDoc.data()!);
     endLoading();
+    notifyListeners();
     //currentUserのuidの取得が可能になりました
   }
 

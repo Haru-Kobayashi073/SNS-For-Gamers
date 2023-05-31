@@ -38,8 +38,8 @@ class FocusPostPage extends ConsumerWidget {
     final commentDocs = commentsModel.commentDocs;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      appBar: NormalAppBar(title: "スレッド", mainModel: mainModel),
+      backgroundColor: colors.green,
+      appBar: const NormalAppBar(title: "スレッド"),
       body: SingleChildScrollView(
           child: Column(
         children: [

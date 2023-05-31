@@ -9,7 +9,7 @@ class FinishedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
+      backgroundColor: colors.green,
       appBar: AppBar(
         backgroundColor: colors.green,
         automaticallyImplyLeading: false,
@@ -21,7 +21,7 @@ class FinishedPage extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: colors.mainTextPrimaryColor,
+            color: colors.white,
             ),
           ),
       ),

@@ -23,7 +23,8 @@ Future<dynamic> returnXFile({required bool postModeToggle}) async {
     } else {
       print('No Video selected.');
     }
-  } else {
+  } 
+  else {
   XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       file = File(pickedFile.path);

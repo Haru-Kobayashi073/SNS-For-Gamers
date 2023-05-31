@@ -37,11 +37,11 @@ class PassiveUserProfilePage extends ConsumerWidget {
         FirestoreUser.fromJson(passiveUserDoc.data()!);
         
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      appBar: NormalAppBar(title: passiveUserProfileTitle, mainModel: mainModel),
+      backgroundColor: colors.green,
+      appBar: const NormalAppBar(title: passiveUserProfileTitle),
       body: SingleChildScrollView(
         child: Container(
-          decoration: const BoxDecoration(color: colors.backScreenColor),
+          decoration: const BoxDecoration(color: colors.green),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             UserHeader(
               mainModel: mainModel,
@@ -49,7 +49,7 @@ class PassiveUserProfilePage extends ConsumerWidget {
               onPressed: () => passiveUserProfileModel.onMenuPressed(context: context, muteUids: muteUids, mutePostIds: mainModel.mutePostIds, passiveUserDoc: passiveUserDoc),
             ),
             Container(
-              decoration: const BoxDecoration(color: colors.backScreenColor),
+              decoration: const BoxDecoration(color: colors.green),
               child: postDocs.isEmpty
                   ? ReloadScreen(
                       onReload: () async =>

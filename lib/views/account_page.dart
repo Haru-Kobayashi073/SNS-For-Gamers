@@ -23,18 +23,18 @@ class AccountPage extends ConsumerWidget {
     final firestoreUser = mainModel.firestoreUser;
 
     return Scaffold(
-      backgroundColor: colors.backScreenColor,
-      appBar: NormalAppBar(title: accountTitle, mainModel: mainModel),
+      backgroundColor: colors.green,
+      appBar: const NormalAppBar(title: accountTitle),
       body: ListView(
         children: [
           ListTile(
             title: const Text(
               updatePasswordText,
-              style: TextStyle(color: colors.appBarTextColor),
+              style: TextStyle(color: colors.white),
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
-              color: colors.appBarTextColor,
+              color: colors.white,
             ),
             onTap: () {
               accountModel.reauthenticationState =
@@ -45,11 +45,11 @@ class AccountPage extends ConsumerWidget {
           ListTile(
             title: Text(
               '$updateEmailText \n ${accountModel.currentUser!.email!}',
-              style: const TextStyle(color: colors.appBarTextColor),
+              style: const TextStyle(color: colors.white),
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
-              color: colors.appBarTextColor,
+              color: colors.white,
             ),
             onTap: () {
               accountModel.reauthenticationState =
@@ -60,11 +60,11 @@ class AccountPage extends ConsumerWidget {
           ListTile(
             title: const Text(
               logoutText,
-              style: TextStyle(color: colors.appBarTextColor),
+              style: TextStyle(color: colors.white),
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
-              color: colors.appBarTextColor,
+              color: colors.white,
             ),
             onTap: () async => await accountModel.logout(
                 context: context, mainModel: mainModel),
@@ -72,11 +72,11 @@ class AccountPage extends ConsumerWidget {
           ListTile(
               title: const Text(
                 "アカウント削除",
-                style: TextStyle(color: colors.appBarTextColor),
+                style: TextStyle(color: colors.white),
               ),
               trailing: const Icon(
                 Icons.arrow_forward_ios,
-                color: colors.appBarTextColor,
+                color: colors.white,
               ),
               onTap: () {
                 accountModel.reauthenticationState =
